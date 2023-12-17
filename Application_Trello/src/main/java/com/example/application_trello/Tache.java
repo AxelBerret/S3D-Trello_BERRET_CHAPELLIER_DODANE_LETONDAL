@@ -77,9 +77,7 @@ public abstract class Tache {
      * methode retirerDependance de la classe Tache
      * @param tache tache que l on souhaite retirer des dependances
      */
-     public void retirerDependance(Tache tache) {
-        this.listeDependances.remove(tache);
-     }
+     public void retirerDependance(Tache tache) {this.listeDependances.remove(tache);}
 
     /**
      * methode equals de la classe Tache

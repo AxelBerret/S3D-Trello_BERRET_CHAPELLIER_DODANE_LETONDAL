@@ -1,27 +1,93 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class Tableau {
+- nomTableau : String
+- listeObjets : ArrayList<InterfaceListeTaches>
+- archive : Archive
++ Tableau(pNom : String)
++ getNomTableau() : String
++ getColonnes() : ArrayList<Colonnes>
++ getArchive() : Archive
++ getListeTaches() : ArrayList<Tache>
++ ajouterColonne(col : Colonne) : void
++ supprimerColonne(col : Colonne) : void
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class Archive {
+- listeTachesArchivees : ArrayList<Tache>
+- listeColonnesArchivees : ArrayLsit<Tache>
++ Archive()
++ archiverTache(tache : Tache) : void
++ archiverColonne(colonne : Colonne) : void
++ desarchiverTache(tache : Tache) : void
++ desarchiverColonne(colonne : Colonne) : void
 }
+
+class ListeTableaux {
+- tableaux : ArrayList<Tableau>
++ ListeTableaux()
++ ajouterTableau(tab : Tableau) : void
++ supprimerTableau(tab : Tableau) : void
++ getTableau(nomTab : String) : Tableau
++ getListeTableaux() : ArrayList<Tableau>
+}
+
+interface InterfaceListeTaches {
++ ajouterTache(tache : Tache) : void
++ supprimerTache(tache : Tache) : void
++ getTache(nomTache : String) : Tache
++ getListeTaches() : ArrayList<Tache>
+}
+
+class Colonne implements InterfaceListeTaches {
+- nomColonne : String
+- listeTaches : ArrayList<Tache>
++ Colonne(pNom : String)
++ getNomColonne() : String
++ ajouterTache(tache : Tache) : void
++ supprimerTache(tache : Tache) : void
++ getTache(nomTache : String) : Tache
++ getListeTaches() : ArrayList<Tache>
+}
+
+abstract class Tache {
+# nomTache : String
+# commentaire : String
+# dateDebut : Date
+# dateFin : Date
+# listeDependances : ArrayList<Tache>
++ Tache(pNom : Tache)
++ setCommentaire(com : String) : void
++ setDateDebut(dateD : Date) : void
++ abstract setDateFin(dateF : Date) : void
++ ajouterDependance(tache : Tache) : void
++ retirerDependance(tache : Tache) : void
++ equals(obj : Object) : boolean
+}
+
+class TacheComplexe extends Tache implements InterfaceListeTaches {
+- listeTaches : ArrayList<Tache>
++ TacheComplexe(pNom : String)
++ setDateFin(dateF : Date) : void
++ ajouterTache(tache : Tache) : void
++ supprimerTache(tache : Tache) : void
++ getTache(nomTache : String) : Tache
++ getListeTaches() : ArrayList<Tache>
+}
+
+class TacheSimple extends Tache {
++ TacheSimple(pNom : String)
++ setDateFin(dateF : Date) : void
++ toString() : String
+}
+
+
+Tableau "1" --> "0...*" InterfaceListeTaches
+Tableau "1" --> "1" Archive
+Archive "1" --> "0...*" Colonne
+Archive "1" --> "0...*" Tache
+TacheComplexe "1" --> "0...*" Tache
+ListeTableaux "1" --> "0...*" Tableau
 
 @enduml
