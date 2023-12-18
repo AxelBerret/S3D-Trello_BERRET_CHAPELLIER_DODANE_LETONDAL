@@ -53,7 +53,7 @@ public class ListeTableaux {
     public String toString(){
         String res = "";
         for (Tableau tab : this.tableaux){
-            res += "-" + tab.toString() + "\n";
+            res += "->" + tab.toString() + "\n";
         }
         return res;
     }

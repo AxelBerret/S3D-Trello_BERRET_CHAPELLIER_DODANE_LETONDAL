@@ -82,4 +82,11 @@ public class Colonne implements InterfaceListeTaches {
         Colonne colonne = (Colonne) obj;
         return Objects.equals(nomColonne, colonne.nomColonne) && Objects.equals(listeTaches, colonne.listeTaches);
     }
+
+    public String toString(){
+        String res = this.nomColonne + " :\n";
+        for (Tache t : this.listeTaches){
+            res += "* " + t.toString() + "\n";
+        }
+    }
 }

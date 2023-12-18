@@ -90,7 +90,10 @@ public class Tableau {
     public void supprimerColonne(Colonne col) {this.listeObjets.remove(col);}
 
     public String toString(){
-        String res = this.nomTableau;
+        String res = this.nomTableau + " :\n";
+        for (Colonne c : this.getColonnes()){
+            res += "+" + c.toString() + "\n";
+        }
         return res;
     }
 }
