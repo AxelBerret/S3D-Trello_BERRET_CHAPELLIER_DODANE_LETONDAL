@@ -8,7 +8,7 @@ public class TestColonne {
     @Test
     public void test_01_constructeurColonne() {
         Colonne col = new Colonne("col1");
-        assertEquals("col1", col.getNomColonne());
+        assertEquals(true, col.getNomColonne().equals("col1"));
         assertEquals(0, col.getListeTaches().size());
     }
 
@@ -17,7 +17,7 @@ public class TestColonne {
         Colonne col = new Colonne("col");
         Tache t1 = new TacheSimple("tache1");
         col.ajouterTache(t1);
-        assertEquals("tache1", col.getListeTaches().get(0).getNomTache());
+        assertEquals(true, col.getListeTaches().get(0).equals(t1));
         assertEquals(1, col.getListeTaches().size());
     }
 
