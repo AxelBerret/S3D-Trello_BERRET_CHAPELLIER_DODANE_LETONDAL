@@ -48,6 +48,12 @@ public abstract class Tache {
 
 
     /**
+     * methode getNomTache de la classe Tache
+     * @return le nom de la tache
+     */
+    public String getNomTache() {return this.nomTache;}
+
+    /**
      * methode setCommentaire de la classe Tache
      * @param com commentaire que l on souhaite donner a la tache
      */
