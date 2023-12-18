@@ -43,8 +43,8 @@ public class TestColonne {
         col.ajouterTache(t1);
         col.ajouterTache(t2);
         col.ajouterTache(t3);
-        assertEquals(true, col.getListeTaches().get(0).equals(t1));
-        assertEquals(true, col.getListeTaches().get(1).equals(t2));
-        assertEquals(true, col.getListeTaches().get(2).equals(t3));
+        assertEquals(true, col.getTache("tache1").equals(t1));
+        assertEquals(true, col.getTache("tache2").equals(t2));
+        assertEquals(true, col.getTache("tache3").equals(t3));
     }
 }

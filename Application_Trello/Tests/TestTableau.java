@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestTableau {
 
     @Test
-
     public void test_01_constructeurTableau() {
         Tableau tableau = new Tableau("TableauTest");
         assertEquals("TableauTest", tableau.getNomTableau());
@@ -18,7 +17,6 @@ public class TestTableau {
         Tableau tableau = new Tableau("TableauTest");
         Colonne colonne = new Colonne("ColonneTest");
         tableau.ajouterColonne(colonne);
-
         assertEquals(1, tableau.getColonnes().size());
         assertEquals("ColonneTest", tableau.getColonnes().get(0).getNomColonne());
     }
@@ -29,11 +27,8 @@ public class TestTableau {
         Colonne colonne2 = new Colonne("Colonne2");
         tableau.ajouterColonne(colonne1);
         tableau.ajouterColonne(colonne2);
-
         assertEquals(2, tableau.getColonnes().size());
-
         tableau.supprimerColonne(colonne1);
-
         assertEquals(1, tableau.getColonnes().size());
         assertEquals("Colonne2", tableau.getColonnes().get(0).getNomColonne());
     }
@@ -47,6 +42,5 @@ public class TestTableau {
         colonne1.ajouterTache(tache1);
         colonne1.ajouterTache(tache2);
         tableau.ajouterColonne(colonne1);
-
     }
 }

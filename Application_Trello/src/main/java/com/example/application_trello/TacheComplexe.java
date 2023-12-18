@@ -16,7 +16,10 @@ public class TacheComplexe extends Tache implements InterfaceListeTaches {
      * a partir des donnees passees en parametres
      * @param pNom nom que l on souhaite donner a la tache complexe
      */
-    public TacheComplexe(String pNom) {super(pNom);}
+    public TacheComplexe(String pNom) {
+        super(pNom);
+        this.listeTaches = new ArrayList<Tache>();
+    }
 
 
     /**
