@@ -24,7 +24,7 @@ public class Colonne implements InterfaceListeTaches {
      * @param pNom nom que l on souhaite donner a la colonne
      */
     public Colonne(String pNom) {
-        this.nomColonne = nomColonne;
+        this.nomColonne = pNom;
         this.listeTaches = new ArrayList<Tache>();
     }
 
