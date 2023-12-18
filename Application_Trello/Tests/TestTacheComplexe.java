@@ -10,7 +10,7 @@ public class TestTacheComplexe {
     public void test_01_constructeurTacheComplexe() {
         TacheComplexe tc = new TacheComplexe("tc");
         assertEquals(true, tc.getNomTache().equals("tc"));
-        assertEquals(0, tc.getListeTaches());
+        assertEquals(0, tc.getListeTaches().size());
     }
 
     @Test
