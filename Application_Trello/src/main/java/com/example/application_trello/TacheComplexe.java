@@ -1,5 +1,6 @@
 package com.example.application_trello;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class TacheComplexe extends Tache implements InterfaceListeTaches {
@@ -26,15 +27,18 @@ public class TacheComplexe extends Tache implements InterfaceListeTaches {
      * methode setDateFin de la classe TacheComplexe
      * @param dateF date de fin que l on souhaite donner a la tache
      */
-    public void setDateFin(Date dateF) {
-        int dureeMax = 0;
+    public void setDateFin(LocalDate dateF) {
+        this.dateFin = dateF;
         for (int i = 0; i < this.listeTaches.size(); i++) {
-            if (this.listeTaches.get(i).dateFin.getTime() > dureeMax) {
-                dureeMax = (int) this.listeTaches.get(i).dateFin.getTime();
+            if (this.dateFin.getYear() < this.listeTaches.get(i).getDateFin().getYear()) {
+                this.dateFin = this.listeTaches.get(i).getDateFin();
+                System.out.println("iteration"+i+" 1 "+this.dateFin.toString());
+            }
+            else if (this.dateFin.getDayOfYear() < this.listeTaches.get(i).getDateFin().getDayOfYear()) {
+                this.dateFin = this.listeTaches.get(i).getDateFin();
+                System.out.println("iteration"+i+" 2 "+this.dateFin.toString());
             }
         }
-        if (dateF.getTime() < dureeMax) this.dateFin.setTime(dureeMax);
-        else this.dateFin = dateF;
     }
 
     /**

@@ -1,8 +1,6 @@
 import com.example.application_trello.*;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -61,20 +59,28 @@ public class TestTacheComplexe {
 
     @Test
     public void test_05_setDateFinInferieure() {
-        TacheComplexe tc = new TacheComplexe("tc");
-        TacheSimple ts1 = new TacheSimple("ts1");
-        TacheSimple ts2 = new TacheSimple("ts2");
-        TacheSimple ts3 = new TacheSimple("ts3");
+        Tache tc = new TacheComplexe("tc");
+        Tache ts1 = new TacheSimple("ts1");
+        Tache ts2 = new TacheSimple("ts2");
+        Tache ts3 = new TacheSimple("ts3");
 
-        LocalDate dTs1 = LocalDate.of(2023, 1, 1);
-        LocalDate fTs1 = LocalDate.of(2023, 1, 5);
+        LocalDate dateFinTs1 = LocalDate.of(2023, 2, 8);
+        LocalDate dateFinTs2 = LocalDate.of(2023, 2, 13);
+        LocalDate dateFinTs3 = LocalDate.of(2023, 2, 11);
+        LocalDate dateFinTc = LocalDate.of(2023, 2, 12);
 
-        //ts1.setDateDebut();
+        ts1.setDateFin(dateFinTs1);
+        ts2.setDateFin(dateFinTs2);
+        ts3.setDateFin(dateFinTs3);
 
-        tc.ajouterTache(ts1);
-        tc.ajouterTache(ts2);
-        tc.ajouterTache(ts3);
-        tc.setDateFin(new Date());
-        //assertEquals();
+        ((TacheComplexe) tc).ajouterTache(ts1);
+        ((TacheComplexe) tc).ajouterTache(ts2);
+        ((TacheComplexe) tc).ajouterTache(ts3);
+
+        tc.setDateFin(dateFinTc);
+
+        assertEquals(2023, tc.getDateFin().getYear());
+        assertEquals(2, tc.getDateFin().getMonthValue());
+        assertEquals(13, tc.getDateFin().getDayOfMonth());
     }
 }

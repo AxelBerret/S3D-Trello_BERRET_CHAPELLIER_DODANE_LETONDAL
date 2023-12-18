@@ -1,5 +1,6 @@
 package com.example.application_trello;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -22,13 +23,13 @@ public abstract class Tache {
      * attribut dateDebut de la classe Tache
      * represente la date de debut de la tache
      */
-    protected Date dateDebut;
+    protected LocalDate dateDebut;
 
     /**
      * atttribut dateFin de la classe Tache
      * represente la date de fin de la tache
      */
-    protected Date dateFin;
+    protected LocalDate dateFin;
 
     /**
      * attribut listeDependances de la classe Tache
@@ -44,6 +45,9 @@ public abstract class Tache {
      */
     public Tache(String pNom) {
         this.nomTache = pNom;
+        this.commentaire = "";
+        this.dateDebut = null;
+        this.dateFin = null;
         this.listeDependances = new ArrayList<Tache>();
     }
 
@@ -53,21 +57,39 @@ public abstract class Tache {
      * @return le nom de la tache
      */
     public String getNomTache() {return this.nomTache;}
+
+    /**
+     *
+     * @return
+     */
     public String getCommentaire() {
         return this.commentaire;
     }
 
-    public Date getDateDebut() {
+    /**
+     *
+     * @return
+     */
+    public LocalDate getDateDebut() {
         return this.dateDebut;
     }
 
-    public Date getDateFin() {
+    /**
+     *
+     * @return
+     */
+    public LocalDate getDateFin() {
         return this.dateFin;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Tache> getListeDependances() {
         return this.listeDependances;
     }
+
     /**
      * methode setCommentaire de la classe Tache
      * @param com commentaire que l on souhaite donner a la tache
@@ -80,13 +102,13 @@ public abstract class Tache {
      * methode setDateDebut de la classe Tache
      * @param dateD date de debut que l on souhaite donner a la tache
      */
-    public void setDateDebut(Date dateD) {this.dateDebut = dateD;}
+    public void setDateDebut(LocalDate dateD) {this.dateDebut = dateD;}
 
     /**
      * methode setDateFin de la classe Tache
      * @param dateF date de fin que l on souhaite donner a la tache
      */
-    public abstract void setDateFin(Date dateF);
+    public abstract void setDateFin(LocalDate dateF);
 
     /**
      * methode ajouterDependance de la classe Tache

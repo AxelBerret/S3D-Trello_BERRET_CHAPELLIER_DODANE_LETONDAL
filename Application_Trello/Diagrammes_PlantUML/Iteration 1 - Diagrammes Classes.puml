@@ -54,18 +54,18 @@ class Colonne implements InterfaceListeTaches {
 abstract class Tache {
 # nomTache : String
 # commentaire : String
-# dateDebut : Date
-# dateFin : Date
+# dateDebut : LocalDate
+# dateFin : LocalDate
 # listeDependances : ArrayList<Tache>
 + Tache(pNom : Tache)
 + getCommentaire() : String
 + getNomTache() : String
-+ getDateDebut() : Date
-+ getDateFin() : Date
++ getDateDebut() : LocalDate
++ getDateFin() : LocalDate
 + getListeDependances() : ArrayList<Tache>
 + setCommentaire(com : String) : void
-+ setDateDebut(dateD : Date) : void
-+ abstract setDateFin(dateF : Date) : void
++ setDateDebut(dateD : LocalDate) : void
++ abstract setDateFin(dateF : LocalDate) : void
 + ajouterDependance(tache : Tache) : void
 + retirerDependance(tache : Tache) : void
 + equals(obj : Object) : boolean
@@ -74,7 +74,7 @@ abstract class Tache {
 class TacheComplexe extends Tache implements InterfaceListeTaches {
 - listeTaches : ArrayList<Tache>
 + TacheComplexe(pNom : String)
-+ setDateFin(dateF : Date) : void
++ setDateFin(dateF : LocalDate) : void
 + ajouterTache(tache : Tache) : void
 + supprimerTache(tache : Tache) : void
 + getTache(nomTache : String) : Tache
@@ -83,7 +83,7 @@ class TacheComplexe extends Tache implements InterfaceListeTaches {
 
 class TacheSimple extends Tache {
 + TacheSimple(pNom : String)
-+ setDateFin(dateF : Date) : void
++ setDateFin(dateF : LocalDate) : void
 + toString() : String
 }
 

@@ -1,5 +1,6 @@
 package com.example.application_trello;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class TacheSimple extends Tache {
@@ -18,7 +19,7 @@ public class TacheSimple extends Tache {
      * methode setDateFin de la classe TacheSimple
      * @param dateF date de fin que l on souhaite donner a la tache
      */
-    public void setDateFin(Date dateF) {this.dateFin = dateF;}
+    public void setDateFin(LocalDate dateF) {this.dateFin = dateF;}
 
     /**
      * methode toString de la classe TacheSimple
