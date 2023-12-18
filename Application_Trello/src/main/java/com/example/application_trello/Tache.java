@@ -59,32 +59,32 @@ public abstract class Tache {
     public String getNomTache() {return this.nomTache;}
 
     /**
-     *
-     * @return
+     * methode getCommentaire de la classe Tache
+     * @return commentaire de la tache
      */
     public String getCommentaire() {
         return this.commentaire;
     }
 
     /**
-     *
-     * @return
+     * methode getDateDebut de la classe Tache
+     * @return la date de debut de la tache
      */
     public LocalDate getDateDebut() {
         return this.dateDebut;
     }
 
     /**
-     *
-     * @return
+     * methode getDateFin de la classe Tache
+     * @return la date de fin de la tache
      */
     public LocalDate getDateFin() {
         return this.dateFin;
     }
 
     /**
-     *
-     * @return
+     * methode getListeDependances de la classe Tache
+     * @return la liste des dependances de la tache
      */
     public ArrayList<Tache> getListeDependances() {
         return this.listeDependances;
