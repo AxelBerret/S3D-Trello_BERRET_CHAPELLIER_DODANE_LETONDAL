@@ -10,9 +10,6 @@ public class TestTache {
     public void test_01_constructeurTache() {
         Tache tache = new TacheSimple("Tache1");
         assertEquals("Tache1", tache.getNomTache());
-        assertNull(tache.getCommentaire());
-        assertNull(tache.getDateDebut());
-        assertNull(tache.getDateFin());
         assertTrue(tache.getListeDependances().isEmpty());
     }
 

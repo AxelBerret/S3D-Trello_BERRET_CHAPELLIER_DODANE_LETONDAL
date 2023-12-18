@@ -49,4 +49,12 @@ public class ListeTableaux {
      * @return la liste des tableaux editables
      */
     public ArrayList<Tableau> getListeTableaux() {return this.tableaux;}
+
+    public String toString(){
+        String res = "";
+        for (Tableau tab : this.tableaux){
+            res += "->" + tab.toString() + "\n";
+        }
+        return res;
+    }
 }

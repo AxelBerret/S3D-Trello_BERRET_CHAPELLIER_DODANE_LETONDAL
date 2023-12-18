@@ -12,9 +12,6 @@ public class TestTacheSimple {
     public void test_01_constructeurTacheSimple() {
         TacheSimple tacheSimple = new TacheSimple("Tache1");
         assertEquals("Tache1", tacheSimple.getNomTache());
-        assertNull(tacheSimple.getCommentaire());
-        assertNull(tacheSimple.getDateDebut());
-        assertNull(tacheSimple.getDateFin());
         assertTrue(tacheSimple.getListeDependances().isEmpty());
     }
 

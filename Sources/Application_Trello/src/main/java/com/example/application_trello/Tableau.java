@@ -88,4 +88,12 @@ public class Tableau {
      * @param col colonne que l on souhaite supprimer du tableau
      */
     public void supprimerColonne(Colonne col) {this.listeObjets.remove(col);}
+
+    public String toString(){
+        String res = this.nomTableau + " :\n";
+        for (Colonne c : this.getColonnes()){
+            res += "+" + c.toString() + "\n";
+        }
+        return res;
+    }
 }

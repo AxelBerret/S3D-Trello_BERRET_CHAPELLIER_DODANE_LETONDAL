@@ -142,4 +142,6 @@ public abstract class Tache {
                 Objects.equals(dateFin, autreTache.dateFin) &&
                 Objects.equals(listeDependances, autreTache.listeDependances);
     }
+
+    public abstract String toString();
 }
