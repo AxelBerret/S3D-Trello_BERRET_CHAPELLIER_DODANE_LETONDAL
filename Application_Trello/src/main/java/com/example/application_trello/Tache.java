@@ -44,6 +44,7 @@ public abstract class Tache {
      */
     public Tache(String pNom) {
         this.nomTache = pNom;
+        this.listeDependances = new ArrayList<Tache>();
     }
 
 
@@ -52,7 +53,21 @@ public abstract class Tache {
      * @return le nom de la tache
      */
     public String getNomTache() {return this.nomTache;}
+    public String getCommentaire() {
+        return this.commentaire;
+    }
 
+    public Date getDateDebut() {
+        return this.dateDebut;
+    }
+
+    public Date getDateFin() {
+        return this.dateFin;
+    }
+
+    public ArrayList<Tache> getListeDependances() {
+        return this.listeDependances;
+    }
     /**
      * methode setCommentaire de la classe Tache
      * @param com commentaire que l on souhaite donner a la tache
