@@ -21,7 +21,6 @@ public class TestTableau {
         assertEquals(1, tableau.getColonnes().size());
         assertEquals("ColonneTest", tableau.getColonnes().get(0).getNomColonne());
     }
-
     @Test
     public void test_03_supprimerColonne() {
         Tableau tableau = new Tableau("TableauTest");
@@ -31,6 +30,7 @@ public class TestTableau {
         tableau.ajouterColonne(colonne2);
 
         assertEquals(2, tableau.getColonnes().size());
+
         tableau.supprimerColonne(colonne1);
 
         assertEquals(1, tableau.getColonnes().size());
@@ -38,20 +38,17 @@ public class TestTableau {
     }
 
     @Test
-    public void test_04_archiverTache() {
+    public void test_04_getListeTaches() {
         Tableau tableau = new Tableau("TableauTest");
-        Colonne colonne = new Colonne("ColonneTest");
-        Tache tache = new TacheSimple("TacheTest");
-        colonne.ajouterTache(tache);
-        tableau.ajouterColonne(colonne);
+        Colonne colonne1 = new Colonne("Colonne1");
+        Tache tache1 = new TacheSimple("Tache1");
+        Tache tache2 = new TacheSimple("Tache2");
+        colonne1.ajouterTache(tache1);
+        colonne1.ajouterTache(tache2);
+        tableau.ajouterColonne(colonne1);
 
-        assertEquals(1, tableau.getListeTaches().size());
-        assertEquals(0, tableau.getArchive().getListeTachesArchivees().size());
-
-        tableau.getArchive().archiverTache(tache);
-
-        assertEquals(0, tableau.getListeTaches().size());
-        assertEquals(1, tableau.getArchive().getListeTachesArchivees().size());
-        assertEquals("TacheTest", tableau.getArchive().getListeTachesArchivees().get(0).getNomTache());
+        assertEquals(2, tableau.getListeTaches().size());
+        assertEquals("Tache1", tableau.getListeTaches().get(0).getNomTache());
+        assertEquals("Tache2", tableau.getListeTaches().get(1).getNomTache());
     }
 }

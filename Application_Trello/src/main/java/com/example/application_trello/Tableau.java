@@ -87,5 +87,5 @@ public class Tableau {
      * methode supprimerColonne de la classe Tableau
      * @param col colonne que l on souhaite supprimer du tableau
      */
-    public void supprimerColonne(Colonne col) {this.getColonnes().remove(col);}
+    public void supprimerColonne(Colonne col) {this.listeObjets.remove(col);}
 }
