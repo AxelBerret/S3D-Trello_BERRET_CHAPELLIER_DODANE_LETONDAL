@@ -1,7 +1,4 @@
-import com.example.application_trello.Archive;
-import com.example.application_trello.Colonne;
-import com.example.application_trello.Tache;
-import com.example.application_trello.TacheSimple;
+import com.example.application_trello.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
