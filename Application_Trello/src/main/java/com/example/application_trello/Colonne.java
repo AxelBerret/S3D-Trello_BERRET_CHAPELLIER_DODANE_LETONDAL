@@ -1,6 +1,7 @@
 package com.example.application_trello;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Colonne implements InterfaceListeTaches {
 
@@ -68,4 +69,17 @@ public class Colonne implements InterfaceListeTaches {
      * @return listeTaches
      */
     public ArrayList<Tache> getListeTaches() {return this.listeTaches;}
+
+    /**
+     * methode equals de la classe Colonne
+     * @param obj
+     * @return vrai si egales sinon faux
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Colonne colonne = (Colonne) obj;
+        return Objects.equals(nomColonne, colonne.nomColonne) && Objects.equals(listeTaches, colonne.listeTaches);
+    }
 }
