@@ -69,6 +69,7 @@ abstract class Tache {
 + ajouterDependance(tache : Tache) : void
 + retirerDependance(tache : Tache) : void
 + equals(obj : Object) : boolean
++ abstract toString() : String
 }
 
 class TacheComplexe extends Tache implements InterfaceListeTaches {
