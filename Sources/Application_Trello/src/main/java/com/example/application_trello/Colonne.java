@@ -88,5 +88,6 @@ public class Colonne implements InterfaceListeTaches {
         for (Tache t : this.listeTaches){
             res += "* " + t.toString() + "\n";
         }
+        return res;
     }
 }
