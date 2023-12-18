@@ -1,0 +1,10 @@
+Fonctionnalités Itération 1 : 
+Ajout des classes Archive, Colonne, ListeTableaux, Tableau, Tache, TacheComplexe, TacheSimple et de l'interface InterfaceListeTaches
+-Archive permet d'archiver des objets Tache et des objets Colonne
+-Colonne permet de modéliser une colonne du tableau
+-ListeTableau est une liste de plusieurs tableaux
+-Tableau permet de modélisé un tableau
+-Tache est la classe composite qui sera héritée dans les autre tâches
+-TacheComplexe est une tache qui est composée de sous tâches
+-TacheSimple est une tache avec un début et fin simplement
+-InterfacelisteTache permet de factorisé des opération avec les tâches complexes et les colonnes
