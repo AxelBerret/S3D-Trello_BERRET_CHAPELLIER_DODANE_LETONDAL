@@ -1,0 +1,3 @@
+Durant cette première itération, nous avons créé les classes élémentaires qui nous permettront par la suite de modéliser notre application sous JavaFX.
+
+Parmis ces classes élémentaires se trouvent : Tache (qui se décompose en tâche simple et complexe), Colonne, Tableau, Archive, Listetableau
