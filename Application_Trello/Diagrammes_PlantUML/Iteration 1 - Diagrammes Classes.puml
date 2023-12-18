@@ -58,6 +58,11 @@ abstract class Tache {
 # dateFin : Date
 # listeDependances : ArrayList<Tache>
 + Tache(pNom : Tache)
++ getCommentaire() : String
++ getNomTache() : String
++ getDateDebut() : Date
++ getDateFin() : Date
++ getListeDependances() : ArrayList<Tache>
 + setCommentaire(com : String) : void
 + setDateDebut(dateD : Date) : void
 + abstract setDateFin(dateF : Date) : void
