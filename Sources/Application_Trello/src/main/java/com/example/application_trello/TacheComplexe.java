@@ -73,4 +73,12 @@ public class TacheComplexe extends Tache implements InterfaceListeTaches {
      * @return la liste des sous taches
      */
     public ArrayList<Tache> getListeTaches() {return this.listeTaches;}
+
+    public String toString(){
+        String res = "";
+        for (Tache taches : this.listeTaches){
+            res += "-" + taches.toString() + "\n";
+        }
+        return res;
+    }
 }
