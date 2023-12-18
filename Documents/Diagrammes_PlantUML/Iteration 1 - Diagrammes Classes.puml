@@ -12,6 +12,7 @@ class Tableau {
 + getListeTaches() : ArrayList<Tache>
 + ajouterColonne(col : Colonne) : void
 + supprimerColonne(col : Colonne) : void
++ toString() : String
 }
 
 class Archive {
@@ -31,6 +32,7 @@ class ListeTableaux {
 + supprimerTableau(tab : Tableau) : void
 + getTableau(nomTab : String) : Tableau
 + getListeTableaux() : ArrayList<Tableau>
++ toString() : String
 }
 
 interface InterfaceListeTaches {
@@ -49,6 +51,7 @@ class Colonne implements InterfaceListeTaches {
 + supprimerTache(tache : Tache) : void
 + getTache(nomTache : String) : Tache
 + getListeTaches() : ArrayList<Tache>
++ toString() : String
 }
 
 abstract class Tache {
@@ -80,6 +83,7 @@ class TacheComplexe extends Tache implements InterfaceListeTaches {
 + supprimerTache(tache : Tache) : void
 + getTache(nomTache : String) : Tache
 + getListeTaches() : ArrayList<Tache>
++ toString() : String
 }
 
 class TacheSimple extends Tache {
