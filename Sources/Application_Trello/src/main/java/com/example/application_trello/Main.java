@@ -27,6 +27,9 @@ public class Main {
         TacheSimple ts4 = new TacheSimple("TacheS 4");
         TacheSimple ts5 = new TacheSimple("TacheS 5");
         TacheSimple ts6 = new TacheSimple("TacheS 6");
+        TacheSimple ts7 = new TacheSimple("TacheS 7");
+        TacheSimple ts8 = new TacheSimple("TacheS 8");
+
 
         // ajout des sous taches
         tc2.ajouterTache(ts1);
@@ -35,6 +38,10 @@ public class Main {
         tc1.ajouterTache(tc2);
         tc1.ajouterTache(ts3);
         tc1.ajouterTache(ts4);
+
+        //ajout des dependances
+        ts5.ajouterDependance(ts7);
+        ts5.ajouterDependance(ts8);
 
         // ajout des taches dans les colonnes
         col1.ajouterTache(tc1);
@@ -52,6 +59,6 @@ public class Main {
 
         // affichage des tableaux
         System.out.println("Affichage des tableaux");
-        System.out.printf(listeTab);
+        System.out.println(listeTab);
     }
 }
