@@ -1,0 +1,209 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Tableau implements Sujet{
+- nomTableau : String
+- listeObjets : ArrayList<InterfaceListeTaches>
+- archive : Archive
++ Tableau(pNom : String)
++ getNomTableau() : String
++ getColonnes() : ArrayList<Colonnes>
++ getArchive() : Archive
++ getListeTaches() : ArrayList<Tache>
++ ajouterColonne(col : Colonne) : void
++ supprimerColonne(col : Colonne) : void
++ toString() : String
++ ajouterTache(nomTache : String, nomColonne : String) : void
++ supprimerTache(nomTache : String, nomColonne : String) : void
++ enregistrerObservateur(obs : Observateur) : void
++ supprimerObservateur(obs : Observateur) : void
++ notifierObservateurs() : void
+}
+
+
+interface Sujet {
++ enregistrerObservateur(obs : Observateur) : void
++ supprimerObservateur(obs : Observateur) : void
++ notifierObservateurs() : void
+}
+
+interface Observateur {
++ actualiser(Sujet) : void
+}
+
+class ControlCreationTableau {
++ ControlCreationTableau(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlSuppressionTableau {
++ ControlSuppressionTableau(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlCreationTache {
++ ControlCreationTache(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlModificationTache {
++ ControlModificationTache(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlSuppressionTache {
++ ControlSuppressionTableau(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlArchivageTache {
++ ControlArchivageTache(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlDesarchivageTache {
++ ControlDesarchivageTache(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlDeplacerTache {
++ ControlDeplacerTache(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlCreationColonne {
++ ControlCreationColonne(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlSuppressionColonne {
++ ControlSuppressionColonne(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlArchivageColonne {
++ ControlCreationColonne(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class ControlDesarchivageColonne {
++ ControlDesarchivageColonne(tab : Tableau)
++ handle(event : Event) : void
+}
+
+class VueTableau implements Observateur {
++ VueTableau()
++ actualiser(Sujet) : void
+}
+
+class VueTache implements Observateur {
++ VueTache()
++ actualiser(Sujet) : void
+}
+
+class VueArchive implements Observateur {
++ VueArchive()
++ actualiser(Sujet) : void
+}
+
+class Archive {
+- listeTachesArchivees : ArrayList<Tache>
+- listeColonnesArchivees : ArrayLsit<Tache>
++ Archive()
++ archiverTache(tache : Tache) : void
++ archiverColonne(colonne : Colonne) : void
++ desarchiverTache(tache : Tache) : void
++ desarchiverColonne(colonne : Colonne) : void
+}
+
+class ListeTableaux {
+- tableaux : ArrayList<Tableau>
++ ListeTableaux()
++ ajouterTableau(tab : Tableau) : void
++ supprimerTableau(tab : Tableau) : void
++ getTableau(nomTab : String) : Tableau
++ getListeTableaux() : ArrayList<Tableau>
++ toString() : String
+}
+
+interface InterfaceListeTaches {
++ ajouterTache(tache : Tache) : void
++ supprimerTache(tache : Tache) : void
++ getTache(nomTache : String) : Tache
++ getListeTaches() : ArrayList<Tache>
+}
+
+class Colonne implements InterfaceListeTaches {
+- nomColonne : String
+- listeTaches : ArrayList<Tache>
++ Colonne(pNom : String)
++ getNomColonne() : String
++ ajouterTache(tache : Tache) : void
++ supprimerTache(tache : Tache) : void
++ getTache(nomTache : String) : Tache
++ getListeTaches() : ArrayList<Tache>
++ toString() : String
+}
+
+abstract class Tache {
+# nomTache : String
+# commentaire : String
+# dateDebut : LocalDate
+# dateFin : LocalDate
+# listeDependances : ArrayList<Tache>
++ Tache(pNom : Tache)
++ getCommentaire() : String
++ getNomTache() : String
++ getDateDebut() : LocalDate
++ getDateFin() : LocalDate
++ getListeDependances() : ArrayList<Tache>
++ setCommentaire(com : String) : void
++ setDateDebut(dateD : LocalDate) : void
++ abstract setDateFin(dateF : LocalDate) : void
++ ajouterDependance(tache : Tache) : void
++ retirerDependance(tache : Tache) : void
++ equals(obj : Object) : boolean
++ abstract toString() : String
+}
+
+class TacheComplexe extends Tache implements InterfaceListeTaches {
+- listeTaches : ArrayList<Tache>
++ TacheComplexe(pNom : String)
++ setDateFin(dateF : LocalDate) : void
++ ajouterTache(tache : Tache) : void
++ supprimerTache(tache : Tache) : void
++ getTache(nomTache : String) : Tache
++ getListeTaches() : ArrayList<Tache>
++ toString() : String
+}
+
+class TacheSimple extends Tache {
++ TacheSimple(pNom : String)
++ setDateFin(dateF : LocalDate) : void
++ toString() : String
+}
+
+
+Tableau "1" --> "0...*" InterfaceListeTaches
+Tableau "1" --> "1" Archive
+Archive "1" --> "0...*" Colonne
+Archive "1" --> "0...*" Tache
+TacheComplexe "1" --> "0...*" Tache
+ListeTableaux "1" --> "0...*" Tableau
+
+
+Tableau "1" --> "1..*" Observateur : Observateur
+ControlCreationTableau --> "0..1" Tableau : Modele
+ControlSuppressionTableau --> "0..1" Tableau : Modele
+ControlCreationTache --> "0..1" Tableau : Modele
+ControlModificationTache --> "0..1" Tableau : Modele
+ControlSuppressionTache --> "0..1" Tableau : Modele
+ControlArchivageTache --> "0..1" Tableau : Modele
+ControlDesarchivageTache --> "0..1" Tableau : Modele
+ControlDeplacerTache --> "0..1" Tableau : Modele
+ControlCreationColonne --> "0..1" Tableau : Modele
+ControlSuppressionColonne --> "0..1" Tableau : Modele
+ControlArchivageColonne --> "0..1" Tableau : Modele
+ControlDesarchivageColonne --> "0..1" Tableau : Modele
+
+@enduml
