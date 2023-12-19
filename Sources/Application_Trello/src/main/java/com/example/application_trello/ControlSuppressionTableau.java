@@ -3,7 +3,7 @@ package com.example.application_trello;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.*;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.util.Optional;
 
 public class ControlSuppressionTableau {
