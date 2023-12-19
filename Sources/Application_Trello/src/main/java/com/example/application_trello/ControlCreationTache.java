@@ -53,7 +53,7 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
         }
     }
 
-    private String extraireNomColonneDeID(String idBouton) {//Méthode pour récupérer la colonne dans laquelle ajouter la tâche
+    public String extraireNomColonneDeID(String idBouton) {//Méthode pour récupérer la colonne dans laquelle ajouter la tâche
         if (idBouton != null && idBouton.startsWith("btnCreerTache")) {
             return idBouton.substring("btnCreerTache".length());
         }
