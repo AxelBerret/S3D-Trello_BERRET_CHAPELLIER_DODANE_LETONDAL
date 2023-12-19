@@ -82,7 +82,12 @@ public class Tableau implements Sujet{
      * methode ajouterColonne de la classe Tableau
      * @param col colonne que l on souhaite ajouter au tableau
      */
-    public void ajouterColonne(Colonne col) {this.listeObjets.add(col);}
+    public void ajouterColonne(Colonne col) {
+        ArrayList<Colonne> lc = this.getColonnes();
+        if (!(lc.contains(col))){
+            this.listeObjets.add(col);
+        }
+    }
 
     /**
      * methode supprimerColonne de la classe Tableau
