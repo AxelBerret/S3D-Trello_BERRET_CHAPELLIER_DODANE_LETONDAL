@@ -29,10 +29,10 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
                 dialog.setHeaderText("Entrer le texte de la tâche :");
                 dialog.setContentText("Texte :");
                 // Attendre que l'utilisateur entre le texte
-                dialog.showAndWait().ifPresent(texteTache -> {
+                //dialog.showAndWait().ifPresent(texteTache -> {
                     // Créer une nouvelle tâche avec le texte et l'ajouter au modèle
-                    tab.ajouterTache(texteTache);
-                });
+                   // tab.ajouterTache(texteTache);
+              //  });
             }
         }
     }
