@@ -1,0 +1,46 @@
+package com.example.application_trello;
+
+import javafx.scene.control.TextInputDialog;
+import java.awt.event.ActionEvent;
+import javafx.scene.control.Button;
+
+public class ControlCreationTableau {
+
+    /**
+     * attribut tab de la classe ControlCreationTableau
+     * represente le controleur du bouton de creation de tableau
+     */
+    private ListeTableaux listeTab;
+
+
+    /**
+     * constructeur qui cree des objets de types ControlCreationTableau
+     * a partir des donnees passees en parametres
+     * @param lt tableau que l on souhaite utiliser en modele
+     */
+    public ControlCreationTableau(ListeTableaux lt) {this.listeTab = lt;}
+
+
+    /**
+     * methode handle de la classe ControlCreationTableau
+     * qui permet la gestion du bouton de creation de tableau
+     * @param event evenement representant le bouton clickable
+     */
+    public void handle(ActionEvent event) {
+        if (event.getSource() instanceof Button) {
+            Button sourceButton = (Button) event.getSource();
+            if ("boutonCreationTableau".equals(sourceButton.getId())) {
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Création de Tableau");
+                dialog.setHeaderText("Entrer le texte du tableau :");
+                dialog.setContentText("Texte :");
+                // Attendre que l'utilisateur entre le texte
+                dialog.showAndWait().ifPresent(texteTableau -> {
+                    // Créer un nouveau tableau avec le texte et l ajouter au modele
+                    Tableau tab = new Tableau(texteTableau);
+                    this.listeTab.ajouterTableau(tab);
+                });
+            }
+        }
+    }
+}
