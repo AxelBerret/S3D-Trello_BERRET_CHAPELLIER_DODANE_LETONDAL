@@ -18,6 +18,7 @@ public class ControlSuppressionTache implements EventHandler<ActionEvent> {
                 String nomColonne = extraireNomColonneDeID(sourceButton.getId());
                 String nomTache = extraireNomTacheDeID(sourceButton.getId());
                 tab.supprimerTache(nomTache, nomColonne);
+                tab.notifierObservateurs();
             }
         }
     }
