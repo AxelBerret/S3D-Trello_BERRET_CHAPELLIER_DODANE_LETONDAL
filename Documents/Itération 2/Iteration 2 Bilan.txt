@@ -1,0 +1,4 @@
+Iteration 2 Bilan :
+Nous avons implémenté tout nos vues et nous avons presque que tous les controleurs voulus opérationnel. Certains problèmes dans les contrôleurs nous ont demandé de créer certaines méthodes dans la classe Tableau pour répondre au différents problèmes donc nous avons dû changer légèrement notre diagramme de classe et élaborer ces nouvelles méthodes.
+Pour ce qui est de l'interface JavaFX, nous avons pu élabrorer une ébauche de la vue bureau ainsi qu'une autre ébauche pour la vue tâche que l'on perfectionnera par la suite.
+Dans l'ensemble, bien qu'un peu trop ambitieuse, l'itération a été globalement respectée et réussie.
