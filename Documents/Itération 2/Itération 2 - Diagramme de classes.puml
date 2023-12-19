@@ -12,12 +12,16 @@ class Tableau implements Sujet{
 + getListeTaches() : ArrayList<Tache>
 + ajouterColonne(col : Colonne) : void
 + supprimerColonne(col : Colonne) : void
-+ toString() : String
 + ajouterTache(nomTache : String, nomColonne : String) : void
 + supprimerTache(nomTache : String, nomColonne : String) : void
++ archiverTache(nomTache : String, nomColonne : String) : void
++ desarchiverTache(nomTache : String, nomColonne : String) : void
++ archiverColonne(nomColonne : String) : void
++ desarchiverColonne(nomColonne : String) : void
 + enregistrerObservateur(obs : Observateur) : void
 + supprimerObservateur(obs : Observateur) : void
 + notifierObservateurs() : void
++ toString() : String
 }
 
 
