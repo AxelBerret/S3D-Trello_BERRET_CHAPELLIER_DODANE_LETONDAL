@@ -2,7 +2,7 @@ package com.example.application_trello;
 
 import java.util.ArrayList;
 
-public class Tableau {
+public class Tableau implements Sujet{
 
     /**
      * attribut nomTableau de la classe Tableau
@@ -16,6 +16,7 @@ public class Tableau {
      * (colonnes et taches)
      */
     private ArrayList<InterfaceListeTaches> listeObjets;
+    private ArrayList<Observateur> observateurs;
 
     /**
      * attribut archive de la classe Tableau
@@ -95,5 +96,26 @@ public class Tableau {
             res += "+" + c.toString() + "\n";
         }
         return res;
+    }
+
+    @Override
+    public void enregistrerObservateur(Observateur o) {
+        this.observateurs.add(o);
+    }
+
+    @Override
+    public void supprimerObservateur(Observateur o) {
+        int i = this.observateurs.indexOf(o);
+        if (i >= 0) {
+            this.observateurs.remove(i);
+        }
+    }
+
+    @Override
+    public void notifierObservateurs() {
+        for (int i = 0; i < this.observateurs.size(); i++) {
+            Observateur observer = this.observateurs.get(i);
+            observer.actualiser(this);
+        }
     }
 }
