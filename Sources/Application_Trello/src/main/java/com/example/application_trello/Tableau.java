@@ -39,6 +39,7 @@ public class Tableau implements Sujet{
         this.nomTableau = pNom;
         this.listeObjets = new ArrayList<InterfaceListeTaches>();
         this.observateurs = new ArrayList<Observateur>();
+        this.archive = new Archive();
     }
 
 
@@ -143,11 +144,19 @@ public class Tableau implements Sujet{
      * @param nomColonne nom de la colonne dans laquelle on veut ajouter la tache
      */
     public void ajouterTache(String nomTache, String nomColonne){
+        /*
         ArrayList<Colonne> lc = this.getListeColonnes();
         for (Colonne c : lc){
             if (c.getNomColonne().equals(nomColonne)){
                 Tache t = new TacheSimple(nomTache);
                 c.ajouterTache(t);
+            }
+        }
+        */
+        for (int i = 0; i < this.getListeColonnes().size(); i++) {
+            if (this.getListeColonnes().get(i).getNomColonne().equals(nomColonne)) {
+                Tache t = new TacheSimple(nomTache);
+                this.getListeColonnes().get(i).ajouterTache(t);
             }
         }
     }
@@ -173,12 +182,11 @@ public class Tableau implements Sujet{
      * @param nomColonne nom de la colonne dans laquelle on souhaite archiver la tache
      */
     public void archiverTache(String nomTache, String nomColonne) {
-        ArrayList<Colonne> lc = this.getListeColonnes();
-        for (Colonne c : lc){
-            if (c.getNomColonne().equals(nomColonne)){
+        for (int i = 0; i < this.getListeColonnes().size(); i++) {
+            if (this.getListeColonnes().get(i).getNomColonne().equals(nomColonne)) {
                 Tache t = this.getTache(nomTache);
                 this.archive.archiverTache(t);
-                c.supprimerTache(t);
+                this.getListeColonnes().get(i).supprimerTache(t);
             }
         }
     }
