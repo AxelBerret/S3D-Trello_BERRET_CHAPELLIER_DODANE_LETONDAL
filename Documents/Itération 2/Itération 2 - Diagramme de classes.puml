@@ -14,8 +14,8 @@ class Tableau implements Sujet{
 + supprimerColonne(col : Colonne) : void
 + ajouterTache(nomTache : String, nomColonne : String) : void
 + supprimerTache(nomTache : String, nomColonne : String) : void
-+archiverTache(nomTache : String, nomColonne : String) : void
-+desarchiverTache(nomTache : String, nomColonne : String) : void
++ archiverTache(nomTache : String, nomColonne : String) : void
++ desarchiverTache(nomTache : String, nomColonne : String) : void
 + archiverColonne(nomColonne : String) : void
 + desarchiverColonne(nomColonne : String) : void
 + enregistrerObservateur(obs : Observateur) : void
