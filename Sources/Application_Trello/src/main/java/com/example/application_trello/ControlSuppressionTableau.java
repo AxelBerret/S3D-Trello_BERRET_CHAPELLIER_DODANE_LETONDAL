@@ -39,7 +39,6 @@ public class ControlSuppressionTableau {
 
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
-                    // Supprimer le tableau de la liste
                     String nomTab = this.extraireNomTableauDeID(sourceButton.getId());
                     this.listeTab.supprimerTableau(this.listeTab.getTableau(nomTab));
                 }
@@ -53,8 +52,8 @@ public class ControlSuppressionTableau {
      * @return
      */
     private String extraireNomTableauDeID(String idBouton) {
-        if (idBouton != null && idBouton.startsWith("btnSupprimerTableau")) {
-            return idBouton.substring("btnSupprimerTableau".length());
+        if (idBouton != null && idBouton.startsWith("boutonSupprimerTableau")) {
+            return idBouton.substring("boutonSupprimerTableau".length());
         }
         return null;
     }

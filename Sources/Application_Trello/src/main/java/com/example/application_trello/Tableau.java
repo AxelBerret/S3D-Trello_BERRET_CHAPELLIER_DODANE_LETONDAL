@@ -16,13 +16,18 @@ public class Tableau implements Sujet{
      * (colonnes et taches)
      */
     private ArrayList<InterfaceListeTaches> listeObjets;
-    private ArrayList<Observateur> observateurs;
 
     /**
      * attribut archive de la classe Tableau
      * represente l archive du tableau
      */
     private Archive archive;
+
+    /**
+     * attribut observateurs de la classe Tableau
+     * represente la liste des observateurs
+     */
+    private ArrayList<Observateur> observateurs;
 
 
     /**
@@ -33,6 +38,7 @@ public class Tableau implements Sujet{
     public Tableau(String pNom) {
         this.nomTableau = pNom;
         this.listeObjets = new ArrayList<InterfaceListeTaches>();
+        this.observateurs = new ArrayList<Observateur>();
     }
 
 
@@ -138,9 +144,58 @@ public class Tableau implements Sujet{
         ArrayList<Colonne> lc = this.getColonnes();
         for (Colonne c : lc){
             if (c.getNomColonne().equals(nomColonne)){
-                Tache t = new TacheSimple(nomTache);
+                Tache t = this.getTache(nomTache);
                 c.supprimerTache(t);
             }
         }
+    }
+
+    public void archiverTache(String nomTache, String nomColonne) {
+        ArrayList<Colonne> lc = this.getColonnes();
+        for (Colonne c : lc){
+            if (c.getNomColonne().equals(nomColonne)){
+                Tache t = this.getTache(nomTache);
+                this.archive.archiverTache(t);
+                c.supprimerTache(t);
+            }
+        }
+    }
+
+    public void desarchiverTache(String nomTache, String nomColonne) {
+        for (int i = 0; i < this.archive.getListeTachesArchivees().size(); i++) {
+            if (this.archive.getListeTachesArchivees().get(i).getNomTache().equals(nomTache)) {
+                Tache t = this.archive.getListeTachesArchivees().get(i);
+
+                this.archive.desarchiverTache(t);
+            }
+        }
+    }
+
+    public void archiverColonne() {
+
+    }
+
+    public void desarchiverColonne() {
+
+    }
+
+    public Tache getTache(String nomTache) {
+        Tache res = null;
+        for (int i = 0; i < this.getListeTaches().size(); i++) {
+            if (this.getListeTaches().get(i).getNomTache().equals(nomTache)) {
+                res = this.getListeTaches().get(i);
+            }
+        }
+        return res;
+    }
+
+    public Colonne getColonne(String nomColonne) {
+        Colonne res = null;
+        for (int i = 0; i < this.getColonnes().size(); i++) {
+            if (this.getColonnes().get(i).getNomColonne().equals(nomColonne)) {
+                res = this.getColonnes().get(i);
+            }
+        }
+        return res;
     }
 }

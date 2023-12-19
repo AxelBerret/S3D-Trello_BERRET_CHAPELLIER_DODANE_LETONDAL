@@ -25,5 +25,12 @@ public class ControlArchivageColonne {
      * qui permet la gestion du bouton d archivage des colonnes
      * @param event evenement representant le bouton clickable
      */
-    public void handle(ActionEvent event) {}
+    public void handle(ActionEvent event) {
+        if (event.getSource() instanceof Button) {
+            Button sourceButton = (Button) event.getSource();
+            if ("boutonArchivageColonne".equals(sourceButton.getId())) {
+
+            }
+        }
+    }
 }
