@@ -118,4 +118,14 @@ public class Tableau implements Sujet{
             observer.actualiser(this);
         }
     }
+
+    public void ajouterTache(String nomTache, String nomColonne){
+        ArrayList<Colonne> lc = this.getColonnes();
+        for (Colonne c : lc){
+            if (c.getNomColonne().equals(nomColonne)){
+                Tache t = new TacheSimple(nomTache);
+                c.ajouterTache(t);
+            }
+        }
+    }
 }
