@@ -16,13 +16,18 @@ public class Tableau implements Sujet{
      * (colonnes et taches)
      */
     private ArrayList<InterfaceListeTaches> listeObjets;
-    private ArrayList<Observateur> observateurs;
 
     /**
      * attribut archive de la classe Tableau
      * represente l archive du tableau
      */
     private Archive archive;
+
+    /**
+     * attribut observateurs de la classe Tableau
+     * represente la liste des observateurs
+     */
+    private ArrayList<Observateur> observateurs;
 
 
     /**
@@ -33,6 +38,7 @@ public class Tableau implements Sujet{
     public Tableau(String pNom) {
         this.nomTableau = pNom;
         this.listeObjets = new ArrayList<InterfaceListeTaches>();
+        this.observateurs = new ArrayList<Observateur>();
     }
 
 
@@ -43,24 +49,16 @@ public class Tableau implements Sujet{
     public String getNomTableau() {return this.nomTableau;}
 
     /**
-     * methode getColonnes de la classe Tableau
-     * @return la liste des colonnes dans la liste des objets
-     */
-    public ArrayList<Colonne> getColonnes() {
-        ArrayList<Colonne> listeColonnes = new ArrayList<Colonne>();
-        for (int i = 0; i < this.listeObjets.size(); i++) {
-            if (this.listeObjets.get(i) instanceof Colonne) {
-                listeColonnes.add((Colonne)this.listeObjets.get(i));
-            }
-        }
-        return listeColonnes;
-    }
-
-    /**
      * methode getArchive de la classe Tableau
      * @return l archive du tableau
      */
     public Archive getArchive() {return this.archive;}
+
+    /**
+     * methode getListeObjets de la classe Tableau
+     * @return la liste des objets (colonne ou taches)
+     */
+    public ArrayList<InterfaceListeTaches> getListeObjets() {return this.listeObjets;}
 
     /**
      * methode getListeTaches de la classe Tableau
@@ -79,10 +77,59 @@ public class Tableau implements Sujet{
     }
 
     /**
+     * methode getColonnes de la classe Tableau
+     * @return la liste des colonnes dans la liste des objets
+     */
+    public ArrayList<Colonne> getListeColonnes() {
+        ArrayList<Colonne> listeColonnes = new ArrayList<Colonne>();
+        for (int i = 0; i < this.listeObjets.size(); i++) {
+            if (this.listeObjets.get(i) instanceof Colonne) {
+                listeColonnes.add((Colonne)this.listeObjets.get(i));
+            }
+        }
+        return listeColonnes;
+    }
+
+    /**
+     * methode getTache de la classe Tableau
+     * @param nomTache nom de la tache que l on souhaite posseder
+     * @return la tache voulue
+     */
+    public Tache getTache(String nomTache) {
+        Tache res = null;
+        for (int i = 0; i < this.getListeTaches().size(); i++) {
+            if (this.getListeTaches().get(i).getNomTache().equals(nomTache)) {
+                res = this.getListeTaches().get(i);
+            }
+        }
+        return res;
+    }
+
+    /**
+     * methode getColonne de la classe Tableau
+     * @param nomColonne nom de la colonne que l on souhaite posseder
+     * @return la colonne voulue
+     */
+    public Colonne getColonne(String nomColonne) {
+        Colonne res = null;
+        for (int i = 0; i < this.getListeColonnes().size(); i++) {
+            if (this.getListeColonnes().get(i).getNomColonne().equals(nomColonne)) {
+                res = this.getListeColonnes().get(i);
+            }
+        }
+        return res;
+    }
+
+    /**
      * methode ajouterColonne de la classe Tableau
      * @param col colonne que l on souhaite ajouter au tableau
      */
-    public void ajouterColonne(Colonne col) {this.listeObjets.add(col);}
+    public void ajouterColonne(Colonne col) {
+        ArrayList<Colonne> lc = this.getListeColonnes();
+        if (!(lc.contains(col))){
+            this.listeObjets.add(col);
+        }
+    }
 
     /**
      * methode supprimerColonne de la classe Tableau
@@ -90,19 +137,101 @@ public class Tableau implements Sujet{
      */
     public void supprimerColonne(Colonne col) {this.listeObjets.remove(col);}
 
-    public String toString(){
-        String res = this.nomTableau + " :\n";
-        for (Colonne c : this.getColonnes()){
-            res += "+" + c.toString() + "\n";
+    /**
+     * methode ajouterTache de la classe Tableau
+     * @param nomTache nom de la tache que l on souhaite ajouter
+     * @param nomColonne nom de la colonne dans laquelle on veut ajouter la tache
+     */
+    public void ajouterTache(String nomTache, String nomColonne){
+        ArrayList<Colonne> lc = this.getListeColonnes();
+        for (Colonne c : lc){
+            if (c.getNomColonne().equals(nomColonne)){
+                Tache t = new TacheSimple(nomTache);
+                c.ajouterTache(t);
+            }
         }
-        return res;
     }
 
+    /**
+     * methode supprimerTache de la classe Tableau
+     * @param nomTache nom de la tache que l on souhaite supprimer
+     * @param nomColonne nom de la colonne dans laquelle on souhaite supprimer la tache
+     */
+    public void supprimerTache(String nomTache, String nomColonne){
+        ArrayList<Colonne> lc = this.getListeColonnes();
+        for (Colonne c : lc){
+            if (c.getNomColonne().equals(nomColonne)){
+                Tache t = this.getTache(nomTache);
+                c.supprimerTache(t);
+            }
+        }
+    }
+
+    /**
+     * methode archiverTache de la classe Tableau
+     * @param nomTache nom de la tache que l on souhaite archiver
+     * @param nomColonne nom de la colonne dans laquelle on souhaite archiver la tache
+     */
+    public void archiverTache(String nomTache, String nomColonne) {
+        ArrayList<Colonne> lc = this.getListeColonnes();
+        for (Colonne c : lc){
+            if (c.getNomColonne().equals(nomColonne)){
+                Tache t = this.getTache(nomTache);
+                this.archive.archiverTache(t);
+                c.supprimerTache(t);
+            }
+        }
+    }
+
+    /**
+     * methode desarchiverTache de la classe Tableau
+     * @param nomTache nom de la tache que l on souhaite desarchiver la tache
+     */
+    public void desarchiverTache(String nomTache) {
+        for (int i = 0; i < this.archive.getListeTachesArchivees().size(); i++) {
+            if (this.archive.getListeTachesArchivees().get(i).getNomTache().equals(nomTache)) {
+                Tache t = this.archive.getListeTachesArchivees().get(i);
+                this.getListeColonnes().get(0).ajouterTache(t);
+                this.archive.desarchiverTache(t);
+            }
+        }
+    }
+
+    /**
+     * methode archiverColonne de la classe Tableau
+     * @param nomColonne nom de la colonne que l on souhaite archiver
+     */
+    public void archiverColonne(String nomColonne) {
+        Colonne colonne = this.getColonne(nomColonne);
+        this.archive.archiverColonne(colonne);
+        this.supprimerColonne(colonne);
+    }
+
+    /**
+     * methode desarchiverColonne de la classe Tableau
+     * @param nomColonne nom de la colonne que l on souhaite desarchiver
+     */
+    public void desarchiverColonne(String nomColonne) {
+        for (int i = 0; i < this.archive.getListeColonnesArchivees().size(); i++) {
+            if (this.archive.getListeColonnesArchivees().get(i).getNomColonne().equals(nomColonne)) {
+                Colonne colonne = this.archive.getListeColonnesArchivees().get(i);
+            }
+        }
+    }
+
+    /**
+     * methode enregistrerObservateur de la classe Tableau
+     * @param o observateur que l on souhaite enregistrer
+     */
     @Override
     public void enregistrerObservateur(Observateur o) {
         this.observateurs.add(o);
     }
 
+    /**
+     * methode supprimerObservateur de la classe Tableau
+     * @param o observateur que l on souhaite supprimer
+     */
     @Override
     public void supprimerObservateur(Observateur o) {
         int i = this.observateurs.indexOf(o);
@@ -111,11 +240,26 @@ public class Tableau implements Sujet{
         }
     }
 
+    /**
+     * methode notifierObservateur de la classe Tableau
+     */
     @Override
     public void notifierObservateurs() {
         for (int i = 0; i < this.observateurs.size(); i++) {
             Observateur observer = this.observateurs.get(i);
             observer.actualiser(this);
         }
+    }
+
+    /**
+     * methode toString de la classe Tableau
+     * @return le mode d affiche pour les objets de types Tableau
+     */
+    public String toString(){
+        String res = this.nomTableau + " :\n";
+        for (Colonne c : this.getListeColonnes()){
+            res += "+" + c.toString() + "\n";
+        }
+        return res;
     }
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="09a96b42-9216-4045-b0a5-7a571cc192bb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,8 +13,18 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
   <component name="ProjectColorInfo">{
@@ -28,7 +41,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Acer PREDATOR/Desktop/SAE_Applicatiojs/S3D-Trello_BERRET_CHAPELLIER_DODANE_LETONDAL/Sources/Application_Trello",
+    "last_opened_file_path": "C:/Travail/BUT 2 - BERRET/1 - SAE/Dev d'applications/S3D-Trello_BERRET_CHAPELLIER_DODANE_LETONDAL/Sources/Application_Trello",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -42,6 +59,7 @@
       <updated>1702905813240</updated>
       <workItem from="1702905815269" duration="111000" />
       <workItem from="1702905935052" duration="115000" />
+      <workItem from="1702911987822" duration="1281000" />
     </task>
     <servers />
   </component>

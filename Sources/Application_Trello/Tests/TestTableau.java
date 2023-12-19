@@ -8,7 +8,7 @@ public class TestTableau {
     public void test_01_constructeurTableau() {
         Tableau tableau = new Tableau("TableauTest");
         assertEquals("TableauTest", tableau.getNomTableau());
-        assertEquals(0, tableau.getColonnes().size());
+        assertEquals(0, tableau.getListeColonnes().size());
         assertEquals(0, tableau.getListeTaches().size());
     }
 
@@ -17,8 +17,8 @@ public class TestTableau {
         Tableau tableau = new Tableau("TableauTest");
         Colonne colonne = new Colonne("ColonneTest");
         tableau.ajouterColonne(colonne);
-        assertEquals(1, tableau.getColonnes().size());
-        assertEquals("ColonneTest", tableau.getColonnes().get(0).getNomColonne());
+        assertEquals(1, tableau.getListeColonnes().size());
+        assertEquals("ColonneTest", tableau.getListeColonnes().get(0).getNomColonne());
     }
     @Test
     public void test_03_supprimerColonne() {
@@ -27,10 +27,10 @@ public class TestTableau {
         Colonne colonne2 = new Colonne("Colonne2");
         tableau.ajouterColonne(colonne1);
         tableau.ajouterColonne(colonne2);
-        assertEquals(2, tableau.getColonnes().size());
+        assertEquals(2, tableau.getListeColonnes().size());
         tableau.supprimerColonne(colonne1);
-        assertEquals(1, tableau.getColonnes().size());
-        assertEquals("Colonne2", tableau.getColonnes().get(0).getNomColonne());
+        assertEquals(1, tableau.getListeColonnes().size());
+        assertEquals("Colonne2", tableau.getListeColonnes().get(0).getNomColonne());
     }
 
     @Test
