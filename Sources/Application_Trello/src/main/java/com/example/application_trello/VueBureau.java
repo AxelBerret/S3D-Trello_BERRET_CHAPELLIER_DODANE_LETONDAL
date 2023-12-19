@@ -2,59 +2,131 @@ package com.example.application_trello;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class VueBureau extends Application {
     @Override
     public void start(Stage stage) {
-        // Left VBox with 5 buttons
-        VBox leftVBox = new VBox(10); // Added spacing
-        leftVBox.setPadding(new Insets(10)); // Added padding
+        // Left VBox with 5 hyperlinks
+        VBox leftVBox = new VBox(100);
+        leftVBox.setAlignment(Pos.CENTER);
+
         for (int i = 1; i <= 5; i++) {
-            Button button = new Button("Button " + i);
-            button.setStyle("-fx-font-size: 14; -fx-padding: 10 20;");
-            leftVBox.getChildren().add(button);
+            Hyperlink link = new Hyperlink("Link " + i);
+            link.setStyle("-fx-font-size: 14;-fx-padding: 50; -fx-border-color: transparent; -fx-background-color: transparent;");
+            link.setStyle("-fx-text-fill: black; -fx-underline: none;");
+            link.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+            VBox.setMargin(link, new Insets(30));
+            link.setPadding(new Insets(10, 30, 10, 30));
+            leftVBox.getChildren().add(link);
         }
 
-        // Right VBox with HBox, rectangles, and "Gant" button
-        VBox rightVBox = new VBox(10); // Added spacing
-        rightVBox.setPadding(new Insets(10)); // Added padding
+        Separator separator = new Separator();
+        separator.setOrientation(Orientation.VERTICAL);
 
-        // HBox in the right VBox
-        HBox rightHBox = new HBox(10); // Added spacing
+        VBox rightVBox = new VBox(10);
+        rightVBox.setPadding(new Insets(10));
+        rightVBox.setAlignment(Pos.CENTER);
 
-        // Create 4 rectangles with specified properties
+        HBox rightHBox = new HBox(10);
+
         for (int i = 0; i < 4; i++) {
-            Rectangle rectangle = new Rectangle(100, 400);
-            rectangle.setArcWidth(10);
-            rectangle.setArcHeight(10);
-            rectangle.setFill(Color.LIGHTGRAY);
+            VBox columnVBox = new VBox(20);
+            columnVBox.setMinWidth(200);
+            columnVBox.setMinHeight(500);
+            columnVBox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+            columnVBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
+            columnVBox.setAlignment(Pos.TOP_CENTER);
 
-            rightHBox.getChildren().add(rectangle);
+            Label columnLabel;
+            switch (i) {
+                case 0:
+                    columnLabel = new Label("A faire");
+                    break;
+                case 1:
+                    columnLabel = new Label("En cours");
+                    break;
+                case 2:
+                    columnLabel = new Label("Terminé");
+                    break;
+                default:
+                    columnLabel = new Label("Unknown");
+            }
+            columnLabel.setPadding(new Insets(20));
+            columnLabel.setAlignment(Pos.TOP_CENTER);
+
+            HBox additionalButtonsRow = new HBox(10);
+            additionalButtonsRow.setAlignment(Pos.CENTER);
+            Button newButton1 = createIconButton("newButton1.png");
+            Button newButton2 = createIconButton("newButton2.png");
+            Button newButton3 = createIconButton("newButton3.png");
+            additionalButtonsRow.getChildren().addAll(newButton1, newButton2, newButton3);
+
+            Hyperlink clickableText = new Hyperlink("Task " + (i + 1));
+            clickableText.setStyle("-fx-text-fill: black; -fx-underline: none;");
+
+            HBox buttonRow = new HBox(10);
+            buttonRow.setAlignment(Pos.CENTER);
+            Button trombonneButton = createIconButton("trombonne.png");
+            Button croixButton = createIconButton("croix.png");
+            buttonRow.getChildren().addAll(trombonneButton, croixButton);
+
+            HBox taskInColumn = new HBox(10);
+            taskInColumn.setPadding(new Insets(10));
+            taskInColumn.getChildren().addAll(clickableText, buttonRow);
+
+            Separator columnSeparator = new Separator();
+            columnSeparator.setOrientation(Orientation.HORIZONTAL);
+            columnSeparator.setStyle("-fx-background-color: black; -fx-min-height: 2px; -fx-pref-height: 2px; -fx-max-height: 2px;");
+
+            columnVBox.getChildren().addAll(columnLabel, additionalButtonsRow, columnSeparator, taskInColumn);
+            rightHBox.getChildren().addAll(columnVBox);
+            columnVBox.setOnMouseEntered(e -> columnVBox.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 255, 0.05), CornerRadii.EMPTY, Insets.EMPTY))));
+            columnVBox.setOnMouseExited(e -> columnVBox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))));
+            HBox.setMargin(columnVBox, new Insets(0, 0, 0, 50));
         }
 
-        // Button "Gant" in the right VBox
-        Button gantButton = new Button("Gant");
-        gantButton.setStyle("-fx-font-size: 16; -fx-padding: 10 20;");
-        rightVBox.getChildren().addAll(rightHBox, gantButton);
+        Button ganttButton = new Button("Création du Gantt");
+        ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
+        VBox.setMargin(ganttButton, new Insets(30));
+        ganttButton.setOnMouseEntered(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
+        ganttButton.setOnMouseExited(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
 
-        // Main HBox with left and right VBoxes
-        HBox mainHBox = new HBox(20, leftVBox, rightVBox); // Added spacing
+        HBox mainHBox = new HBox(20, leftVBox, separator, rightVBox);
+        mainHBox.setStyle("-fx-background-color: linear-gradient(to top right, rgba(255,128,0,0.45), rgba(0,128,255,0.45)); -fx-background-radius: 0;");
+        rightVBox.getChildren().addAll(rightHBox, ganttButton);
 
-        // Create the scene with the main HBox
         Scene scene = new Scene(mainHBox, 900, 400);
 
-        // Set the stage title and scene
         stage.setTitle("Hello JavaFX!");
         stage.setScene(scene);
 
-        // Show the stage
         stage.show();
+    }
+
+    private Button createIconButton(String imageName) {
+        Image image = new Image("file:Image/" + imageName);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(20);
+        imageView.setFitHeight(20);
+        imageView.setPreserveRatio(true);
+        Button button = new Button("", imageView);
+        button.setStyle("-fx-background-color: lightblue;");
+        addHoverEffect(button);
+        return button;
+    }
+
+    private void addHoverEffect(Button button) {
+        button.setOnMouseEntered(e -> button.setStyle("-fx-background-color: orange;"));
+        button.setOnMouseExited(e -> button.setStyle("-fx-background-color: lightblue;"));
     }
 
     public static void main(String[] args) {
