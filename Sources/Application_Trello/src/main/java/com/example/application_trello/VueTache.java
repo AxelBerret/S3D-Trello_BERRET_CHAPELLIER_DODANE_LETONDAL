@@ -2,6 +2,8 @@ package com.example.application_trello;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.application.Platform;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,9 +11,48 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static javafx.application.Application.launch;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class VueTache extends Application {
+
+    private Tache t;
+    private ObservableList<String> listeDep;
+    private ObservableList<String> listeSousT;
+
+    public VueTache(Tache t){
+        this.t = t;
+        this.listeDep = FXCollections.observableArrayList();
+        this.listeSousT = FXCollections.observableArrayList();
+        //observableList.add("Element 1");
+    }
+
+    public void actualiser(Sujet s){
+        ArrayList<Tache> lisAllTaches = ((Tableau)s).getListeTaches();
+        ArrayList<Tache> lisD = this.t.getListeDependances();
+        lisAllTaches.removeAll(lisD);
+        lisAllTaches.remove(this.t);
+        for (Tache t : lisAllTaches){//On ajoute a la liste des dependances possibles toutes les taches sauf celles qui sont deja les dependances et la tache en question
+            this.listeDep.add(t.getNomTache());
+        }
+
+        //On fait la même chose pour les sous-tâches
+        //Ces observablesLists serviront pour les comboBox lors de la modification d'une tâche
+        //Et accessoirement donc lors de l'ajout de dépendances ou sous-tâches
+        lisAllTaches = ((Tableau)s).getListeTaches();//On remet à 0 la liste de toutes les tâches
+        if (t instanceof TacheComplexe){//Et si notre tâche est une tâche complexe (car sinon elle n'a pas de sous-tâche dans tous les cas)
+            ArrayList<Tache> lisSousT = ((TacheComplexe) t).getListeTaches();//On récupère les sous-tâches déjà assignées à cette tâche
+            lisAllTaches.removeAll(lisSousT);//On les enleve de la liste de toutes les tâches
+            lisAllTaches.remove(this.t);//On enleve ensuite la tâche en question
+            for (Tache t : lisAllTaches){
+                this.listeDep.add(t.getNomTache());//On ajoute tous les noms des tâches possibles dans l'observableList
+            }
+        }
+    }
+
+    public
+
     @Override
     public void start(Stage stage) {
         /*Stage window = new Stage();
@@ -34,7 +75,7 @@ public class VueTache extends Application {
         dependListView.setItems(FXCollections.observableArrayList("Dep1", "Dep2", "Dep3"));
 
         ComboBox<String> dependComboBox = new ComboBox<>();
-        dependComboBox.setItems(FXCollections.observableArrayList("NouvelleDep1", "NouvelleDep2", "NouvelleDep3", "ExempleDep1", "ExempleDep2"));
+        dependComboBox.setItems(this.listeDep);
 
         Button addDependButton = new Button("Ajouter");
         addDependButton.setOnAction(e -> {
@@ -52,7 +93,7 @@ public class VueTache extends Application {
         subtaskListView.setItems(FXCollections.observableArrayList("SousTache1", "SousTache2", "SousTache3"));
 
         ComboBox<String> subtaskComboBox = new ComboBox<>();
-        subtaskComboBox.setItems(FXCollections.observableArrayList("NouvelleSousTache1", "NouvelleSousTache2", "NouvelleSousTache3", "ExempleSousTache1", "ExempleSousTache2"));
+        subtaskComboBox.setItems(this.listeSousT);
 
         Button addSubtaskButton = new Button("Ajouter");
         addSubtaskButton.setOnAction(e -> {
@@ -111,6 +152,7 @@ public class VueTache extends Application {
         // Show the stage in full screen
         stage.show();
     }
+
 
     public static void main(String[] args) {
         launch();

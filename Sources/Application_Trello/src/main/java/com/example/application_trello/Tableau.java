@@ -152,6 +152,7 @@ public class Tableau implements Sujet{
                 c.ajouterTache(t);
             }
         }
+<<<<<<< Updated upstream
         */
         for (int i = 0; i < this.getListeColonnes().size(); i++) {
             if (this.getListeColonnes().get(i).getNomColonne().equals(nomColonne)) {
@@ -159,6 +160,9 @@ public class Tableau implements Sujet{
                 this.getListeColonnes().get(i).ajouterTache(t);
             }
         }
+=======
+        notifierObservateurs();
+>>>>>>> Stashed changes
     }
 
     /**
@@ -174,6 +178,7 @@ public class Tableau implements Sujet{
                 c.supprimerTache(t);
             }
         }
+        notifierObservateurs();
     }
 
     /**
