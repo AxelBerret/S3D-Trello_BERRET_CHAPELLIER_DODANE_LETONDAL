@@ -33,7 +33,7 @@ public class ControlSuppressionColonne implements EventHandler<ActionEvent> {
                 // Extraction du nom de la colonne
                 String nomColonne = extraireNomColonneDeID(sourceButton.getId());
                 // Parcourt toutes les colonnes du tableau
-                for (Colonne c : tab.getColonnes()) {
+                for (Colonne c : tab.getListeColonnes()) {
                     // Si la colonne correspond au nom extrait, la supprime et sort de la boucle
                     if (c.getNomColonne().equals(nomColonne)) {
                         tab.supprimerColonne(c);

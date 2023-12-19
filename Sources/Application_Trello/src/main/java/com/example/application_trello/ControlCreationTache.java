@@ -46,7 +46,7 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
     }
 
     public void majListeNomColonnes(){
-        ArrayList<Colonne> lc = this.tab.getColonnes();
+        ArrayList<Colonne> lc = this.tab.getListeColonnes();
         this.listeNomColonnes = new ArrayList<>();
         for (Colonne c : lc){
             this.listeNomColonnes.add(c.getNomColonne());
