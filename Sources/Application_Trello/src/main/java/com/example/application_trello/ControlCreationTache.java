@@ -60,4 +60,8 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
         return null;
     }
 
+    public ArrayList<String> getListeNomColonnes(){
+        return this.listeNomColonnes;
+    }
+
 }

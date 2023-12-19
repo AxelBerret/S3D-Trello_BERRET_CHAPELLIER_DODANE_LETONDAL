@@ -17,32 +17,35 @@ public class ControlModificationTache implements EventHandler<ActionEvent> {
      * mettre à jour si nécessaire. */
     private Tableau tab;
     private ArrayList<String> listeNomColonnes;
+    private FenetreModification fenetreModification;
 
     public ControlModificationTache(Tableau t){
         this.tab = t;
         this.majListeNomColonnes();
+        this.fenetreModification = new FenetreModification();
     }
 
-    public void handle(ActionEvent event) {
-        this.majListeNomColonnes();
-        if (event.getSource() instanceof Button) {
-            Button sourceButton = (Button) event.getSource();//Si l'event vient d'un boutton
-            if (sourceButton.getId().startsWith("btnCreerTache")) {//Si c'est un bouton de création de tâche
-                String nomColonne = extraireNomColonneDeID(sourceButton.getId());//On récupère le nom de la colonne
-                if (this.listeNomColonnes.contains(nomColonne)){//Si la colonne existe dans notre tableau
-                    // On ouvre une fenetre de dialogue pour rentrer le nom de la tâche
-                    TextInputDialog dialog = new TextInputDialog();
-                    dialog.setTitle("Création de Tâche");
-                    dialog.setHeaderText("Entrer le texte de la tâche :");
-                    dialog.setContentText("Texte :");
-                    // Attendre que l'utilisateur entre le texte
-                    dialog.showAndWait().ifPresent(texteTache -> {
-                        // Créer une nouvelle tâche avec le texte et l'ajouter au modèle
-                        tab.ajouterTache(texteTache, nomColonne);//On ajoute la tâche dans la colonne
-                    });
-                }
-            }
-        }
+    public void gererClicSurTache(Tache tache) {
+        // Créez une nouvelle fenêtre de modification
+        Stage stageModification = new Stage();
+
+        // Créez la vue de modification de la tâche avec les détails de la tâche
+        VueModificationTache vueModificationTache = new VueModificationTache(tache);
+
+        // Ajoutez la vue de modification à la scène
+        Scene sceneModification = new Scene(vueModificationTache);
+
+        // Configurez et montrez la nouvelle fenêtre
+        stageModification.setScene(sceneModification);
+        stageModification.showAndWait();
+
+        // Récupérez les informations modifiées après la fermeture de la fenêtre
+        String nouveauNom = vueModificationTache.getNouveauNom();
+        // ... récupérer d'autres informations ...
+
+        // Mettez à jour la tâche avec les informations modifiées
+        tache.setNomTache(nouveauNom);
+        // ... mettre à jour d'autres informations ...
     }
 
     public void majListeNomColonnes(){
