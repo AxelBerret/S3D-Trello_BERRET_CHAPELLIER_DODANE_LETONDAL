@@ -10,7 +10,7 @@ public class ControlSuppressionTableau {
 
     /**
      * attribut tab de la classe ControlSuppressionTableau
-     * represente le controleur du bouton de creation de tableau
+     * represente le modele que l on modifiera
      */
     private ListeTableaux listeTab;
 
@@ -25,7 +25,7 @@ public class ControlSuppressionTableau {
 
     /**
      * methode handle de la classe ControlSuppressionTableau
-     * qui permet la gestion du bouton de creation de tableau
+     * qui permet la gestion du bouton de suppression de tableau
      * @param event evenement representant le bouton clickable
      */
     public void handle(ActionEvent event) {

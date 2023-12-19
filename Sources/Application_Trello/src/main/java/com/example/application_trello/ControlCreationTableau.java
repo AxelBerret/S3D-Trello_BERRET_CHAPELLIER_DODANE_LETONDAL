@@ -8,7 +8,7 @@ public class ControlCreationTableau {
 
     /**
      * attribut tab de la classe ControlCreationTableau
-     * represente le controleur du bouton de creation de tableau
+     * represente le modele que l on modifiera
      */
     private ListeTableaux listeTab;
 
@@ -16,7 +16,7 @@ public class ControlCreationTableau {
     /**
      * constructeur qui cree des objets de types ControlCreationTableau
      * a partir des donnees passees en parametres
-     * @param lt tableau que l on souhaite utiliser en modele
+     * @param lt liste de tableaux que l on souhaite utiliser en modele
      */
     public ControlCreationTableau(ListeTableaux lt) {this.listeTab = lt;}
 
