@@ -26,9 +26,9 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         this.majListeNomColonnes();
         if (event.getSource() instanceof Button) {
-            Button sourceButton = (Button) event.getSource();//Si l'event vient d'un boutton
-            if (sourceButton.getId().startsWith("btnCreerTache")) {//Si c'est un bouton de création de tâche
-                String nomColonne = extraireNomColonneDeID(sourceButton.getId());//On récupère le nom de la colonne
+            Button targetButton = (Button) event.getTarget();//Si l'event vient d'un boutton
+            if (targetButton.getId().startsWith("btnCreerTache")) {//Si c'est un bouton de création de tâche
+                String nomColonne = extraireNomColonneDeID(targetButton.getId());//On récupère le nom de la colonne
                 if (this.listeNomColonnes.contains(nomColonne)){//Si la colonne existe dans notre tableau
                     // On ouvre une fenetre de dialogue pour rentrer le nom de la tâche
                     TextInputDialog dialog = new TextInputDialog();

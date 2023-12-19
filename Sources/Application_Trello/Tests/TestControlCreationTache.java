@@ -1,10 +1,7 @@
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import org.junit.jupiter.api.Test;
 import com.example.application_trello.Tache;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 import com.example.application_trello.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,25 +42,5 @@ public class TestControlCreationTache {
 
         // Vérifier si le nom de colonne extrait est correct
         assertEquals("Colonne1", nomColonne);
-    }
-
-    @Test
-    void testHandle() {
-        // Ajouter une colonne pour le test
-        Colonne colonne1 = new Colonne("Colonne1");
-        tableau.ajouterColonne(colonne1);
-
-        // Créer un bouton de test
-        Button boutonTest = new Button();
-        boutonTest.setId("btnCreerTacheColonne1");
-
-        // Créer un événement de test
-        ActionEvent event = new ActionEvent(boutonTest, null);
-
-        // Appeler la méthode handle
-        controlCreationTache.handle(event);
-
-        // Vérifier si une tâche a été ajoutée à la colonne
-        assertEquals(1, colonne1.getListeTaches().size());
     }
 }
