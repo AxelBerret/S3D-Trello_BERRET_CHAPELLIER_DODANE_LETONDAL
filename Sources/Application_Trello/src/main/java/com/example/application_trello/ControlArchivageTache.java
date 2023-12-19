@@ -1,10 +1,14 @@
 package com.example.application_trello;
 
+<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.scene.control.Alert;
+=======
+import javafx.event.ActionEvent;
+>>>>>>> bbce6d8a14da7a41405c43b72718db1cba2d8fec
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
