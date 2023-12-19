@@ -1,0 +1,18 @@
+Fonctionnalités Itération 2 : 
+Ajout des interface Sujet et Observateur et des classe VueBureau, VueArchive, VueTache, ControlCreationTableau, ControlSuppressionTableau, 
+ControlCreationTache, ControlModificationTache, ControlSuppressionTache, ControlArchivageTache, ControlDesarchivageTache,
+ControlCreationColonne, ControlSuppressionColonne, ControlArchivageColonne, ControlDesarchivageColonne
+-VueBureau permet de créé la vue principale du bureau
+-VueArchive permet de créé la vue des tâches et des colonnes archivés 
+-VueTache permet de créé la vue de la modification d'une tâche
+-ControlCreationTableau permet de créé un nouveau tableau
+-ControlSuppressionTableau permet de supprimer un tableau
+-ControlCreationTache permet de créé un tâche
+-ControlModificationTache permet de modifier la tâche
+-ControlSuppressionTache permet de supprimer la tâche
+-ControlArchivageTache permet d'archiver la tâche
+-ControlDesarchivageTache permet de désarchiver la tâche
+-ControleCreationColonne permet de créé une colonne
+-ControlSuppressionColonne permet de supprimer une colonne
+-ControlArchivageColonne permet d'archiver une colonne
+-ControlDesarchivageColonne permet de désarchiver une colonne
