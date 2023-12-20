@@ -65,9 +65,9 @@ public class VueBureau extends Application {
 
             HBox additionalButtonsRow = new HBox(10);
             additionalButtonsRow.setAlignment(Pos.CENTER);
-            Button newButton1 = createIconButton("newButton1.png");
+            Button newButton1 = createIconButton("trombonne.png");
             Button newButton2 = createIconButton("newButton2.png");
-            Button newButton3 = createIconButton("newButton3.png");
+            Button newButton3 = createIconButton("plus.png");
             additionalButtonsRow.getChildren().addAll(newButton1, newButton2, newButton3);
 
             Hyperlink clickableText = new Hyperlink("Task " + (i + 1));
