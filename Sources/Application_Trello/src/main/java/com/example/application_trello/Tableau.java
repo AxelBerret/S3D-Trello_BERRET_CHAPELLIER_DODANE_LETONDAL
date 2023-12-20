@@ -144,25 +144,12 @@ public class Tableau implements Sujet{
      * @param nomColonne nom de la colonne dans laquelle on veut ajouter la tache
      */
     public void ajouterTache(String nomTache, String nomColonne){
-        /*
-        ArrayList<Colonne> lc = this.getListeColonnes();
-        for (Colonne c : lc){
-            if (c.getNomColonne().equals(nomColonne)){
-                Tache t = new TacheSimple(nomTache);
-                c.ajouterTache(t);
-            }
-        }
-<<<<<<< Updated upstream
-        */
         for (int i = 0; i < this.getListeColonnes().size(); i++) {
             if (this.getListeColonnes().get(i).getNomColonne().equals(nomColonne)) {
                 Tache t = new TacheSimple(nomTache);
                 this.getListeColonnes().get(i).ajouterTache(t);
             }
         }
-=======
-        notifierObservateurs();
->>>>>>> Stashed changes
     }
 
     /**
