@@ -144,15 +144,6 @@ public class Tableau implements Sujet{
      * @param nomColonne nom de la colonne dans laquelle on veut ajouter la tache
      */
     public void ajouterTache(String nomTache, String nomColonne){
-        /*
-        ArrayList<Colonne> lc = this.getListeColonnes();
-        for (Colonne c : lc){
-            if (c.getNomColonne().equals(nomColonne)){
-                Tache t = new TacheSimple(nomTache);
-                c.ajouterTache(t);
-            }
-        }
-        */
         for (int i = 0; i < this.getListeColonnes().size(); i++) {
             if (this.getListeColonnes().get(i).getNomColonne().equals(nomColonne)) {
                 Tache t = new TacheSimple(nomTache);
@@ -174,6 +165,7 @@ public class Tableau implements Sujet{
                 c.supprimerTache(t);
             }
         }
+        notifierObservateurs();
     }
 
     /**
@@ -223,6 +215,8 @@ public class Tableau implements Sujet{
         for (int i = 0; i < this.archive.getListeColonnesArchivees().size(); i++) {
             if (this.archive.getListeColonnesArchivees().get(i).getNomColonne().equals(nomColonne)) {
                 Colonne colonne = this.archive.getListeColonnesArchivees().get(i);
+                this.ajouterColonne(colonne);
+                this.archive.desarchiverColonne(colonne);
             }
         }
     }

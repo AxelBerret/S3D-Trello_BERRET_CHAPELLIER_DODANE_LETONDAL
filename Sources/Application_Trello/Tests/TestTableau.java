@@ -153,16 +153,60 @@ public class TestTableau {
 
     @Test
     public void test_11_desarchiverTache() {
-
+        Tableau tableau = new Tableau("TableauTest");
+        Colonne colonne1 = new Colonne("Colonne1");
+        Colonne colonne2 = new Colonne("Colonne2");
+        Tache tache1 = new TacheSimple("Tache1");
+        Tache tache2 = new TacheSimple("Tache2");
+        Tache tache3 = new TacheSimple("Tache3");
+        tableau.ajouterColonne(colonne1);
+        tableau.ajouterColonne(colonne2);
+        tableau.ajouterTache("Tache1", "Colonne2");
+        tableau.ajouterTache("Tache2", "Colonne2");
+        tableau.ajouterTache("Tache3", "Colonne2");
+        tableau.archiverTache("Tache1", "Colonne2");
+        tableau.archiverTache("Tache3", "Colonne2");
+        assertEquals(true, tableau.getArchive().getListeTachesArchivees().get(0).equals(tache1));
+        assertEquals(true, tableau.getArchive().getListeTachesArchivees().get(1).equals(tache3));
+        tableau.desarchiverTache("Tache1");
+        assertEquals(true, tableau.getArchive().getListeTachesArchivees().get(0).equals(tache3));
+        assertEquals(true, tableau.getListeColonnes().get(0).getTache("Tache1").equals(tache1));
     }
 
     @Test
     public void test_12_archiverColonne() {
-
+        Tableau tableau = new Tableau("TableauTest");
+        Colonne colonne1 = new Colonne("Colonne1");
+        Colonne colonne2 = new Colonne("Colonne2");
+        Colonne colonne3 = new Colonne("Colonne3");
+        tableau.ajouterColonne(colonne1);
+        tableau.ajouterColonne(colonne2);
+        tableau.ajouterColonne(colonne3);
+        assertEquals(true, tableau.getListeColonnes().get(0).equals(colonne1));
+        assertEquals(true, tableau.getListeColonnes().get(1).equals(colonne2));
+        assertEquals(true, tableau.getListeColonnes().get(2).equals(colonne3));
+        tableau.archiverColonne("Colonne2");
+        assertEquals(true, tableau.getListeColonnes().get(0).equals(colonne1));
+        assertEquals(true, tableau.getListeColonnes().get(1).equals(colonne3));
+        assertEquals(true, tableau.getArchive().getListeColonnesArchivees().get(0).equals(colonne2));
     }
 
     @Test
     public void test_13_desarchiverColonne() {
-
+        Tableau tableau = new Tableau("TableauTest");
+        Colonne colonne1 = new Colonne("Colonne1");
+        Colonne colonne2 = new Colonne("Colonne2");
+        Colonne colonne3 = new Colonne("Colonne3");
+        tableau.ajouterColonne(colonne1);
+        tableau.ajouterColonne(colonne2);
+        tableau.ajouterColonne(colonne3);
+        tableau.archiverColonne("Colonne2");
+        tableau.archiverColonne("Colonne1");
+        assertEquals(true, tableau.getListeColonnes().get(0).equals(colonne3));
+        assertEquals(true, tableau.getArchive().getListeColonnesArchivees().get(0).equals(colonne2));
+        assertEquals(true, tableau.getArchive().getListeColonnesArchivees().get(1).equals(colonne1));
+        tableau.desarchiverColonne("Colonne2");
+        assertEquals(true, tableau.getListeColonnes().get(1).equals(colonne2));
+        assertEquals(true, tableau.getArchive().getListeColonnesArchivees().get(0).equals(colonne1));
     }
 }
