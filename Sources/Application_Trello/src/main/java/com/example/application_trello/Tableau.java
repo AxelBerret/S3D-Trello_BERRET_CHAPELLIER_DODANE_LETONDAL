@@ -223,6 +223,8 @@ public class Tableau implements Sujet{
         for (int i = 0; i < this.archive.getListeColonnesArchivees().size(); i++) {
             if (this.archive.getListeColonnesArchivees().get(i).getNomColonne().equals(nomColonne)) {
                 Colonne colonne = this.archive.getListeColonnesArchivees().get(i);
+                this.ajouterColonne(colonne);
+                this.archive.desarchiverColonne(colonne);
             }
         }
     }
