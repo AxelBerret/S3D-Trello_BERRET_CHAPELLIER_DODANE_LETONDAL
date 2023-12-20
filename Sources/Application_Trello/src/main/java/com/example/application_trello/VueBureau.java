@@ -66,7 +66,7 @@ public class VueBureau extends Application {
             HBox additionalButtonsRow = new HBox(10);
             additionalButtonsRow.setAlignment(Pos.CENTER);
             Button newButton1 = createIconButton("trombonne.png");
-            Button newButton2 = createIconButton("newButton2.png");
+            Button newButton2 = createIconButton("croix.png");
             Button newButton3 = createIconButton("plus.png");
             additionalButtonsRow.getChildren().addAll(newButton1, newButton2, newButton3);
 
@@ -93,6 +93,8 @@ public class VueBureau extends Application {
             columnVBox.setOnMouseExited(e -> columnVBox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))));
             HBox.setMargin(columnVBox, new Insets(0, 0, 0, 50));
         }
+
+        
 
         Button ganttButton = new Button("Création du Gantt");
         ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");

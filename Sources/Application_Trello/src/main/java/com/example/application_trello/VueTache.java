@@ -51,7 +51,7 @@ public class VueTache extends Application {
         }
     }
 
-    public
+
 
     @Override
     public void start(Stage stage) {
