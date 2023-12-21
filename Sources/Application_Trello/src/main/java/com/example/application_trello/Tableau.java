@@ -222,6 +222,10 @@ public class Tableau implements Sujet{
         }
     }
 
+    public void ajouterDependance(String nomTache, String nomDependance){
+
+    }
+
     /**
      * methode enregistrerObservateur de la classe Tableau
      * @param o observateur que l on souhaite enregistrer
