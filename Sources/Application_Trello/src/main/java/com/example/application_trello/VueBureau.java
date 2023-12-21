@@ -6,8 +6,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -24,6 +23,9 @@ public class VueBureau extends Application {
             Hyperlink link = new Hyperlink("Link " + i);
             link.setStyle("-fx-font-size: 14;-fx-padding: 50; -fx-border-color: transparent; -fx-background-color: transparent;");
             link.setStyle("-fx-text-fill: black; -fx-underline: none;");
+            link.setOnMouseEntered(e -> link.setStyle(" -fx-background-color: white; -fx-text-fill: black;"));
+            link.setOnMouseExited(e -> link.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
+
             link.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
             VBox.setMargin(link, new Insets(30));
             link.setPadding(new Insets(10, 30, 10, 30));
@@ -80,17 +82,62 @@ public class VueBureau extends Application {
 
     private VueColonne createColumn(String columnName) {
         VueColonne columnVBox = new VueColonne(columnName);
-        columnVBox.setOnMouseEntered(e -> columnVBox.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 255, 0.05), CornerRadii.EMPTY, Insets.EMPTY))));
-        columnVBox.setOnMouseExited(e -> columnVBox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))));
-        HBox.setMargin(columnVBox, new Insets(0, 0, 0, 50));
+
+        // Ajoutez un gestionnaire d'événements pour le drag-and-drop
+        setDragDropHandlers(columnVBox);
+
         return columnVBox;
     }
 
     private VueColonne createSpecialColumn() {
         VueColonne specialColumnVBox = new VueColonne();
-        specialColumnVBox.setOnMouseEntered(e -> specialColumnVBox.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 255, 0.05), CornerRadii.EMPTY, Insets.EMPTY))));
-        specialColumnVBox.setOnMouseExited(e -> specialColumnVBox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))));
+
+        // Ajoutez un gestionnaire d'événements pour le drag-and-drop
+        setDragDropHandlers(specialColumnVBox);
+
         return specialColumnVBox;
+    }
+
+    // Méthode pour définir les gestionnaires d'événements de glisser-déposer
+    private void setDragDropHandlers(VueColonne columnVBox) {
+        columnVBox.setOnDragDetected(event -> {
+            // Commence le glisser-déposer
+            Dragboard db = columnVBox.startDragAndDrop(TransferMode.MOVE);
+
+            // Ajoute les données à transférer (ici, le nom de la colonne)
+            ClipboardContent content = new ClipboardContent();
+            content.putString(columnVBox.getColumnLabel());
+            db.setContent(content);
+
+            event.consume();
+        });
+
+        columnVBox.setOnDragOver(event -> {
+            // Autorise le déplacement si les données sont du type attendu
+            if (event.getGestureSource() != columnVBox && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+
+            event.consume();
+        });
+
+        columnVBox.setOnDragDropped(event -> {
+            // Récupère le contenu des données déposées
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+
+            if (db.hasString()) {
+                // Ajoute la tâche à la colonne actuelle
+                columnVBox.addTask(db.getString());
+                success = true;
+            }
+
+            // Indique que le déplacement est terminé
+            event.setDropCompleted(success);
+            event.consume();
+        });
+
+        columnVBox.setOnDragDone(DragEvent::consume);
     }
 
     public static void main(String[] args) {
