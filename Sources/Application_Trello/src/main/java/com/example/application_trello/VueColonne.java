@@ -1,34 +1,36 @@
 package com.example.application_trello;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class VueColonne extends VBox {
 
-    private String columnName;
+    private String columnLabel;
 
     public VueColonne(String columnName) {
-        this.columnName = columnName;
-        init();
+        this.columnLabel = columnName;
+        initialize();
     }
 
     public VueColonne() {
-        this.columnName = "Créer une Colonne";
-        init();
+        this.columnLabel = "Créer une Colonne";
+        initialize();
     }
 
-    private void init() {
+    private void initialize() {
         setMinWidth(200);
         setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
         setAlignment(Pos.TOP_CENTER);
 
-        Label columnLabel = new Label(columnName);
+        Label columnLabel = new Label(this.columnLabel);
         columnLabel.setPadding(new Insets(30));
         columnLabel.setAlignment(Pos.TOP_CENTER);
 
@@ -40,10 +42,31 @@ public class VueColonne extends VBox {
         additionalButtonsRow.getChildren().addAll(newButton1, newButton2, newButton3);
         additionalButtonsRow.setPadding(new Insets(20));
         getChildren().addAll(columnLabel, additionalButtonsRow);
+
+        setOnDragOver(event -> {
+            if (event.getGestureSource() != this && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+
+            if (db.hasString()) {
+                // Move the task to this column
+                addTask(db.getString());
+                success = true;
+            }
+
+            event.setDropCompleted(success);
+            event.consume();
+        });
     }
 
     public String getColumnLabel() {
-        return columnName;
+        return columnLabel;
     }
 
     public void addTask(String taskName) {
@@ -61,9 +84,14 @@ public class VueColonne extends VBox {
         taskInColumn.getChildren().addAll(clickableText, buttonRow);
 
         Separator columnSeparator = new Separator();
+        columnSeparator.setOrientation(Orientation.HORIZONTAL);
         columnSeparator.setStyle("-fx-background-color: black; -fx-min-height: 2px; -fx-pref-height: 2px; -fx-max-height: 2px;");
 
         getChildren().addAll(columnSeparator, taskInColumn);
+    }
+
+    public void removeTask(Hyperlink task) {
+        getChildren().removeAll(task, task.getParent()); // Remove the task and its separator
     }
 
     private Button createIconButton(String imageName) {
