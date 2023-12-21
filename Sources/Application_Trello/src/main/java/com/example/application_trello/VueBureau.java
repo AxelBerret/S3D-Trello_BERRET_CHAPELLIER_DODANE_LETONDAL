@@ -104,9 +104,9 @@ public class VueBureau extends Application {
             // Commence le glisser-déposer
             Dragboard db = columnVBox.startDragAndDrop(TransferMode.MOVE);
 
-            // Ajoute les données à transférer (ici, le nom de la colonne)
+            // Ajoute les données à transférer (ici, le nom de la tâche)
             ClipboardContent content = new ClipboardContent();
-            content.putString(columnVBox.getColumnLabel());
+            content.putString(columnVBox.getTaskName());
             db.setContent(content);
 
             event.consume();

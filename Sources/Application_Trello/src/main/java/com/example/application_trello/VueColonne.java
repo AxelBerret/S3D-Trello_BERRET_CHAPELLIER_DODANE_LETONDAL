@@ -69,6 +69,13 @@ public class VueColonne extends VBox {
         return columnLabel;
     }
 
+    public String getTaskName() {
+        // Récupère le dernier élément ajouté à la colonne, qui est la tâche
+        HBox taskInColumn = (HBox) getChildren().get(getChildren().size() - 1);
+        Hyperlink clickableText = (Hyperlink) taskInColumn.getChildren().get(0);
+        return clickableText.getText();
+    }
+
     public void addTask(String taskName) {
         Hyperlink clickableText = new Hyperlink(taskName);
         clickableText.setStyle("-fx-text-fill: black; -fx-underline: none;");
