@@ -1,4 +1,4 @@
-/*package com.example.application_trello;
+package com.example.application_trello;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,11 +10,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class ControlModificationTache implements EventHandler<ActionEvent> {
-    *Explication de l'architecture MVC : L'architecture MVC mise en place ici se décompose en plusieurs parties.
+    /*Explication de l'architecture MVC : L'architecture MVC mise en place ici se décompose en plusieurs parties.
      * Premièrement, dans la classe main principale, on créée un nouveau modèle, auquel on va associer des vues, auxquelles on va associer un controleur éventuellement.
      * le principe est que chaque vue affiche queleque chose par défaut, et lorsque l'utilisateur agit sur l'application,
      * le controleur reçoit l'action, et déclenche la méthode appropriée définie dans le modèle. Ce dernier notifie tous les observateurs qui vont se
-     * mettre à jour si nécessaire. *
+     * mettre à jour si nécessaire. */
     private Tableau tab;
     private ArrayList<String> listeNomColonnes;
     private FenetreModification fenetreModification;
@@ -48,6 +48,22 @@ public class ControlModificationTache implements EventHandler<ActionEvent> {
         // ... mettre à jour d'autres informations ...
     }
 
+    private void openSecondWindow() {
+        Stage secondStage = new Stage();
+
+        Button closeButton = new Button("Close Second Window");
+        closeButton.setOnAction(e -> secondStage.close());
+
+        StackPane secondRoot = new StackPane();
+        secondRoot.getChildren().add(closeButton);
+
+        Scene secondScene = new Scene(secondRoot, 200, 100);
+
+        secondStage.setTitle("Second Window");
+        secondStage.setScene(secondScene);
+        secondStage.show();
+    }
+
     public void majListeNomColonnes(){
         ArrayList<Colonne> lc = this.tab.getColonnes();
         this.listeNomColonnes = new ArrayList<>();
@@ -64,4 +80,3 @@ public class ControlModificationTache implements EventHandler<ActionEvent> {
     }
 
 }
-*/
