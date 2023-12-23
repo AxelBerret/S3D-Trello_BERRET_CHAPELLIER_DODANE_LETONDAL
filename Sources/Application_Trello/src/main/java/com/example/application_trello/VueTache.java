@@ -2,6 +2,8 @@ package com.example.application_trello;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -14,6 +16,7 @@ public class VueTache extends GridPane {
     private ObservableList<String> listeSousT;
     private ObservableList<String> vueDep;
     private ObservableList<String> vueSt;
+    private String dependanceSelectionnee;
 
     public VueTache(Tache t){// !!! !!! Ne pas oublier d'actualiser a la création
         this.t = t;
@@ -39,10 +42,26 @@ public class VueTache extends GridPane {
         addDependButton.setId("addDependButton" + this.t.getNomTache());
         addDependButton.setOnAction(e -> {//Créer controleur
             // Ajouter la nouvelle dépendance
-            String nouvelleDependance = dependComboBox.getValue();
-            if (nouvelleDependance != null && !nouvelleDependance.isEmpty()) {
-                dependListView.getItems().add(nouvelleDependance);
+            this.dependanceSelectionnee = dependComboBox.getValue();
+            if (dependanceSelectionnee != null && !dependanceSelectionnee.isEmpty()) {
+                dependListView.getItems().add(dependanceSelectionnee);
                 dependComboBox.setValue(null);
+            }
+        });
+        addDependButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                this.dependanceSelectionnee = dependComboBox.getValue();
+                if (dependanceSelectionnee != null && !dependanceSelectionnee.isEmpty()) {
+                    dependListView.getItems().add(dependanceSelectionnee);
+                    dependComboBox.setValue(null);
+                }
+
+                // Créer le contrôleur
+                ControlBoutonsModifTache controleur = new ControlBoutonsModifTache();//Passer en parametre la dependance a ajouter
+
+                // Appeler la méthode du contrôleur
+                monControleur.handle(event);
             }
         });
 
@@ -61,6 +80,11 @@ public class VueTache extends GridPane {
             if (nouvelleSousTache != null && !nouvelleSousTache.isEmpty()) {
                 subtaskListView.getItems().add(nouvelleSousTache);
                 subtaskComboBox.setValue(null);
+                ActionEvent event = new ActionEvent(null, addDependButton);
+                event.setUserData(dependanceSelectionnee);
+
+                // Passer l'événement modifié au gestionnaire
+                addDependButton.fireEvent(eventWithUserData);
             }
         });
 
@@ -113,6 +137,10 @@ public class VueTache extends GridPane {
                 this.vueSt.add(t.getNomTache());//On met a jour l'attribut VueDep
             }
         }
+    }
+
+    public String getDependanceSelectionnee() {
+        return this.dependanceSelectionnee;
     }
 
     }
