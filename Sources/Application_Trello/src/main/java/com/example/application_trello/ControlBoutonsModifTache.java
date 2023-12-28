@@ -26,13 +26,21 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         if (event.getSource() instanceof Button) {
             Button targetButton = (Button) event.getTarget();//Si l'event vient d'un boutton
-            if (targetButton.getId().startsWith("addDependButton") || targetButton.getId().startsWith("addSousTacheButton")) {//Si c'est un bouton d'ajout de dépendance
+            if (targetButton.getId().startsWith("addDependButton")) {//Si c'est un bouton d'ajout de dépendance
                 String nomTache = extraireNomTacheID(targetButton.getId());//On récupère le nom de la tache
-                if (this.listeNomTaches.contains(nomTache)){//Si la tache existe dans notre tableau
+                if (this.listeNomTaches.contains(nomTache)) {//Si la tache existe dans notre tableau
                     VueTache vt = this.tab.getVueTache();
                     String dep = vt.getDependanceSelectionnee();//On récupère le nom de la dépendance à ajouter à cette tâche
                     // On ajoute la dépendance a la tâche
                     this.tab.ajouterDependance(nomTache, dep);
+                }
+            } else if (targetButton.getId().startsWith("addSousTacheButton")) {//Sinon si c'est un bouton d'ajout de sous-tâche
+                String nomTache = extraireNomTacheID(targetButton.getId());//On récupère le nom de la tache
+                if (this.listeNomTaches.contains(nomTache)) {//Si la tache existe dans notre tableau
+                    VueTache vt = this.tab.getVueTache();
+                    String st = vt.getSousTacheSelectionnee();//On récupère le nom de la sous-tâche à ajouter à cette tâche
+                    // On ajoute la st a la tâche
+                    this.tab.ajouterSousTache(nomTache, st);
                 }
             }
         }
@@ -49,6 +57,8 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
     public String extraireNomTacheID(String idBouton) {//Méthode pour récupérer la tache dans laquelle ajouter la dépendance/sous-tâche
         if (idBouton != null && idBouton.startsWith("addDependButton")) {
             return idBouton.substring("addDependButton".length());
+        }else if (idBouton != null && idBouton.startsWith("addSousTacheButton")){
+            return idBouton.substring("addSousTacheButton".length());
         }
         return null;
     }

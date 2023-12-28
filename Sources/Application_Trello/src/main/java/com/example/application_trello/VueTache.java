@@ -121,4 +121,8 @@ public class VueTache extends GridPane implements Observateur{
         return this.dependanceSelectionnee;
     }
 
+    public String getSousTacheSelectionnee(){
+        return this.sousTacheSelectionnee;
+    }
+
     }

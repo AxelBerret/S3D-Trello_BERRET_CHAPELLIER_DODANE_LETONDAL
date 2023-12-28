@@ -22,6 +22,14 @@ public class TacheComplexe extends Tache implements InterfaceListeTaches {
         this.listeTaches = new ArrayList<Tache>();
     }
 
+    public TacheComplexe(TacheSimple ts){
+        super(ts.getNomTache());
+        this.commentaire = ts.getCommentaire();
+        this.dateDebut = ts.getDateDebut();
+        this.dateFin = ts.getDateFin();
+        this.listeDependances = ts.getListeDependances();
+    }
+
 
     /**
      * methode setDateFin de la classe TacheComplexe

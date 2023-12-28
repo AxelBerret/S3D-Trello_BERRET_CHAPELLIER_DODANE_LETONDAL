@@ -222,8 +222,37 @@ public class Tableau implements Sujet{
         }
     }
 
-    public void ajouterDependance(String nomTache, String nomDependance){
+    public void ajouterDependance(String nomTache, String nomTacheAAjouter) {
+        Tache tAAjouter = null;
+        for (Tache t : this.getListeTaches()) {
+            if (t.getNomTache().equals(nomTacheAAjouter)) {
+                tAAjouter = t;
+            }
+        }
+        for (Tache t : this.getListeTaches()) {
+            if (t.getNomTache().equals(nomTache)) {
+                t.ajouterDependance(tAAjouter);
+            }
+        }
+    }
 
+    public void ajouterSousTache(String nomTache, String nomTacheAAjouter){
+        Tache tAAjouter = null;
+        for (Tache t : this.getListeTaches()){
+            if (t.getNomTache().equals(nomTacheAAjouter)){
+                tAAjouter = t;
+            }
+        }
+        for (Tache t : this.getListeTaches()){
+            if (t.getNomTache().equals(nomTache)){
+                if (t instanceof TacheSimple ts){
+                    TacheComplexe tc = new TacheComplexe(ts);
+                    tc.ajouterTache(tAAjouter);
+                } else if(t instanceof TacheComplexe tc){
+                    tc.ajouterTache(tAAjouter);
+                }
+            }
+        }
     }
 
     /**
