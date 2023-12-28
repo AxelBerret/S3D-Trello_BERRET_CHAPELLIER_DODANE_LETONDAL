@@ -5,8 +5,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 public class VueTache extends GridPane implements Observateur{
@@ -63,7 +66,9 @@ public class VueTache extends GridPane implements Observateur{
         addSousTacheButton.setId("addSousTacheButton" + this.t.getNomTache());
         addSousTacheButton.setOnAction(controleur);
         Button saveButton = new Button("Enregistrer");
-        saveButton.setOnAction(e -> {//Faire contrôleur
+        saveButton.setOnAction(e -> {//Pour que la fenêtre se ferme lorsqu'on clique sur ce bouton
+            Scene scene = this.getScene();
+            ((Stage) scene.getWindow()).close();
         });
 
         this.add(commentLabel, 0, 0);
