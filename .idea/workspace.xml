@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="09a96b42-9216-4045-b0a5-7a571cc192bb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/Application_Trello/src/main/java/com/example/application_trello/ControlSuppressionTache.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/Application_Trello/src/main/java/com/example/application_trello/ControlSuppressionTache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/Itération 3/Itération 3 - Diagramme de classes.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/Itération 3/Itération 3 - Diagramme de classes.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +68,7 @@
       <workItem from="1702905935052" duration="115000" />
       <workItem from="1702911987822" duration="1281000" />
       <workItem from="1703773788286" duration="217000" />
-      <workItem from="1703774022865" duration="2538000" />
+      <workItem from="1703774022865" duration="4889000" />
     </task>
     <servers />
   </component>
