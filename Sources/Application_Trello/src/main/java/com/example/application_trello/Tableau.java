@@ -269,4 +269,13 @@ public class Tableau implements Sujet{
         }
         return res;
     }
+
+    public VueTache getVueTache(){
+        for (Observateur o : this.observateurs){
+            if (o instanceof VueTache){
+                return (VueTache) o;
+            }
+        }
+        return null;
+    }
 }

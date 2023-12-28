@@ -20,25 +20,19 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
 
     public ControlBoutonsModifTache(Tableau t){
         this.tab = t;
-        this.majListeNomColonnes();
+        this.majListeNomTaches();
     }
 
     public void handle(ActionEvent event) {
         if (event.getSource() instanceof Button) {
             Button targetButton = (Button) event.getTarget();//Si l'event vient d'un boutton
-            if (targetButton.getId().startsWith("addDependButton")) {//Si c'est un bouton d'ajout de dépendance
+            if (targetButton.getId().startsWith("addDependButton") || targetButton.getId().startsWith("addSousTacheButton")) {//Si c'est un bouton d'ajout de dépendance
                 String nomTache = extraireNomTacheID(targetButton.getId());//On récupère le nom de la tache
                 if (this.listeNomTaches.contains(nomTache)){//Si la tache existe dans notre tableau
+                    VueTache vt = this.tab.getVueTache();
+                    String dep = vt.getDependanceSelectionnee();//On récupère le nom de la dépendance à ajouter à cette tâche
                     // On ajoute la dépendance a la tâche
-                    this.tab.ajouterDependance(nomTache, nomDependance);
-                    dialog.setTitle("Création de Tâche");
-                    dialog.setHeaderText("Entrer le texte de la tâche :");
-                    dialog.setContentText("Texte :");
-                    // Attendre que l'utilisateur entre le texte
-                    dialog.showAndWait().ifPresent(texteTache -> {
-                        // Créer une nouvelle tâche avec le texte et l'ajouter au modèle
-                        tab.ajouterTache(texteTache, nomColonne);//On ajoute la tâche dans la colonne
-                    });
+                    this.tab.ajouterDependance(nomTache, dep);
                 }
             }
         }

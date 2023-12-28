@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import java.util.ArrayList;
 
-public class VueTache extends GridPane {
+public class VueTache extends GridPane implements Observateur{
 
     private Tache t;
     private ObservableList<String> listeDep;
@@ -17,9 +17,12 @@ public class VueTache extends GridPane {
     private ObservableList<String> vueDep;
     private ObservableList<String> vueSt;
     private String dependanceSelectionnee;
+    private String sousTacheSelectionnee;
+    private Tableau tab;
 
-    public VueTache(Tache t){// !!! !!! Ne pas oublier d'actualiser a la création
+    public VueTache(Tache t, Tableau tab){// !!! !!! Ne pas oublier d'actualiser a la création
         this.t = t;
+        this.tab = tab;
         this.listeDep = FXCollections.observableArrayList();
         this.listeSousT = FXCollections.observableArrayList();
         GridPane grid = new GridPane();
@@ -30,65 +33,35 @@ public class VueTache extends GridPane {
         TextArea commentTextArea = new TextArea("Commentaire de test");
         commentTextArea.setWrapText(true);
 
+
         // Éléments pour les dépendances
         Label dependLabel = new Label("Dépendances:");
         ListView<String> dependListView = new ListView<>();
         dependListView.setItems(this.vueDep);
 
         ComboBox<String> dependComboBox = new ComboBox<>();
-        dependComboBox.setItems(this.listeDep);
-
+        dependComboBox.setItems(this.listeDep);//On met dans la comboBox les taches qui peuvent devenir des dépendances
+        dependComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            dependanceSelectionnee = newValue; // Lorsqu'une selection est faite dans la comboBox, on modifie l'attribut dépendance séléctionnée.
+        });
         Button addDependButton = new Button("Ajouter");
         addDependButton.setId("addDependButton" + this.t.getNomTache());
-        addDependButton.setOnAction(e -> {//Créer controleur
-            // Ajouter la nouvelle dépendance
-            this.dependanceSelectionnee = dependComboBox.getValue();
-            if (dependanceSelectionnee != null && !dependanceSelectionnee.isEmpty()) {
-                dependListView.getItems().add(dependanceSelectionnee);
-                dependComboBox.setValue(null);
-            }
-        });
-        addDependButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                this.dependanceSelectionnee = dependComboBox.getValue();
-                if (dependanceSelectionnee != null && !dependanceSelectionnee.isEmpty()) {
-                    dependListView.getItems().add(dependanceSelectionnee);
-                    dependComboBox.setValue(null);
-                }
+        ControlBoutonsModifTache controleur = new ControlBoutonsModifTache(this.tab);
+        addDependButton.setOnAction(controleur);
 
-                // Créer le contrôleur
-                ControlBoutonsModifTache controleur = new ControlBoutonsModifTache();//Passer en parametre la dependance a ajouter
-
-                // Appeler la méthode du contrôleur
-                monControleur.handle(event);
-            }
-        });
 
         // Éléments pour les sous-tâches
-        Label subtaskLabel = new Label("Sous-Tâches:");
-        ListView<String> subtaskListView = new ListView<>();
-        subtaskListView.setItems(this.vueSt);
-
-        ComboBox<String> subtaskComboBox = new ComboBox<>();
-        subtaskComboBox.setItems(this.listeSousT);
-
-        Button addSubtaskButton = new Button("Ajouter");
-        addSubtaskButton.setOnAction(e -> {//Créer controleur
-            // Ajouter la nouvelle sous-tâche
-            String nouvelleSousTache = subtaskComboBox.getValue();
-            if (nouvelleSousTache != null && !nouvelleSousTache.isEmpty()) {
-                subtaskListView.getItems().add(nouvelleSousTache);
-                subtaskComboBox.setValue(null);
-                ActionEvent event = new ActionEvent(null, addDependButton);
-                event.setUserData(dependanceSelectionnee);
-
-                // Passer l'événement modifié au gestionnaire
-                addDependButton.fireEvent(eventWithUserData);
-            }
+        Label sousTachesLabel = new Label("Sous-Tâches:");
+        ListView<String> sousTachesListView = new ListView<>();
+        sousTachesListView.setItems(this.vueSt);
+        ComboBox<String> sousTachesComboBox = new ComboBox<>();
+        sousTachesComboBox.setItems(this.listeSousT);//On met dans la comboBox les taches qui peuvent devenir des sous-tâches
+        sousTachesComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sousTacheSelectionnee = newValue; // Lorsqu'une selection est faite dans la comboBox, on modifie l'attribut sous-tache séléctionnée.
         });
-
-
+        Button addSousTacheButton = new Button("Ajouter");
+        addSousTacheButton.setId("addSousTacheButton" + this.t.getNomTache());
+        addSousTacheButton.setOnAction(controleur);
         Button saveButton = new Button("Enregistrer");
         saveButton.setOnAction(e -> {//Faire contrôleur
         });
@@ -99,10 +72,10 @@ public class VueTache extends GridPane {
         this.add(dependListView, 1, 1);
         this.add(dependComboBox, 0, 2);
         this.add(addDependButton, 1, 2);
-        this.add(subtaskLabel, 0, 3);
-        this.add(subtaskListView, 1, 3);
-        this.add(subtaskComboBox, 0, 4);
-        this.add(addSubtaskButton, 1, 4);
+        this.add(sousTachesLabel, 0, 3);
+        this.add(sousTachesListView, 1, 3);
+        this.add(sousTachesComboBox, 0, 4);
+        this.add(addSousTacheButton, 1, 4);
         this.add(saveButton, 0, 5, 2, 1);
     }
 
