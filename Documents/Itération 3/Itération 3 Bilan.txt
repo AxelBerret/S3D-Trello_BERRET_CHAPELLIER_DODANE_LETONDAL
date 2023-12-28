@@ -1,0 +1,5 @@
+Itération 3 Bilan : 
+Nous nous sommes principalement concentrés sur la mise en place du drag and drop, et nous avons réussi à bien implémenter le déplacement d'une tâche d'une colonne vers une autre. 
+Le seul problème qui persiste est la suppression de la tâche lorsqu'elle est déplacée vers une autre colonne, car actuellement, la tâche n'est pas encore supprimée de sa colonne d'origine lors du déplacement. 
+Nous avons également finalisé quelques contrôleurs que nous n'avions pas pu terminer lors de l'itération 2. 
+En conclusion, cette itération a été plutôt bien respectée.

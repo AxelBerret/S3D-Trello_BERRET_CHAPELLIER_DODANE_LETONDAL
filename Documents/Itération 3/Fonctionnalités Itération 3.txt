@@ -1,0 +1,12 @@
+Fonctionnalités Itération 3 : 
+Modification de la vueBureau pour y implémenter le drag and drop à l'intérieur de celle-ci. 
+Modification de la classe VueTache pour rajouter plus de fonctionnalités à celle-ci. 
+Ajout des classes de test : 
+-TestArchive pour tester l'archivage de tâches et de colonnes. 
+-TestColonne pour tester l'ajout et la suppression des tâches dans les colonnes. 
+-TestControlCreationTache pour tester le contrôleur de la création de tâches. 
+-TestListeTableau pour tester l'ajout et la suppression de tableaux. 
+-TestTableau pour tester l'ajout et la suppression de colonnes dans les tableaux. 
+-TestTache pour tester la date de début de la tâche, ses commentaires et l'enlèvement de dépendance. 
+-TestTacheComplexe pour tester l'ajout et la suppression de tâches avec des dépendances. 
+-TestTacheSimple pour tester une tâche simple avec une date limite.
