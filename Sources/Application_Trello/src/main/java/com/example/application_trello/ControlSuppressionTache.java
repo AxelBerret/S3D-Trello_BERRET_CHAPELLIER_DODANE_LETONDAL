@@ -47,7 +47,7 @@ public class ControlSuppressionTache implements EventHandler<ActionEvent> {
      * @param idBouton L'ID du bouton.
      * @return Le nom de la colonne extrait.
      */
-    private String extraireNomColonneDeID(String idBouton) {
+    public String extraireNomColonneDeID(String idBouton) {
         if (idBouton != null && idBouton.startsWith("btnSupprimerTache")) {
             return idBouton.substring("btnSupprimerTache".length());
         }
@@ -60,7 +60,7 @@ public class ControlSuppressionTache implements EventHandler<ActionEvent> {
      * @param idBouton L'ID du bouton.
      * @return Le nom de la tâche extrait.
      */
-    private String extraireNomTacheDeID(String idBouton) {
+    public String extraireNomTacheDeID(String idBouton) {
         if (idBouton != null && idBouton.startsWith("btnSupprimerTache")) {
             return idBouton.substring("btnSupprimerTache".length());
         }
