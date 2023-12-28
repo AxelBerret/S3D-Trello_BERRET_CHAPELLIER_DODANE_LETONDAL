@@ -30,7 +30,7 @@ public class ControlModificationTache implements EventHandler<ActionEvent> {
         Stage stageModification = new Stage();
 
         // Créez la vue de modification de la tâche avec les détails de la tâche
-        VueModificationTache vueModificationTache = new VueModificationTache(tache);
+        VueTache vueModificationTache = new VueTache(tache, this.tab);
 
         // Ajoutez la vue de modification à la scène
         Scene sceneModification = new Scene(vueModificationTache);
