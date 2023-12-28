@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-class Tableau {
+class Tableau implements Sujet {
 - nomTableau : String
 - listeObjets : ArrayList<InterfaceListeTaches>
 - archive : Archive
@@ -23,7 +23,7 @@ class Tableau {
 + archiverColonne(nomColonne : String) : void
 + desarchiverColonne(nomColonne : String) : void
 + enregistrerObservateur(o : Observateur) : void
-+ supprimerObservateur(o : Observateur) : void
++ supprimerObservateurs(o : Observateur) : void
 + notifierObservateurs() : void
 + toString() : String
 }
@@ -187,12 +187,68 @@ class ControlSuppressionTache {
 + extraireNomTacheDeID(idBouton : String) : String
 }
 
+interface Observateur {
++ actualiser(s : Sujet) : void
+}
+
+interface Sujet {
++ enregistrerObservateur(o : Observateur) : void
++ supprimerObservateur(o : Observateur) : void
++ notifierObservateurs() : void
+}
+
+class VueBureau implements Observateur {
++ start(stage : Stage) : void
+- createColumn(columnName : String) : VueColonne
+- createSpecialColumn() : VueColonne
+- setDragAndDropHandlers(columnVBox : VueColonne) : void
++ actualiser(s : Sujet) : void
+}
+
+class VueColonne implements Observateur {
+- columnLabel : String
++ VueColonne()
+- initialize() : void
++ getColumnLabel() : String
++ addTask(taskName : String)
++ removeTask(task : Hyperlink) : void
+- createIconButton(imageName : Button) : Button
+- addHoverEffect(button : Button) : void
++ actualiser(s : Sujet) : void
+}
+
+class VueTache implements Observateur {
+- t : Tache
+- listeDep : ObservableList<String>
+- liseteSousT : ObservableList<String>
+- vueDep : ObservableList<String>
+- vueSt : ObservableList<String>
+- dependanceSelectionnee : String
++ VueTache(t : Tache)
++ actualiser(s : Sujet) : void
++ getDependanceSelectionnee() : String
+}
+
 
 Tableau "1" --> "0...*" InterfaceListeTaches
 Tableau "1" --> "1" Archive
+Tableau "1" --> "0...*" Observateur
 Archive "1" --> "0...*" Colonne
 Archive "1" --> "0...*" Tache
 TacheComplexe "1" --> "0...*" Tache
 ListeTableaux "1" --> "0...*" Tableau
+
+ControlArchivageColonne "1" --> "1...*" Tableau
+ControlArchivageTache "1" --> "1...*" Tableau
+ControlBoutonModifTache "1" --> "1...*" Tableau
+ControlCreationColonne "1" --> "1...*" Tableau
+ControlCreationTableau "1" --> "1...*" Tableau
+ControlCreationTache "1" --> "1...*" Tableau
+ControlDesarchivageColonne "1" --> "1...*" Tableau
+ControlDesarchivageTache "1" --> "1...*" Tableau
+ControlModificationTache "1" --> "1...*" Tableau
+ControlSuppressionColonne "1" --> "1...*" Tableau
+ControlSuppressionTableau "1" --> "1...*" Tableau
+ControlSuppressionTache "1" --> "1...*" Tableau
 
 @enduml
