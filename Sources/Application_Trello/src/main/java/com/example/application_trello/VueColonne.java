@@ -10,7 +10,9 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class VueColonne extends VBox {
+import java.util.Objects;
+
+public class VueColonne extends VBox implements Observateur{
 
     private String columnLabel;
 
@@ -21,6 +23,11 @@ public class VueColonne extends VBox {
 
     public VueColonne() {
         this.columnLabel = "Créer une Colonne";
+        initialize();
+    }
+
+    public VueColonne(Colonne c){
+        this.columnLabel = c.getNomColonne();
         initialize();
     }
 
@@ -63,6 +70,11 @@ public class VueColonne extends VBox {
             event.setDropCompleted(success);
             event.consume();
         });
+    }
+
+    @Override
+    public void actualiser(Sujet s) {
+
     }
 
     public String getColumnLabel() {
@@ -116,5 +128,13 @@ public class VueColonne extends VBox {
     private void addHoverEffect(Button button) {
         button.setOnMouseEntered(e -> button.setStyle("-fx-background-color: pink;"));
         button.setOnMouseExited(e -> button.setStyle("-fx-background-color: lightblue;"));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VueColonne that = (VueColonne) o;
+        return Objects.equals(getColumnLabel(), that.getColumnLabel());
     }
 }

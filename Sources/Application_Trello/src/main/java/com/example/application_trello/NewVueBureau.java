@@ -5,17 +5,25 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Separator;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class VueBureau extends Application {
+import java.util.ArrayList;
 
-    @Override
-    public void start(Stage stage) {
-        // Left VBox with 5 hyperlinks
+public class NewVueBureau extends HBox implements Observateur{
+
+    private ArrayList<VueColonne> listColVue;
+    private HBox rightHBox;
+
+    public void NewVueBureau() {
         VBox leftVBox = new VBox(100);
         leftVBox.setAlignment(Pos.CENTER);
 
@@ -39,24 +47,26 @@ public class VueBureau extends Application {
         rightVBox.setPadding(new Insets(20));
         rightVBox.setAlignment(Pos.CENTER);
 
-        HBox rightHBox = new HBox(20);
+        this.rightHBox = new HBox(20);
 
-        // Create task columns using VueColonne
-        VueColonne columnAfaire = createColumn("A faire");
-        VueColonne columnEnCours = createColumn("En cours");
-        VueColonne columnTermine = createColumn("Terminé");
 
-        // Add tasks to each column
+        //Création des 3 colonnes par défaut
+        Colonne afaire = new Colonne("A faire");//On crée un objet colonne
+        VueColonne columnAfaire = createColumn(afaire);//On le passe en paramètre de la méthode créer une colonne
+        this.listColVue.add(columnAfaire);//On l'ajoute a l'attribut de la liste des colonnes présentes
+        Colonne enCours = new Colonne("En cours");
+        VueColonne columnEnCours = createColumn(enCours);
+        this.listColVue.add(columnEnCours);
+        Colonne termine = new Colonne("Terminé");
+        VueColonne columnTermine = createColumn(termine);
+        this.listColVue.add(columnTermine);
+
+
+        // On ajoute des tâches par défaut à la première colonne pour servir d'exemple
         columnAfaire.addTask("Tache 1");
         columnAfaire.addTask("Tache 2");
 
-        columnEnCours.addTask("Tache 1");
-        columnEnCours.addTask("Tache 2");
-
-        columnTermine.addTask("Tache 1");
-        columnTermine.addTask("Tache 2");
-
-        // Special column for creating a new column
+        // Colonne pour créer une nouvelle colonne
         VueColonne createColumnColumn = createSpecialColumn();
 
         rightHBox.getChildren().addAll(columnAfaire, columnEnCours, columnTermine, createColumnColumn);
@@ -67,25 +77,46 @@ public class VueBureau extends Application {
         VBox.setMargin(ganttButton, new Insets(30));
         ganttButton.setOnMouseEntered(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
         ganttButton.setOnMouseExited(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
-        HBox mainHBox = new HBox(20, leftVBox, separator, rightVBox);
-        mainHBox.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
+        this.setSpacing(20);
+        this.getChildren().addAll(leftVBox, separator, rightVBox);
+        this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
         rightVBox.getChildren().addAll(rightHBox, ganttButton);
-
-        Scene scene = new Scene(mainHBox, 900, 400);
-
-        stage.setTitle("Hello JavaFX!");
-        stage.setScene(scene);
-
-        stage.show();
     }
 
-    private VueColonne createColumn(String columnName) {
-        VueColonne columnVBox = new VueColonne(columnName);
+    @Override
+    public void actualiser(Sujet s){
+        //On récupère les colonnes du modèle au moment où la méthode actualiser est appelée
+        ArrayList<Colonne> listeCol = ((Tableau)s).getListeColonnes();
+        ArrayList<String> listeNomCol = null;
+        for (Colonne c : listeCol){
+            listeNomCol.add(c.getNomColonne());//On crée une liste de noms des colonnes pour simplifier les comparaisons
+        }
+
+        for (Colonne c : listeCol){//On parcours les colonnes du modèle
+            if (!this.listColVue.contains(new VueColonne(c.getNomColonne()))){//Si une colonne n'est pas présente dans la vue, on l'ajoute. (on crée une vueColonne temporaire pour comparer)
+                this.createColumn(c);//et la méthode la crée graphiquement
+            }
+        }
+        for (VueColonne c : this.listColVue){//On parcours les colonnes de la vue
+            String nomC = c.getColumnLabel();//Pour chaque colonne on extrait son nom afin de pouvoir comparer
+            if (!listeNomCol.contains(nomC)){//Si une colonne de la vue n'est plus présente dans le modèle, on la supprime.
+                this.removeColumn(c);
+            }
+        }
+    }
+
+    private VueColonne createColumn(Colonne colonne) {//Cette méthode ajoute un objet colonne dans les données et renvoie une vueColonne
+        VueColonne columnVBox = new VueColonne(colonne.getNomColonne());
 
         // Ajoutez un gestionnaire d'événements pour le drag-and-drop
         setDragDropHandlers(columnVBox);
 
         return columnVBox;
+    }
+
+    private void removeColumn(VueColonne colonne){
+        this.listColVue.remove(colonne);
+        this.rightHBox.getChildren().remove(colonne);
     }
 
     private VueColonne createSpecialColumn() {

@@ -28,7 +28,6 @@ public class VueTache extends GridPane implements Observateur{
         this.tab = tab;
         this.listeDep = FXCollections.observableArrayList();
         this.listeSousT = FXCollections.observableArrayList();
-        GridPane grid = new GridPane();
         this.setPadding(new Insets(20, 20, 20, 20));
         this.setVgap(10);
         this.setHgap(10);
