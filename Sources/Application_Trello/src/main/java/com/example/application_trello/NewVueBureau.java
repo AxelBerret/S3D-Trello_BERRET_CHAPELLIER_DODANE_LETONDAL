@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+import static javafx.application.Application.launch;
+
 public class NewVueBureau extends HBox implements Observateur{
 
     private ArrayList<VueColonne> listColVue;
