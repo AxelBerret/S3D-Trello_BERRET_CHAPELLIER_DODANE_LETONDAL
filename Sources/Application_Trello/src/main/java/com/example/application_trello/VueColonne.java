@@ -78,40 +78,7 @@ public class VueColonne extends VBox implements Observateur{
 
     @Override
     public void actualiser(Sujet s) {
-        if (s instanceof Tableau) {
-            Tableau tableau = (Tableau) s;
 
-            // Récupérez les tâches actuelles de la colonne dans la vue
-            // Vous devrez peut-être ajuster la logique en fonction de votre structure exacte
-            VBox tasksAndSeparator = (VBox) getChildren().get(getChildren().size() - 1);
-            VBox tasksContainer = (VBox) tasksAndSeparator.getChildren().get(1);
-
-            // Comparez les tâches actuelles dans la vue avec celles dans la colonne du modèle
-            for (Tache tache : tableau.getTachesDansColonne(nomColonne)) {
-                String taskName = tache.getNomTache();
-
-                // Si la tâche n'est pas présente dans la vue, ajoutez-la
-                if (!containsTask(taskName, tasksContainer)) {
-                    addTask(taskName);
-                }
-            }
-
-            // Vous pouvez également vérifier si une tâche dans la vue n'est plus présente dans la colonne du modèle
-            // et la supprimer si nécessaire
-        }
-    }
-
-    private boolean containsTask(String taskName, VBox tasksContainer) {
-        for (Node node : tasksContainer.getChildren()) {
-            if (node instanceof HBox) {
-                HBox taskInColumn = (HBox) node;
-                Hyperlink clickableText = (Hyperlink) taskInColumn.getChildren().get(0);
-                if (clickableText.getText().equals(taskName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     public String getNomVueColonne() {
