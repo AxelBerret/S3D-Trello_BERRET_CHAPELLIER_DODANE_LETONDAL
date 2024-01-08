@@ -1,5 +1,7 @@
 package com.example.application_trello.TestMVC;
 
+import com.example.application_trello.*;
+
 public class ControlCreationTacheTest {
 
     private TableauTest tableau;
@@ -10,6 +12,5 @@ public class ControlCreationTacheTest {
 
     public void creerTache(String nomColonne, String nomTache) {
         tableau.ajouterTache(nomTache, nomColonne);
-        tableau.notifierObservateurs(); // Notifier la vue du changement
     }
 }

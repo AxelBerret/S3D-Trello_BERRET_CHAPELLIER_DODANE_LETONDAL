@@ -12,9 +12,10 @@ public class VueTacheConsoleTest implements Observateur {
             TableauTest tableau = (TableauTest) s;
             ArrayList<Tache> listeTaches = tableau.getListeTaches();
             if (!listeTaches.isEmpty()) {
-                System.out.println("Nouvelle tâche ajoutée : " + listeTaches.get(listeTaches.size() - 1));
-            } else {
-                System.out.println("Aucune tâche disponible.");
+                System.out.println("Nouvelle tâche ajoutée : " + listeTaches.get(listeTaches.size() - 1).getNomTache());
+            }
+            else {
+                System.out.println("aucune tache existante ...");
             }
         }
     }
