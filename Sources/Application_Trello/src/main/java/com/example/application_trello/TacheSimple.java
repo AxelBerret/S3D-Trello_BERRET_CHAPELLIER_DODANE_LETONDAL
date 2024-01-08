@@ -27,9 +27,16 @@ public class TacheSimple extends Tache {
      */
     @Override
     public String toString() {
-        return "TacheSimple{" +
-                "nomTache='" + nomTache + "'" +
-                ", listeDependances=" + listeDependances +
-                '}';
+        String res = "";
+        res += "nom Tache : "+this.nomTache+"\n";
+        if (this.listeDependances.size() > 0) {
+            for (int i = 0; i < this.listeDependances.size(); i++) {
+                res += "- dependance "+i+" : "+this.listeDependances.get(i)+"\n";
+            }
+        }
+        else {
+            res += "cette tache ne comporte aucune dependance ...";
+        }
+        return res;
     }
 }
