@@ -3,6 +3,7 @@ package com.example.application_trello;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +25,8 @@ public class VueColonne extends VBox implements Observateur{
         this.t = t;
         this.listeTaches = new ArrayList<>();
         Colonne c = new Colonne(columnName);
-        this.t.ajouterColonne(c);
+        //this.t.ajouterColonne(c);
+        this.t.enregistrerObservateur(this);
         initialize();
     }
 
@@ -80,7 +82,32 @@ public class VueColonne extends VBox implements Observateur{
 
     @Override
     public void actualiser(Sujet s) {
+        System.out.println("Lancement de actualiser de VueColonne");
+        ArrayList<Tache> lisTacheModele = ((Tableau)s).getListeTaches();
+        for (Tache t : lisTacheModele){//boucle qui parcourt les taches présentes dans le modèle et ajoute celles qui ne le sont pas encore
+            String nom = t.getNomTache();
+            System.out.println("Adding task: " + nom);
+            if (!this.listeTaches.contains(nom)){//Si la liste de la vue ne contient pas la tache nom alors
+                addTask(nom);//On l'ajoute
+                System.out.println("Task added: " + nom);
+            }
+        }
 
+        for (String nomT : this.listeTaches){//Boucle qui parcourt les taches présentes dans la vue et supprime celles qui ne sont plus dans le modèle
+            if (!containsTache(nomT, lisTacheModele)){//Si la liste du modèle ne contient pas la tache nomT alors
+                //On la supprime de notre liste
+                removeTaskById(nomT);
+            }
+        }
+    }
+
+    private boolean containsTache(String nomT, ArrayList<Tache> lisT) {//Méthode auxiliaire à la méthode actualiser
+        for (Tache t : lisT) {
+            if (t.getNomTache().equals(nomT)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getNomVueColonne() {
@@ -95,7 +122,6 @@ public class VueColonne extends VBox implements Observateur{
     }
 
     public void addTask(String taskName) {
-        this.t.ajouterTache(taskName, this.nomColonne);
         this.listeTaches.add(taskName);
         Hyperlink clickableText = new Hyperlink(taskName);
         clickableText.setStyle("-fx-text-fill: black; -fx-underline: none;");
@@ -108,19 +134,43 @@ public class VueColonne extends VBox implements Observateur{
 
         HBox taskInColumn = new HBox(10);
         taskInColumn.setPadding(new Insets(20));
+        taskInColumn.setId(taskName);
         taskInColumn.getChildren().addAll(clickableText, buttonRow);
 
         Separator columnSeparator = new Separator();
         columnSeparator.setOrientation(Orientation.HORIZONTAL);
         columnSeparator.setStyle("-fx-background-color: black; -fx-min-height: 2px; -fx-pref-height: 2px; -fx-max-height: 2px;");
 
-        getChildren().addAll(columnSeparator, taskInColumn);
+        this.getChildren().addAll(columnSeparator, taskInColumn);
     }
 
-    public void removeTask(String nomTache) {
-        this.t.supprimerTache(nomTache, this.nomColonne);
-        this.listeTaches.remove(nomTache);
+    public void removeTaskById(String nomT) {
+        Node taskToRemove = null;
+
+        // Parcourir les enfants pour trouver le HBox avec l'id donné
+        for (Node node : getChildren()) {
+            if (node.getId() != null && node.getId().equals(nomT)) {
+                taskToRemove = node;
+                break;
+            }
+        }
+
+        // Supprimer le HBox et son séparateur si on l'a trouvé
+        if (taskToRemove != null) {
+            int indexToRemove = getChildren().indexOf(taskToRemove);
+            if (indexToRemove > 0) {
+                // Supprimer le HBox et son séparateur
+                getChildren().remove(indexToRemove - 1, indexToRemove + 1);
+            } else {
+                // Supprimer uniquement le HBox si le séparateur n'est pas présent
+                getChildren().remove(taskToRemove);
+            }
+            this.listeTaches.remove(nomT);//On supprime la tâche de la liste de la vue
+        }
     }
+
+
+
 
     private Button createIconButton(String imageName) {
         Image image = new Image("file:Image/" + imageName);

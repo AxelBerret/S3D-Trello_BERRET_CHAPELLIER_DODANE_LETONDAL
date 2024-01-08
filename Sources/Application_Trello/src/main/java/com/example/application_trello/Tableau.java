@@ -296,6 +296,7 @@ public class Tableau implements Sujet {
         for (int i = 0; i < this.observateurs.size(); i++) {
             Observateur observer = this.observateurs.get(i);
             observer.actualiser(this);
+            System.out.println(this.observateurs);
         }
     }
 

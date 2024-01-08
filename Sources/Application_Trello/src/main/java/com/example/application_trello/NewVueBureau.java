@@ -59,12 +59,16 @@ public class NewVueBureau extends HBox implements Observateur{
         Colonne aFaire = new Colonne("A faire");//On crée un objet colonne
         VueColonne columnAfaire = createColumn(aFaire);//On le passe en paramètre de la méthode créer une colonne
         this.listColVue.add(columnAfaire);//On l'ajoute a l'attribut de la liste des colonnes présentes
+        this.t.ajouterColonne(aFaire);
         Colonne enCours = new Colonne("En cours");
         VueColonne columnEnCours = createColumn(enCours);
         this.listColVue.add(columnEnCours);
+        this.t.ajouterColonne(enCours);
         Colonne termine = new Colonne("Terminé");
         VueColonne columnTermine = createColumn(termine);
         this.listColVue.add(columnTermine);
+        this.t.ajouterColonne(termine);
+        this.t.enregistrerObservateur(columnTermine);
 
 
         // On ajoute des tâches par défaut à la première colonne pour servir d'exemple
@@ -90,6 +94,7 @@ public class NewVueBureau extends HBox implements Observateur{
 
     @Override
     public void actualiser(Sujet s){
+        System.out.println("Lancement de actualiser de newVueBureau");
         //On récupère les colonnes du modèle au moment où la méthode actualiser est appelée
         ArrayList<Colonne> listeCol = ((Tableau)s).getListeColonnes();
         ArrayList<String> listeNomCol = new ArrayList<>();
@@ -100,6 +105,7 @@ public class NewVueBureau extends HBox implements Observateur{
         for (Colonne c : listeCol){//On parcours les colonnes du modèle
             if (!containsColumn(c.getNomColonne())){//Si une colonne n'est pas présente dans cette vue, on l'ajoute. (On utilise une méthode auxiliaire pour simplifier le code)
                 this.createColumn(c);//et la méthode la crée graphiquement
+                ((Tableau)s).enregistrerObservateur(this);//et on l'enregistre dans le modèle.
             }
         }
         for (VueColonne c : this.listColVue){//On parcours les colonnes de la vue
@@ -115,7 +121,6 @@ public class NewVueBureau extends HBox implements Observateur{
         //gestionnaire d'événements pour le drag and drop
         setDragDropHandlers(columnVBox);
         rightHBox.getChildren().add(columnVBox);
-        this.t.enregistrerObservateur(columnVBox);
         return columnVBox;
     }
 
@@ -126,7 +131,6 @@ public class NewVueBureau extends HBox implements Observateur{
 
     private VueColonne createAddColumn(Colonne colonne) {
         VueColonne specialColumnVBox = new VueColonne(colonne.getNomColonne(), this.t);
-        this.t.enregistrerObservateur(specialColumnVBox);
         // Ajoutez un gestionnaire d'événements pour le drag-and-drop
         setDragDropHandlers(specialColumnVBox);
 
