@@ -1,0 +1,133 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Observateur {
+  + actualiser(s : Sujet) : void
+}
+
+interface Sujet {
+  + enregistrerObservateur(o : Observateur) : void
+  + supprimerObservateur(o : Observateur) : void
+  + notifierObservateurs() : void
+}
+
+class ListeTableaux {
+  - tableaux : ArrayList<Tableau>
+  + ListeTableaux()
+  + ajouterTableau(tab : Tableau) : void
+  + supprimerTableau(tab : Tableau) : void
+  + getTableau(nomTab : String) : Tableau
+  + getListeTableaux() : ArrayList<Tableau>
+  + toString() : String
+}
+
+class Tableau implements Sujet {
+  - nomTableau : String
+  - listeObjets : ArrayList<InterfaceListeTaches>
+  - archive : Archive
+  - observateurs : ArrayList<Observateur>
+  + Tableau(pNom : String)
+  + getNomTableau() : String
+  + getArchive() : Archive
+  + getListeObjets() : ArrayList<InterfaceListeTaches>
+  + getListeTaches() : ArrayList<Tache>
+  + getListeColonnes() : ArrayList<Colonne>
+  + getTache(nomTache : String) : Tache
+  + getColonne(nomColonne : String) : Colonne
+  + getColonnes() : ArrayList<Colonne>
+  + ajouterColonne(col : Colonne) : void
+  + supprimerColonne(col : Colonne) : void
+  + ajouterTache(nomtache : String, nomColonne : String) : void
+  + supprimerTache(nomTache : String, nomColonne : String) : void
+  + archiverTache(nomTache : String, nomColonne : String) : void
+  + desarchiverTache(nomTache : String) : void
+  + archiverColonne(nomColonne : String) : void
+  + desarchiverColonne(nomColonne : String) : void
+  + enregistrerObservateur(o : Observateur) : void
+  + supprimerObservateurs(o : Observateur) : void
+  + notifierObservateurs() : void
+  + toString() : String
+}
+
+class Archive {
+  - listeTachesArchivees : ArrayList<Tache>
+  - listeColonnesArchivees : ArrayList<Colonne>
+  + Archive()
+  + archiverTache(tache : Tache) : void
+  + archiverColonne(colonne : Colonne) : void
+  + desarchiverTache(tache : Tache) : void
+  + desarchiverColonne(colonne : Colonne) : void
+}
+
+interface InterfaceListeTaches {
+  + ajouterTache(tache : Tache) : void
+  + supprimerTache(tache : Tache) : void
+  + getTache(nomTache : String) : Tache
+  + getListeTaches() : ArrayList<Tache>
+}
+
+class Colonne implements InterfaceListeTaches {
+  - nomColonne : String
+  - listeTaches : ArrayList<Tache>
+  + Colonne(pNom : String)
+  + getNomColonne() : String
+  + ajouterTache(tache : Tache) : void
+  + supprimerTache(tache : Tache) : void
+  + getTache(nomTache : String) : Tache
+  + getListeTaches() : ArrayList<Tache>
+  + toString() : String
+}
+
+abstract class Tache {
+  # nomTache : String
+  # commentaire : String
+  # dateDebut : LocalDate
+  # dateFin : LocalDate
+  # listeDependances : ArrayList<Tache>
+  + Tache(pNom : String)
+  + getCommentaire() : String
+  + getNomTache() : String
+  + getDateDebut() : LocalDate
+  + getDateFin() : LocalDate
+  + getListeDependances() : ArrayList<Tache>
+  + setCommentaire(com : String) : void
+  + setDateDebut(dateD : LocalDate) : void
+  + abstract setDateFin(dateF : LocalDate) : void
+  + ajouterDependance(tache : Tache) : void
+  + retirerDependance(tache : Tache) : void
+  + equals(obj : Object) : boolean
+  + abstract toString() : String
+}
+
+class TacheComplexe extends Tache implements InterfaceListeTaches {
+  - listeTaches : ArrayList<Tache>
+  + TacheComplexe(pNom : String)
+  + setDateFin(dateF : LocalDate) : void
+  + ajouterTache(tache : Tache) : void
+  + supprimerTache(tache : Tache) : void
+  + getTache(nomTache : String) : Tache
+  + getListeTaches() : ArrayList<Tache>
+  + toString() : String
+}
+
+class TacheSimple extends Tache {
+  + TacheSimple(pNom : String)
+  + setDateFin(dateF : LocalDate) : void
+  + toString() : String
+}
+
+class ControlCreationTache {
+  - tab : Tableau
+  - listeNomColonnes : ArrayList<String>
+  + ControlCreationTache(t : Tableau)
+  + handle(event : ActionEvent) : void
+  + majListeNomColonnes() : void
+  + extraireNomColonneDeID(idBouton : String) : String
+  + getListeNomColonnes() : ArrayList<String>
+}
+
+ControlCreationTache "1" --> "1" Tableau
+ControlCreationTache o-> Observateur : <<Uses>>
+Tableau "1" --> "0...*" Observateur
+
+@enduml
