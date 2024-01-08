@@ -17,11 +17,12 @@ public class VueColonne extends VBox implements Observateur{
 
     private String nomColonne;
     private Tableau t;
-    private ArrayList<String> listeTachesVue;
+    private ArrayList<String> listeTaches;
 
     public VueColonne(String columnName, Tableau t) {
         this.nomColonne = columnName;
         this.t = t;
+        this.listeTaches = new ArrayList<>();
         Colonne c = new Colonne(columnName);
         this.t.ajouterColonne(c);
         initialize();
@@ -29,6 +30,7 @@ public class VueColonne extends VBox implements Observateur{
 
     public VueColonne(Colonne c){
         this.nomColonne = c.getNomColonne();
+        this.listeTaches = new ArrayList<>();
         initialize();
     }
 
@@ -94,6 +96,7 @@ public class VueColonne extends VBox implements Observateur{
 
     public void addTask(String taskName) {
         this.t.ajouterTache(taskName, this.nomColonne);
+        this.listeTaches.add(taskName);
         Hyperlink clickableText = new Hyperlink(taskName);
         clickableText.setStyle("-fx-text-fill: black; -fx-underline: none;");
 
@@ -114,8 +117,9 @@ public class VueColonne extends VBox implements Observateur{
         getChildren().addAll(columnSeparator, taskInColumn);
     }
 
-    public void removeTask(Hyperlink task) {
-        getChildren().removeAll(task, task.getParent()); // Remove the task and its separator
+    public void removeTask(String nomTache) {
+        this.t.supprimerTache(nomTache, this.nomColonne);
+        this.listeTaches.remove(nomTache);
     }
 
     private Button createIconButton(String imageName) {

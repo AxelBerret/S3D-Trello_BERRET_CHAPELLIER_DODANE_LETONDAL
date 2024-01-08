@@ -55,7 +55,6 @@ public class NewVueBureau extends HBox implements Observateur{
 
 
         //Création des 3 colonnes par défaut
-        /*
         this.listColVue = new ArrayList<>(); //On initialise la liste de vues colonnes
         Colonne aFaire = new Colonne("A faire");//On crée un objet colonne
         VueColonne columnAfaire = createColumn(aFaire);//On le passe en paramètre de la méthode créer une colonne
@@ -65,13 +64,8 @@ public class NewVueBureau extends HBox implements Observateur{
         this.listColVue.add(columnEnCours);
         Colonne termine = new Colonne("Terminé");
         VueColonne columnTermine = createColumn(termine);
-        this.listColVue.add(columnTermine);*/
-        Colonne aFaire = new Colonne("A faire");
-        this.t.ajouterColonne(aFaire);
-        Colonne enCours = new Colonne("En cours");
-        Colonne termine = new Colonne("Terminé");
-        this.t.ajouterColonne(enCours);
-        this.t.ajouterColonne(termine);
+        this.listColVue.add(columnTermine);
+
 
         // On ajoute des tâches par défaut à la première colonne pour servir d'exemple
         columnAfaire.addTask("Tache 1");
@@ -114,7 +108,6 @@ public class NewVueBureau extends HBox implements Observateur{
                 this.removeColumn(c);
             }
         }
-
     }
 
     private VueColonne createColumn(Colonne colonne) {//Cette méthode ajoute un objet colonne dans les données et renvoie une vueColonne
