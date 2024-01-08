@@ -32,7 +32,6 @@ public class VueGantt extends HBox implements Observateur {
         tableau.enregistrerObservateur(this);
     }
 
-    @Override
     public void actualiser(Sujet s) {
         getChildren().clear();
 
@@ -47,11 +46,15 @@ public class VueGantt extends HBox implements Observateur {
 
             // Ajouter la logique du diagramme de Gantt ici
             for (Tache tache : colonne.getListeTaches()) {
-                Rectangle rectangleTache = createGanttRectangle(tache);
-                getChildren().add(rectangleTache);
+                // Vérifier si la tâche a des dates de début et de fin définies
+                if (tache.getDateDebut() != null && tache.getDateFin() != null) {
+                    Rectangle rectangleTache = createGanttRectangle(tache);
+                    getChildren().add(rectangleTache);
+                }
             }
         }
     }
+
 
     private Rectangle createGanttRectangle(Tache tache) {
         LocalDate baseDate = determinerBaseDate(tableau);

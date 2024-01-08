@@ -76,7 +76,7 @@ public class NewVueBureau extends HBox implements Observateur {
         LocalDate dateFin = LocalDate.of(2022, 1, 9);
         TacheSimple tache = new TacheSimple("Tâche 1" );
         tache.setDateDebut(dateDebut);
-        tache.setDateDebut(dateFin);
+        tache.setDateFin(dateFin);
         columnAfaire.addTask(String.valueOf(tache));
 
 
