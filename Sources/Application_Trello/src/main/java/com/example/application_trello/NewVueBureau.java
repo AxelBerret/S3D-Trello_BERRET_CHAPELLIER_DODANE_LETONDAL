@@ -72,8 +72,9 @@ public class NewVueBureau extends HBox implements Observateur {
 
         // On ajoute des tâches par défaut à la première colonne pour servir d'exemple
         columnAfaire.addTask("Tache 1");
-
+        this.t.ajouterTache("Tache 1", "A faire");
         columnAfaire.addTask("Tache 2");
+        this.t.ajouterTache("Tache 2", "A faire");
 
 
         LocalDate dateDebut = LocalDate.of(2022, 1, 1);
@@ -156,8 +157,8 @@ public class NewVueBureau extends HBox implements Observateur {
         }
         for (Colonne c : listeCol){//On parcours les colonnes du modèle
             if (!containsColumn(c.getNomColonne())){//Si une colonne n'est pas présente dans cette vue, on l'ajoute. (On utilise une méthode auxiliaire pour simplifier le code)
-                this.createColumn(c);//et la méthode la crée graphiquement
-                ((Tableau)s).enregistrerObservateur(this);//et on l'enregistre dans le modèle.
+                VueColonne vc = createColumn(c);//et la méthode la crée graphiquement
+                ((Tableau)s).enregistrerObservateur(vc);//et on l'enregistre dans le modèle.
             }
         }
         for (VueColonne c : this.listColVue) {// On parcourt les colonnes de la vue
