@@ -62,14 +62,23 @@ public class VueBureau extends Application {
         rightHBox.getChildren().addAll(columnAfaire, columnEnCours, columnTermine, createColumnColumn);
         rightHBox.setMargin(createColumnColumn, new Insets(0, 0, 0, 50));
 
+        // Button for Gantt view
         Button ganttButton = new Button("Création du Gantt");
         ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
         VBox.setMargin(ganttButton, new Insets(30));
         ganttButton.setOnMouseEntered(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
         ganttButton.setOnMouseExited(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+
+        // Button for archive view
+        Button archiveButton = new Button("Archive");
+        archiveButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
+        VBox.setMargin(archiveButton, new Insets(30));
+        archiveButton.setOnMouseEntered(e -> archiveButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
+        archiveButton.setOnMouseExited(e -> archiveButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+
         HBox mainHBox = new HBox(20, leftVBox, separator, rightVBox);
         mainHBox.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
-        rightVBox.getChildren().addAll(rightHBox, ganttButton);
+        rightVBox.getChildren().addAll(rightHBox, ganttButton, archiveButton);
 
         Scene scene = new Scene(mainHBox, 900, 400);
 
