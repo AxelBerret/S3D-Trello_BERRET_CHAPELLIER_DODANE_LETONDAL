@@ -114,7 +114,11 @@ public abstract class Tache {
      * methode ajouterDependance de la classe Tache
      * @param tache tache que l on souhaite ajouter en dependances
      */
-     public void ajouterDependance(Tache tache) {this.listeDependances.add(tache);}
+     public void ajouterDependance(Tache tache) {
+         if (!this.listeDependances.contains(tache)){
+             this.listeDependances.add(tache);
+         }
+     }
 
     /**
      * methode retirerDependance de la classe Tache
