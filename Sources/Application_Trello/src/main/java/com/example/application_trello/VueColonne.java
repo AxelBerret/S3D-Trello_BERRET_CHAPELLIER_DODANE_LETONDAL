@@ -10,6 +10,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class VueColonne extends VBox implements Observateur{
