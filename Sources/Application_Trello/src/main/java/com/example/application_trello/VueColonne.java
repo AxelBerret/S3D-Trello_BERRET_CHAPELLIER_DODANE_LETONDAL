@@ -11,6 +11,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -82,19 +83,16 @@ public class VueColonne extends VBox implements Observateur{
 
     @Override
     public void actualiser(Sujet s) {
-        System.out.println("Lancement de actualiser de VueColonne");
-        ArrayList<Tache> lisTacheModele = ((Tableau)s).getListeTaches();
-        for (Tache t : lisTacheModele){//boucle qui parcourt les taches présentes dans le modèle et ajoute celles qui ne le sont pas encore
+        Colonne colonneModele = ((Tableau)s).getColonne(this.nomColonne);
+        ArrayList<Tache> lisTacheCol = colonneModele.getListeTaches();//On récupère depuis le modèle la liste des tâches que doit contenir cette colonne
+        for (Tache t : lisTacheCol){//boucle qui parcourt les taches présentes dans le modèle et ajoute celles qui ne le sont pas encore
             String nom = t.getNomTache();
-            System.out.println("Adding task: " + nom);
             if (!this.listeTaches.contains(nom)){//Si la liste de la vue ne contient pas la tache nom alors
                 addTask(nom);//On l'ajoute
-                System.out.println("Task added: " + nom);
             }
         }
-
         for (String nomT : this.listeTaches){//Boucle qui parcourt les taches présentes dans la vue et supprime celles qui ne sont plus dans le modèle
-            if (!containsTache(nomT, lisTacheModele)){//Si la liste du modèle ne contient pas la tache nomT alors
+            if (!containsTache(nomT, lisTacheCol)){//Si la liste du modèle ne contient pas la tache nomT alors
                 //On la supprime de notre liste
                 removeTaskById(nomT);
             }
