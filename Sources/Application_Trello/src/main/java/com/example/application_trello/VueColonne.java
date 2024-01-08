@@ -16,6 +16,7 @@ public class VueColonne extends VBox implements Observateur{
 
     private String nomColonne;
     private Tableau t;
+    private ArrayList<String> listeTachesVue;
 
     public VueColonne(String columnName, Tableau t) {
         this.nomColonne = columnName;
@@ -44,8 +45,11 @@ public class VueColonne extends VBox implements Observateur{
         additionalButtonsRow.setAlignment(Pos.CENTER);
         Button newButton1 = createIconButton("trombonne.png");
         Button newButton2 = createIconButton("croix.png");
-        Button newButton3 = createIconButton("plus.png");
-        additionalButtonsRow.getChildren().addAll(newButton1, newButton2, newButton3);
+        Button boutonPlus = createIconButton("plus.png");
+        boutonPlus.setId("btnCreerTache" + this.getNomVueColonne());
+        ControlCreationTache cct = new ControlCreationTache(this.t);
+        boutonPlus.setOnAction(cct);
+        additionalButtonsRow.getChildren().addAll(newButton1, newButton2, boutonPlus);
         additionalButtonsRow.setPadding(new Insets(20));
         getChildren().addAll(columnLabel, additionalButtonsRow);
 
@@ -73,7 +77,40 @@ public class VueColonne extends VBox implements Observateur{
 
     @Override
     public void actualiser(Sujet s) {
+        if (s instanceof Tableau) {
+            Tableau tableau = (Tableau) s;
 
+            // Récupérez les tâches actuelles de la colonne dans la vue
+            // Vous devrez peut-être ajuster la logique en fonction de votre structure exacte
+            VBox tasksAndSeparator = (VBox) getChildren().get(getChildren().size() - 1);
+            VBox tasksContainer = (VBox) tasksAndSeparator.getChildren().get(1);
+
+            // Comparez les tâches actuelles dans la vue avec celles dans la colonne du modèle
+            for (Tache tache : tableau.getTachesDansColonne(nomColonne)) {
+                String taskName = tache.getNomTache();
+
+                // Si la tâche n'est pas présente dans la vue, ajoutez-la
+                if (!containsTask(taskName, tasksContainer)) {
+                    addTask(taskName);
+                }
+            }
+
+            // Vous pouvez également vérifier si une tâche dans la vue n'est plus présente dans la colonne du modèle
+            // et la supprimer si nécessaire
+        }
+    }
+
+    private boolean containsTask(String taskName, VBox tasksContainer) {
+        for (Node node : tasksContainer.getChildren()) {
+            if (node instanceof HBox) {
+                HBox taskInColumn = (HBox) node;
+                Hyperlink clickableText = (Hyperlink) taskInColumn.getChildren().get(0);
+                if (clickableText.getText().equals(taskName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public String getNomVueColonne() {
@@ -96,8 +133,6 @@ public class VueColonne extends VBox implements Observateur{
         buttonRow.setAlignment(Pos.CENTER);
         Button trombonneButton = createIconButton("trombonne.png");
         Button croixButton = createIconButton("croix.png");
-        //ControlCreationTache cct = new ControlCreationTache();
-        //croixButton.setOnAction();
         buttonRow.getChildren().addAll(trombonneButton, croixButton);
 
         HBox taskInColumn = new HBox(10);
