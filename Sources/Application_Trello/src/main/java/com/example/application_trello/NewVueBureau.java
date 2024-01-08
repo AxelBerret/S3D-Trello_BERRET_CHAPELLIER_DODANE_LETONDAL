@@ -81,21 +81,21 @@ public class NewVueBureau extends HBox implements Observateur {
         vueListeButton.setOnMouseEntered(e -> vueListeButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
         vueListeButton.setOnMouseExited(e -> vueListeButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
 
-        vueListeButton.setOnAction(event -> afficherVueListeEnPleinEcran());
+        vueListeButton.setOnAction(event -> afficherVueListe());
 
         Button ganttButton = new Button("Création du Gantt");
         ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
         VBox.setMargin(ganttButton, new Insets(30));
         ganttButton.setOnMouseEntered(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
         ganttButton.setOnMouseExited(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
-
+        ganttButton.setOnAction(event -> afficherVueGantt());
         this.setSpacing(20);
         this.getChildren().addAll(leftVBox, separator, rightVBox, vueListeButton, ganttButton);
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
         rightVBox.getChildren().addAll(rightHBox);
     }
 
-    private void afficherVueListeEnPleinEcran() {
+    private void afficherVueListe() {
         // Créez la VueListe en utilisant le premier objet Colonne (ici, la première colonne de la liste)
         if (!listColVue.isEmpty()) {
             VueListe vueListe = new VueListe(t, listColVue.get(0).getNomVueColonne());
@@ -110,6 +110,23 @@ public class NewVueBureau extends HBox implements Observateur {
             stage.show();
         }
     }
+
+    private void afficherVueGantt() {
+        // Créez la VueGantt
+        VueGantt vueGantt = new VueGantt(t);
+
+        // Créez une nouvelle scène pour la VueGantt
+        Scene scene = new Scene(vueGantt, 600, 600);
+        // Créez une nouvelle fenêtre (Stage)
+        Stage stage = new Stage();
+        stage.setScene(scene);
+
+        // Affichez la fenêtre
+        stage.show();
+    }
+
+
+
 
     @Override
     public void actualiser(Sujet s) {
