@@ -77,8 +77,13 @@ public class VueColonne extends VBox implements Observateur{
 
     }
 
+<<<<<<< HEAD
     public String getColumnLabel() {
         return columnLabel;
+=======
+    public String getNomVueColonne() {
+        return this.nomColonne;
+>>>>>>> 37705b0451a08909944591deb903171f589bd3cb
     }
 
     public String getTaskName() {
