@@ -127,7 +127,8 @@ public class TableauTest implements Sujet {
      * methode ajouterColonne de la classe Tableau
      * @param col colonne que l on souhaite ajouter au tableau
      */
-    public void ajouterColonne(Colonne col) {
+    public void ajouterColonne(String nomColonne) {
+        Colonne col = new Colonne(nomColonne);
         ArrayList<Colonne> lc = this.getListeColonnes();
         if (!(lc.contains(col))){
             this.listeObjets.add(col);

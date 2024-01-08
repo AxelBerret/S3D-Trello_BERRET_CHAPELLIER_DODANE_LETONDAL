@@ -10,25 +10,24 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class VueColonne extends VBox implements Observateur{
 
-    private String nomColonne;
-    private Tableau t;
-    private ArrayList<String> listeTachesVue;
+    private String columnLabel;
 
-    public VueColonne(String columnName, Tableau t) {
-        this.nomColonne = columnName;
-        this.t = t;
-        Colonne c = new Colonne(columnName);
-        this.t.ajouterColonne(c);
+    public VueColonne(String columnName) {
+        this.columnLabel = columnName;
+        initialize();
+    }
+
+    public VueColonne() {
+        this.columnLabel = "Créer une Colonne";
         initialize();
     }
 
     public VueColonne(Colonne c){
-        this.nomColonne = c.getNomColonne();
+        this.columnLabel = c.getNomColonne();
         initialize();
     }
 
@@ -38,7 +37,7 @@ public class VueColonne extends VBox implements Observateur{
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
         setAlignment(Pos.TOP_CENTER);
 
-        Label columnLabel = new Label(this.nomColonne);
+        Label columnLabel = new Label(this.columnLabel);
         columnLabel.setPadding(new Insets(30));
         columnLabel.setAlignment(Pos.TOP_CENTER);
 
@@ -46,11 +45,8 @@ public class VueColonne extends VBox implements Observateur{
         additionalButtonsRow.setAlignment(Pos.CENTER);
         Button newButton1 = createIconButton("trombonne.png");
         Button newButton2 = createIconButton("croix.png");
-        Button boutonPlus = createIconButton("plus.png");
-        boutonPlus.setId("btnCreerTache" + this.getNomVueColonne());
-        ControlCreationTache cct = new ControlCreationTache(this.t);
-        boutonPlus.setOnAction(cct);
-        additionalButtonsRow.getChildren().addAll(newButton1, newButton2, boutonPlus);
+        Button newButton3 = createIconButton("plus.png");
+        additionalButtonsRow.getChildren().addAll(newButton1, newButton2, newButton3);
         additionalButtonsRow.setPadding(new Insets(20));
         getChildren().addAll(columnLabel, additionalButtonsRow);
 
@@ -78,44 +74,11 @@ public class VueColonne extends VBox implements Observateur{
 
     @Override
     public void actualiser(Sujet s) {
-        if (s instanceof Tableau) {
-            Tableau tableau = (Tableau) s;
 
-            // Récupérez les tâches actuelles de la colonne dans la vue
-            // Vous devrez peut-être ajuster la logique en fonction de votre structure exacte
-            VBox tasksAndSeparator = (VBox) getChildren().get(getChildren().size() - 1);
-            VBox tasksContainer = (VBox) tasksAndSeparator.getChildren().get(1);
-
-            // Comparez les tâches actuelles dans la vue avec celles dans la colonne du modèle
-            for (Tache tache : tableau.getTachesDansColonne(nomColonne)) {
-                String taskName = tache.getNomTache();
-
-                // Si la tâche n'est pas présente dans la vue, ajoutez-la
-                if (!containsTask(taskName, tasksContainer)) {
-                    addTask(taskName);
-                }
-            }
-
-            // Vous pouvez également vérifier si une tâche dans la vue n'est plus présente dans la colonne du modèle
-            // et la supprimer si nécessaire
-        }
     }
 
-    private boolean containsTask(String taskName, VBox tasksContainer) {
-        for (Node node : tasksContainer.getChildren()) {
-            if (node instanceof HBox) {
-                HBox taskInColumn = (HBox) node;
-                Hyperlink clickableText = (Hyperlink) taskInColumn.getChildren().get(0);
-                if (clickableText.getText().equals(taskName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public String getNomVueColonne() {
-        return this.nomColonne;
+    public String getColumnLabel() {
+        return columnLabel;
     }
 
     public String getTaskName() {
@@ -126,7 +89,6 @@ public class VueColonne extends VBox implements Observateur{
     }
 
     public void addTask(String taskName) {
-        this.t.ajouterTache(taskName, this.nomColonne);
         Hyperlink clickableText = new Hyperlink(taskName);
         clickableText.setStyle("-fx-text-fill: black; -fx-underline: none;");
 
@@ -173,6 +135,6 @@ public class VueColonne extends VBox implements Observateur{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VueColonne that = (VueColonne) o;
-        return Objects.equals(getNomVueColonne(), that.getNomVueColonne());
+        return Objects.equals(getColumnLabel(), that.getColumnLabel());
     }
 }
