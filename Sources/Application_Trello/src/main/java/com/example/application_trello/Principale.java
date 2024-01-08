@@ -11,18 +11,26 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Principale extends Application {
 
     @Override
     public void start(Stage stage) {
 
-        NewVueBureau vb = new NewVueBureau();
+        Sujet t = new Tableau("Test");
+        NewVueBureau vb = new NewVueBureau(t);
+        t.enregistrerObservateur(vb);
+        t.notifierObservateurs();
 
         Scene scene = new Scene(vb, 900, 400);
 
         stage.setTitle("Hello JavaFX!");
         stage.setScene(scene);
         stage.show();
+        ArrayList<Colonne> a = new ArrayList<>();
+        a = ((Tableau) t).getListeColonnes();
+        System.out.println(a);
     }
 
     public static void main(String[] args) {
