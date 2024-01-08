@@ -10,7 +10,6 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
 public class Principale extends Application {
