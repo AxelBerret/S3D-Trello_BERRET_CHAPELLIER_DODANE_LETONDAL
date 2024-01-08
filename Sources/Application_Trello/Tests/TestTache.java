@@ -39,9 +39,24 @@ public class TestTache {
         tache1.retirerDependance(tache2);
         assertFalse(tache1.getListeDependances().contains(tache2));
     }
+    @Test
+    public void test_05_ajouterDependance() {
+        Tache tache1 = new TacheSimple("Tache1");
+        Tache tache2 = new TacheSimple("Tache2");
+        Tache tache3 = new TacheSimple("Tache3");
+
+        tache1.ajouterDependance(tache2);
+        tache1.ajouterDependance(tache3);
+        //ajout d'une dépendance déjà existante
+        tache1.ajouterDependance(tache2);
+
+        assertEquals(2, tache1.getListeDependances().size());
+        assertTrue(tache1.getListeDependances().contains(tache2));
+        assertTrue(tache1.getListeDependances().contains(tache3));
+    }
 
     @Test
-    public void test_05_equals() {
+    public void test_06_equals() {
         Tache tache1 = new TacheSimple("Tache1");
         Tache tache2 = new TacheSimple("Tache1");
         assertTrue(tache1.equals(tache2));
