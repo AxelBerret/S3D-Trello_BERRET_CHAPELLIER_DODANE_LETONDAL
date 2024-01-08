@@ -132,13 +132,17 @@ public class TableauTest implements Sujet {
         if (!(lc.contains(col))){
             this.listeObjets.add(col);
         }
+        this.notifierObservateurs();
     }
 
     /**
      * methode supprimerColonne de la classe Tableau
      * @param col colonne que l on souhaite supprimer du tableau
      */
-    public void supprimerColonne(Colonne col) {this.listeObjets.remove(col);}
+    public void supprimerColonne(Colonne col) {
+        this.listeObjets.remove(col);
+        this.notifierObservateurs();
+    }
 
     /**
      * methode ajouterTache de la classe Tableau
@@ -152,6 +156,7 @@ public class TableauTest implements Sujet {
                 this.getListeColonnes().get(i).ajouterTache(t);
             }
         }
+        this.notifierObservateurs();
     }
 
     /**
@@ -183,6 +188,7 @@ public class TableauTest implements Sujet {
                 this.getListeColonnes().get(i).supprimerTache(t);
             }
         }
+        this.notifierObservateurs();
     }
 
     /**
@@ -197,6 +203,7 @@ public class TableauTest implements Sujet {
                 this.archive.desarchiverTache(t);
             }
         }
+        this.notifierObservateurs();
     }
 
     /**
@@ -207,6 +214,7 @@ public class TableauTest implements Sujet {
         Colonne colonne = this.getColonne(nomColonne);
         this.archive.archiverColonne(colonne);
         this.supprimerColonne(colonne);
+        this.notifierObservateurs();
     }
 
     /**
@@ -221,6 +229,7 @@ public class TableauTest implements Sujet {
                 this.archive.desarchiverColonne(colonne);
             }
         }
+        this.notifierObservateurs();
     }
 
     public void ajouterDependance(String nomTache, String nomTacheAAjouter) {
@@ -235,6 +244,7 @@ public class TableauTest implements Sujet {
                 t.ajouterDependance(tAAjouter);
             }
         }
+        this.notifierObservateurs();
     }
 
     public void ajouterSousTache(String nomTache, String nomTacheAAjouter){
@@ -254,6 +264,7 @@ public class TableauTest implements Sujet {
                 }
             }
         }
+        this.notifierObservateurs();
     }
 
     /**
