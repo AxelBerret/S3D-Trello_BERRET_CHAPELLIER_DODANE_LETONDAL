@@ -1,4 +1,4 @@
-package com.example.application_trello;
+/*package com.example.application_trello;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -152,3 +152,4 @@ public class VueBureau extends Application {
         launch();
     }
 }
+*/
