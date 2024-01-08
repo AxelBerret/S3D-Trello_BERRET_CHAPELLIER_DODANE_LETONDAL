@@ -21,7 +21,6 @@ public class Principale extends Application {
         Sujet t = new Tableau("Test");
         NewVueBureau vb = new NewVueBureau(t);
         t.enregistrerObservateur(vb);
-        t.notifierObservateurs();
 
         Scene scene = new Scene(vb, 900, 400);
 
