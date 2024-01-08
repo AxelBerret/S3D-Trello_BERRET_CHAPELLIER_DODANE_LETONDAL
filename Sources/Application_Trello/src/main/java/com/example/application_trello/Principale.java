@@ -19,10 +19,11 @@ public class Principale extends Application {
     public void start(Stage stage) {
 
         Sujet t = new Tableau("Test");
+
         NewVueBureau vb = new NewVueBureau(t);
         t.enregistrerObservateur(vb);
 
-        Scene scene = new Scene(vb, 900, 400);
+        Scene scene = new Scene(vb, 1200, 600);
 
         stage.setTitle("Hello JavaFX!");
         stage.setScene(scene);

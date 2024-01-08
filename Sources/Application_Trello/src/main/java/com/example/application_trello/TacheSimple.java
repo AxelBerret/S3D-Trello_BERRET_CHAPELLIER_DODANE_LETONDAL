@@ -1,9 +1,10 @@
 package com.example.application_trello;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class TacheSimple extends Tache {
+
+
 
     /**
      * constructeur qui cree des objets de types TacheSimple
@@ -14,12 +15,36 @@ public class TacheSimple extends Tache {
         super(nomTache);
     }
 
+    /**
+     * methode setDateFin de la classe TacheSimple
+     * @param dateD date de fin que l on souhaite donner a la tache
+     */
+    public void setDateDebut(LocalDate dateD) {this.dateDebut = dateD;}
+
 
     /**
      * methode setDateFin de la classe TacheSimple
      * @param dateF date de fin que l on souhaite donner a la tache
      */
     public void setDateFin(LocalDate dateF) {this.dateFin = dateF;}
+
+    /**
+     * Méthode getDateDebut de la classe TacheSimple
+     *
+     * @return la date de début de la tâche
+     */
+    public LocalDate getDateDebut() {
+        return this.dateDebut;
+    }
+
+    /**
+     * Méthode getDateFin de la classe TacheSimple
+     *
+     * @return la date de fin de la tâche
+     */
+    public LocalDate getDateFin() {
+        return this.dateFin;
+    }
 
     /**
      * methode toString de la classe TacheSimple

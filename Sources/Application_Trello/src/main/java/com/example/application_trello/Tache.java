@@ -1,6 +1,7 @@
 package com.example.application_trello;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -50,6 +51,7 @@ public abstract class Tache {
         this.dateFin = null;
         this.listeDependances = new ArrayList<Tache>();
     }
+
 
 
     /**
@@ -131,6 +133,25 @@ public abstract class Tache {
      * @param obj
      * @return vrai si egales sinon faux
      */
+    /**
+     * methode determinerBaseDate de la classe Tache
+     * @param tableau le tableau auquel appartient la tâche
+     * @return la date de début la plus ancienne parmi toutes les tâches du tableau
+     */
+    public static LocalDate determinerBaseDate(Tableau tableau) {
+        LocalDate minDate = LocalDate.MAX;
+
+        for (Colonne colonne : tableau.getListeColonnes()) {
+            for (Tache tache : colonne.getListeTaches()) {
+                if (tache.getDateDebut() != null && tache.getDateDebut().isBefore(minDate)) {
+                    minDate = tache.getDateDebut();
+                }
+            }
+        }
+
+        return minDate;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -148,4 +169,17 @@ public abstract class Tache {
     }
 
     public abstract String toString();
+
+    /**
+     * methode getDuree de la classe Tache
+     * @return la durée de la tâche en jours
+     */
+    public int getDuree() {
+        if (dateDebut != null && dateFin != null) {
+            return (int) ChronoUnit.DAYS.between(dateDebut, dateFin);
+        } else {
+            return 0;
+        }
+    }
+
 }
