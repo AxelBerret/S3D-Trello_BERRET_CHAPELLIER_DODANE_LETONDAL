@@ -195,9 +195,9 @@ public class NewVueBureau extends HBox implements Observateur {
             // Commence le glisser-déposer
             Dragboard db = columnVBox.startDragAndDrop(TransferMode.MOVE);
 
-            // Ajoute les données à transférer (ici, le nom de la tâche)
+            // Ajoute les données à transférer (ici, le nom et la colonne de la tâche)
             ClipboardContent content = new ClipboardContent();
-            content.putString(columnVBox.getTaskName());
+            content.putString(columnVBox.getTaskName() + "|" + columnVBox.getNomVueColonne());
             db.setContent(content);
 
             event.consume();
@@ -218,9 +218,23 @@ public class NewVueBureau extends HBox implements Observateur {
             boolean success = false;
 
             if (db.hasString()) {
-                // Ajoute la tâche à la colonne actuelle
-                columnVBox.addTask(db.getString());
-                success = true;
+                // Sépare le nom de la tâche et le nom de la colonne
+                String[] taskInfo = db.getString().split("\\|");
+                if (taskInfo.length == 2) {
+                    String taskName = taskInfo[0];
+                    String sourceColumn = taskInfo[1];
+
+                    // Ajoute la tâche à la colonne actuelle
+                    columnVBox.addTask(taskName);
+
+                    // Supprime la tâche de la colonne source (si nécessaire)
+                    VueColonne sourceColumnVBox = findColumnByName(sourceColumn);
+                    if (sourceColumnVBox != null) {
+                        sourceColumnVBox.removeTaskById(taskName);
+                    }
+
+                    success = true;
+                }
             }
 
             // Indique que le déplacement est terminé
@@ -229,6 +243,16 @@ public class NewVueBureau extends HBox implements Observateur {
         });
 
         columnVBox.setOnDragDone(DragEvent::consume);
+    }
+
+    // Méthode auxiliaire pour trouver la colonne par son nom
+    private VueColonne findColumnByName(String columnName) {
+        for (VueColonne vueColonne : this.listColVue) {
+            if (vueColonne.getNomVueColonne().equals(columnName)) {
+                return vueColonne;
+            }
+        }
+        return null;
     }
 
     private boolean containsColumn(String columnName) {

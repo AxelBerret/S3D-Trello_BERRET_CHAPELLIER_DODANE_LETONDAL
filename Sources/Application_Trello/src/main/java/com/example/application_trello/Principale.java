@@ -33,7 +33,5 @@ public class Principale extends Application {
         System.out.println(a);
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
+    public static void main(String[] args) {launch();}
 }
