@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import static javafx.application.Application.launch;
 
-public class NewVueBureau extends HBox implements Observateur{
+public class NewVueBureau extends HBox implements Observateur {
 
     private ArrayList<VueColonne> listColVue;
     private HBox rightHBox;
@@ -53,19 +53,17 @@ public class NewVueBureau extends HBox implements Observateur{
 
         this.rightHBox = new HBox(20);
 
-
-        //Création des 3 colonnes par défaut
-        this.listColVue = new ArrayList<>(); //On initialise la liste de vues colonnes
-        Colonne aFaire = new Colonne("A faire");//On crée un objet colonne
-        VueColonne columnAfaire = createColumn(aFaire);//On le passe en paramètre de la méthode créer une colonne
-        this.listColVue.add(columnAfaire);//On l'ajoute a l'attribut de la liste des colonnes présentes
+        // Création des 3 colonnes par défaut
+        this.listColVue = new ArrayList<>(); // On initialise la liste de vues colonnes
+        Colonne aFaire = new Colonne("A faire");// On crée un objet colonne
+        VueColonne columnAfaire = createColumn(aFaire);// On le passe en paramètre de la méthode créer une colonne
+        this.listColVue.add(columnAfaire);// On l'ajoute à l'attribut de la liste des colonnes présentes
         Colonne enCours = new Colonne("En cours");
         VueColonne columnEnCours = createColumn(enCours);
         this.listColVue.add(columnEnCours);
         Colonne termine = new Colonne("Terminé");
         VueColonne columnTermine = createColumn(termine);
         this.listColVue.add(columnTermine);
-
 
         // On ajoute des tâches par défaut à la première colonne pour servir d'exemple
         columnAfaire.addTask("Tache 1");
@@ -77,49 +75,74 @@ public class NewVueBureau extends HBox implements Observateur{
 
         rightHBox.setMargin(colonneAjout, new Insets(0, 0, 0, 50));
 
+        Button vueListeButton = new Button("Vue Liste");
+        vueListeButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
+        VBox.setMargin(vueListeButton, new Insets(30));
+        vueListeButton.setOnMouseEntered(e -> vueListeButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
+        vueListeButton.setOnMouseExited(e -> vueListeButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+
+        vueListeButton.setOnAction(event -> afficherVueListeEnPleinEcran());
+
         Button ganttButton = new Button("Création du Gantt");
         ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
         VBox.setMargin(ganttButton, new Insets(30));
         ganttButton.setOnMouseEntered(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
         ganttButton.setOnMouseExited(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+
         this.setSpacing(20);
-        this.getChildren().addAll(leftVBox, separator, rightVBox);
+        this.getChildren().addAll(leftVBox, separator, rightVBox, vueListeButton, ganttButton);
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
-        rightVBox.getChildren().addAll(rightHBox, ganttButton);
+        rightVBox.getChildren().addAll(rightHBox);
+    }
+
+    private void afficherVueListeEnPleinEcran() {
+        // Créez la VueListe en utilisant le premier objet Colonne (ici, la première colonne de la liste)
+        if (!listColVue.isEmpty()) {
+            VueListe vueListe = new VueListe(t, listColVue.get(0).getNomVueColonne());
+
+            // Créez une nouvelle scène pour la VueListe
+            Scene scene = new Scene(vueListe, 600, 600);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+
+
+            // Affichez la fenêtre
+            stage.show();
+        }
     }
 
     @Override
-    public void actualiser(Sujet s){
-        //On récupère les colonnes du modèle au moment où la méthode actualiser est appelée
-        ArrayList<Colonne> listeCol = ((Tableau)s).getListeColonnes();
+    public void actualiser(Sujet s) {
+        // On récupère les colonnes du modèle au moment où la méthode actualiser est appelée
+        ArrayList<Colonne> listeCol = ((Tableau) s).getListeColonnes();
         ArrayList<String> listeNomCol = new ArrayList<>();
-        for (Colonne c : listeCol){
-            listeNomCol.add(c.getNomColonne());//On crée une liste de noms des colonnes pour simplifier les comparaisons
+        for (Colonne c : listeCol) {
+            listeNomCol.add(c.getNomColonne());// On crée une liste de noms des colonnes pour simplifier les comparaisons
         }
 
-        for (Colonne c : listeCol){//On parcours les colonnes du modèle
-            if (!containsColumn(c.getNomColonne())){//Si une colonne n'est pas présente dans cette vue, on l'ajoute. (On utilise une méthode auxiliaire pour simplifier le code)
-                this.createColumn(c);//et la méthode la crée graphiquement
+        for (Colonne c : listeCol) {// On parcourt les colonnes du modèle
+            if (!containsColumn(c.getNomColonne())) {// Si une colonne n'est pas présente dans cette vue, on l'ajoute. (On utilise une méthode auxiliaire pour simplifier le code)
+                this.createColumn(c);// et la méthode la crée graphiquement
             }
         }
-        for (VueColonne c : this.listColVue){//On parcours les colonnes de la vue
-            String nomC = c.getNomVueColonne();//Pour chaque colonne on extrait son nom afin de pouvoir comparer
-            if (!listeNomCol.contains(nomC)){//Si une colonne de la vue n'est plus présente dans le modèle, on la supprime.
+        for (VueColonne c : this.listColVue) {// On parcourt les colonnes de la vue
+            String nomC = c.getNomVueColonne();// Pour chaque colonne, on extrait son nom afin de pouvoir comparer
+            if (!listeNomCol.contains(nomC)) {// Si une colonne de la vue n'est plus présente dans le modèle, on la supprime.
                 this.removeColumn(c);
             }
         }
     }
 
-    private VueColonne createColumn(Colonne colonne) {//Cette méthode ajoute un objet colonne dans les données et renvoie une vueColonne
+    private VueColonne createColumn(Colonne colonne) {// Cette méthode ajoute un objet colonne dans les données et renvoie une vueColonne
         VueColonne columnVBox = new VueColonne(colonne.getNomColonne(), this.t);
-        //gestionnaire d'événements pour le drag and drop
+        // gestionnaire d'événements pour le drag and drop
         setDragDropHandlers(columnVBox);
         rightHBox.getChildren().add(columnVBox);
         this.t.enregistrerObservateur(columnVBox);
         return columnVBox;
     }
 
-    private void removeColumn(VueColonne colonne){
+    private void removeColumn(VueColonne colonne) {
         this.listColVue.remove(colonne);
         this.rightHBox.getChildren().remove(colonne);
     }

@@ -23,7 +23,7 @@ public class Principale extends Application {
         t.enregistrerObservateur(vb);
         t.notifierObservateurs();
 
-        Scene scene = new Scene(vb, 900, 400);
+        Scene scene = new Scene(vb, 1200, 600);
 
         stage.setTitle("Hello JavaFX!");
         stage.setScene(scene);
