@@ -19,6 +19,7 @@ public class Principale extends Application {
     public void start(Stage stage) {
 
         Sujet t = new Tableau("Test");
+
         NewVueBureau vb = new NewVueBureau(t);
         t.enregistrerObservateur(vb);
 

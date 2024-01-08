@@ -16,6 +16,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static javafx.application.Application.launch;
@@ -67,7 +68,19 @@ public class NewVueBureau extends HBox implements Observateur {
 
         // On ajoute des tâches par défaut à la première colonne pour servir d'exemple
         columnAfaire.addTask("Tache 1");
+
         columnAfaire.addTask("Tache 2");
+
+
+        LocalDate dateDebut = LocalDate.of(2022, 1, 1);
+        LocalDate dateFin = LocalDate.of(2022, 1, 9);
+        TacheSimple tache = new TacheSimple("Tâche 1" );
+        tache.setDateDebut(dateDebut);
+        tache.setDateDebut(dateFin);
+        columnAfaire.addTask(String.valueOf(tache));
+
+
+
 
         // Colonne pour créer une nouvelle colonne
         Colonne cAjout = new Colonne("Ajout");
