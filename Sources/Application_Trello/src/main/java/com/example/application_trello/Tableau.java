@@ -10,6 +10,7 @@ public class Tableau implements Sujet {
      * represente le nom du tableau (espace de travail)
      */
     private String nomTableau;
+    private boolean estEnCoursDActualisation = false;
 
     /**
      * attribut listeObjets de la classe Tableau
@@ -128,10 +129,10 @@ public class Tableau implements Sujet {
      */
     public void ajouterColonne(Colonne col) {
         ArrayList<Colonne> lc = this.getListeColonnes();
-        if (!(lc.contains(col))){
+        if (!(lc.contains(col))) {
             this.listeObjets.add(col);
+            this.notifierObservateurs();
         }
-        this.notifierObservateurs();
     }
 
     /**
