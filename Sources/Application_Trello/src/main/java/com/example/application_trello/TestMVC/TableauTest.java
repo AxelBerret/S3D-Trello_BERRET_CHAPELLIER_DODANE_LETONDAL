@@ -125,7 +125,7 @@ public class TableauTest implements Sujet {
 
     /**
      * methode ajouterColonne de la classe Tableau
-     * @param col colonne que l on souhaite ajouter au tableau
+     * @param nomColonne nom de la colonne que l on souhaite ajouter au tableau
      */
     public void ajouterColonne(String nomColonne) {
         Colonne col = new Colonne(nomColonne);
