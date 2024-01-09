@@ -49,8 +49,14 @@ public class VueArchive  extends GridPane implements Observateur {
             Hyperlink hyperlinkTache = new Hyperlink(tache.getNomTache());
             hyperlinkTache.setStyle("-fx-text-fill: white;-fx-font-size: 24;");
             add(hyperlinkTache, 0, row);
+            ControlModificationTache cmt = new ControlModificationTache(this.tableau, tache);
+            hyperlinkTache.setOnAction(cmt);
 
             Button boutonDesarchiver = new Button("Désarchiver");
+            ControlDesarchivageTache condesarchiTache = new ControlDesarchivageTache(tableau,tache.getNomTache(),nomColonne);
+            boutonDesarchiver.setOnAction(condesarchiTache);
+            boutonDesarchiver.setId("boutonDesarchiver"+tache.getNomTache());
+
             boutonDesarchiver.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
             VBox.setMargin(boutonDesarchiver, new Insets(30));
             boutonDesarchiver.setOnMouseEntered(e -> boutonDesarchiver.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));

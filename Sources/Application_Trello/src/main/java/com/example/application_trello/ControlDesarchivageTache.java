@@ -1,42 +1,44 @@
 package com.example.application_trello;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
-public class ControlDesarchivageTache {
+public class ControlDesarchivageTache implements EventHandler<ActionEvent> {
 
-    /**
-     * attribut tab de la classe ControlDesarchivageTache
-     * represente le modele que l on modifiera
-     */
     private Tableau tab;
+    private String nomCol;
+    private String nomTache;
 
-
-    /**
-     * constructeur qui cree des objets de types ControlDesarchivageTache
-     * a partir des donnees passees en parametres
-     * @param t tableau que l on souhaite utiliser en modele
-     */
-    public ControlDesarchivageTache(Tableau t) {this.tab = t;}
-
-    /**
-     * getter du tableau
-     * @return
-     */
-    public Tableau getTab() {
-        return tab;
+    public ControlDesarchivageTache(Tableau t, String nomTache, String nomCol) {
+        this.tab = t;
+        this.nomCol = nomCol;
+        this.nomTache = nomTache;
     }
 
-    /**
-     * methode handle de la classe ControlDesarchivageTache
-     * qui permet la gestion du desarchivage des taches
-     * @param event evenement representant le bouton clickable
-     */
     public void handle(ActionEvent event) {
         if (event.getSource() instanceof Button) {
             Button sourceButton = (Button) event.getSource();
-            if ("boutonDesarchivageTache".equals(sourceButton.getId())) {
+            String buttonId = sourceButton.getId();
 
+            // Vérifier si le bouton est un bouton de désarchivage
+            if (buttonId != null && buttonId.startsWith("boutonDesarchiver")) {
+                // Extraire le nom de la tâche à partir de l'ID du bouton
+                String tacheNom = buttonId.replace("boutonDesarchiver", "");
+
+                // Rechercher la tâche dans la liste des tâches archivées du tableau
+                Tache tacheDesarchivee = null;
+                for (Tache tache : tab.getListeTachesArchives()) {
+                    if (tache.getNomTache().equals(tacheNom)) {
+                        tacheDesarchivee = tache;
+                        break;
+                    }
+                }
+
+                // Utiliser la tâche trouvée pour désarchiver
+              //  if (tacheDesarchivee != null) {
+                //    tab.desarchiverTache(tacheDesarchivee);
+                //}
             }
         }
     }
