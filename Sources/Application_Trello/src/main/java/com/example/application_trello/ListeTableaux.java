@@ -2,6 +2,12 @@ package com.example.application_trello;
 
 import java.util.ArrayList;
 
+/**
+ * classe ListeTableaux
+ * represente la liste des tableaux de l'application
+ * fait par Axel
+ */
+
 public class ListeTableaux {
 
     /**
