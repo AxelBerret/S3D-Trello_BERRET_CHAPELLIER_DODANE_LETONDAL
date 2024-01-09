@@ -24,7 +24,7 @@ public class Principale extends Application {
 
         Scene scene = new Scene(vb, 1200, 600);
 
-        stage.setTitle("Hello JavaFX!");
+        stage.setTitle("TRELLO");
         stage.setScene(scene);
         stage.show();
         ArrayList<Colonne> a = new ArrayList<>();

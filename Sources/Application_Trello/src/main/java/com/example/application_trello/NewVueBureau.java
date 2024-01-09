@@ -100,6 +100,15 @@ public class NewVueBureau extends HBox implements Observateur {
         ganttButton.setOnMouseExited(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
         ganttButton.setOnAction(event -> afficherVueGantt());
 
+
+        Button ajoutercolonne = new Button("Ajouter une colonne");
+        ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
+        VBox.setMargin(ajoutercolonne, new Insets(30));
+        ajoutercolonne.setOnMouseEntered(e -> ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
+        ajoutercolonne.setOnMouseExited(e -> ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+        ControlCreationColonne contrajoutercolonne = new ControlCreationColonne(this.t);
+        ajoutercolonne.setOnAction(contrajoutercolonne);
+
         rightHBox.setSpacing(20);
         rightVBox.setSpacing(20);
         this.setSpacing(20);
@@ -110,7 +119,7 @@ public class NewVueBureau extends HBox implements Observateur {
         VBox.setMargin(vueArchive, new Insets(30, 30, 30, 30));
 
         this.setSpacing(20);
-        this.getChildren().addAll(leftVBox, rightVBox, vueListeButton, ganttButton, vueArchive);
+        this.getChildren().addAll(leftVBox, rightVBox, vueListeButton, ganttButton, vueArchive,ajoutercolonne);
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
         rightVBox.getChildren().addAll(rightHBox);
 
