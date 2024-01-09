@@ -1,0 +1,9 @@
+Fonctionnalités Itération 5 :
+- Modification Drag and Drop dans NewVueBureau
+- Modification VueGantt
+- Implémentation MVC : création de colonne
+- Implémentation MVC : suppression de colonne 
+- Implémentation MVC : suppression de tache dans une colonne
+- Implémentation MVC : archivage tache
+- Modifications majeures tests Controleurs
+- Modification Controleurs (controlSuppressionTache, ControlArchivageTache, ControlCreationColonne, ControlSuppressionColonne)

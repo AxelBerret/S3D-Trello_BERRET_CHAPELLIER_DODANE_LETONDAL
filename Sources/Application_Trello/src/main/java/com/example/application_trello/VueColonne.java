@@ -91,7 +91,6 @@ public class VueColonne extends VBox implements Observateur{
             ArrayList<Tache> lisTacheCol = colonneModele.getListeTaches();//On récupère depuis le modèle la liste des tâches que doit contenir cette colonne
             for (Tache t : lisTacheCol){//boucle qui parcourt les taches présentes dans le modèle et ajoute celles qui ne le sont pas encore
                 String nom = t.getNomTache();
-                System.out.println("Ajout en cours de la tâche " + nom);
                 if (!this.listeTaches.contains(nom)){//Si la liste de la vue ne contient pas la tache nom alors
                     addTask(nom);//On l'ajoute
                 }
@@ -129,7 +128,7 @@ public class VueColonne extends VBox implements Observateur{
         this.listeTaches.add(taskName);
         Hyperlink clickableText = new Hyperlink(taskName);
         clickableText.setStyle("-fx-text-fill: black; -fx-underline: none;");
-        Tache ta = new TacheComplexe(taskName);
+        Tache ta = this.t.getTache(taskName);
         ControlModificationTache cmt = new ControlModificationTache(this.t, ta);
         clickableText.setOnAction(cmt);
 

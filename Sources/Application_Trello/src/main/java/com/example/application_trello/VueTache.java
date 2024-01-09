@@ -107,13 +107,13 @@ public class VueTache extends GridPane implements Observateur{
             ArrayList<Tache> lisSousT = ((TacheComplexe) t).getListeTaches();//On récupère les sous-tâches déjà assignées à cette tâche
             lisAllTaches.removeAll(lisSousT);//On les enleve de la liste de toutes les tâches
             lisAllTaches.remove(this.t);//On enlève ensuite la tâche en question
-            for (Tache t : lisAllTaches){
-                this.listeSousT.add(t.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
+            for (Tache tach : lisAllTaches){
+                this.listeSousT.add(tach.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
             }
-            TacheComplexe tc = (TacheComplexe) ((Tableau)s).getTache(this.t.getNomTache());
+            TacheComplexe tc = (TacheComplexe) ((Tableau)s).getTache(t.getNomTache());
             ArrayList<Tache> lisStActuelles = tc.getListeTaches();//On recupere la liste de ses sous-taches
-            for (Tache t : lisStActuelles){
-                this.vueSt.add(t.getNomTache());//On met a jour l'attribut VueDep
+            for (Tache tach : lisStActuelles){
+                this.vueSt.add(tach.getNomTache());//On met a jour l'attribut VueDep
             }
         }
     }
