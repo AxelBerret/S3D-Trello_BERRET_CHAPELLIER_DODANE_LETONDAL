@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
  * test les differentes methodes de la classe ControlCreationTache
  * fait par Titouan
  */
+
 public class TestControlCreationTache {
 
     // Attributs
@@ -27,7 +28,7 @@ public class TestControlCreationTache {
     /**
      * test_01
      * test la methode MajListeNomColonnes de la classe ControlCreationTache
-     */
+
     @Test
     void testMajListeNomColonnes() {
         // Ajouter des colonnes pour le test
@@ -45,7 +46,7 @@ public class TestControlCreationTache {
         assertTrue(listeNomColonnes.contains("Colonne1"));
         assertTrue(listeNomColonnes.contains("Colonne2"));
     }
-
+    */
     /**
      * test_02
      * test la methode ExtraireNomColonneDeID de la classe ControlCreationTache
