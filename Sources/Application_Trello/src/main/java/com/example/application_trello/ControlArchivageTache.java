@@ -17,6 +17,13 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
      * represente le modele que l on modifiera
      */
     private Tableau tab;
+    private String nomCol;
+    private String nomTache;
+    public ControlArchivageTache(Tableau t, String nomCol, String nomTache) {
+        this.tab = t;
+        this.nomCol = nomCol;
+        this.nomTache = nomTache;
+    }
 
 
     /**
@@ -24,7 +31,6 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
      * a partir des donnees passees en parametres
      * @param t tableau que l on souhaite utiliser en modele
      */
-    public ControlArchivageTache(Tableau t) {this.tab = t;}
 
 
     /**
@@ -33,10 +39,10 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
      * @param event
      */
     public void handle(ActionEvent event) {
-        
         if (event.getTarget() instanceof Button) {
-            Button sourceButton = (Button) event.getTarget();
-            if ("boutonArchivageTache".equals(sourceButton.getId())) {
+            Button targetButton = (Button) event.getTarget();
+
+            if (targetButton.getId().startsWith("boutonArchivageTache")){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmation de l archivage");
                 alert.setHeaderText("Archiver la tache");
@@ -44,9 +50,11 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
 
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
-                    String nomTache = this.extraireNomTacheDeID(sourceButton.getId());
+                    String nomTache = this.extraireNomTacheDeID(targetButton.getId());
 
-                    //this.tab.getArchive().archiverTache();
+                    this.tab.getArchive().archiverTache(this.tab.getTache(nomTache));
+                    this.tab.supprimerTache(nomTache,nomCol);
+                    System.out.println("test");
 
                 }
             }
