@@ -80,4 +80,13 @@ public class Archive {
     public ArrayList<Colonne> getListeColonnesArchivees(){
         return this.listeColonnesArchivees;
     }
+
+    public Tache getTacheByNom(String str){
+        for (Tache t : this.listeTachesArchivees){
+            if (t.getNomTache().equals(str)){
+                return t;
+            }
+        }
+        return null;
+    }
 }

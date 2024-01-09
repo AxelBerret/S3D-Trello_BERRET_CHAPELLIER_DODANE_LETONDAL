@@ -106,6 +106,9 @@ public class VueTache extends GridPane implements Observateur {
     public void actualiser(Sujet s){
         ArrayList<Tache> lisAllTaches = ((Tableau)s).getListeTaches();//Stocke toutes les tâches du modèle
         Tache ta = ((Tableau)s).getTache(this.t.getNomTache());//On récupère la tache actuelle mise a jour
+        if (ta==null){
+            ta = ((Tableau)s).getArchive().getTacheByNom(this.t.getNomTache());
+        }
         ArrayList<Tache> listDepActuelles = ta.getListeDependances();//On recupere ses dépendances
         for (Tache t : listDepActuelles){//Pour chaque dependance
             this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute a la liste
