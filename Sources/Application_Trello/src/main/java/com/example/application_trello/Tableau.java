@@ -168,7 +168,7 @@ public class Tableau implements Sujet {
         ArrayList<Colonne> lc = this.getListeColonnes();
         for (Colonne c : lc){
             if (c.getNomColonne().equals(nomColonne)){
-                Tache t = this.getTache(nomTache);
+                Tache t = c.getTache(nomTache);
                 c.supprimerTache(t);
             }
         }

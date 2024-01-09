@@ -52,7 +52,7 @@ public class VueColonne extends VBox implements Observateur{
         Button newButton1 = createIconButton("trombonne.png");
         Button boutonSupp = createIconButton("croix.png");
         boutonSupp.setId("btnSupprimerColonne" + this.nomColonne);
-        ControlSuppressionColonne  controlSup = new ControlSuppressionColonne(this.t);
+        ControlSuppressionColonne controlSup = new ControlSuppressionColonne(this.t);
         boutonSupp.setOnAction(controlSup);
         Button boutonPlus = createIconButton("plus.png");
         boutonPlus.setId("btnCreerTache" + this.getNomVueColonne());
@@ -131,6 +131,8 @@ public class VueColonne extends VBox implements Observateur{
         buttonRow.setAlignment(Pos.CENTER);
         Button trombonneButton = createIconButton("trombonne.png");
         Button croixButton = createIconButton("croix.png");
+        ControlSuppressionTache conSupTache = new ControlSuppressionTache(this.t, this.nomColonne, taskName);
+        croixButton.setOnAction(conSupTache);
         buttonRow.getChildren().addAll(trombonneButton, croixButton);
 
         HBox taskInColumn = new HBox(10);

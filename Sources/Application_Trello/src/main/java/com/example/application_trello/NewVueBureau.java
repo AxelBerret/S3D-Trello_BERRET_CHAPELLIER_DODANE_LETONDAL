@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -163,7 +164,7 @@ public class NewVueBureau extends HBox implements Observateur {
         for (VueColonne c : this.listColVue) {// On parcourt les colonnes de la vue
             String nomC = c.getNomVueColonne();// Pour chaque colonne, on extrait son nom afin de pouvoir comparer
             if (!listeNomCol.contains(nomC)) {// Si une colonne de la vue n'est plus présente dans le modèle, on la supprime.
-                this.removeColumn(c);
+                this.removeColumnById(nomC);
             }
         }
     }
@@ -171,14 +172,29 @@ public class NewVueBureau extends HBox implements Observateur {
     private VueColonne createColumn(Colonne colonne) {// Cette méthode ajoute un objet colonne dans les données et renvoie une vueColonne
         VueColonne columnVBox = new VueColonne(colonne.getNomColonne(), this.t);
         // gestionnaire d'événements pour le drag and drop
+        columnVBox.setId(colonne.getNomColonne());
+
         setDragDropHandlers(columnVBox);
         rightHBox.getChildren().add(columnVBox);
         return columnVBox;
     }
 
-    private void removeColumn(VueColonne colonne) {
-        this.listColVue.remove(colonne);
-        this.rightHBox.getChildren().remove(colonne);
+    public void removeColumnById(String nomColonne) {
+        Node columnToRemove = null;
+
+        // Parcourir les enfants pour trouver le HBox avec l'id donné
+        for (Node node : rightHBox.getChildren()) {
+            if (node.getId() != null && node.getId().equals(nomColonne)) {
+                columnToRemove = node;
+                break;
+            }
+        }
+
+        // Supprimer le HBox si on l'a trouvé
+        if (columnToRemove != null) {
+            rightHBox.getChildren().remove(columnToRemove);
+        }
+        this.listColVue.remove(nomColonne);
     }
 
     private VueColonne createAddColumn(Colonne colonne) {
