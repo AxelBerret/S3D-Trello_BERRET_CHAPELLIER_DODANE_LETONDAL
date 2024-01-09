@@ -54,9 +54,10 @@ public class VueArchive  extends GridPane implements Observateur {
         for (Tache tache : tableau.getListeTachesArchives()) {
             Hyperlink hyperlinkTache = new Hyperlink(tache.getNomTache());
             hyperlinkTache.setStyle("-fx-text-fill: white;-fx-font-size: 24;");
-            add(hyperlinkTache, 0, row);
             ControlModificationTache cmt = new ControlModificationTache(this.tableau, tache);
             hyperlinkTache.setOnAction(cmt);
+            add(hyperlinkTache, 0, row);
+
 
             Button boutonDesarchiver = new Button("Désarchiver");
             ControlDesarchivageTache condesarchiTache = new ControlDesarchivageTache(tableau,tache.getNomTache(),nomColonne);

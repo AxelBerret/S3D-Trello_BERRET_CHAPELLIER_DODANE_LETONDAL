@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -33,21 +34,30 @@ public class VueTache extends GridPane implements Observateur {
         this.setVgap(10);
         this.setHgap(10);
         Label commentLabel = new Label("Commentaire:");
+        commentLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
+
         TextArea commentTextArea = new TextArea("Commentaire de test");
         commentTextArea.setWrapText(true);
 
 
         // Éléments pour les dépendances
         Label dependLabel = new Label("Dépendances:");
+        dependLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
+
         ListView<String> dependListView = new ListView<>();
         dependListView.setItems(this.vueDep);
 
         ComboBox<String> dependComboBox = new ComboBox<>();
+        dependComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
+
         dependComboBox.setItems(this.listeDep);//On met dans la comboBox les taches qui peuvent devenir des dépendances
         dependComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             dependanceSelectionnee = newValue; // Lorsqu'une selection est faite dans la comboBox, on modifie l'attribut dépendance séléctionnée.
         });
         Button addDependButton = new Button("Ajouter");
+        addDependButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
+        addDependButton.setOnMouseEntered(e -> addDependButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
+        addDependButton.setOnMouseExited(e -> addDependButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
         addDependButton.setId("addDependButton" + this.t.getNomTache());
         ControlBoutonsModifTache controleur = new ControlBoutonsModifTache(this.tab);
         addDependButton.setOnAction(controleur);
@@ -55,17 +65,27 @@ public class VueTache extends GridPane implements Observateur {
 
         // Éléments pour les sous-tâches
         Label sousTachesLabel = new Label("Sous-Tâches:");
+        sousTachesLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
         ListView<String> sousTachesListView = new ListView<>();
         sousTachesListView.setItems(this.vueSt);
         ComboBox<String> sousTachesComboBox = new ComboBox<>();
-        sousTachesComboBox.setItems(this.listeSousT);//On met dans la comboBox les taches qui peuvent devenir des sous-tâches
+        sousTachesComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
+      sousTachesComboBox.setItems(this.listeSousT);//On met dans la comboBox les taches qui peuvent devenir des sous-tâches
         sousTachesComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             sousTacheSelectionnee = newValue; // Lorsqu'une selection est faite dans la comboBox, on modifie l'attribut sous-tache séléctionnée.
         });
+        this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
+
         Button addSousTacheButton = new Button("Ajouter");
+        addSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
+        addSousTacheButton.setOnMouseEntered(e -> addSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
+        addSousTacheButton.setOnMouseExited(e -> addSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
         addSousTacheButton.setId("addSousTacheButton" + this.t.getNomTache());
         addSousTacheButton.setOnAction(controleur);
         Button saveButton = new Button("Enregistrer");
+        saveButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
+        saveButton.setOnMouseEntered(e -> saveButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
+        saveButton.setOnMouseExited(e -> saveButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
         saveButton.setOnAction(e -> {//Pour que la fenêtre se ferme lorsqu'on clique sur ce bouton
             Scene scene = this.getScene();
             ((Stage) scene.getWindow()).close();
@@ -85,6 +105,7 @@ public class VueTache extends GridPane implements Observateur {
     }
 
     public void actualiser(Sujet s){
+
         ArrayList<Tache> lisAllTaches = ((Tableau)s).getListeTaches();
         ArrayList<Tache> lisD = this.t.getListeDependances();
         lisAllTaches.removeAll(lisD);
@@ -96,8 +117,8 @@ public class VueTache extends GridPane implements Observateur {
         ArrayList<Tache> listDepActuelles = ta.getListeDependances();//On recupere ses dépendances
         for (Tache t : listDepActuelles){//Pour chaque dependance
             this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute a la liste
+
         }
-        this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
 
         //On fait la même chose pour les sous-tâches
         //Ces observablesLists serviront pour les comboBox lors de la modification d'une tâche
