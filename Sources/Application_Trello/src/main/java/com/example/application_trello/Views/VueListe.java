@@ -1,8 +1,10 @@
 package com.example.application_trello.Views;
 
+import com.example.application_trello.Controls.ControlModificationTache;
 import com.example.application_trello.Objects.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -44,11 +46,16 @@ public class VueListe extends VBox implements Observateur {
 
             // Parcourir les tâches dans la colonne et les afficher
             for (Tache tache : colonne.getListeTaches()) {
-                Label labelTache = new Label(tache.getNomTache());
-                labelTache.setStyle("-fx-text-fill: white; -fx-font-size: 20;");
+                Hyperlink hyperlinkTache = new Hyperlink(tache.getNomTache());
+                hyperlinkTache.setStyle("-fx-text-fill: white; -fx-font-size: 20;");
 
-                getChildren().add(labelTache);
+                Tache ta = this.tableau.getTache(tache.getNomTache());
+                ControlModificationTache cmt = new ControlModificationTache(this.tableau, ta);
+
+                hyperlinkTache.setOnAction(cmt);
+                getChildren().add(hyperlinkTache);
             }
+
 
         }
     }
