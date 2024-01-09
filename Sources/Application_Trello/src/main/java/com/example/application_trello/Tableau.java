@@ -188,6 +188,7 @@ public class Tableau implements Sujet {
      */
     public void archiverTache(String nomTache, String nomColonne) {
         for (int i = 0; i < this.getListeColonnes().size(); i++) {
+            System.out.println("NOM DE LA COLONNE PARAMETRE : " + nomColonne + "Nom de la colonne réelle ; " + this.getListeColonnes().get(i));
             if (this.getListeColonnes().get(i).getNomColonne().equals(nomColonne)) {
                 Tache t = this.getTache(nomTache);
                 this.archive.archiverTache(t);
@@ -302,7 +303,6 @@ public class Tableau implements Sujet {
         for (int i = 0; i < this.observateurs.size(); i++) {
             Observateur observer = this.observateurs.get(i);
             observer.actualiser(this);
-            System.out.println(this.observateurs);
         }
     }
 

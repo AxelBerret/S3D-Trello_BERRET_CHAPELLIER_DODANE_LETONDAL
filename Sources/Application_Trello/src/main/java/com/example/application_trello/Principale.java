@@ -29,7 +29,6 @@ public class Principale extends Application {
         stage.show();
         ArrayList<Colonne> a = new ArrayList<>();
         a = ((Tableau) t).getListeColonnes();
-        System.out.println(a);
         t.notifierObservateurs();
     }
 

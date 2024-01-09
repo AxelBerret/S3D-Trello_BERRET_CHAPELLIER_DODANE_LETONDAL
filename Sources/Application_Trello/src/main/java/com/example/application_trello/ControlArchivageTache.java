@@ -19,7 +19,7 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
     private Tableau tab;
     private String nomCol;
     private String nomTache;
-    public ControlArchivageTache(Tableau t, String nomCol, String nomTache) {
+    public ControlArchivageTache(Tableau t, String nomTache, String nomCol) {
         this.tab = t;
         this.nomCol = nomCol;
         this.nomTache = nomTache;
