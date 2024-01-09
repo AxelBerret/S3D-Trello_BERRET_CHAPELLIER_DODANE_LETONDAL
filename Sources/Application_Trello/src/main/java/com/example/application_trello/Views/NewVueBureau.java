@@ -55,10 +55,11 @@ public class NewVueBureau extends HBox implements Observateur {
         this.t.enregistrerObservateur(columnTermine);
 
         // On ajoute des tâches par défaut à la première colonne pour servir d'exemple
-        columnAfaire.addTask("Tache 1");
         this.t.ajouterTache("Tache 1", "A faire");
-        columnAfaire.addTask("Tache 2");
+        //columnAfaire.addTask("Tache 1");
         this.t.ajouterTache("Tache 2", "A faire");
+        //columnAfaire.addTask("Tache 2");
+
 
 
         //    LocalDate dateDebut = LocalDate.of(2022, 1, 1);
