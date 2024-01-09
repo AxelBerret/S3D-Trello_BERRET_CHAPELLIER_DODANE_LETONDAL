@@ -35,12 +35,10 @@ public class VueArchive extends VBox implements Observateur {
 
     @Override
     public void actualiser(Sujet s) {
-        // Mettre à jour la ListView avec les tâches archivées
         if (s instanceof Tableau) {
             Tableau tableau = (Tableau) s;
-            if (nomColonne.equals("Archive")) { // Assurez-vous que la colonne est celle des archives
                 listViewTachesArchivees.getItems().setAll(tableau.getListeTachesArchives());
-            }
+
         }
     }
 }
