@@ -1,0 +1,6 @@
+Fonctionnalités Itération 4 : 
+- Correction DragAndDrop dans une nouvelle vue Bureau NewVueBureau (optimisation) que l on formalisera par la suite
+la tache déplacée est désormais supprimée de la colonne d'origine quand elle est drop vers la nouvelle colonne
+- Mise en place de MVC : fonctionnalité de création de tâches
+- Mise en place VueListe permettant la visualisation des Taches au sein des colonnes du tableau
+- Mise en place de la VueGantt : ajout du bouton sans MVC
