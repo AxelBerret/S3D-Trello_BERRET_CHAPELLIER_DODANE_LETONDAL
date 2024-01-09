@@ -1,7 +1,10 @@
 package com.example.application_trello;
 
 import java.util.ArrayList;
-
+/**
+ * interface InterfaceListeTaches
+ * fait par Titouan
+ */
 public interface InterfaceListeTaches {
 
     /**
