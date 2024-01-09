@@ -109,6 +109,7 @@ public class NewVueBureau extends HBox implements Observateur {
         ajoutercolonne.setOnMouseEntered(e -> ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
         ajoutercolonne.setOnMouseExited(e -> ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
         ControlCreationColonne contrajoutercolonne = new ControlCreationColonne(this.t);
+        ajoutercolonne.setId("btnCreerColonne");
         ajoutercolonne.setOnAction(contrajoutercolonne);
 
         rightHBox.setSpacing(20);
