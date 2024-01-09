@@ -172,8 +172,6 @@ public class Tableau implements Sujet {
     public void supprimerTache(String nomTache, String nomColonne){
         ArrayList<Colonne> lc = this.getListeColonnes();
         for (Colonne c : lc){
-            System.out.println("supression");
-
             if (c.getNomColonne().equals(nomColonne)){
                 Tache t = c.getTache(nomTache);
                 c.supprimerTache(c.getTache(nomTache));
@@ -329,6 +327,7 @@ public class Tableau implements Sujet {
         return null;
     }
 
-    public Tache getListeTachesArchives() {
-    }
+    //public Tache getListeTachesArchives() {
+    //    return
+    //}
 }
