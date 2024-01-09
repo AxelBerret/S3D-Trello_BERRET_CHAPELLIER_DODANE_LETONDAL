@@ -51,10 +51,7 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     String nomTache = this.extraireNomTacheDeID(targetButton.getId());
-
-                    this.tab.getArchive().archiverTache(this.tab.getTache(nomTache));
-                    this.tab.supprimerTache(nomTache,nomCol);
-                    System.out.println("test");
+                    this.tab.archiverTache(this.nomTache, this.nomCol);
 
                 }
             }
