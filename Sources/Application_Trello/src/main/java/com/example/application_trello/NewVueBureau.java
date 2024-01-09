@@ -171,6 +171,7 @@ public class NewVueBureau extends HBox implements Observateur {
 
     private VueColonne createColumn(Colonne colonne) {// Cette méthode ajoute un objet colonne dans les données et renvoie une vueColonne
         VueColonne columnVBox = new VueColonne(colonne.getNomColonne(), this.t);
+        columnVBox.setId(colonne.getNomColonne());
         // gestionnaire d'événements pour le drag and drop
         columnVBox.setId(colonne.getNomColonne());
 
@@ -195,6 +196,7 @@ public class NewVueBureau extends HBox implements Observateur {
             rightHBox.getChildren().remove(columnToRemove);
         }
         this.listColVue.remove(nomColonne);
+
     }
 
     private VueColonne createAddColumn(Colonne colonne) {
