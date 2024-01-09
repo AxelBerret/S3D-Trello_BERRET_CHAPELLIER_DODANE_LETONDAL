@@ -21,6 +21,14 @@ public class ControlCreationColonne implements EventHandler<ActionEvent> {
         this.tab = t;
     }
 
+    /**
+     * getter du tableau
+     * @return
+     */
+    public Tableau getTab() {
+        return tab;
+    }
+
     public void handle(ActionEvent event) {
         if (event.getTarget() instanceof Button) {//Si l'event vient d'un boutton
             Button targetButton = (Button) event.getTarget();//On récupère ce bouton
