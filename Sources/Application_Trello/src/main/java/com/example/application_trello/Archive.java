@@ -39,6 +39,7 @@ public class Archive {
         this.listeTachesArchivees.add(tache);
     }
 
+
     /**
      * methode archiverColonne de la classe Archive
      * @param colonne colonne que l on souhaite archiver
