@@ -6,6 +6,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 
 public class VueListe extends VBox implements Observateur {
@@ -58,6 +61,41 @@ public class VueListe extends VBox implements Observateur {
 
 
         }
+        setOnDragDetected(event -> {
+            Dragboard db = startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            content.putString(nomColonne);  // Utilisez le nom de la colonne comme donnée de glisser-déposer
+            db.setContent(content);
+            event.consume();
+        });
+
+        setOnDragOver(event -> {
+            if (event.getGestureSource() != this && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+
+            if (db.hasString()) {
+                // Déplacer la tâche en utilisant votre méthode deplacerTache
+                tableau.deplacerTache(db.getString(), db.getString(), nomColonne);
+                success = true;
+            }
+
+            event.setDropCompleted(success);
+            event.consume();
+        });
+
+        setOnDragDone(event -> {
+            // Rafraîchissez l'affichage après le déplacement
+            actualiser(tableau);
+            event.consume();
+        });
+    }
     }
 
-}
+

@@ -66,38 +66,6 @@ public class VueColonne extends VBox implements Observateur {
         additionalButtonsRow.setPadding(new Insets(20));
         getChildren().addAll(columnLabel, additionalButtonsRow);
 
-        setOnDragDetected(event -> {
-            Dragboard db = startDragAndDrop(TransferMode.MOVE);
-
-            ClipboardContent content = new ClipboardContent();
-            content.putString(getNomVueColonne());
-            db.setContent(content);
-
-            event.consume();
-        });
-
-        setOnDragOver(event -> {
-            if (event.getGestureSource() != this && event.getDragboard().hasString()) {
-                event.acceptTransferModes(TransferMode.MOVE);
-            }
-
-            event.consume();
-        });
-
-        setOnDragDropped(event -> {
-            Dragboard db = event.getDragboard();
-            boolean success = false;
-
-            if (db.hasString()) {
-                // Implémentez la logique pour déplacer la colonne
-                // Vous pouvez appeler une méthode sur votre objet Tableau ici
-
-                success = true;
-            }
-
-            event.setDropCompleted(success);
-            event.consume();
-        });
 
     }
 
