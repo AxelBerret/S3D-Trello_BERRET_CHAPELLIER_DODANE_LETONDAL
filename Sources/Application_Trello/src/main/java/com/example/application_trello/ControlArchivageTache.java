@@ -55,10 +55,14 @@ public class ControlArchivageTache {
      * @param idBouton
      * @return
      */
-    private String extraireNomTacheDeID(String idBouton) {
+    public String extraireNomTacheDeID(String idBouton) {
         if (idBouton != null && idBouton.startsWith("boutonSupprimerTableau")) {
             return idBouton.substring("boutonSupprimerTableau".length());
         }
         return null;
+    }
+
+    public Tableau getTab() {
+        return tab;
     }
 }
