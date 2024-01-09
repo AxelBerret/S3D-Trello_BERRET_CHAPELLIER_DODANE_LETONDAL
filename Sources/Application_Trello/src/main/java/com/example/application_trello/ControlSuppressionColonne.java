@@ -26,14 +26,12 @@ public class ControlSuppressionColonne implements EventHandler<ActionEvent> {
      * @param event L'événement déclenché.
      */
     public void handle(ActionEvent event) {
-        if (event.getSource() instanceof Button sourceButton) {
+        if (event.getTarget() instanceof Button sourceButton) {//Si l'event vient d'un bouton
                 // Extraction du nom de la colonne
-                String nomColonne = extraireNomColonneDeID(sourceButton.getId());
+                String nomColonne = extraireNomColonneDeID(sourceButton.getId());//On récupère le nom de la colonne
                 // Parcourt toutes les colonnes du tableau
                 for (Colonne c : tab.getListeColonnes()) {
                     // Si la colonne correspond au nom extrait, la supprime et sort de la boucle
-
-
                     if (c.getNomColonne().equals(nomColonne)) {
 
                         tab.supprimerColonne(c);
