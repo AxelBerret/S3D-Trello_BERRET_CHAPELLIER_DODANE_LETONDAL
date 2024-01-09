@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * classe Colonne
  * represente une colonne de l application
- * fait par Axe
+ * fait par Axel
  */
 
 public class Colonne implements InterfaceListeTaches {
