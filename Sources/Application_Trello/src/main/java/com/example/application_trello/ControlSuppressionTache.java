@@ -35,7 +35,6 @@ public class ControlSuppressionTache implements EventHandler<ActionEvent> {
         Button targetButton = (Button) event.getTarget();//Si l'event vient d'un boutton
         // Vérifie si l'evenement est bien un bouton de suppression de tâche
             // Suppression de la tâche dans le tableau
-            System.out.println(tab.getColonne(nomCol).getListeTaches());
             tab.supprimerTache(this.nomTache, this.nomCol);
 
     }
