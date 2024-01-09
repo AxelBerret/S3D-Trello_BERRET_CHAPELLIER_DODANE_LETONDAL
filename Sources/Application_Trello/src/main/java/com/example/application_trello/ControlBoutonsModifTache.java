@@ -10,11 +10,10 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
-    /*Explication de l'architecture MVC : L'architecture MVC mise en place ici se décompose en plusieurs parties.
-     * Premièrement, dans la classe main principale, on créée un nouveau modèle, auquel on va associer des vues, auxquelles on va associer un controleur éventuellement.
-     * le principe est que chaque vue affiche queleque chose par défaut, et lorsque l'utilisateur agit sur l'application,
-     * le controleur reçoit l'action, et déclenche la méthode appropriée définie dans le modèle. Ce dernier notifie tous les observateurs qui vont se
-     * mettre à jour si nécessaire. */
+    /*Classe représentant le controleurs des boutons dans la fenêtre de modification des tâches.
+    *Le controleur agit sur les boutons pour ajouter ou bien des dépendances ou bien des sous-tâches sur la tâche qu'on est en train de modifier.
+    * Classe écrite par Titouan
+     */
     private Tableau tab;
     private ArrayList<String> listeNomTaches;
 

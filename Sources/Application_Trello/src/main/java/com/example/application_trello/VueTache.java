@@ -11,7 +11,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-
+//Vue tache : vue qu'on va afficher dans une fenêtre externe a l'application lorsqu'on va cliquer sur une tache,
+//pour afficher des informations complémentaires et personnaliser plus en détails les tâches.
+//Classe écrite par Titouan
 public class VueTache extends GridPane implements Observateur{
 
     private Tache t;

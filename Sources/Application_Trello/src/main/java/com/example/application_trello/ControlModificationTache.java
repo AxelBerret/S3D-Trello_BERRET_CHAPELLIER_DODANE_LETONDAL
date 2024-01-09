@@ -4,7 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+//Controleur qui en principe va, lorsqu'on clique sur une tâche quelconque, ouvrir une fenêtre affichant plus de détails
+//Et qui va permettre de consulter les sous-tâches et les dépendances, et d'en ajouter ou d'en supprimer.
+//Classe écrite par Titouan
 public class ControlModificationTache implements EventHandler<ActionEvent> {
     private Tableau tab;
     private Tache tache;
