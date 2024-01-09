@@ -23,6 +23,7 @@ public class VueTache extends GridPane implements Observateur {
     private String dependanceSelectionnee;
     private String sousTacheSelectionnee;
     private Tableau tab;
+    private ListView<String> dependListView;
 
     public VueTache(Tache t, Tableau tab){// !!! !!! Ne pas oublier d'actualiser a la création
         this.t = t;
@@ -38,10 +39,8 @@ public class VueTache extends GridPane implements Observateur {
 
 
         // Éléments pour les dépendances
-        Label dependLabel = new Label("Dépendances:");
-        ListView<String> dependListView = new ListView<>();
-        dependListView.setItems(this.vueDep);
-
+        Label dependLabel = new Label("Dépendances:");//Crée le label dépendances
+        this.dependListView = new ListView<>();//Crée la boite ou les dépendances vont apparaitre
         ComboBox<String> dependComboBox = new ComboBox<>();
         dependComboBox.setItems(this.listeDep);//On met dans la comboBox les taches qui peuvent devenir des dépendances
         dependComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -69,6 +68,7 @@ public class VueTache extends GridPane implements Observateur {
         saveButton.setOnAction(e -> {//Pour que la fenêtre se ferme lorsqu'on clique sur ce bouton
             Scene scene = this.getScene();
             ((Stage) scene.getWindow()).close();
+            tab.supprimerObservateur(this);
         });
 
         this.add(commentLabel, 0, 0);
@@ -85,20 +85,19 @@ public class VueTache extends GridPane implements Observateur {
     }
 
     public void actualiser(Sujet s){
-        ArrayList<Tache> lisAllTaches = ((Tableau)s).getListeTaches();
-        ArrayList<Tache> lisD = this.t.getListeDependances();
-        lisAllTaches.removeAll(lisD);
-        lisAllTaches.remove(this.t);
-        for (Tache t : lisAllTaches){//On ajoute a la liste des dependances possibles toutes les taches sauf celles qui sont deja les dependances et la tache en question
-            this.listeDep.add(t.getNomTache());
-        }
+        ArrayList<Tache> lisAllTaches = ((Tableau)s).getListeTaches();//Stocke toutes les tâches du modèle
         Tache ta = ((Tableau)s).getTache(this.t.getNomTache());//On récupère la tache actuelle mise a jour
         ArrayList<Tache> listDepActuelles = ta.getListeDependances();//On recupere ses dépendances
         for (Tache t : listDepActuelles){//Pour chaque dependance
             this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute a la liste
         }
+        dependListView.setItems(this.vueDep);//Affiche dans la boite les dépendances déjà mises en ajoutant l'observableList a la ListView
+        lisAllTaches.removeAll(listDepActuelles);//Supprime les dépendances actuelles de la liste de toutes les tâches
+        lisAllTaches.remove(this.t);//Supprime la tâche en modification de la liste de toutes les tâches
+        for (Tache t : lisAllTaches){//On ajoute à la liste des dépendances possibles à l'ajout toutes les taches sauf celles qui sont deja les dépendances et la tache en question
+            this.listeDep.add(t.getNomTache());
+        }
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
-
         //On fait la même chose pour les sous-tâches
         //Ces observablesLists serviront pour les comboBox lors de la modification d'une tâche
         //Et accessoirement donc lors de l'ajout de dépendances ou sous-tâches
