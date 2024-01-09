@@ -2,12 +2,11 @@ package com.example.application_trello;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class VueArchive extends VBox implements Observateur {
+public class VueArchive  extends GridPane implements Observateur {
 
     private Tableau tableau;
     private String nomColonne;
@@ -20,7 +19,8 @@ public class VueArchive extends VBox implements Observateur {
     }
 
     private void initialize() {
-        setSpacing(10);
+        setHgap(30);
+        setVgap(30);
         setPadding(new Insets(10));
         setAlignment(Pos.CENTER);
         setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
@@ -34,32 +34,34 @@ public class VueArchive extends VBox implements Observateur {
         tableau.enregistrerObservateur(this);
     }
 
+    @Override
     public void actualiser(Sujet s) {
         getChildren().clear();
 
         // Ajouter un label pour indiquer la vue archive
         Label labelVueArchive = new Label("Vue Archive");
-        labelVueArchive.setStyle("-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 24;");
-        getChildren().add(labelVueArchive);
+        labelVueArchive.setStyle("-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 28;");
+        add(labelVueArchive, 0, 0, 2, 1);
 
-        // Créer un TextField pour afficher les tâches archivées
-        TextField textFieldVueArchive = new TextField();
-        textFieldVueArchive.setEditable(false); // Pour rendre le TextField en lecture seule
-        textFieldVueArchive.setStyle("-fx-font-size: 16; -fx-pref-height: 300; -fx-pref-width: 400;-fx-text-fill: black;"); // Ajustez selon vos préférences
-
-
-        System.out.println("ahhh");
-
-        // Parcourir les tâches archivées et les afficher
+        // Parcourir les tâches archivées et les afficher en tant que lignes dans le GridPane
+        int row = 1; // Commencer à partir de la deuxième ligne
         for (Tache tache : tableau.getListeTachesArchives()) {
-            System.out.println("ahhh222");
+            Hyperlink hyperlinkTache = new Hyperlink(tache.getNomTache());
+            hyperlinkTache.setStyle("-fx-text-fill: white;-fx-font-size: 24;");
+            add(hyperlinkTache, 0, row);
 
-            System.out.println("ahhh"+ tache.getNomTache());
-            textFieldVueArchive.appendText(tache.getNomTache() + "\n");
+            Button boutonDesarchiver = new Button("Désarchiver");
+            boutonDesarchiver.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
+            VBox.setMargin(boutonDesarchiver, new Insets(30));
+            boutonDesarchiver.setOnMouseEntered(e -> boutonDesarchiver.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
+            boutonDesarchiver.setOnMouseExited(e -> boutonDesarchiver.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
+
+            //boutonDesarchiver.setOnAction(event -> desarchiverTache(tache)); // Remplacez cette méthode par votre logique de désarchivage
+            add(boutonDesarchiver, 1, row);
+
+            row++;
         }
-
-        // Ajouter le TextField à la vue
-        getChildren().add(textFieldVueArchive);
     }
+
 
 }
