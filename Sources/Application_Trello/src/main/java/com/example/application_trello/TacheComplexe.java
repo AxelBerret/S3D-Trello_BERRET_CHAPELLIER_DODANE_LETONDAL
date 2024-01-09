@@ -3,6 +3,12 @@ package com.example.application_trello;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * classe TaccheComplexe
+ * represente une tache comptenant des sous taches
+ * fait par Axel
+ */
+
 public class TacheComplexe extends Tache implements InterfaceListeTaches {
 
     /**
