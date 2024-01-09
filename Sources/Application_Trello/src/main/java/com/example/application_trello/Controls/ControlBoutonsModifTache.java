@@ -23,7 +23,7 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
     }
 
     public void handle(ActionEvent event) {
-        if (event.getSource() instanceof Button) {
+        if (event.getTarget() instanceof Button) {
             Button targetButton = (Button) event.getTarget();//Si l'event vient d'un boutton
             if (targetButton.getId().startsWith("addDependButton")) {//Si c'est un bouton d'ajout de dépendance
                 String nomTache = extraireNomTacheID(targetButton.getId());//On récupère le nom de la tache
