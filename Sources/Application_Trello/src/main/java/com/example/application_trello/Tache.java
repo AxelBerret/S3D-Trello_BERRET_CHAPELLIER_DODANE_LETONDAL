@@ -5,6 +5,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+
+/**
+ * classe abstract Tache
+ * represente une tache de l application
+ * fait par Axel, Sacha, Titouan et Logan
+ */
 public abstract class Tache {
 
     /**
