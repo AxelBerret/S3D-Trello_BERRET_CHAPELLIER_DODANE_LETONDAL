@@ -4,8 +4,17 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 import com.example.application_trello.*;
 
+/**
+ * classe TestTache
+ * test les differentes methodes de la classe Tache
+ * fait par Sacha
+ */
 public class TestTache {
 
+    /**
+     * test_01
+     * test le constructeur de la classe Tache
+     */
     @Test
     public void test_01_constructeurTache() {
         Tache tache = new TacheSimple("Tache1");
@@ -13,6 +22,10 @@ public class TestTache {
         assertTrue(tache.getListeDependances().isEmpty());
     }
 
+    /**
+     * test_02
+     * test la methode setCommentaire de la classe Tache
+     */
     @Test
     public void test_02_setCommentaire() {
         Tache tache = new TacheSimple("Tache1");
@@ -20,6 +33,10 @@ public class TestTache {
         assertEquals("Commentaire test", tache.getCommentaire());
     }
 
+    /**
+     * test_03
+     * test la methode setDateDebut de la classe Tache
+     */
     @Test
     public void test_03_setDateDebut() {
         Tache tache = new TacheSimple("Tache1");
@@ -30,6 +47,10 @@ public class TestTache {
         assertEquals(2, tache.getDateDebut().getDayOfMonth());
     }
 
+    /**
+     * test_04
+     * test la methode setDateFin de la classe Tache
+     */
     @Test
     public void test_04_retirerDependance() {
         Tache tache1 = new TacheSimple("Tache1");
@@ -39,6 +60,11 @@ public class TestTache {
         tache1.retirerDependance(tache2);
         assertFalse(tache1.getListeDependances().contains(tache2));
     }
+
+    /**
+     * test_05
+     * test la methode ajouterDependance de la classe Tache
+     */
     @Test
     public void test_05_ajouterDependance() {
         Tache tache1 = new TacheSimple("Tache1");
@@ -55,6 +81,10 @@ public class TestTache {
         assertTrue(tache1.getListeDependances().contains(tache3));
     }
 
+    /**
+     * test_06
+     * test la methode equals de la classe Tache
+     */
     @Test
     public void test_06_equals() {
         Tache tache1 = new TacheSimple("Tache1");
