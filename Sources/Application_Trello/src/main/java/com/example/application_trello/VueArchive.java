@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class VueArchive extends VBox implements Observateur {
@@ -33,14 +34,30 @@ public class VueArchive extends VBox implements Observateur {
         tableau.enregistrerObservateur(this);
     }
 
-    @Override
     public void actualiser(Sujet s) {
-        // Mettre à jour la ListView avec les tâches archivées
-        if (s instanceof Tableau) {
-            Tableau tableau = (Tableau) s;
-            if (nomColonne.equals("Archive")) { // Assurez-vous que la colonne est celle des archives
-                listViewTachesArchivees.getItems().setAll(tableau.getListeTachesArchives());
-            }
+        getChildren().clear();
+
+        // Ajouter un label pour indiquer la vue archive
+        Label labelVueArchive = new Label("Vue Archive");
+        labelVueArchive.setStyle("-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 24;");
+        getChildren().add(labelVueArchive);
+
+        // Créer un TextField pour afficher les tâches archivées
+        TextField textFieldVueArchive = new TextField();
+        textFieldVueArchive.setEditable(false); // Pour rendre le TextField en lecture seule
+        textFieldVueArchive.setStyle("-fx-font-size: 16; -fx-pref-height: 300; -fx-pref-width: 400;-fx-text-fill: black;"); // Ajustez selon vos préférences
+
+
+        System.out.println("ahhh");
+
+        // Parcourir les tâches archivées et les afficher
+        for (Tache tache : tableau.getListeTachesArchives()) {
+            System.out.println("ahhh"+ tache.getNomTache());
+            textFieldVueArchive.appendText(tache.getNomTache() + "\n");
         }
+
+        // Ajouter le TextField à la vue
+        getChildren().add(textFieldVueArchive);
     }
+
 }
