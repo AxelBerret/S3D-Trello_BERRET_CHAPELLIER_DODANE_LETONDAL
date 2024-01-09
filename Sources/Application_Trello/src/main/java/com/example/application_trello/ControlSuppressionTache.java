@@ -38,4 +38,28 @@ public class ControlSuppressionTache implements EventHandler<ActionEvent> {
             tab.supprimerTache(this.nomTache, this.nomCol);
 
     }
+
+    /**
+     * getter du tableau
+     * @return
+     */
+    public Tableau getTab() {
+        return tab;
+    }
+
+    /**
+     * getter du nom de la colonne
+     * @return
+     */
+    public String getNomCol() {
+        return nomCol;
+    }
+
+    /**
+     * getter du nom de la tache
+     * @return
+     */
+    public String getNomTache() {
+        return nomTache;
+    }
 }
