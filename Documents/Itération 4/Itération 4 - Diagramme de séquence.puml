@@ -1,0 +1,13 @@
+@startuml
+actor Utilisateur
+control ControlCreationColonne
+control ControlSuppressionColonne
+
+Utilisateur -> ControlCreationColonne: clique bouton "+"
+ControlCreationColonne -> Tableau: ajouterColonne(Colonne1)
+Tableau --> ControlCreationColonne: colonne ajouté
+
+Utilisateur -> ControlSuppressionColonne: clique bouton "x"
+ControlSuppressionColonne -> Tableau: supprimerColonne(Colonne1)
+Tableau --> ControlSuppressionColonne: colonne supprimé
+@enduml
