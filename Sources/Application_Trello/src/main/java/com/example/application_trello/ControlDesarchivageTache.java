@@ -36,9 +36,9 @@ public class ControlDesarchivageTache implements EventHandler<ActionEvent> {
                 }
 
                 // Utiliser la tâche trouvée pour désarchiver
-              //  if (tacheDesarchivee != null) {
-                //    tab.desarchiverTache(tacheDesarchivee);
-                //}
+                if (tacheDesarchivee != null) {
+                    tab.desarchiverTache(tacheDesarchivee.getNomTache());
+                }
             }
         }
     }

@@ -98,6 +98,7 @@ public class VueTache extends GridPane implements Observateur{
         for (Tache t : listDepActuelles){//Pour chaque dependance
             this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute a la liste
         }
+        this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
 
         //On fait la même chose pour les sous-tâches
         //Ces observablesLists serviront pour les comboBox lors de la modification d'une tâche
