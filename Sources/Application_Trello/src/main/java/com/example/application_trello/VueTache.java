@@ -30,7 +30,7 @@ public class VueTache extends GridPane implements Observateur{
         this.tab = tab;
         this.listeDep = FXCollections.observableArrayList();
         this.listeSousT = FXCollections.observableArrayList();
-        this.setPadding(new Insets(20, 20, 20, 20));
+        this.setPadding(new Insets(10, 10, 10, 10));
         this.setVgap(10);
         this.setHgap(10);
         Label commentLabel = new Label("Commentaire:");
@@ -106,9 +106,9 @@ public class VueTache extends GridPane implements Observateur{
         if (t instanceof TacheComplexe){//Et si notre tâche est une tâche complexe (car sinon elle n'a pas de sous-tâche dans tous les cas)
             ArrayList<Tache> lisSousT = ((TacheComplexe) t).getListeTaches();//On récupère les sous-tâches déjà assignées à cette tâche
             lisAllTaches.removeAll(lisSousT);//On les enleve de la liste de toutes les tâches
-            lisAllTaches.remove(this.t);//On enleve ensuite la tâche en question
+            lisAllTaches.remove(this.t);//On enlève ensuite la tâche en question
             for (Tache t : lisAllTaches){
-                this.listeSousT.add(t.getNomTache());//On ajoute tous les noms des tâches possibles dans l'observableList
+                this.listeSousT.add(t.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
             }
             TacheComplexe tc = (TacheComplexe) ((Tableau)s).getTache(this.t.getNomTache());
             ArrayList<Tache> lisStActuelles = tc.getListeTaches();//On recupere la liste de ses sous-taches

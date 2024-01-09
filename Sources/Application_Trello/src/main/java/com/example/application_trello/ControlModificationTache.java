@@ -20,8 +20,9 @@ public class ControlModificationTache implements EventHandler<ActionEvent> {
         Stage stageModification = new Stage();
 
         VueTache vueModificationTache = new VueTache(this.tache, this.tab);
+        vueModificationTache.actualiser(this.tab);
 
-        Scene sceneModification = new Scene(vueModificationTache);
+        Scene sceneModification = new Scene(vueModificationTache, 400, 300);
 
         stageModification.setScene(sceneModification);
         stageModification.showAndWait();

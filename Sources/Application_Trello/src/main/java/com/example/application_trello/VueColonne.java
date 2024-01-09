@@ -129,6 +129,9 @@ public class VueColonne extends VBox implements Observateur{
         this.listeTaches.add(taskName);
         Hyperlink clickableText = new Hyperlink(taskName);
         clickableText.setStyle("-fx-text-fill: black; -fx-underline: none;");
+        Tache ta = new TacheComplexe(taskName);
+        ControlModificationTache cmt = new ControlModificationTache(this.t, ta);
+        clickableText.setOnAction(cmt);
 
         HBox buttonRow = new HBox(10);
         buttonRow.setAlignment(Pos.CENTER);
