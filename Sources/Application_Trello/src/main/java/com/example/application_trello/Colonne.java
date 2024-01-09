@@ -2,6 +2,11 @@ package com.example.application_trello;
 
 import java.util.ArrayList;
 import java.util.Objects;
+/**
+ * classe Colonne
+ * represente une colonne de l application
+ * fait par Axe
+ */
 
 public class Colonne implements InterfaceListeTaches {
 
