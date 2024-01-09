@@ -330,5 +330,6 @@ public class Tableau implements Sujet {
     }
 
     public Tache getListeTachesArchives() {
+        return getListeTachesArchives();
     }
 }

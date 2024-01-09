@@ -148,17 +148,16 @@ public class NewVueBureau extends HBox implements Observateur {
 
     private void afficherVueArchive() {
 
-            VueListe vueListe = new VueListe(t, listColVue.get(0).getNomVueColonne());
+            VueArchive vueArchive = new VueArchive(t, listColVue.get(0).getNomVueColonne());
 
             // Créez une nouvelle scène pour la VueListe
-            Scene scene = new Scene(vueListe, 600, 600);
+            Scene scene = new Scene(vueArchive, 600, 600);
             Stage stage = new Stage();
             stage.setScene(scene);
 
 
             // Affichez la fenêtre
             stage.show();
-
     }
 
     private void afficherVueGantt() {
