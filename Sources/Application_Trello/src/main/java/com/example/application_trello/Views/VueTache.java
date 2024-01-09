@@ -1,7 +1,9 @@
 package com.example.application_trello.Views;
 import com.example.application_trello.Controls.ControlBoutonsModifTache;
 import com.example.application_trello.Objects.*;
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,7 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
+import java.util.*;
+
 //Vue tache : vue qu'on va afficher dans une fenêtre externe a l'application lorsqu'on va cliquer sur une tache,
 //pour afficher des informations complémentaires et personnaliser plus en détails les tâches.
 //Classe écrite par Titouan
@@ -31,6 +34,8 @@ public class VueTache extends GridPane implements Observateur {
         this.tab = tab;
         this.listeDep = FXCollections.observableArrayList();
         this.listeSousT = FXCollections.observableArrayList();
+        this.vueDep = FXCollections.observableArrayList();
+        this.vueSt = FXCollections.observableArrayList();
         this.setPadding(new Insets(10, 10, 10, 10));
         this.setVgap(10);
         this.setHgap(10);
@@ -109,9 +114,9 @@ public class VueTache extends GridPane implements Observateur {
         if (ta==null){
             ta = ((Tableau)s).getArchive().getTacheByNom(this.t.getNomTache());
         }
-        ArrayList<Tache> listDepActuelles = ta.getListeDependances();//On recupere ses dépendances
+        ArrayList<Tache> listDepActuelles = ta.getListeDependances();//On récupère ses dépendances
         for (Tache t : listDepActuelles){//Pour chaque dependance
-            this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute a la liste
+            this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute à la liste
 
         }
         dependListView.setItems(this.vueDep);//Affiche dans la boite les dépendances déjà mises en ajoutant l'observableList a la ListView
@@ -135,7 +140,7 @@ public class VueTache extends GridPane implements Observateur {
             TacheComplexe tc = (TacheComplexe) ((Tableau)s).getTache(t.getNomTache());
             ArrayList<Tache> lisStActuelles = tc.getListeTaches();//On recupere la liste de ses sous-taches
             for (Tache tach : lisStActuelles){
-                this.vueSt.add(tach.getNomTache());//On met a jour l'attribut VueDep
+                this.vueSt.add(tach.getNomTache());//On met a jour l'attribut VueSt
             }
         }
     }
