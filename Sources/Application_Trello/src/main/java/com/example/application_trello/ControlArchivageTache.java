@@ -19,7 +19,7 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
     private Tableau tab;
     private String nomCol;
     private String nomTache;
-    public ControlArchivageTache(Tableau t, String nomCol, String nomTache) {
+    public ControlArchivageTache(Tableau t, String nomTache, String nomCol) {
         this.tab = t;
         this.nomCol = nomCol;
         this.nomTache = nomTache;
@@ -51,10 +51,7 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     String nomTache = this.extraireNomTacheDeID(targetButton.getId());
-
-                    this.tab.getArchive().archiverTache(this.tab.getTache(nomTache));
-                    this.tab.supprimerTache(nomTache,nomCol);
-                    System.out.println("test");
+                    this.tab.archiverTache(this.nomTache, this.nomCol);
 
                 }
             }
