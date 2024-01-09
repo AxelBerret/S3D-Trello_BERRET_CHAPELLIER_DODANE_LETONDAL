@@ -120,9 +120,10 @@ public class NewVueBureau extends HBox implements Observateur {
         VBox.setMargin(vueArchive, new Insets(30, 30, 30, 30));
 
         this.setSpacing(20);
-        this.getChildren().addAll(leftVBox, rightVBox, vueListeButton, ganttButton, vueArchive,ajoutercolonne);
+        this.setPadding(new Insets(55));
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
         rightVBox.getChildren().addAll(rightHBox);
+        this.getChildren().addAll(leftVBox, rightVBox, vueListeButton, ganttButton, vueArchive,ajoutercolonne);
 
 
 

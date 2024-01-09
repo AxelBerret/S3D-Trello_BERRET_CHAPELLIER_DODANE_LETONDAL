@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -38,6 +39,8 @@ public class VueColonne extends VBox implements Observateur {
     }
 
     private void initialize() {
+
+        setAlignment(Pos.TOP_CENTER);
         setMinWidth(200);
         setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
@@ -63,10 +66,21 @@ public class VueColonne extends VBox implements Observateur {
         additionalButtonsRow.setPadding(new Insets(20));
         getChildren().addAll(columnLabel, additionalButtonsRow);
 
+        setOnDragDetected(event -> {
+            Dragboard db = startDragAndDrop(TransferMode.MOVE);
+
+            ClipboardContent content = new ClipboardContent();
+            content.putString(getNomVueColonne());
+            db.setContent(content);
+
+            event.consume();
+        });
+
         setOnDragOver(event -> {
             if (event.getGestureSource() != this && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.MOVE);
             }
+
             event.consume();
         });
 
@@ -75,14 +89,16 @@ public class VueColonne extends VBox implements Observateur {
             boolean success = false;
 
             if (db.hasString()) {
-                // Move the task to this column
-                addTask(db.getString());
+                // Implémentez la logique pour déplacer la colonne
+                // Vous pouvez appeler une méthode sur votre objet Tableau ici
+
                 success = true;
             }
 
             event.setDropCompleted(success);
             event.consume();
         });
+
     }
 
     @Override
@@ -127,6 +143,7 @@ public class VueColonne extends VBox implements Observateur {
                 // Obtient le texte de l'élément survolé
                 return ((Hyperlink) clickableText).getText();
             }
+
         }
 
         // Si la condition ci-dessus n'est pas satisfaite ou si hbox est vide

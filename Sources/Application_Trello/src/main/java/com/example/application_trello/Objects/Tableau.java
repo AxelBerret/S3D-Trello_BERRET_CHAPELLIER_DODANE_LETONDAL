@@ -250,11 +250,10 @@ public class Tableau implements Sujet {
             if (tache != null) {
 
                 // Ajoute la tâche à la colonne destination
-                //colonneDestination.ajouterTache(tache);
+
                 ajouterTache(tache.getNomTache(), nomColonneDestination);
 
                 // Supprime la tâche de la colonne source
-                //colonneSource.supprimerTache(tache);
                 supprimerTache(tache.getNomTache(), nomColonneSource);
 
                 // Notifie les observateurs du tableau
