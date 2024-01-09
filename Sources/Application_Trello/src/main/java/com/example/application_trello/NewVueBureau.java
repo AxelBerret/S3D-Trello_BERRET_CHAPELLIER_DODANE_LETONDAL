@@ -31,25 +31,9 @@ public class NewVueBureau extends HBox implements Observateur {
     private Tableau t;
 
     public NewVueBureau(Sujet t) {
-        VBox leftVBox = new VBox(100);
+        VBox leftVBox = new VBox(200);
         leftVBox.setAlignment(Pos.CENTER);
         this.t = (Tableau) t;
-
-        for (int i = 1; i <= 5; i++) {
-            Hyperlink link = new Hyperlink("Link " + i);
-            link.setStyle("-fx-font-size: 14;-fx-padding: 50; -fx-border-color: transparent; -fx-background-color: transparent;");
-            link.setStyle("-fx-text-fill: black; -fx-underline: none;");
-            link.setOnMouseEntered(e -> link.setStyle(" -fx-background-color: white; -fx-text-fill: black;"));
-            link.setOnMouseExited(e -> link.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
-
-            link.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-            VBox.setMargin(link, new Insets(30));
-            link.setPadding(new Insets(10, 30, 10, 30));
-            leftVBox.getChildren().add(link);
-        }
-
-        Separator separator = new Separator();
-        separator.setOrientation(Orientation.VERTICAL);
 
         VBox rightVBox = new VBox(20);
         rightVBox.setPadding(new Insets(20));
@@ -93,7 +77,7 @@ public class NewVueBureau extends HBox implements Observateur {
         Colonne cAjout = new Colonne("Ajout");
         VueColonne colonneAjout = createAddColumn(cAjout);
 
-        rightHBox.setMargin(colonneAjout, new Insets(0, 0, 0, 50));
+        rightHBox.setMargin(colonneAjout, new Insets(20, 20, 20, 50));
 
         Button vueListeButton = new Button("Vue Liste");
         vueListeButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
@@ -117,8 +101,27 @@ public class NewVueBureau extends HBox implements Observateur {
         ganttButton.setOnMouseEntered(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
         ganttButton.setOnMouseExited(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
         ganttButton.setOnAction(event -> afficherVueGantt());
+
+
+        Button ajoutercolonne = new Button("Ajouter une colonne");
+        ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
+        VBox.setMargin(ajoutercolonne, new Insets(30));
+        ajoutercolonne.setOnMouseEntered(e -> ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
+        ajoutercolonne.setOnMouseExited(e -> ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+        ControlCreationColonne contrajoutercolonne = new ControlCreationColonne(this.t);
+        ajoutercolonne.setOnAction(contrajoutercolonne);
+
+        rightHBox.setSpacing(20);
+        rightVBox.setSpacing(20);
         this.setSpacing(20);
-        this.getChildren().addAll(leftVBox, separator, rightVBox, vueListeButton, ganttButton, vueArchive);
+
+// Ajouter les marges pour les boutons
+        VBox.setMargin(vueListeButton, new Insets(30, 30, 30, 30));
+        VBox.setMargin(ganttButton, new Insets(30, 30, 30, 30));
+        VBox.setMargin(vueArchive, new Insets(30, 30, 30, 30));
+
+        this.setSpacing(20);
+        this.getChildren().addAll(leftVBox, rightVBox, vueListeButton, ganttButton, vueArchive,ajoutercolonne);
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
         rightVBox.getChildren().addAll(rightHBox);
 
