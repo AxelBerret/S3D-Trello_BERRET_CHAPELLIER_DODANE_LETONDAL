@@ -2,13 +2,15 @@ package com.example.application_trello;
 
 import java.util.ArrayList;
 import java.util.Optional;
+
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 
-public class ControlArchivageTache {
+public class ControlArchivageTache implements EventHandler<ActionEvent> {
 
     /**
      * attribut tab de la classe ControlArchivageTache
@@ -31,8 +33,9 @@ public class ControlArchivageTache {
      * @param event
      */
     public void handle(ActionEvent event) {
-        if (event.getSource() instanceof Button) {
-            Button sourceButton = (Button) event.getSource();
+        
+        if (event.getTarget() instanceof Button) {
+            Button sourceButton = (Button) event.getTarget();
             if ("boutonArchivageTache".equals(sourceButton.getId())) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmation de l archivage");
