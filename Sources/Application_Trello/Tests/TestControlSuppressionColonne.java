@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * classe TestControlSuppressionColonne
+ * test les differentes methodes de la classe ControlSuppressionColonne
+ * fait par Logan
+ */
 public class TestControlSuppressionColonne {
 
     // Attributs

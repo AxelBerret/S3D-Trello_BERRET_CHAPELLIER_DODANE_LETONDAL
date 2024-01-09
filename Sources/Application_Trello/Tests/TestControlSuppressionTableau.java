@@ -3,6 +3,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+/**
+ * classe TestControlSuppressionTableau
+ * test les differentes methodes de la classe ControlSuppressionTableau
+ * fait par Logan
+ */
 
 public class TestControlSuppressionTableau {
     // Attributs
