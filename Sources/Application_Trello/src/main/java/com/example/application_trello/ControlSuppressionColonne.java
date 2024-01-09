@@ -43,12 +43,20 @@ public class ControlSuppressionColonne implements EventHandler<ActionEvent> {
     }
 
     /**
+     * getter du tableau
+     * @return
+     */
+    public Tableau getTab() {
+        return tab;
+    }
+
+    /**
      * Extrait le nom de la colonne à partir de l'ID du bouton.
      *
      * @param idBouton L'ID du bouton.
      * @return Le nom de la colonne extrait.
      */
-    private String extraireNomColonneDeID(String idBouton) {
+    public String extraireNomColonneDeID(String idBouton) {
         if (idBouton != null && idBouton.startsWith("btnSupprimerColonne")) {
             return idBouton.substring("btnSupprimerColonne".length());
         }
