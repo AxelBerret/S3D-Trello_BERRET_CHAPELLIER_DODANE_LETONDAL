@@ -6,7 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.example.application_trello.*;
 import org.junit.jupiter.api.BeforeEach;
 
+/**
+ * classe TestControlCreationTache
+ * test les differentes methodes de la classe ControlCreationTache
+ * fait par Titouan
+ */
 public class TestControlCreationTache {
+
+    // Attributs
     private ControlCreationTache controlCreationTache;
     private Tableau tableau;
 
@@ -17,6 +24,10 @@ public class TestControlCreationTache {
         controlCreationTache = new ControlCreationTache(tableau);
     }
 
+    /**
+     * test_01
+     * test la methode MajListeNomColonnes de la classe ControlCreationTache
+     */
     @Test
     void testMajListeNomColonnes() {
         // Ajouter des colonnes pour le test
@@ -35,6 +46,10 @@ public class TestControlCreationTache {
         assertTrue(listeNomColonnes.contains("Colonne2"));
     }
 
+    /**
+     * test_02
+     * test la methode ExtraireNomColonneDeID de la classe ControlCreationTache
+     */
     @Test
     void testExtraireNomColonneDeID() {
         // Appeler la méthode extraireNomColonneDeID avec un ID de bouton
