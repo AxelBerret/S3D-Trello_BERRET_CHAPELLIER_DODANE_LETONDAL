@@ -240,6 +240,29 @@ public class Tableau implements Sujet {
         }
         this.notifierObservateurs();
     }
+    public void deplacerTache(String nomTache, String nomColonneSource, String nomColonneDestination) {
+        Colonne colonneSource = getColonne(nomColonneSource);
+        Colonne colonneDestination = getColonne(nomColonneDestination);
+
+        if (colonneSource != null && colonneDestination != null) {
+            Tache tache = colonneSource.getTache(nomTache);
+
+            if (tache != null) {
+
+                // Ajoute la tâche à la colonne destination
+                //colonneDestination.ajouterTache(tache);
+                ajouterTache(tache.getNomTache(), nomColonneDestination);
+
+                // Supprime la tâche de la colonne source
+                //colonneSource.supprimerTache(tache);
+                supprimerTache(tache.getNomTache(), nomColonneSource);
+
+                // Notifie les observateurs du tableau
+                notifierObservateurs();
+            }
+        }
+    }
+
 
     public void ajouterDependance(String nomTache, String nomTacheAAjouter) {
         Tache tAAjouter = null;

@@ -270,17 +270,8 @@ public class NewVueBureau extends HBox implements Observateur {
                     String taskName = taskInfo[0];
                     String sourceColumn = taskInfo[1];
 
-                    // Ajoute la tâche à la colonne actuelle
-                    VueColonne targetColumn = findColumnByName((Parent) columnVBox.getParent(), columnVBox.getNomVueColonne());
-                    if (targetColumn != null) {
-                        targetColumn.addTask(taskName);
-                    }
-
-                    // Supprime la tâche de la colonne source (si nécessaire)
-                    VueColonne sourceColumnVBox = findColumnByName((Parent) columnVBox.getParent(), sourceColumn);
-                    if (sourceColumnVBox != null) {
-                        sourceColumnVBox.removeTaskById(taskName);
-                    }
+                    // Appelle la méthode deplacerTache sur l'instance du tableau
+                    t.deplacerTache(taskName, sourceColumn, columnVBox.getNomVueColonne());
 
                     success = true;
                 }
