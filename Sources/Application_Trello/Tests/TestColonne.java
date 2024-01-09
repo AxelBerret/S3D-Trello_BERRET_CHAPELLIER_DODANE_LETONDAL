@@ -3,8 +3,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * classe TestColonne
+ * test les differentes methodes de la classe Colonne
+ * fait par Axel
+ */
 public class TestColonne {
 
+    /**
+     * test_01
+     * test le constructeur de la classe Colonne
+     */
     @Test
     public void test_01_constructeurColonne() {
         Colonne col = new Colonne("col1");
@@ -12,6 +21,10 @@ public class TestColonne {
         assertEquals(0, col.getListeTaches().size());
     }
 
+    /**
+     * test_02
+     * test la methode ajouterTache de la classe Colonne
+     */
     @Test
     public void test_02_ajouterTache() {
         Colonne col = new Colonne("col");
@@ -21,6 +34,10 @@ public class TestColonne {
         assertEquals(1, col.getListeTaches().size());
     }
 
+    /**
+     * test_03
+     * test la methode supprimerTache de la classe Colonne
+     */
     @Test
     public void test_03_supprimerTache() {
         Colonne col = new Colonne("col");
@@ -33,7 +50,10 @@ public class TestColonne {
         assertEquals("tache2", col.getListeTaches().get(0).getNomTache());
         assertEquals(1, col.getListeTaches().size());
     }
-
+    /**
+     * test_04
+     * test la methode getTache de la classe Colonne
+     */
     @Test
     public void test_04_getTache() {
         Colonne col = new Colonne("col");
