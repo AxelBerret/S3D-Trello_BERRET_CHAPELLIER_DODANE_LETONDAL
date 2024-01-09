@@ -30,6 +30,7 @@ public class Principale extends Application {
         ArrayList<Colonne> a = new ArrayList<>();
         a = ((Tableau) t).getListeColonnes();
         System.out.println(a);
+        t.notifierObservateurs();
     }
 
     public static void main(String[] args) {launch();}

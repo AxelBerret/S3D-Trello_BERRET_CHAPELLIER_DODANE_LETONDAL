@@ -62,9 +62,11 @@ public class NewVueBureau extends HBox implements Observateur {
         Colonne aFaire = new Colonne("A faire");//On crée un objet colonne
         VueColonne columnAfaire = createColumn(aFaire);//On le passe en paramètre de la méthode créer une colonne (ce que le controleur est sensé faire mais ici on ne l'utilse pas)
         this.t.ajouterColonne(aFaire);//Meme chose
+        this.t.enregistrerObservateur(columnAfaire);
         Colonne enCours = new Colonne("En cours");
         VueColonne columnEnCours = createColumn(enCours);
         this.t.ajouterColonne(enCours);
+        this.t.enregistrerObservateur(columnEnCours);
         Colonne termine = new Colonne("Termine");
         VueColonne columnTermine = createColumn(termine);
         this.t.ajouterColonne(termine);
@@ -193,6 +195,7 @@ public class NewVueBureau extends HBox implements Observateur {
                 this.removeColumnById(nomC);
             }
         }
+        ((Tableau)s).toString();
     }
 
     private VueColonne createColumn(Colonne colonne) {// Cette méthode ajoute un objet colonne graphiquement et renvoie la vueColonne
