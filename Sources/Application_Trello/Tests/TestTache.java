@@ -49,7 +49,7 @@ public class TestTache {
 
     /**
      * test_04
-     * test la methode setDateFin de la classe Tache
+     * test la methode setDateDependance de la classe Tache
      */
     @Test
     public void test_04_retirerDependance() {

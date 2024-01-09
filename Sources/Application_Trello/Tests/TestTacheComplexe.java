@@ -78,7 +78,7 @@ public class TestTacheComplexe {
 
     /**
      * test_05
-     * test la methode setDateFin de la classe TacheComplexe
+     * test la methode setDateFinInferieure de la classe TacheComplexe
      */
     @Test
     public void test_05_setDateFinInferieure() {
