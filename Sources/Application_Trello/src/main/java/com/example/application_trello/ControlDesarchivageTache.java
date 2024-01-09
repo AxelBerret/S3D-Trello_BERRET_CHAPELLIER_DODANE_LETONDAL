@@ -19,6 +19,13 @@ public class ControlDesarchivageTache {
      */
     public ControlDesarchivageTache(Tableau t) {this.tab = t;}
 
+    /**
+     * getter du tableau
+     * @return
+     */
+    public Tableau getTab() {
+        return tab;
+    }
 
     /**
      * methode handle de la classe ControlDesarchivageTache

@@ -62,6 +62,10 @@ public class ControlArchivageTache {
         return null;
     }
 
+    /**
+     * getter du tableau
+     * @return
+     */
     public Tableau getTab() {
         return tab;
     }

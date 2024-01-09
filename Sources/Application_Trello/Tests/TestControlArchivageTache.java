@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * classe TestControlArchivageTache
+ * test les differentes methodes de la classe ControlArchivageTache
+ * fait par Logan
+ */
 public class TestControlArchivageTache{
     // Attributs
     private Tableau tableau;
