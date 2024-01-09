@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -239,10 +240,13 @@ public class NewVueBureau extends HBox implements Observateur {
                     String sourceColumn = taskInfo[1];
 
                     // Ajoute la tâche à la colonne actuelle
-                    columnVBox.addTask(taskName);
+                    VueColonne targetColumn = findColumnByName((Parent) columnVBox.getParent(), columnVBox.getNomVueColonne());
+                    if (targetColumn != null) {
+                        targetColumn.addTask(taskName);
+                    }
 
                     // Supprime la tâche de la colonne source (si nécessaire)
-                    VueColonne sourceColumnVBox = findColumnByName(sourceColumn);
+                    VueColonne sourceColumnVBox = findColumnByName((Parent) columnVBox.getParent(), sourceColumn);
                     if (sourceColumnVBox != null) {
                         sourceColumnVBox.removeTaskById(taskName);
                     }
@@ -260,14 +264,20 @@ public class NewVueBureau extends HBox implements Observateur {
     }
 
     // Méthode auxiliaire pour trouver la colonne par son nom
-    private VueColonne findColumnByName(String columnName) {
-        for (VueColonne vueColonne : this.listColVue) {
-            if (vueColonne.getNomVueColonne().equals(columnName)) {
-                return vueColonne;
+    private VueColonne findColumnByName(Parent parent, String columnName) {
+        if (parent instanceof HBox) {
+            HBox hbox = (HBox) parent;
+
+            for (Node node : hbox.getChildren()) {
+                if (node instanceof VueColonne && node.getId().equals(columnName)) {
+                    return (VueColonne) node;
+                }
             }
         }
+
         return null;
     }
+
 
     private boolean containsColumn(String columnName) {//Méthode qui compare le nom en paramètre avec les noms de la liste des colonnes présentes dans la vue.
         //Renvoie vrai si la colonne est présente, faux sinon
