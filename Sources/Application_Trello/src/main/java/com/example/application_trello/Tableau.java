@@ -327,9 +327,7 @@ public class Tableau implements Sujet {
         return null;
     }
 
-
-    //public Tache getListeTachesArchives() {
-    //    return
-    //}
-
+    public ArrayList<Tache> getListeTachesArchives() {
+        return this.archive.getListeTachesArchivees();
+    }
 }
