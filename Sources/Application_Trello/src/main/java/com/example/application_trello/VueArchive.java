@@ -52,6 +52,8 @@ public class VueArchive extends VBox implements Observateur {
 
         // Parcourir les tâches archivées et les afficher
         for (Tache tache : tableau.getListeTachesArchives()) {
+            System.out.println("ahhh222");
+
             System.out.println("ahhh"+ tache.getNomTache());
             textFieldVueArchive.appendText(tache.getNomTache() + "\n");
         }
