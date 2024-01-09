@@ -4,11 +4,10 @@ package com.example.application_trello;
 import java.util.ArrayList;
 
 /**
- * classe Tableau
- * represente un tableau de l application
+ * Classe Tableau
+ * représente un tableau de l'application, contient toutes les méthodes requises à l'architecture MVC et au fonctionnement interne de l'application.
  * fait par Axel, Sacha, Titouan et Logan
  */
-
 public class Tableau implements Sujet {
 
     /**

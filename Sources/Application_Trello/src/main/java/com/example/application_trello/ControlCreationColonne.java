@@ -10,11 +10,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class ControlCreationColonne implements EventHandler<ActionEvent> {
-    /*Explication de l'architecture MVC : L'architecture MVC mise en place ici se décompose en plusieurs parties.
-     * Premièrement, dans la classe main principale, on créée un nouveau modèle, auquel on va associer des vues, auxquelles on va associer un controleur éventuellement.
-     * le principe est que chaque vue affiche queleque chose par défaut, et lorsque l'utilisateur agit sur l'application,
-     * le controleur reçoit l'action, et déclenche la méthode appropriée définie dans le modèle. Ce dernier notifie tous les observateurs qui vont se
-     * mettre à jour si nécessaire. */
+    /*Controleur pour le bouton + sur la colonne de droite servant à créer une nouvelle colonne.
+    *Ouvre une fenêtre de dialogue temporaire pour que l'utilisateur rentre le nom de la colonne puis appelle
+    * le modèle pour créer une nouvelle colonne.
+    * Classe écrite par Titouan
+     */
     private Tableau tab;
 
     public ControlCreationColonne(Tableau t){

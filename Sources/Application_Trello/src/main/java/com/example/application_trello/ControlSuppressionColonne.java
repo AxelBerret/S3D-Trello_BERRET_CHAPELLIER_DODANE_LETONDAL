@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 
 /**
  * Contrôleur pour la suppression d'une colonne dans un tableau.
+ * Classe écrite par Titouan
  */
 public class ControlSuppressionColonne implements EventHandler<ActionEvent> {
 

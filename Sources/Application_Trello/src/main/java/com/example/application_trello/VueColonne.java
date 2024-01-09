@@ -14,7 +14,8 @@ import javafx.scene.paint.Color;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
-
+//Classe représentant la vue d'une colonne. Ces vues sont contenues dans une vue bureau, et une nouvelle est créée à chaque création de Colonne.
+//Cette vue a été co écrite par ? et Titouan
 public class VueColonne extends VBox implements Observateur{
 
     private String nomColonne;

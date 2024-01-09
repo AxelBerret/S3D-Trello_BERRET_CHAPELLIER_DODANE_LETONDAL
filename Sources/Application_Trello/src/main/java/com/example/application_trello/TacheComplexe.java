@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 /**
- * classe TaccheComplexe
- * represente une tache comptenant des sous taches
+ * classe TacheComplexe
+ * represente une tache comportant des sous taches
  * fait par Axel
  */
 
