@@ -1,0 +1,7 @@
+Itération 5 Bilan :
+En itération 5, nous avons au début principalement mis l'accent sur la VueGantt et sur le DragAndDrop. Or nous n'avons pas su aboutir à faire en sorte que le Drag and Drop puisse être pleinement fonctionnel car nous sommes toujours confrontés au deux mêmes problèmes (Consulter Itération 4 Bilan).
+Pour ce qui est de la VueGantt, il nous faudrai encore s'investir pour qu'elle soit complète (nécessite que la vue tache soit complète et permet de donner des dates de début et de fin)
+Néanmoins, nous avons pu implémenter 4 fonctionnalités centrales d'un Trello à savoir la création suppression de Colonne, la suppression d'une tâche dans une colonne et l'archivage des taches. Ces dernières fonctionnalités en plus de celles déjà existantes sont fixées et fonctionnelles.
+Par extension cela à impliquer de corriger les controleurs nécessaires à ces fonctionnalités.
+
+Bien qu'on est perdu du temps sur le drag and drop et un peu sur la VueGantt, nous avons en revanche très bien avancé sur l'implémentation du MVC au sein du proejt. Cela en fait une très bonne itération dans l'ensemble malgré le retard toujours présent.

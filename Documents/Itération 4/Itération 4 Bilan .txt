@@ -1,0 +1,23 @@
+Itération 4 Bilan :
+Pour ce qui est de l'itération 4, nous avons pu corriger une partie du DragAndDrop qui comportais auparavant deux problèmes majeurs :
+- le nom de la tache n'était pas le bon quand on la déplaçait dans une autre colonne
+- la tâche déplacée dans la nouvelle colonne n'était pas supprimée de la colonne d'origine
+Or ces points là ont pu être fixé.
+De plus, nous avons réussit à bien implémenter MVC pour l'ajout d'une tâche et avons fait une vue liste qui permet la
+visualisation des tâches par colonne.
+Nous avons de plus ajouter une ébauche de VueGantt bien que pas encore complète puis avons pris soin de refaire une classe VueBureau
+nommée NewVueBureau plus optimisé. Cette classe a pour objectif de remplacer la première classe VueBureau.
+
+En revanche le DragAndDrops de NewVueBureau n'est pas pleinement complet. On y voit deux problèmes :
+- la tache que l on drag et drop n'est parfois pas la bonne
+	par exemple : au démarrage de l'application on a 3 colonnes (à faire, en cours et terminé) et 2 taches (tache 1 et tache 2)
+par défaut les 2 tâches sont dans la colonne à faire
+si l'on décide de déplacer la tache 1 dans une autre colonne ce n'est pas la tache 1 qui sera déplacé et non la tache 2
+- la vue liste n'est pas mise à jour comme il faut, lorsque que l on drop la tache dans une autre colonne on devrait pouvoir
+visualiser cette tâche dans la colonne correspondante
+	par exemple : au démarrage de l'application on a 3 colonnes (à faire, en cours et terminé) et 2 taches (tache 1 et tache 2)
+par défaut les 2 tâches sont dans la colonne à faire
+si l on prend la tache 2 et qu on la drop dans une autre colonne comme en cours pour illustrer, la visualisation devrait nous dire
+qu il y a bien 3 colonnes et la tache 1 se trouve dans à faire et la tache 2 dans en cours. Or la tache 2 ne se déplace pas dans la visualisation et reste dans la colonne à faire
+
+En conclusion, cette itération était plutôt bonne dans l'ensemble bien que laborieuse du point de vue du Drag and Drop.
