@@ -118,11 +118,19 @@ public class VueColonne extends VBox implements Observateur {
         return this.nomColonne;
     }
 
-    public String getTaskName() {
-        // Récupère le dernier élément ajouté à la colonne, qui est la tâche
-        HBox taskInColumn = (HBox) getChildren().get(getChildren().size() - 1);
-        Hyperlink clickableText = (Hyperlink) taskInColumn.getChildren().get(0);
-        return clickableText.getText();
+    public String getTaskName(MouseEvent event) {
+        // Récupère l'élément actuellement survolé
+        HBox hbox = (HBox) event.getTarget();
+        if (!hbox.getChildren().isEmpty()) {
+            Node clickableText = hbox.getChildren().get(0);
+            if (clickableText instanceof Hyperlink) {
+                // Obtient le texte de l'élément survolé
+                return ((Hyperlink) clickableText).getText();
+            }
+        }
+
+        // Si la condition ci-dessus n'est pas satisfaite ou si hbox est vide
+        return null; // Ou une autre valeur par défaut selon vos besoins
     }
 
     public void addTask(String taskName) {

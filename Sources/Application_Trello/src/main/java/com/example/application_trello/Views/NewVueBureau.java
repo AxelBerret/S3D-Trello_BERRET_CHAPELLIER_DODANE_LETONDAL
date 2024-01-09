@@ -243,7 +243,7 @@ public class NewVueBureau extends HBox implements Observateur {
 
             // Ajoute les données à transférer (ici, le nom et la colonne de la tâche)
             ClipboardContent content = new ClipboardContent();
-            content.putString(columnVBox.getTaskName() + "|" + columnVBox.getNomVueColonne());
+            content.putString(columnVBox.getTaskName(event) + "|" + columnVBox.getNomVueColonne());
             db.setContent(content);
 
             event.consume();
