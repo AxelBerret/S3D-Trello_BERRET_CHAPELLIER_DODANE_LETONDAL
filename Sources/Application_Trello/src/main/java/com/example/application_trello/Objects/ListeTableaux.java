@@ -1,4 +1,4 @@
-package com.example.application_trello;
+package com.example.application_trello.Objects;
 
 import java.util.ArrayList;
 

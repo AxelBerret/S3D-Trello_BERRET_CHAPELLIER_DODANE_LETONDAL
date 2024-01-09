@@ -1,13 +1,11 @@
-package com.example.application_trello;
+package com.example.application_trello.Controls;
 
+import com.example.application_trello.Objects.Colonne;
+import com.example.application_trello.Objects.Tableau;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class ControlCreationColonne implements EventHandler<ActionEvent> {
     /*Controleur pour le bouton + sur la colonne de droite servant à créer une nouvelle colonne.

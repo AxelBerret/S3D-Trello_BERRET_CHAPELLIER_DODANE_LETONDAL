@@ -1,14 +1,11 @@
 package com.example.application_trello;
 
+import com.example.application_trello.Objects.Colonne;
+import com.example.application_trello.Objects.Sujet;
+import com.example.application_trello.Objects.Tableau;
+import com.example.application_trello.Views.NewVueBureau;
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 

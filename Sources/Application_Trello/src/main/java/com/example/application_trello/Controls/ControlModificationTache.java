@@ -1,5 +1,8 @@
-package com.example.application_trello;
+package com.example.application_trello.Controls;
 
+import com.example.application_trello.Objects.Tableau;
+import com.example.application_trello.Objects.Tache;
+import com.example.application_trello.Views.VueTache;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

@@ -1,5 +1,6 @@
-package com.example.application_trello;
+package com.example.application_trello.Views;
 
+import com.example.application_trello.Objects.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

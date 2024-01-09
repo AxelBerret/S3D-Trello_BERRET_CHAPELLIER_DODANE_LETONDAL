@@ -1,9 +1,8 @@
-package com.example.application_trello;
+package com.example.application_trello.Objects;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 
 /**

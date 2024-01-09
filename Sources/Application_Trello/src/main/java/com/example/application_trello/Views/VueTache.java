@@ -1,9 +1,8 @@
-package com.example.application_trello;
+package com.example.application_trello.Views;
+import com.example.application_trello.Controls.ControlBoutonsModifTache;
+import com.example.application_trello.Objects.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 //Vue tache : vue qu'on va afficher dans une fenêtre externe a l'application lorsqu'on va cliquer sur une tache,
 //pour afficher des informations complémentaires et personnaliser plus en détails les tâches.
 //Classe écrite par Titouan
-public class VueTache extends GridPane implements Observateur{
+public class VueTache extends GridPane implements Observateur {
 
     private Tache t;
     private ObservableList<String> listeDep;

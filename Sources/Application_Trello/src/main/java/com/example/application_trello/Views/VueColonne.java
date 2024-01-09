@@ -1,5 +1,7 @@
-package com.example.application_trello;
+package com.example.application_trello.Views;
 
+import com.example.application_trello.Controls.*;
+import com.example.application_trello.Objects.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -11,12 +13,11 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 //Classe représentant la vue d'une colonne. Ces vues sont contenues dans une vue bureau, et une nouvelle est créée à chaque création de Colonne.
 //Cette vue a été co écrite par ? et Titouan
-public class VueColonne extends VBox implements Observateur{
+public class VueColonne extends VBox implements Observateur {
 
     private String nomColonne;
     private Tableau t;

@@ -1,5 +1,7 @@
 
-package com.example.application_trello;
+package com.example.application_trello.Objects;
+
+import com.example.application_trello.Views.VueTache;
 
 import java.util.ArrayList;
 

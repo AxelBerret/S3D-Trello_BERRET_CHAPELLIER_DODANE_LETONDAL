@@ -1,5 +1,11 @@
-package com.example.application_trello;
+package com.example.application_trello.Views;
 
+import com.example.application_trello.Controls.ControlDesarchivageTache;
+import com.example.application_trello.Controls.ControlModificationTache;
+import com.example.application_trello.Objects.Observateur;
+import com.example.application_trello.Objects.Sujet;
+import com.example.application_trello.Objects.Tableau;
+import com.example.application_trello.Objects.Tache;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;

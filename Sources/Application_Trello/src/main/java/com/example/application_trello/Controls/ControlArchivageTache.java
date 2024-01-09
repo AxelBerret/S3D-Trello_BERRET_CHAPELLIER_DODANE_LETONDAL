@@ -1,14 +1,13 @@
-package com.example.application_trello;
+package com.example.application_trello.Controls;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
+import com.example.application_trello.Objects.Tableau;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
 
 public class ControlArchivageTache implements EventHandler<ActionEvent> {
 

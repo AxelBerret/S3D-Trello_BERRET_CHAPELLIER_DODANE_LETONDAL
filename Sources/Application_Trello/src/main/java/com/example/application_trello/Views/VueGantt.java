@@ -1,5 +1,5 @@
-package com.example.application_trello;
-import com.example.application_trello.*;
+package com.example.application_trello.Views;
+import com.example.application_trello.Objects.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import static com.example.application_trello.Tache.determinerBaseDate;
+import static com.example.application_trello.Objects.Tache.determinerBaseDate;
 
 public class VueGantt extends HBox implements Observateur {
 

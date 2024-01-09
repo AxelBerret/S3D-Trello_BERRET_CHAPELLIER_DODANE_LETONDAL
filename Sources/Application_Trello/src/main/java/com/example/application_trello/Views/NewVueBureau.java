@@ -1,25 +1,23 @@
-package com.example.application_trello;
-import javafx.application.Application;
+package com.example.application_trello.Views;
+import com.example.application_trello.Controls.ControlCreationColonne;
+import com.example.application_trello.Objects.Colonne;
+import com.example.application_trello.Objects.Observateur;
+import com.example.application_trello.Objects.Sujet;
+import com.example.application_trello.Objects.Tableau;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Separator;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import static javafx.application.Application.launch;
 //Cette classe représente la vue bureau qui est la vue principale que l'on utilise dans l'application et qui englobe d'autres vues.
