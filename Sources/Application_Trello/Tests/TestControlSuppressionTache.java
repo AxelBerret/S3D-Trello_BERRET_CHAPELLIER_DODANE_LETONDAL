@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class TestControlSuppressionTache {
 
+    // Attributs
     private Tableau tableau;
     private String colonne;
     private String tache;

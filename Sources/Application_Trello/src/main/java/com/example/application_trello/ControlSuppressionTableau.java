@@ -47,11 +47,19 @@ public class ControlSuppressionTableau {
     }
 
     /**
+     * getter de la liste des tableaux
+     * @return
+     */
+    public ListeTableaux getListeTab() {
+        return listeTab;
+    }
+
+    /**
      *
      * @param idBouton
      * @return
      */
-    private String extraireNomTableauDeID(String idBouton) {
+    public String extraireNomTableauDeID(String idBouton) {
         if (idBouton != null && idBouton.startsWith("boutonSupprimerTableau")) {
             return idBouton.substring("boutonSupprimerTableau".length());
         }

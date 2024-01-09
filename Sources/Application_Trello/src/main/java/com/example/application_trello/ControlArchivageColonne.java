@@ -21,6 +21,14 @@ public class ControlArchivageColonne {
 
 
     /**
+     * getter du tableau
+     * @return
+     */
+    public Tableau getTab() {
+        return tab;
+    }
+
+    /**
      * methode handle de la classe ControlArchivageColonne
      * qui permet la gestion du bouton d archivage des colonnes
      * @param event evenement representant le bouton clickable
