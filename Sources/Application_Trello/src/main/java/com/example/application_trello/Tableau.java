@@ -3,6 +3,12 @@ package com.example.application_trello;
 
 import java.util.ArrayList;
 
+/**
+ * classe Tableau
+ * represente un tableau de l application
+ * fait par Axel, Sacha, Titouan et Logan
+ */
+
 public class Tableau implements Sujet {
 
     /**
@@ -168,7 +174,7 @@ public class Tableau implements Sujet {
         ArrayList<Colonne> lc = this.getListeColonnes();
         for (Colonne c : lc){
             if (c.getNomColonne().equals(nomColonne)){
-                Tache t = this.getTache(nomTache);
+                Tache t = c.getTache(nomTache);
                 c.supprimerTache(t);
             }
         }

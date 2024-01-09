@@ -6,8 +6,17 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * classe TestTacheSimple
+ * test les differentes methodes de la classe TacheSimple
+ * fait par Axel et Sacha
+ */
 public class TestTacheSimple {
 
+    /**
+     * test_01
+     * test le constructeur de la classe TacheSimple
+     */
     @Test
     public void test_01_constructeurTacheSimple() {
         TacheSimple tacheSimple = new TacheSimple("Tache1");
@@ -15,6 +24,10 @@ public class TestTacheSimple {
         assertTrue(tacheSimple.getListeDependances().isEmpty());
     }
 
+    /**
+     * test_02
+     * test la methode setDateFin de la classe TacheSimple
+     */
     @Test
     public void test_02_setDateFin() {
         TacheSimple tacheSimple = new TacheSimple("Tache1");

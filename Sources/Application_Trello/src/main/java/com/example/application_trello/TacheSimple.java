@@ -2,6 +2,11 @@ package com.example.application_trello;
 
 import java.time.LocalDate;
 
+/**
+ * classe TacheSimple
+ * represente une tache simple de l application
+ * fait par Titouan
+ */
 public class TacheSimple extends Tache {
 
 

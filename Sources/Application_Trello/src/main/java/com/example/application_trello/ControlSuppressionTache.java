@@ -10,14 +10,18 @@ import javafx.scene.control.Button;
 public class ControlSuppressionTache implements EventHandler<ActionEvent> {
 
     private Tableau tab;
+    private String nomCol;
+    private String nomTache;
 
     /**
      * Constructeur du contrôleur.
      *
      * @param t Le tableau associé au contrôleur.
      */
-    public ControlSuppressionTache(Tableau t) {
+    public ControlSuppressionTache(Tableau t, String nomCol, String nomTache) {
         this.tab = t;
+        this.nomCol = nomCol;
+        this.nomTache = nomTache;
     }
 
     /**
@@ -27,43 +31,11 @@ public class ControlSuppressionTache implements EventHandler<ActionEvent> {
      */
     public void handle(ActionEvent event) {
         // Vérifie si la source de l'événement est un bouton
-        if (event.getSource() instanceof Button sourceButton) {
-            // Vérifie si l'evenement est bien un bouton de suppression de tâche
-            if (sourceButton.getId().startsWith("btnSupprimerTache")) {
-                // Extraction du nom de la colonne et de la tâche
-                String nomColonne = extraireNomColonneDeID(sourceButton.getId());
-                String nomTache = extraireNomTacheDeID(sourceButton.getId());
-                // Suppression de la tâche dans le tableau
-                tab.supprimerTache(nomTache, nomColonne);
-                // Notification de l'observateur
-                tab.notifierObservateurs();
-            }
-        }
-    }
+        Button targetButton = (Button) event.getTarget();//Si l'event vient d'un boutton
+        // Vérifie si l'evenement est bien un bouton de suppression de tâche
+            // Suppression de la tâche dans le tableau
+            System.out.println(tab.getColonne(nomCol).getListeTaches());
+            tab.supprimerTache(this.nomTache, this.nomCol);
 
-    /**
-     * Extrait le nom de la colonne à partir de l'ID du bouton.
-     *
-     * @param idBouton L'ID du bouton.
-     * @return Le nom de la colonne extrait.
-     */
-    public String extraireNomColonneDeID(String idBouton) {
-        if (idBouton != null && idBouton.startsWith("btnSupprimerTache")) {
-            return idBouton.substring("btnSupprimerTache".length());
-        }
-        return null;
-    }
-
-    /**
-     * Extrait le nom de la tâche à partir de l'ID du bouton.
-     *
-     * @param idBouton L'ID du bouton.
-     * @return Le nom de la tâche extrait.
-     */
-    public String extraireNomTacheDeID(String idBouton) {
-        if (idBouton != null && idBouton.startsWith("btnSupprimerTache")) {
-            return idBouton.substring("btnSupprimerTache".length());
-        }
-        return null;
     }
 }

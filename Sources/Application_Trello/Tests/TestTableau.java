@@ -5,8 +5,17 @@ import com.example.application_trello.TacheSimple;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * classe TestTableau
+ * test les differentes methodes de la classe Tableau
+ * fait par Axel et Sacha
+ */
 public class TestTableau {
 
+    /**
+     * test_01
+     * test le constructeur de la classe Tableau
+     */
     @Test
     public void test_01_constructeurTableau() {
         Tableau tableau = new Tableau("TableauTest");
@@ -15,6 +24,10 @@ public class TestTableau {
         assertEquals(0, tableau.getListeTaches().size());
     }
 
+    /**
+     * test_02
+     * test la methode ajouterColonne de la classe Tableau
+     */
     @Test
     public void test_02_ajouterColonne() {
         Tableau tableau = new Tableau("TableauTest");
@@ -23,6 +36,11 @@ public class TestTableau {
         assertEquals(1, tableau.getListeColonnes().size());
         assertEquals("ColonneTest", tableau.getListeColonnes().get(0).getNomColonne());
     }
+
+    /**
+     * test_03
+     * test la methode supprimerColonne de la classe Tableau
+     */
     @Test
     public void test_03_supprimerColonne() {
         Tableau tableau = new Tableau("TableauTest");
@@ -36,6 +54,10 @@ public class TestTableau {
         assertEquals("Colonne2", tableau.getListeColonnes().get(0).getNomColonne());
     }
 
+    /**
+     * test_04
+     * test la methode getListeColonnes de la classe Tableau
+     */
     @Test
     public void test_04_getListeColonnes() {
         Tableau tableau = new Tableau("TableauTest");
@@ -50,6 +72,10 @@ public class TestTableau {
         assertEquals(true, tableau.getListeColonnes().get(2).equals(colonne3));
     }
 
+    /**
+     * test_05
+     * test la methode getColonne de la classe Tableau
+     */
     @Test
     public void test_05_getColonne() {
         Tableau tableau = new Tableau("TableauTes");
@@ -63,7 +89,10 @@ public class TestTableau {
         assertEquals(true, tableau.getColonne("Colonne2").equals(colonne2));
         assertEquals(true, tableau.getColonne("Colonne3").equals(colonne3));
     }
-
+    /**
+     * test_06
+     * test la methode getListeTaches de la classe Tableau
+     */
     @Test
     public void test_06_getListeTaches() {
         Tableau tableau = new Tableau("TableauTest");
@@ -77,6 +106,10 @@ public class TestTableau {
         assertEquals(true, tableau.getColonne("Colonne1").getListeTaches().get(1).equals(tache2));
     }
 
+    /**
+     * test_07
+     * test la methode getTache de la classe Tableau
+     */
     @Test
     public void test_07_getTache() {
         Tableau tableau = new Tableau("TableauTest");
@@ -93,6 +126,10 @@ public class TestTableau {
         assertEquals(true, tableau.getTache("Tache3").equals(tache3));
     }
 
+    /**
+     * test_08
+     * test la methode ajouterTache de la classe Tableau
+     */
     @Test
     public void test_08_ajouterTache() {
         Tableau tableau = new Tableau("TableauTest");
@@ -110,6 +147,10 @@ public class TestTableau {
         assertEquals(true, tableau.getTache("Tache3").equals(tache3));
     }
 
+    /**
+     * test_09
+     * test la methode supprimerTache de la classe Tableau
+     */
     @Test
     public void test_09_supprimerTache() {
         Tableau tableau = new Tableau("TableauTest");
@@ -130,6 +171,10 @@ public class TestTableau {
         assertEquals(true, tableau.getListeTaches().isEmpty());
     }
 
+    /**
+     * test_10
+     * test la methode archiverTache de la classe Tableau
+     */
     @Test
     public void test_10_archiverTache() {
         Tableau tableau = new Tableau("TableauTest");
@@ -150,7 +195,10 @@ public class TestTableau {
         assertEquals(true, tableau.getTache("Tache2").equals(tache2));
         assertEquals(true, tableau.getArchive().getListeTachesArchivees().get(0).equals(tache3));
     }
-
+    /**
+     * test_11
+     * test la methode desarchiverTache de la classe Tableau
+     */
     @Test
     public void test_11_desarchiverTache() {
         Tableau tableau = new Tableau("TableauTest");
@@ -173,6 +221,10 @@ public class TestTableau {
         assertEquals(true, tableau.getListeColonnes().get(0).getTache("Tache1").equals(tache1));
     }
 
+    /**
+     * test_12
+     * test la methode archiverColonne de la classe Tableau
+     */
     @Test
     public void test_12_archiverColonne() {
         Tableau tableau = new Tableau("TableauTest");
@@ -191,6 +243,10 @@ public class TestTableau {
         assertEquals(true, tableau.getArchive().getListeColonnesArchivees().get(0).equals(colonne2));
     }
 
+    /**
+     * test_13
+     * test la methode desarchiverColonne de la classe Tableau
+     */
     @Test
     public void test_13_desarchiverColonne() {
         Tableau tableau = new Tableau("TableauTest");

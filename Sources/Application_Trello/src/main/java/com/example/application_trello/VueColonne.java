@@ -26,8 +26,6 @@ public class VueColonne extends VBox implements Observateur{
         this.t = t;
         this.listeTaches = new ArrayList<>();
         Colonne c = new Colonne(columnName);
-        //this.t.ajouterColonne(c);
-        this.t.enregistrerObservateur(this);
         initialize();
     }
 
@@ -52,7 +50,7 @@ public class VueColonne extends VBox implements Observateur{
         Button newButton1 = createIconButton("trombonne.png");
         Button boutonSupp = createIconButton("croix.png");
         boutonSupp.setId("btnSupprimerColonne" + this.nomColonne);
-        ControlSuppressionColonne  controlSup = new ControlSuppressionColonne(this.t);
+        ControlSuppressionColonne controlSup = new ControlSuppressionColonne(this.t);
         boutonSupp.setOnAction(controlSup);
         Button boutonPlus = createIconButton("plus.png");
         boutonPlus.setId("btnCreerTache" + this.getNomVueColonne());
@@ -87,17 +85,19 @@ public class VueColonne extends VBox implements Observateur{
     @Override
     public void actualiser(Sujet s) {
         Colonne colonneModele = ((Tableau)s).getColonne(this.nomColonne);
-        ArrayList<Tache> lisTacheCol = colonneModele.getListeTaches();//On récupère depuis le modèle la liste des tâches que doit contenir cette colonne
-        for (Tache t : lisTacheCol){//boucle qui parcourt les taches présentes dans le modèle et ajoute celles qui ne le sont pas encore
-            String nom = t.getNomTache();
-            if (!this.listeTaches.contains(nom)){//Si la liste de la vue ne contient pas la tache nom alors
-                addTask(nom);//On l'ajoute
+        if (colonneModele != null){
+            ArrayList<Tache> lisTacheCol = colonneModele.getListeTaches();//On récupère depuis le modèle la liste des tâches que doit contenir cette colonne
+            for (Tache t : lisTacheCol){//boucle qui parcourt les taches présentes dans le modèle et ajoute celles qui ne le sont pas encore
+                String nom = t.getNomTache();
+                if (!this.listeTaches.contains(nom)){//Si la liste de la vue ne contient pas la tache nom alors
+                    addTask(nom);//On l'ajoute
+                }
             }
-        }
-        for (String nomT : this.listeTaches){//Boucle qui parcourt les taches présentes dans la vue et supprime celles qui ne sont plus dans le modèle
-            if (!containsTache(nomT, lisTacheCol)){//Si la liste du modèle ne contient pas la tache nomT alors
-                //On la supprime de notre liste
-                removeTaskById(nomT);
+            for (String nomT : this.listeTaches){//Boucle qui parcourt les taches présentes dans la vue et supprime celles qui ne sont plus dans le modèle
+                if (!containsTache(nomT, lisTacheCol)){//Si la liste du modèle ne contient pas la tache nomT alors
+                    //On la supprime de notre liste
+                    removeTaskById(nomT);
+                }
             }
         }
     }
@@ -131,6 +131,8 @@ public class VueColonne extends VBox implements Observateur{
         buttonRow.setAlignment(Pos.CENTER);
         Button trombonneButton = createIconButton("trombonne.png");
         Button croixButton = createIconButton("croix.png");
+        ControlSuppressionTache conSupTache = new ControlSuppressionTache(this.t, this.nomColonne, taskName);
+        croixButton.setOnAction(conSupTache);
         buttonRow.getChildren().addAll(trombonneButton, croixButton);
 
         HBox taskInColumn = new HBox(10);

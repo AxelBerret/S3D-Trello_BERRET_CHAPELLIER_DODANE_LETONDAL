@@ -2,6 +2,11 @@ package com.example.application_trello;
 
 import java.util.ArrayList;
 
+/**
+ * classe Archive
+ * represente l archive de l application
+ * fait par Logan
+ */
 public class Archive {
 
     /**

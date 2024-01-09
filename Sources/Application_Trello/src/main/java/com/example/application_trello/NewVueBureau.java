@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import static javafx.application.Application.launch;
 
@@ -56,16 +58,13 @@ public class NewVueBureau extends HBox implements Observateur {
         //Création des 3 colonnes par défaut
         this.listColVue = new ArrayList<>(); //On initialise la liste de vues colonnes
         Colonne aFaire = new Colonne("A faire");//On crée un objet colonne
-        VueColonne columnAfaire = createColumn(aFaire);//On le passe en paramètre de la méthode créer une colonne
-        this.listColVue.add(columnAfaire);//On l'ajoute a l'attribut de la liste des colonnes présentes
-        this.t.ajouterColonne(aFaire);
+        VueColonne columnAfaire = createColumn(aFaire);//On le passe en paramètre de la méthode créer une colonne (ce que le controleur est sensé faire mais ici on ne l'utilse pas)
+        this.t.ajouterColonne(aFaire);//Meme chose
         Colonne enCours = new Colonne("En cours");
         VueColonne columnEnCours = createColumn(enCours);
-        this.listColVue.add(columnEnCours);
         this.t.ajouterColonne(enCours);
-        Colonne termine = new Colonne("Terminé");
+        Colonne termine = new Colonne("Termine");
         VueColonne columnTermine = createColumn(termine);
-        this.listColVue.add(columnTermine);
         this.t.ajouterColonne(termine);
         this.t.enregistrerObservateur(columnTermine);
 
@@ -147,12 +146,11 @@ public class NewVueBureau extends HBox implements Observateur {
 
     @Override
     public void actualiser(Sujet s){
-        System.out.println("Lancement de actualiser de newVueBureau");
         //On récupère les colonnes du modèle au moment où la méthode actualiser est appelée
         ArrayList<Colonne> listeCol = ((Tableau)s).getListeColonnes();
-        ArrayList<String> listeNomCol = new ArrayList<>();
-        for (Colonne c : listeCol) {
-            listeNomCol.add(c.getNomColonne());// On crée une liste de noms des colonnes pour simplifier les comparaisons
+        ArrayList<String> listeNomCol = new ArrayList<>();//On crée une liste des noms seulement des colonnes pour simplifier les comparaisons plus tard
+        for (Colonne c : listeCol) {//Pour chaque colonne du modèle
+            listeNomCol.add(c.getNomColonne());// On prend son nom et le met dans la liste des noms
         }
         for (Colonne c : listeCol){//On parcours les colonnes du modèle
             if (!containsColumn(c.getNomColonne())){//Si une colonne n'est pas présente dans cette vue, on l'ajoute. (On utilise une méthode auxiliaire pour simplifier le code)
@@ -163,22 +161,38 @@ public class NewVueBureau extends HBox implements Observateur {
         for (VueColonne c : this.listColVue) {// On parcourt les colonnes de la vue
             String nomC = c.getNomVueColonne();// Pour chaque colonne, on extrait son nom afin de pouvoir comparer
             if (!listeNomCol.contains(nomC)) {// Si une colonne de la vue n'est plus présente dans le modèle, on la supprime.
-                this.removeColumn(c);
+                ((Tableau)s).supprimerObservateur(c);
+                this.removeColumnById(nomC);
             }
         }
     }
 
-    private VueColonne createColumn(Colonne colonne) {// Cette méthode ajoute un objet colonne dans les données et renvoie une vueColonne
+    private VueColonne createColumn(Colonne colonne) {// Cette méthode ajoute un objet colonne graphiquement et renvoie la vueColonne
         VueColonne columnVBox = new VueColonne(colonne.getNomColonne(), this.t);
+        this.listColVue.add(columnVBox);
+        columnVBox.setId(colonne.getNomColonne());
         // gestionnaire d'événements pour le drag and drop
         setDragDropHandlers(columnVBox);
         rightHBox.getChildren().add(columnVBox);
         return columnVBox;
     }
 
-    private void removeColumn(VueColonne colonne) {
-        this.listColVue.remove(colonne);
-        this.rightHBox.getChildren().remove(colonne);
+    public void removeColumnById(String nomColonne) {
+        Node columnToRemove = null;
+        // Parcourir les enfants pour trouver le HBox avec l'id donné
+        for (Node node : rightHBox.getChildren()) {
+            if (node.getId() != null && node.getId().equals(nomColonne)) {
+                columnToRemove = node;
+                break;
+            }
+        }
+
+        // Supprimer le HBox si on l'a trouvé
+        if (columnToRemove != null) {
+            rightHBox.getChildren().remove(columnToRemove);
+            //Si la liste contient un objet du même nom, on le supprime
+            this.listColVue.removeIf(vueColonne -> vueColonne.getNomVueColonne().equals(nomColonne));
+        }
     }
 
     private VueColonne createAddColumn(Colonne colonne) {
@@ -255,7 +269,8 @@ public class NewVueBureau extends HBox implements Observateur {
         return null;
     }
 
-    private boolean containsColumn(String columnName) {
+    private boolean containsColumn(String columnName) {//Méthode qui compare le nom en paramètre avec les noms de la liste des colonnes présentes dans la vue.
+        //Renvoie vrai si la colonne est présente, faux sinon
         for (VueColonne vueColonne : this.listColVue) {
             if (vueColonne.getNomVueColonne().equals(columnName)) {
                 return true;

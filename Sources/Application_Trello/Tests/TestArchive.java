@@ -5,8 +5,17 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * classe TestArchive
+ * test les differentes methodes de la classe Archive
+ * fait par Logan
+ */
 public class TestArchive {
 
+    /**
+     * test_01
+     * test le constructeur de la classe Archive
+     */
     @Test
     public void test_01_ConstructeurArchive() {
         Archive archive = new Archive();
@@ -14,6 +23,10 @@ public class TestArchive {
         assertEquals(archive.getListeColonnesArchivees(),new ArrayList<>());
     }
 
+    /**
+     * test_02
+     * test la methode archiverTache de la classe Archive
+     */
     @Test
     public void test_02_ArchiverTache() {
         Archive archive = new Archive();
@@ -23,6 +36,10 @@ public class TestArchive {
         assertEquals(archive.getListeTachesArchivees().get(0), tacheS);
     }
 
+    /**
+     * test_03
+     * test la methode archiverColonne de la classe Archive
+     */
     @Test
     public void test_03_ArchiverColonne(){
         Archive archive = new Archive();
@@ -32,6 +49,10 @@ public class TestArchive {
         assertEquals(archive.getListeColonnesArchivees().get(0), c1);
     }
 
+    /**
+     * test_04
+     * test la methode desarchiverTache de la classe Archive
+     */
     @Test
     public void test_04_DesarchiverTache(){
         Archive archive = new Archive();
@@ -44,6 +65,10 @@ public class TestArchive {
         assertEquals("tache2", archive.getListeTachesArchivees().get(0).getNomTache());
     }
 
+/**
+     * test_05
+     * test la methode desarchiverColonne de la classe Archive
+     */
     @Test
     public void test_05_DesarchiverColonne(){
         Archive archive = new Archive();
