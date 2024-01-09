@@ -100,6 +100,14 @@ public class NewVueBureau extends HBox implements Observateur {
 
         vueListeButton.setOnAction(event -> afficherVueListe());
 
+        Button vueArchive = new Button("Accéder aux archives");
+        vueArchive.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
+        VBox.setMargin(vueArchive, new Insets(30));
+        vueArchive.setOnMouseEntered(e -> vueArchive.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
+        vueArchive.setOnMouseExited(e -> vueArchive.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+
+        vueArchive.setOnAction(event -> afficherVueArchive());
+
         Button ganttButton = new Button("Création du Gantt");
         ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
         VBox.setMargin(ganttButton, new Insets(30));
@@ -107,9 +115,12 @@ public class NewVueBureau extends HBox implements Observateur {
         ganttButton.setOnMouseExited(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
         ganttButton.setOnAction(event -> afficherVueGantt());
         this.setSpacing(20);
-        this.getChildren().addAll(leftVBox, separator, rightVBox, vueListeButton, ganttButton);
+        this.getChildren().addAll(leftVBox, separator, rightVBox, vueListeButton, ganttButton, vueArchive);
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
         rightVBox.getChildren().addAll(rightHBox);
+
+
+
     }
 
     private void afficherVueListe() {
@@ -126,6 +137,21 @@ public class NewVueBureau extends HBox implements Observateur {
             // Affichez la fenêtre
             stage.show();
         }
+    }
+
+    private void afficherVueArchive() {
+
+            VueListe vueListe = new VueListe(t, listColVue.get(0).getNomVueColonne());
+
+            // Créez une nouvelle scène pour la VueListe
+            Scene scene = new Scene(vueListe, 600, 600);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+
+
+            // Affichez la fenêtre
+            stage.show();
+
     }
 
     private void afficherVueGantt() {

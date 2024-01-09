@@ -49,6 +49,7 @@ public class VueColonne extends VBox implements Observateur{
         additionalButtonsRow.setAlignment(Pos.CENTER);
         Button newButton1 = createIconButton("trombonne.png");
         Button boutonSupp = createIconButton("croix.png");
+
         boutonSupp.setId("btnSupprimerColonne" + this.nomColonne);
         ControlSuppressionColonne controlSup = new ControlSuppressionColonne(this.t);
         boutonSupp.setOnAction(controlSup);
