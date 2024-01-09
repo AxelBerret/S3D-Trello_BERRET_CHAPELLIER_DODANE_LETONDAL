@@ -30,7 +30,10 @@ public class ControlModificationTache implements EventHandler<ActionEvent> {
         Scene sceneModification = new Scene(vueModificationTache, 600, 400);
 
         stageModification.setScene(sceneModification);
-        stageModification.showAndWait();
+        stageModification.show();  // Utilisez show() au lieu de showAndWait()
+
+        // Appelez la méthode actualiser après avoir montré la fenêtre
+        vueModificationTache.actualiser(this.tab);
     }
 
 }
