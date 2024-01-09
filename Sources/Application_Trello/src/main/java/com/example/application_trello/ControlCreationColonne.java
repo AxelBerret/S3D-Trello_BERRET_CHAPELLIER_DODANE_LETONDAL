@@ -22,9 +22,9 @@ public class ControlCreationColonne implements EventHandler<ActionEvent> {
     }
 
     public void handle(ActionEvent event) {
-        if (event.getSource() instanceof Button) {
-            Button sourceButton = (Button) event.getSource();//Si l'event vient d'un boutton
-            if (sourceButton.getId().startsWith("btnCreerColonne")) {//Si c'est un bouton de création de colonne
+        if (event.getTarget() instanceof Button) {//Si l'event vient d'un boutton
+            Button targetButton = (Button) event.getTarget();//On récupère ce bouton
+            if (targetButton.getId().startsWith("btnCreerColonne")) {//Si c'est un bouton de création de colonne
                     // On ouvre une fenetre de dialogue pour rentrer le nom de la colonne
                     TextInputDialog dialog = new TextInputDialog();
                     dialog.setTitle("Création de colonne");
@@ -39,5 +39,4 @@ public class ControlCreationColonne implements EventHandler<ActionEvent> {
             }
         }
     }
-
 }

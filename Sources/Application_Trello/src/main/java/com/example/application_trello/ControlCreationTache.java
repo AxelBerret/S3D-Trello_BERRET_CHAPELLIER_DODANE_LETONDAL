@@ -10,11 +10,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class ControlCreationTache implements EventHandler<ActionEvent> {
-    /*Explication de l'architecture MVC : L'architecture MVC mise en place ici se décompose en plusieurs parties.
-     * Premièrement, dans la classe main principale, on créée un nouveau modèle, auquel on va associer des vues, auxquelles on va associer un controleur éventuellement.
-     * le principe est que chaque vue affiche queleque chose par défaut, et lorsque l'utilisateur agit sur l'application,
-     * le controleur reçoit l'action, et déclenche la méthode appropriée définie dans le modèle. Ce dernier notifie tous les observateurs qui vont se
-     * mettre à jour si nécessaire. */
+    /*  Controleur du bouton + servant à créer une tache. Son rôle est d'ouvrir une fenêtre de dialogue temporaire
+    * afin que l'utilisateur rentre le nom de la tâche puis l'ajoute au modèle. Le contrôleur récupère le nom de la colonne de laquelle
+    * provient le bouton + grâce à l'ID du bouton qui est de la forme suivante : "btnCreerTacheColonne1" ce qui explique l'utilisation de la méthode
+    * "extraireNomDeColonne". C'est pour ajouter la tâche dans la bonne colonne.
+    * Le contrôleur a été écrit par Titouan*/
     private Tableau tab;
     private ArrayList<String> listeNomColonnes;
 
@@ -25,9 +25,8 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
 
     public void handle(ActionEvent event) {
         this.majListeNomColonnes();
-        if (event.getSource() instanceof Button) {
-
-            Button targetButton = (Button) event.getTarget();//Si l'event vient d'un boutton
+        if (event.getTarget() instanceof Button) {//Si l'event vient d'un boutton
+            Button targetButton = (Button) event.getTarget();// On récupère ce bouton
             if (targetButton.getId().startsWith("btnCreerTache")) {//Si c'est un bouton de création de tâche
                 String nomColonne = extraireNomColonneDeID(targetButton.getId());//On récupère le nom de la colonne
                 if (this.listeNomColonnes.contains(nomColonne)){//Si la colonne existe dans notre tableau
@@ -46,7 +45,7 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
         }
     }
 
-    public void majListeNomColonnes(){
+    public void majListeNomColonnes(){//Méthode pour créer une liste des noms de colonnes a partir de la liste des colonnes du tableau pour simplifier la méthode handle
         ArrayList<Colonne> lc = this.tab.getListeColonnes();
         this.listeNomColonnes = new ArrayList<>();
         for (Colonne c : lc){
@@ -60,9 +59,4 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
         }
         return null;
     }
-
-    public ArrayList<String> getListeNomColonnes(){
-        return this.listeNomColonnes;
-    }
-
 }
