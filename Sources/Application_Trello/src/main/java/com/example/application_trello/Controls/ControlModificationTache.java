@@ -33,7 +33,7 @@ public class ControlModificationTache implements EventHandler<ActionEvent> {
         stageModification.show();  // Utilisez show() au lieu de showAndWait()
 
         // Appelez la méthode actualiser après avoir montré la fenêtre
-        vueModificationTache.actualiser(this.tab);
+        //vueModificationTache.actualiser(this.tab);
     }
 
 }
