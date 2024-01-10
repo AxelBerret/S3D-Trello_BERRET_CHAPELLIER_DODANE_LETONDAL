@@ -33,8 +33,8 @@ public class VueTache extends GridPane implements Observateur {
     private String sousTacheSelectionnee;
     private Tableau tab;
     private ListView<String> dependListView;
-    private ListView<String> sousTachesListView;
     private TextArea commentTextArea;
+    private VBox vboxListesousTache;
 
     public VueTache(Tache t, Tableau tab){// !!! !!! Ne pas oublier d'actualiser a la création
         this.t = t;
@@ -99,7 +99,7 @@ public class VueTache extends GridPane implements Observateur {
         // Éléments pour les sous-tâches
         Label sousTachesLabel = new Label("Sous-Tâches:");
         sousTachesLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
-        this.sousTachesListView = new ListView<>();
+        this.vboxListesousTache = new VBox();
         ComboBox<String> sousTachesComboBox = new ComboBox<>();
         sousTachesComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
       sousTachesComboBox.setItems(this.listeSousT);//On met dans la comboBox les taches qui peuvent devenir des sous-tâches
@@ -132,7 +132,7 @@ public class VueTache extends GridPane implements Observateur {
         this.add(dependComboBox, 0, 2);
         this.add(addDependButton, 1, 2);
         this.add(sousTachesLabel, 0, 3);
-        this.add(sousTachesListView, 1, 3);
+        this.add(vboxListesousTache, 1, 3);
         this.add(sousTachesComboBox, 0, 4);
         this.add(addSousTacheButton, 1, 4);
         this.add(dateDebutLabel, 0, 5);
