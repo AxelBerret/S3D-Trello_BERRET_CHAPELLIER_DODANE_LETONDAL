@@ -3,6 +3,7 @@ package com.example.application_trello.Objects;
 
 import com.example.application_trello.Views.VueTache;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -372,5 +373,16 @@ public class Tableau implements Sujet {
 
     public ArrayList<Tache> getListeTachesArchives() {
         return this.archive.getListeTachesArchivees();
+    }
+    public void setDateDebut(String nomT, LocalDate date){
+        Tache tAModifier = getTache(nomT);
+        tAModifier.setDateDebut(date);
+        notifierObservateurs();
+    }
+
+    public void setDateFin(String nomT, LocalDate date){
+        Tache tAModifier = getTache(nomT);
+        tAModifier.setDateFin(date);
+        notifierObservateurs();
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.*;
 
 //Vue tache : vue qu'on va afficher dans une fenêtre externe a l'application lorsqu'on va cliquer sur une tache,
@@ -19,9 +20,10 @@ import java.util.*;
 //Classe écrite par Titouan
 public class VueTache extends GridPane implements Observateur {
 
-    private final DatePicker datePickerDebut;
-    private final DatePicker datePickerFin;
-
+    private DatePicker datePickerDebut;
+    private DatePicker datePickerFin;
+    private LocalDate dateDebutSelectionnee;
+    private LocalDate dateFinSelectionnee;
     private Tache t;
     private ObservableList<String> listeDep;
     private ObservableList<String> listeSousT;
@@ -70,7 +72,17 @@ public class VueTache extends GridPane implements Observateur {
         addDependButton.setOnAction(controleur);
 
         datePickerDebut = new DatePicker();
+        datePickerDebut.valueProperty().addListener((observable, oldValue, newValue) -> {
+            dateDebutSelectionnee = newValue;// Lorsqu'une selection est faite dans la date, on modifie l'attribut date sélectionnée.
+        });
+        datePickerDebut.setId("setDateDebut" + this.t.getNomTache());
+        datePickerDebut.setOnAction(controleur);
         datePickerFin = new DatePicker();
+        datePickerFin.valueProperty().addListener((observable, oldValue, newValue) -> {
+            dateFinSelectionnee = newValue;//Même chose
+        });
+        datePickerFin.setId("setDateFin" + this.t.getNomTache());
+        datePickerFin.setOnAction(controleur);
         datePickerDebut.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
 
 
@@ -82,11 +94,6 @@ public class VueTache extends GridPane implements Observateur {
 
         Label dateFinLabel = new Label("Date de fin:");
         dateFinLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
-
-        this.add(dateDebutLabel, 0, 5);
-        this.add(datePickerDebut, 1, 5);
-        this.add(dateFinLabel, 0, 6);
-        this.add(datePickerFin, 1, 6);
 
         // Éléments pour les sous-tâches
         Label sousTachesLabel = new Label("Sous-Tâches:");
@@ -115,7 +122,7 @@ public class VueTache extends GridPane implements Observateur {
             ((Stage) scene.getWindow()).close();
             tab.supprimerObservateur(this);
         });
-
+//Ajout de tous les éléments dans le gridPane principal
         this.add(commentLabel, 0, 0);
         this.add(commentTextArea, 1, 0);
         this.add(dependLabel, 0, 1);
@@ -126,6 +133,10 @@ public class VueTache extends GridPane implements Observateur {
         this.add(sousTachesListView, 1, 3);
         this.add(sousTachesComboBox, 0, 4);
         this.add(addSousTacheButton, 1, 4);
+        this.add(dateDebutLabel, 0, 5);
+        this.add(datePickerDebut, 1, 5);
+        this.add(dateFinLabel, 0, 6);
+        this.add(datePickerFin, 1, 6);
         this.add(saveButton, 0, 7, 2, 1);
     }
 
@@ -140,8 +151,9 @@ public class VueTache extends GridPane implements Observateur {
         }
         ArrayList<Tache> listDepActuelles = ta.getListeDependances();//On récupère ses dépendances
         for (Tache t : listDepActuelles){//Pour chaque dependance
-            this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute à la liste
-
+            if (t!=null){//Si la tache existe
+                this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute à la liste
+            }
         }
         dependListView.setItems(this.vueDep);//Affiche dans la boite les dépendances déjà mises en ajoutant l'observableList a la ListView
         lisAllTaches.removeAll(listDepActuelles);//Supprime les dépendances actuelles de la liste de toutes les tâches
@@ -177,14 +189,41 @@ public class VueTache extends GridPane implements Observateur {
                 this.listeSousT.add(tach.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
             }
         }
+        this.datePickerDebut.setValue(this.dateDebutSelectionnee);
+        this.datePickerFin.setValue(this.dateFinSelectionnee);
+        System.out.println("Date de la tâche : " + this.t.getDateDebut());
     }
 
     public String getDependanceSelectionnee() {
         return this.dependanceSelectionnee;
     }
 
+    public void resetDependanceSelectionnee(){
+        this.dependanceSelectionnee = null;
+    }
+
     public String getSousTacheSelectionnee(){
         return this.sousTacheSelectionnee;
+    }
+
+    public void resetSousTacheSelectionnee(){
+        this.sousTacheSelectionnee = null;
+    }
+
+    public LocalDate getDateDebutSelectionnee(){
+        return dateDebutSelectionnee;
+    }
+
+    public void resetDateDebutSelectionnee(){
+        this.dateDebutSelectionnee = null;
+    }
+
+    public LocalDate getDateFinSelectionnee(){
+        return this.dateFinSelectionnee;
+    }
+
+    public void resetDateFinSelectionnee(){
+        this.dateFinSelectionnee = null;
     }
 
     }

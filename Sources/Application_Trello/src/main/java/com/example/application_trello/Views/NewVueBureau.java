@@ -218,7 +218,6 @@ public class NewVueBureau extends HBox implements Observateur {
                 this.removeColumnById(nomC);
             }
         }
-        ((Tableau)s).toString();
     }
 
     private VueColonne createColumn(Colonne colonne) {// Cette méthode ajoute un objet colonne graphiquement et renvoie la vueColonne
