@@ -11,6 +11,10 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 
+//Vue Liste : vue qu'on va afficher dans une fenêtre externe a l'application lorsqu'on va cliquer sur une tache,
+//pour afficher la liste des taches de chaque colonne avec la possibilité d'acceder a la vue tache de chaque tache
+//Classe écrite par Sacha
+
 public class VueListe extends VBox implements Observateur {
 
     private Tableau tableau;

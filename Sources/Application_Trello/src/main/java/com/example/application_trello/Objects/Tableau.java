@@ -204,11 +204,12 @@ public class Tableau implements Sujet {
      * methode desarchiverTache de la classe Tableau
      * @param nomTache nom de la tache que l on souhaite desarchiver la tache
      */
-    public void desarchiverTache(String nomTache) {
+    public void desarchiverTache(String nomTache,String nomCol) {
         for (int i = 0; i < this.archive.getListeTachesArchivees().size(); i++) {
             if (this.archive.getListeTachesArchivees().get(i).getNomTache().equals(nomTache)) {
                 Tache t = this.archive.getListeTachesArchivees().get(i);
-                this.getListeColonnes().get(0).ajouterTache(t);
+                System.out.println(nomCol);
+                this.ajouterTache(t.getNomTache(),nomCol);
                 this.archive.desarchiverTache(t);
             }
         }
@@ -222,8 +223,9 @@ public class Tableau implements Sujet {
     public void archiverColonne(String nomColonne) {
         Colonne colonne = this.getColonne(nomColonne);
         this.archive.archiverColonne(colonne);
-        this.supprimerColonne(colonne);
         this.notifierObservateurs();
+        this.supprimerColonne(colonne);
+
     }
 
     /**
@@ -288,7 +290,7 @@ public class Tableau implements Sujet {
         for (Tache t : this.getListeTaches()){
             if (t.getNomTache().equals(nomTache)){
                 if (t instanceof TacheSimple ts){
-                    TacheComplexe tc = new TacheComplexe(ts);
+                    TacheComplexe tc = tacheSimpleToTacheComplexe(ts);
                     tc.ajouterTache(tAAjouter);
                 } else if(t instanceof TacheComplexe tc){
                     tc.ajouterTache(tAAjouter);
@@ -296,6 +298,23 @@ public class Tableau implements Sujet {
             }
         }
         this.notifierObservateurs();
+    }
+
+    public Colonne getColonneByTask(Tache t){
+        for (Colonne c : this.getListeColonnes()){
+            if (c.getListeTaches().contains(t)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public TacheComplexe tacheSimpleToTacheComplexe(TacheSimple ts){
+        TacheComplexe tc = new TacheComplexe(ts);
+        Colonne actuelle = getColonneByTask(ts);
+        actuelle.supprimerTache(ts);
+        actuelle.ajouterTache(tc);
+        return tc;
     }
 
     /**

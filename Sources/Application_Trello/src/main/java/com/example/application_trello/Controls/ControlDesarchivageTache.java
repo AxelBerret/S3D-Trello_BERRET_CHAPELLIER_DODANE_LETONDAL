@@ -5,7 +5,8 @@ import com.example.application_trello.Objects.Tache;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-
+//Controleur DesarchivageTache : Controleur qui va permettre de désarchiver une tache en lien avec le nouton désarchiver de la vueArchive
+//Classe écrite par Sacha
 public class ControlDesarchivageTache implements EventHandler<ActionEvent> {
 
     private Tableau tab;
@@ -47,7 +48,7 @@ public class ControlDesarchivageTache implements EventHandler<ActionEvent> {
 
                 // Utiliser la tâche trouvée pour désarchiver
                 if (tacheDesarchivee != null) {
-                    tab.desarchiverTache(tacheDesarchivee.getNomTache());
+                    tab.desarchiverTache(tacheDesarchivee.getNomTache(),tacheDesarchivee.getColonneParent().getNomColonne());
                 }
             }
         }

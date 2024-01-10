@@ -8,7 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-
+//Controleur sarchivageTache : Controleur qui va permettre d'archiver une tache en lien avec le bouton sur les taches
+//Classe écrite par Sacha
 public class ControlArchivageTache implements EventHandler<ActionEvent> {
 
     /**

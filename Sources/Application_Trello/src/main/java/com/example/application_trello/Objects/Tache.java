@@ -42,6 +42,7 @@ public abstract class Tache {
      * represente la liste des dependances de la tache
      */
     protected ArrayList<Tache> listeDependances;
+    protected Colonne colonneParent;
 
 
     /**
@@ -55,6 +56,7 @@ public abstract class Tache {
         this.dateDebut = null;
         this.dateFin = null;
         this.listeDependances = new ArrayList<Tache>();
+        this.colonneParent = null;
     }
 
 
@@ -97,6 +99,10 @@ public abstract class Tache {
         return this.listeDependances;
     }
 
+    public Colonne getColonneParent(){
+        return this.colonneParent;
+    }
+
     /**
      * methode setCommentaire de la classe Tache
      * @param com commentaire que l on souhaite donner a la tache
@@ -116,6 +122,10 @@ public abstract class Tache {
      * @param dateF date de fin que l on souhaite donner a la tache
      */
     public abstract void setDateFin(LocalDate dateF);
+
+    public void setColonneParent(Colonne c){
+        this.colonneParent = c;
+    }
 
     /**
      * methode ajouterDependance de la classe Tache

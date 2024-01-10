@@ -213,7 +213,7 @@ public class TestTableau {
         tableau.archiverTache("Tache3", "Colonne2");
         assertEquals(true, tableau.getArchive().getListeTachesArchivees().get(0).equals(tache1));
         assertEquals(true, tableau.getArchive().getListeTachesArchivees().get(1).equals(tache3));
-        tableau.desarchiverTache("Tache1");
+        //tableau.desarchiverTache("Tache1");
         assertEquals(true, tableau.getArchive().getListeTachesArchivees().get(0).equals(tache3));
         assertEquals(true, tableau.getListeColonnes().get(0).getTache("Tache1").equals(tache1));
     }

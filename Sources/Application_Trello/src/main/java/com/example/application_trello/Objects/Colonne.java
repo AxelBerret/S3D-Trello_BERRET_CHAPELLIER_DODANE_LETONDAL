@@ -45,7 +45,10 @@ public class Colonne implements InterfaceListeTaches {
      * @param tache tache que l on souhaite ajouter a la liste des taches
      * de la colonne
      */
-    public void ajouterTache(Tache tache) {this.listeTaches.add(tache);}
+    public void ajouterTache(Tache tache) {
+        tache.setColonneParent(this);
+        this.listeTaches.add(tache);
+    }
 
     /**
      * methode supprimer de la classe Colonne
