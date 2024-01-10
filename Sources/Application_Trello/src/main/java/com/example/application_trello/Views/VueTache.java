@@ -183,12 +183,16 @@ public class VueTache extends GridPane implements Observateur {
                 this.listeSousT.add(tach.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
             }
             ArrayList<Tache> lisStActuelles = tc.getListeTaches();//On récupère la liste de ses sous-taches
+            vboxListesousTache.getChildren().clear();//On remet à zéro la VBox
             for (Tache tach : lisStActuelles){
                 if (tach!=null){
-                    this.vueSt.clear();
-                    this.vueSt.add(tach.getNomTache());//On met à jour l'attribut VueSt
+                    Hyperlink hyperlink = new Hyperlink(tach.getNomTache());
+                    ControlModificationTache cmt = new ControlModificationTache(tab, tach);
+                    hyperlink.setOnAction(cmt);
+                    vboxListesousTache.getChildren().add(hyperlink);
                 }
             }
+            System.out.println("SOus taches :" + lisStActuelles);
            // this.sousTa.setItems(this.vueSt);//On met dans la vue des sous tâches toutes les sous-tâches que la tâche contient actuellement
         } else {//Si ce n'est pas encore une tâche complexe :
             //On va seulement remplir la comboBox pour proposer des sous-tâches à assigner
@@ -204,10 +208,7 @@ public class VueTache extends GridPane implements Observateur {
 
         // Ajoute les sous-tâches à la VBox
         for (String sousTache : listeSousT) {
-            Hyperlink hyperlink = new Hyperlink(sousTache);
-            ControlModificationTache cmt = new ControlModificationTache(tab, ta);
-            hyperlink.setOnAction(cmt);
-            vboxListesousTache.getChildren().add(hyperlink);
+
         }
 
 

@@ -108,12 +108,38 @@ public class VueGantt extends HBox implements Observateur {
 
                     rectanglesBox.getChildren().add(rowBox);
                 }
+                if (tache instanceof TacheComplexe){
+                for (Tache tac : ((TacheComplexe) tache).getListeTaches()) {
+                    if (tache.getDateDebut() != null && tache.getDateFin() != null) {
+                        Hyperlink hyperlinkTache = new Hyperlink(tache.getNomTache());
+                        hyperlinkTache.setStyle("-fx-text-fill: white; -fx-font-size: 16;");
+
+                        Tache ta = this.tableau.getTache(tache.getNomTache());
+                        ControlModificationTache cmt = new ControlModificationTache(this.tableau, ta);
+
+                        hyperlinkTache.setOnAction(cmt);
+
+                        hyperlinksBox.getChildren().add(hyperlinkTache);
+
+                        // Ajouter le rectangle transparent avant la date de début
+                        Rectangle preStartRect = createTransparentRectangle(baseDate, tache.getDateDebut(), 10);
+                        // Ajouter le rectangle de la tâche
+                        Rectangle rectangleTache = createGanttRectangle(tache, baseDate, 10);
+
+                        // Ajouter la ligne actuelle avec les rectangles
+                        HBox rowBox = new HBox(10);
+                        rowBox.setAlignment(Pos.CENTER_LEFT);
+                        rowBox.getChildren().addAll(preStartRect, rectangleTache);
+
+                        rectanglesBox.getChildren().add(rowBox);
+                    }
+                }
             }
         }
 
         // Ajouter les hyperliens et rectangles à la vue Gantt
         getChildren().addAll(hyperlinksBox, rectanglesBox);
-    }
+    }}
 
 
     // Méthode pour obtenir l'indice fictif associé à la colonne
