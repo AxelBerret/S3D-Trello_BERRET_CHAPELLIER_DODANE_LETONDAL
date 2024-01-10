@@ -167,6 +167,15 @@ public class Tableau implements Sujet {
         this.notifierObservateurs();
     }
 
+    public void ajouterTache(Tache t, String nomColonne){
+        for (Colonne c : this.getListeColonnes()){
+            if (c.getNomColonne().equals(nomColonne)){
+                c.ajouterTache(t);
+            }
+        }
+        this.notifierObservateurs();
+    }
+
     /**
      * methode supprimerTache de la classe Tableau
      * @param nomTache nom de la tache que l on souhaite supprimer
@@ -253,8 +262,7 @@ public class Tableau implements Sujet {
             if (tache != null) {
 
                 // Ajoute la tâche à la colonne destination
-
-                ajouterTache(tache.getNomTache(), nomColonneDestination);
+                ajouterTache(tache, nomColonneDestination);
 
                 // Supprime la tâche de la colonne source
                 supprimerTache(tache.getNomTache(), nomColonneSource);

@@ -225,7 +225,6 @@ import static javafx.application.Application.launch;
         columnVBox.setOnDragDetected(event -> {
             // Commence le glisser-déposer
             Dragboard db = columnVBox.startDragAndDrop(TransferMode.MOVE);
-
             // Ajoute les données à transférer (ici, le nom et la colonne de la tâche)
             ClipboardContent content = new ClipboardContent();
             content.putString(columnVBox.getTaskName(event) + "|" + columnVBox.getNomVueColonne());
