@@ -1,4 +1,6 @@
 import com.example.application_trello.*;
+import com.example.application_trello.Controls.ControlArchivageTache;
+import com.example.application_trello.Objects.Tableau;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,13 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestControlArchivageTache{
     // Attributs
     private Tableau tableau;
+    private String nomTache;
+    private String nomCol;
     private ControlArchivageTache controlArchivageTache;
 
     @BeforeEach
     public void setUp(){
         // Initialisation des objets nécessaires pour les tests
         tableau = new Tableau("Test");
-        controlArchivageTache = new ControlArchivageTache(tableau);
+        controlArchivageTache = new ControlArchivageTache(tableau, nomTache, nomCol);
     }
 
     /**

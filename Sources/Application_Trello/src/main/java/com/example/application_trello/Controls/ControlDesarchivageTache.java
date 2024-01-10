@@ -18,6 +18,14 @@ public class ControlDesarchivageTache implements EventHandler<ActionEvent> {
         this.nomTache = nomTache;
     }
 
+    /**
+     * getter du tableau
+     * @return
+     */
+    public Tableau getTab() {
+        return tab;
+    }
+
     public void handle(ActionEvent event) {
         if (event.getSource() instanceof Button) {
             Button sourceButton = (Button) event.getSource();

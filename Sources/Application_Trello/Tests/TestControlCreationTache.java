@@ -1,5 +1,7 @@
+import com.example.application_trello.Controls.ControlCreationTache;
+import com.example.application_trello.Objects.Tableau;
 import org.junit.jupiter.api.Test;
-import com.example.application_trello.Tache;
+import com.example.application_trello.Objects.Colonne;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +30,7 @@ public class TestControlCreationTache {
     /**
      * test_01
      * test la methode MajListeNomColonnes de la classe ControlCreationTache
-
+     * */
     @Test
     void testMajListeNomColonnes() {
         // Ajouter des colonnes pour le test
@@ -46,7 +48,6 @@ public class TestControlCreationTache {
         assertTrue(listeNomColonnes.contains("Colonne1"));
         assertTrue(listeNomColonnes.contains("Colonne2"));
     }
-    */
     /**
      * test_02
      * test la methode ExtraireNomColonneDeID de la classe ControlCreationTache

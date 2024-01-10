@@ -1,7 +1,4 @@
-import com.example.application_trello.Tableau;
-import com.example.application_trello.Colonne;
-import com.example.application_trello.Tache;
-import com.example.application_trello.TacheSimple;
+import com.example.application_trello.Objects.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
