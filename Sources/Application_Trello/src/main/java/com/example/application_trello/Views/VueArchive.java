@@ -2,10 +2,7 @@ package com.example.application_trello.Views;
 
 import com.example.application_trello.Controls.ControlDesarchivageTache;
 import com.example.application_trello.Controls.ControlModificationTache;
-import com.example.application_trello.Objects.Observateur;
-import com.example.application_trello.Objects.Sujet;
-import com.example.application_trello.Objects.Tableau;
-import com.example.application_trello.Objects.Tache;
+import com.example.application_trello.Objects.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -62,7 +59,7 @@ public class VueArchive  extends GridPane implements Observateur {
 
 
             Button boutonDesarchiver = new Button("Désarchiver");
-            ControlDesarchivageTache condesarchiTache = new ControlDesarchivageTache(tableau,tache.getNomTache(),nomColonne);
+            ControlDesarchivageTache condesarchiTache = new ControlDesarchivageTache(tableau,tache.getNomTache(), tache.getColonneParent().getNomColonne());
             boutonDesarchiver.setOnAction(condesarchiTache);
             boutonDesarchiver.setId("boutonDesarchiver"+tache.getNomTache());
 

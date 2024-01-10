@@ -37,7 +37,6 @@ public class Archive {
      */
     public void archiverTache(Tache tache){
         this.listeTachesArchivees.add(tache);
-
     }
 
 
