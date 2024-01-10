@@ -19,6 +19,14 @@ public class ControlModificationTache implements EventHandler<ActionEvent> {
         this.tache = tt;
     }
 
+    /**
+     * getter du tableau
+     * @return
+     */
+    public Tableau getTab() {
+        return tab;
+    }
+
     public void handle(ActionEvent event) {
         Stage stageModification = new Stage();
         stageModification.setTitle(tache.getNomTache());

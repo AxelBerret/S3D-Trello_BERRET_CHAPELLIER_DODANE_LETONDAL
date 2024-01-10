@@ -14,13 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestControlArchivageColonne {
     // Attributs
     public Tableau tableau;
+
+    String nomColonne;
     public ControlArchivageColonne controlArchivageColonne;
 
     @BeforeEach
     public void setUp(){
         // Initialisation des objets nécessaires pour les tests
         tableau = new Tableau("Test");
-        controlArchivageColonne = new ControlArchivageColonne(tableau);
+        controlArchivageColonne = new ControlArchivageColonne(tableau,nomColonne);
     }
 
     /**
