@@ -45,8 +45,10 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
                     VueTache vt = this.tab.getVueTache();//On récupère l'instance de la VueTache en cours d'éxécution
                     String st = vt.getSousTacheSelectionnee();//On récupère le nom de la sous-tâche à ajouter à cette tâche
                     // On ajoute la st a la tâche
-                    this.tab.ajouterSousTache(nomTache, st);
-                    vt.resetSousTacheSelectionnee();
+                    if (st != null){
+                        this.tab.ajouterSousTache(nomTache, st);
+                        vt.resetSousTacheSelectionnee();
+                    }
                 }
             }
         } else if(event.getTarget() instanceof DatePicker) {//Si l'event vient d'un datePicker

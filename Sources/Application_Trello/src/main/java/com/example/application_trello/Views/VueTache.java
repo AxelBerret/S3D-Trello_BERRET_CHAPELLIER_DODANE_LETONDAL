@@ -34,6 +34,7 @@ public class VueTache extends GridPane implements Observateur {
     private Tableau tab;
     private ListView<String> dependListView;
     private ListView<String> sousTachesListView;
+    private TextArea commentTextArea;
 
     public VueTache(Tache t, Tableau tab){// !!! !!! Ne pas oublier d'actualiser a la création
         this.t = t;
@@ -48,7 +49,7 @@ public class VueTache extends GridPane implements Observateur {
         Label commentLabel = new Label("Commentaire:");
         commentLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
 
-        TextArea commentTextArea = new TextArea("Commentaire de test");
+        this.commentTextArea = new TextArea("Commentaire de test");
         commentTextArea.setWrapText(true);
 
 
@@ -118,6 +119,7 @@ public class VueTache extends GridPane implements Observateur {
         saveButton.setOnMouseEntered(e -> saveButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
         saveButton.setOnMouseExited(e -> saveButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
         saveButton.setOnAction(e -> {//Pour que la fenêtre se ferme lorsqu'on clique sur ce bouton
+            this.t.setCommentaire(this.commentTextArea.getText());
             Scene scene = this.getScene();
             ((Stage) scene.getWindow()).close();
             tab.supprimerObservateur(this);
@@ -143,6 +145,7 @@ public class VueTache extends GridPane implements Observateur {
     public void actualiser(Sujet s){
         ArrayList<Tache> lisAllTaches = ((Tableau)s).getListeTaches();//Stocke toutes les tâches du modèle
         Tache ta = ((Tableau)s).getTache(this.t.getNomTache());//On récupère la tache actuelle mise a jour
+        this.commentTextArea.setText(ta.getCommentaire());
         if (ta==null){
             ta = ((Tableau)s).getArchive().getTacheByNom(this.t.getNomTache());
         }
@@ -152,6 +155,7 @@ public class VueTache extends GridPane implements Observateur {
         ArrayList<Tache> listDepActuelles = ta.getListeDependances();//On récupère ses dépendances
         for (Tache t : listDepActuelles){//Pour chaque dependance
             if (t!=null){//Si la tache existe
+                this.vueDep.clear();//On la remet à zéro
                 this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute à la liste
             }
         }
@@ -178,7 +182,10 @@ public class VueTache extends GridPane implements Observateur {
             }
             ArrayList<Tache> lisStActuelles = tc.getListeTaches();//On récupère la liste de ses sous-taches
             for (Tache tach : lisStActuelles){
-                this.vueSt.add(tach.getNomTache());//On met à jour l'attribut VueSt
+                if (tach!=null){
+                    this.vueSt.clear();
+                    this.vueSt.add(tach.getNomTache());//On met à jour l'attribut VueSt
+                }
             }
             this.sousTachesListView.setItems(this.vueSt);//On met dans la vue des sous tâches toutes les sous-tâches que la tâche contient actuellement
         } else {//Si ce n'est pas encore une tâche complexe :
