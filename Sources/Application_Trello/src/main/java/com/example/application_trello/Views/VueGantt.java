@@ -43,11 +43,14 @@ public class VueGantt extends HBox implements Observateur {
             Label labelColonne = new Label(nomColonne);
             labelColonne.setStyle("-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 18;");
             getChildren().add(labelColonne);
-
             // Ajouter la logique du diagramme de Gantt ici
             for (Tache tache : colonne.getListeTaches()) {
                 // Vérifier si la tâche a des dates de début et de fin définies
+                System.out.println("taches trouvées" +tache);
+
                 if (tache.getDateDebut() != null && tache.getDateFin() != null) {
+                    System.out.println("récuppérations de la date de la tache : " +tache);
+
                     Rectangle rectangleTache = createGanttRectangle(tache);
                     getChildren().add(rectangleTache);
                 }
@@ -55,6 +58,7 @@ public class VueGantt extends HBox implements Observateur {
         }
     }
 
+    
 
     private Rectangle createGanttRectangle(Tache tache) {
         LocalDate baseDate = determinerBaseDate(tableau);
@@ -80,7 +84,7 @@ public class VueGantt extends HBox implements Observateur {
 
         // Utiliser la couleur associée à l'indice fictif
         rectangle.setFill(getCouleurByIndice(indiceColonne));
-
+        System.out.println("affichage du rectangle");
         return rectangle;
     }
 
