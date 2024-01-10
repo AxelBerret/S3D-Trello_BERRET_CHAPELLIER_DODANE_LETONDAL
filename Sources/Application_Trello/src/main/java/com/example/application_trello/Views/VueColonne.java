@@ -17,7 +17,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.Objects;
 //Classe représentant la vue d'une colonne. Ces vues sont contenues dans une vue bureau, et une nouvelle est créée à chaque création de Colonne.
-//Cette vue a été co écrite par ? et Titouan
+//Cette vue a été co écrite par Sacha et Titouan
 public class VueColonne extends VBox implements Observateur {
 
     private String nomColonne;
