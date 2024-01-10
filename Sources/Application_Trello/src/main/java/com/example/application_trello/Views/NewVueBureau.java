@@ -22,121 +22,85 @@ import java.util.ArrayList;
 import static javafx.application.Application.launch;
 //Cette classe représente la vue bureau qui est la vue principale que l'on utilise dans l'application et qui englobe d'autres vues.
 //Elle a été écrite par Titouan et Sacha
-public class NewVueBureau extends HBox implements Observateur {
 
-    private ArrayList<VueColonne> listColVue;
-    private HBox rightHBox;
-    private Tableau t;
+    public class NewVueBureau extends HBox implements Observateur {
 
-    public NewVueBureau(Sujet t) {
-        VBox leftVBox = new VBox(200);
-        leftVBox.setAlignment(Pos.CENTER);
-        this.t = (Tableau) t;
+        private ArrayList<VueColonne> listColVue;
+        private HBox rightHBox;
+        private VBox vbox;  // Nouvelle VBox
+        private Tableau t;
 
-        VBox rightVBox = new VBox(20);
-        rightVBox.setPadding(new Insets(20));
-        rightVBox.setAlignment(Pos.CENTER);
+        public NewVueBureau(Sujet t) {
+            VBox leftVBox = new VBox(0);
+            leftVBox.setAlignment(Pos.CENTER);
+            this.t = (Tableau) t;
 
-        this.rightHBox = new HBox(20);
+            VBox rightVBox = new VBox(20);
+            rightVBox.setPadding(new Insets(20));
+            rightVBox.setAlignment(Pos.CENTER);
 
-        //Création des 3 colonnes par défaut
-        this.listColVue = new ArrayList<>(); //On initialise la liste de vues colonnes
-        Colonne aFaire = new Colonne("A faire");//On crée un objet colonne
-        VueColonne columnAfaire = createColumn(aFaire);//On le passe en paramètre de la méthode créer une colonne (ce que le controleur est sensé faire mais ici on ne l'utilse pas)
-        this.t.ajouterColonne(aFaire);//Meme chose
-        this.t.enregistrerObservateur(columnAfaire);
-        Colonne enCours = new Colonne("En cours");
-        VueColonne columnEnCours = createColumn(enCours);
-        this.t.ajouterColonne(enCours);
-        this.t.enregistrerObservateur(columnEnCours);
-        Colonne termine = new Colonne("Termine");
-        VueColonne columnTermine = createColumn(termine);
-        this.t.ajouterColonne(termine);
-        this.t.enregistrerObservateur(columnTermine);
+            this.rightHBox = new HBox(20);
 
-        // On ajoute des tâches par défaut à la première colonne pour servir d'exemple
-        this.t.ajouterTache("Tache 1", "A faire");
-        //columnAfaire.addTask("Tache 1");
-        this.t.ajouterTache("Tache 2", "A faire");
-        //columnAfaire.addTask("Tache 2");
+            this.vbox = new VBox(20);  // Nouvelle VBox
+            vbox.setAlignment(Pos.CENTER);  // Alignement au centre
 
+            // Création des 3 colonnes par défaut
+            this.listColVue = new ArrayList<>();
+            Colonne aFaire = new Colonne("A faire");
+            VueColonne columnAfaire = createColumn(aFaire);
+            this.t.ajouterColonne(aFaire);
+            this.t.enregistrerObservateur(columnAfaire);
+            Colonne enCours = new Colonne("En cours");
+            VueColonne columnEnCours = createColumn(enCours);
+            this.t.ajouterColonne(enCours);
+            this.t.enregistrerObservateur(columnEnCours);
+            Colonne termine = new Colonne("Termine");
+            VueColonne columnTermine = createColumn(termine);
+            this.t.ajouterColonne(termine);
+            this.t.enregistrerObservateur(columnTermine);
 
+            // Ajout des tâches par défaut à la première colonne pour servir d'exemple
+            this.t.ajouterTache("Tache 1", "A faire");
+            this.t.ajouterTache("Tache 2", "A faire");
 
-        //    LocalDate dateDebut = LocalDate.of(2022, 1, 1);
-        //  LocalDate dateFin = LocalDate.of(2022, 1, 9);
-        //  TacheSimple tache = new TacheSimple("Tâche 1" );
-        //   tache.setDateDebut(dateDebut);
-        //   tache.setDateFin(dateFin);
-        //   columnAfaire.addTask(tache);
+            Colonne cAjout = new Colonne("Ajout");
+            VueColonne colonneAjout = createAddColumn(cAjout);
+            rightHBox.setMargin(colonneAjout, new Insets(20, 20, 20, 50));
 
+            Button vueListeButton = new Button("Vue Liste");
+            configureButton(vueListeButton);
+            vueListeButton.setOnAction(event -> afficherVueListe());
 
+            Button vueArchive = new Button("Accéder aux archives");
+            configureButton(vueArchive);
+            vueArchive.setOnAction(event -> afficherVueArchive());
 
-        // Colonne pour créer une nouvelle colonne
-        Colonne cAjout = new Colonne("Ajout");
-        VueColonne colonneAjout = createAddColumn(cAjout);
+            Button boutonArchivageColonne = new Button("Accéder aux archives des colonnes");
+            configureButton(boutonArchivageColonne);
+            boutonArchivageColonne.setOnAction(event -> afficherVueArchiveColonne());
 
-        rightHBox.setMargin(colonneAjout, new Insets(20, 20, 20, 50));
+            Button ganttButton = new Button("Création du Gantt");
+            configureButton(ganttButton);
+            ganttButton.setOnAction(event -> afficherVueGantt());
 
-        Button vueListeButton = new Button("Vue Liste");
-        vueListeButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
-        VBox.setMargin(vueListeButton, new Insets(30));
-        vueListeButton.setOnMouseEntered(e -> vueListeButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
-        vueListeButton.setOnMouseExited(e -> vueListeButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+            Button ajoutercolonne = new Button("Ajouter une colonne");
+            configureButton(ajoutercolonne);
+            ControlCreationColonne contrajoutercolonne = new ControlCreationColonne(this.t);
+            ajoutercolonne.setId("btnCreerColonne");
+            ajoutercolonne.setOnAction(contrajoutercolonne);
 
-        vueListeButton.setOnAction(event -> afficherVueListe());
+            vbox.getChildren().addAll(vueListeButton, ganttButton, vueArchive, boutonArchivageColonne, ajoutercolonne, rightHBox);
+            this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
+            this.setAlignment(Pos.CENTER);
+            rightVBox.getChildren().addAll(vbox);
+            this.getChildren().addAll(rightVBox, leftVBox);
+        }
 
-        Button vueArchive = new Button("Accéder aux archives");
-        vueArchive.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
-        VBox.setMargin(vueArchive, new Insets(30));
-        vueArchive.setOnMouseEntered(e -> vueArchive.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
-        vueArchive.setOnMouseExited(e -> vueArchive.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
-
-        vueArchive.setOnAction(event -> afficherVueArchive());
-
-        Button boutonArchivageColonne = new Button("Accéder aux archives des colonnes");
-        boutonArchivageColonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
-        VBox.setMargin(boutonArchivageColonne, new Insets(30));
-        boutonArchivageColonne.setOnMouseEntered(e -> boutonArchivageColonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
-        boutonArchivageColonne.setOnMouseExited(e -> boutonArchivageColonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
-
-        boutonArchivageColonne.setOnAction(event -> afficherVueArchiveColonne());
-
-        Button ganttButton = new Button("Création du Gantt");
-        ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
-        VBox.setMargin(ganttButton, new Insets(30));
-        ganttButton.setOnMouseEntered(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
-        ganttButton.setOnMouseExited(e -> ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
-        ganttButton.setOnAction(event -> afficherVueGantt());
-
-
-        Button ajoutercolonne = new Button("Ajouter une colonne");
-        ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
-        VBox.setMargin(ajoutercolonne, new Insets(30));
-        ajoutercolonne.setOnMouseEntered(e -> ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
-        ajoutercolonne.setOnMouseExited(e -> ajoutercolonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
-        ControlCreationColonne contrajoutercolonne = new ControlCreationColonne(this.t);
-        ajoutercolonne.setId("btnCreerColonne");
-        ajoutercolonne.setOnAction(contrajoutercolonne);
-
-        rightHBox.setSpacing(20);
-        rightVBox.setSpacing(20);
-        this.setSpacing(20);
-
-// Ajouter les marges pour les boutons
-        VBox.setMargin(vueListeButton, new Insets(30, 30, 30, 30));
-        VBox.setMargin(ganttButton, new Insets(30, 30, 30, 30));
-        VBox.setMargin(vueArchive, new Insets(30, 30, 30, 30));
-
-        this.setSpacing(20);
-        this.setPadding(new Insets(55));
-        this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
-        rightVBox.getChildren().addAll(rightHBox);
-        this.getChildren().addAll(leftVBox, rightVBox, vueListeButton, ganttButton, vueArchive,boutonArchivageColonne,ajoutercolonne);
-
-
-
-    }
-
+        private void configureButton(Button button) {
+            button.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
+            button.setOnMouseEntered(e -> button.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
+            button.setOnMouseExited(e -> button.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+        }
     private void afficherVueListe() {
         // Créez la VueListe en utilisant le premier objet Colonne (ici, la première colonne de la liste)
         if (!listColVue.isEmpty()) {
