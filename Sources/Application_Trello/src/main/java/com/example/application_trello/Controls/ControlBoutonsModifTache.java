@@ -34,8 +34,10 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
                     VueTache vt = this.tab.getVueTache();//On récupère l'instance de la VueTache en cours d'éxécution (oui c'est sûrement un peu bancal mais c'est la première solution fonctionnelle que j'ai trouvée)
                     String dep = vt.getDependanceSelectionnee();//On récupère le nom de la dépendance à ajouter à cette tâche
                     // On ajoute la dépendance a la tâche
-                    this.tab.ajouterDependance(nomTache, dep);
-                    vt.resetDependanceSelectionnee();
+                    if (dep != null){
+                        this.tab.ajouterDependance(nomTache, dep);
+                        vt.resetDependanceSelectionnee();
+                    }
                 }
             } else if (targetButton.getId().startsWith("addSousTacheButton")) {//Sinon si c'est un bouton d'ajout de sous-tâche
                 String nomTache = extraireNomTacheID(targetButton.getId());//On récupère le nom de la tache

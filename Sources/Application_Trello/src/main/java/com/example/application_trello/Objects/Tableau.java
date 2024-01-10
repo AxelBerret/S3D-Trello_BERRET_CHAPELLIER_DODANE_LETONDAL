@@ -219,7 +219,7 @@ public class Tableau implements Sujet {
             if (this.archive.getListeTachesArchivees().get(i).getNomTache().equals(nomTache)) {
                 Tache t = this.archive.getListeTachesArchivees().get(i);
                 System.out.println(nomCol);
-                this.ajouterTache(t.getNomTache(),nomCol);
+                this.ajouterTache(t,nomCol);
                 this.archive.desarchiverTache(t);
             }
         }
