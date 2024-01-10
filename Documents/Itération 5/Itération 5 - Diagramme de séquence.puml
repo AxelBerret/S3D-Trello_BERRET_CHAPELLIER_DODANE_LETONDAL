@@ -1,0 +1,15 @@
+@startuml
+actor Utilisateur
+control ControlArchivageTache
+control ControlDesarchivageTache
+
+Utilisateur -> ControlArchivageTache: clique bouton "archiver"
+ControlArchivageTache -> Archive: archiverTache(Tache1)
+Archive --> ControlArchivageTache: tache archivé
+
+Utilisateur -> VueArchive: clique bouton "archive"
+VueArchive --> Utilisateur: affiche VueArchive
+Utilisateur -> ControlDesarchivageTache: clique bouton "desarchiver"
+ControlDesarchivageTache -> Archive: desarchiverTache(Tache1)
+Archive --> ControlDesarchivageTache: tache desarchivé
+@enduml
