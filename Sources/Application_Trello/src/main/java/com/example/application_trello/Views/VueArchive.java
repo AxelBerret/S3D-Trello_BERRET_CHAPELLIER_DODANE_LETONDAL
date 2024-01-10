@@ -11,7 +11,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-
+//VueArchive : vue qu'on va afficher dans une fenêtre externe a l'application lorsqu'on va cliquer sur une tache,
+//pour afficher la liste des taches archivees avec la possibilité de désarchiver ou d'acceder a la vue tache de chaque tache actuellement archivé
+//Classe écrite par Sacha
 public class VueArchive  extends GridPane implements Observateur {
 
     private Tableau tableau;

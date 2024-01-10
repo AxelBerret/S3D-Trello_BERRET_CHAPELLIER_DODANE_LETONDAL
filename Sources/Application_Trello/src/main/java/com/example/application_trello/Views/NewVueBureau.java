@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import static javafx.application.Application.launch;
 //Cette classe représente la vue bureau qui est la vue principale que l'on utilise dans l'application et qui englobe d'autres vues.
-//Elle a été écrite par Titouan
+//Elle a été écrite par Titouan et Sacha
 public class NewVueBureau extends HBox implements Observateur {
 
     private ArrayList<VueColonne> listColVue;
