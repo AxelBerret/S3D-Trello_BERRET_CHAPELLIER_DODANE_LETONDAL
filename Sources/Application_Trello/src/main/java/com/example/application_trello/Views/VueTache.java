@@ -189,8 +189,8 @@ public class VueTache extends GridPane implements Observateur {
                 this.listeSousT.add(tach.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
             }
         }
-        this.datePickerDebut.setValue(this.dateDebutSelectionnee);
-        this.datePickerFin.setValue(this.dateFinSelectionnee);
+        this.datePickerDebut.setValue(ta.getDateDebut());
+        this.datePickerFin.setValue(ta.getDateFin());
         System.out.println("Date de la tâche : " + this.t.getDateDebut());
     }
 
