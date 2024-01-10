@@ -50,6 +50,9 @@ public class VueGantt extends HBox implements Observateur {
 
                 if (tache.getDateDebut() != null && tache.getDateFin() != null) {
                     System.out.println("récuppérations de la date de la tache : " +tache);
+                    System.out.println("date début" +tache.getDateDebut());
+                    System.out.println("date fin" +tache.getDateFin());
+
 
                     Rectangle rectangleTache = createGanttRectangle(tache);
                     getChildren().add(rectangleTache);
@@ -58,7 +61,7 @@ public class VueGantt extends HBox implements Observateur {
         }
     }
 
-    
+
 
     private Rectangle createGanttRectangle(Tache tache) {
         LocalDate baseDate = determinerBaseDate(tableau);
