@@ -19,6 +19,9 @@ import java.util.*;
 //Classe écrite par Titouan
 public class VueTache extends GridPane implements Observateur {
 
+    private final DatePicker datePickerDebut;
+    private final DatePicker datePickerFin;
+
     private Tache t;
     private ObservableList<String> listeDep;
     private ObservableList<String> listeSousT;
@@ -66,6 +69,24 @@ public class VueTache extends GridPane implements Observateur {
         ControlBoutonsModifTache controleur = new ControlBoutonsModifTache(this.tab);
         addDependButton.setOnAction(controleur);
 
+        datePickerDebut = new DatePicker();
+        datePickerFin = new DatePicker();
+        datePickerDebut.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
+
+
+        datePickerFin.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
+
+
+        Label dateDebutLabel = new Label("Date de début:");
+        dateDebutLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
+
+        Label dateFinLabel = new Label("Date de fin:");
+        dateFinLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
+
+        this.add(dateDebutLabel, 0, 5);
+        this.add(datePickerDebut, 1, 5);
+        this.add(dateFinLabel, 0, 6);
+        this.add(datePickerFin, 1, 6);
 
         // Éléments pour les sous-tâches
         Label sousTachesLabel = new Label("Sous-Tâches:");
@@ -105,7 +126,7 @@ public class VueTache extends GridPane implements Observateur {
         this.add(sousTachesListView, 1, 3);
         this.add(sousTachesComboBox, 0, 4);
         this.add(addSousTacheButton, 1, 4);
-        this.add(saveButton, 0, 5, 2, 1);
+        this.add(saveButton, 0, 7, 2, 1);
     }
 
     public void actualiser(Sujet s){
