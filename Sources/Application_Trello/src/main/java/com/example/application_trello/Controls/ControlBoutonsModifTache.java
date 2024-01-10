@@ -60,7 +60,7 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
                 String nomTache = extraireNomTacheID(targetDatePicker.getId());//On récupère le nom de la tache
                 if (this.listeNomTaches.contains(nomTache)) {//Si la tache existe dans notre tableau
                     VueTache vt = this.tab.getVueTache();//On récupère l'instance de la VueTache en cours d'éxécution
-                    LocalDate df = vt.getDateDebutSelectionnee();//On récupère le nom de la sous-tâche à ajouter à cette tâche
+                    LocalDate df = vt.getDateFinSelectionnee();//On récupère le nom de la sous-tâche à ajouter à cette tâche
                     this.tab.setDateFin(nomTache, df);//On ajoute la date à la tâche
                 }
             }
