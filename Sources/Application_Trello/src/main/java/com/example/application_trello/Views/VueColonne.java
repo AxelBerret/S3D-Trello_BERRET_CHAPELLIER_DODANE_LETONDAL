@@ -42,7 +42,7 @@ public class VueColonne extends VBox implements Observateur {
 
         setAlignment(Pos.TOP_CENTER);
         setMinWidth(230);
-        setMinHeight(380);
+        setMinHeight(330);
 
         setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));

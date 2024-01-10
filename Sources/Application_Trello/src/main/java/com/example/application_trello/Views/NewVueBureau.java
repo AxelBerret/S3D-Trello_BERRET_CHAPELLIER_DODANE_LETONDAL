@@ -35,13 +35,13 @@ import static javafx.application.Application.launch;
             leftVBox.setAlignment(Pos.CENTER);
             this.t = (Tableau) t;
 
-            VBox rightVBox = new VBox(20);
-            rightVBox.setPadding(new Insets(20));
+            VBox rightVBox = new VBox(10);
+            rightVBox.setPadding(new Insets(10));
             rightVBox.setAlignment(Pos.CENTER);
 
-            this.rightHBox = new HBox(20);
+            this.rightHBox = new HBox(10);
 
-            this.vbox = new VBox(20);  // Nouvelle VBox
+            this.vbox = new VBox(10);  // Nouvelle VBox
             vbox.setAlignment(Pos.CENTER);  // Alignement au centre
 
             // Création des 3 colonnes par défaut
@@ -65,7 +65,7 @@ import static javafx.application.Application.launch;
 
             Colonne cAjout = new Colonne("Ajout");
             VueColonne colonneAjout = createAddColumn(cAjout);
-            rightHBox.setMargin(colonneAjout, new Insets(20, 20, 20, 50));
+
 
             Button vueListeButton = new Button("Vue Liste");
             configureButton(vueListeButton);
@@ -97,11 +97,11 @@ import static javafx.application.Application.launch;
         }
 
         private void configureButton(Button button) {
-            button.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
-            button.setOnMouseEntered(e -> button.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
-            button.setOnMouseExited(e -> button.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+            button.setStyle("-fx-font-size: 14; -fx-padding: 10 30; -fx-background-radius: 100 100 100 100; -fx-background-color: white; -fx-text-fill: black;");
+            button.setOnMouseEntered(e -> button.setStyle("-fx-font-size: 14; -fx-padding: 10 30; -fx-background-radius: 100 100 100 100; -fx-background-color: black; -fx-text-fill: white;"));
+            button.setOnMouseExited(e -> button.setStyle("-fx-font-size: 14; -fx-padding: 10 30; -fx-background-radius: 100 100 100 100; -fx-background-color: white; -fx-text-fill: black;"));
         }
-    private void afficherVueListe() {
+        private void afficherVueListe() {
         // Créez la VueListe en utilisant le premier objet Colonne (ici, la première colonne de la liste)
         if (!listColVue.isEmpty()) {
             VueListe vueListe = new VueListe(t, listColVue.get(0).getNomVueColonne());
