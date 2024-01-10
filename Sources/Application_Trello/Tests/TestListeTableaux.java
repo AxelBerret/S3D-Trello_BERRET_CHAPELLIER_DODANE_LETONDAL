@@ -1,5 +1,5 @@
-import com.example.application_trello.ListeTableaux;
-import com.example.application_trello.Tableau;
+import com.example.application_trello.Objects.ListeTableaux;
+import com.example.application_trello.Objects.Tableau;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
