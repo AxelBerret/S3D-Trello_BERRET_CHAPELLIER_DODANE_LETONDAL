@@ -28,6 +28,7 @@ public class VueTache extends GridPane implements Observateur {
     private String sousTacheSelectionnee;
     private Tableau tab;
     private ListView<String> dependListView;
+    private ListView<String> sousTachesListView;
 
     public VueTache(Tache t, Tableau tab){// !!! !!! Ne pas oublier d'actualiser a la création
         this.t = t;
@@ -69,8 +70,7 @@ public class VueTache extends GridPane implements Observateur {
         // Éléments pour les sous-tâches
         Label sousTachesLabel = new Label("Sous-Tâches:");
         sousTachesLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
-        ListView<String> sousTachesListView = new ListView<>();
-        sousTachesListView.setItems(this.vueSt);
+        this.sousTachesListView = new ListView<>();
         ComboBox<String> sousTachesComboBox = new ComboBox<>();
         sousTachesComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
       sousTachesComboBox.setItems(this.listeSousT);//On met dans la comboBox les taches qui peuvent devenir des sous-tâches
@@ -114,6 +114,9 @@ public class VueTache extends GridPane implements Observateur {
         if (ta==null){
             ta = ((Tableau)s).getArchive().getTacheByNom(this.t.getNomTache());
         }
+        if (ta==null){
+            return;
+        }
         ArrayList<Tache> listDepActuelles = ta.getListeDependances();//On récupère ses dépendances
         for (Tache t : listDepActuelles){//Pour chaque dependance
             this.vueDep.add(t.getNomTache());//On récupère son nom et on l'ajoute à la liste
@@ -121,7 +124,8 @@ public class VueTache extends GridPane implements Observateur {
         }
         dependListView.setItems(this.vueDep);//Affiche dans la boite les dépendances déjà mises en ajoutant l'observableList a la ListView
         lisAllTaches.removeAll(listDepActuelles);//Supprime les dépendances actuelles de la liste de toutes les tâches
-        lisAllTaches.remove(this.t);//Supprime la tâche en modification de la liste de toutes les tâches
+        lisAllTaches.remove(ta);//Supprime la tâche en modification de la liste de toutes les tâches
+        this.listeDep.clear();//On remet la ComboBox à zéro
         for (Tache t : lisAllTaches){//On ajoute à la liste des dépendances possibles à l'ajout toutes les taches sauf celles qui sont deja les dépendances et la tache en question
             this.listeDep.add(t.getNomTache());
         }
@@ -130,17 +134,26 @@ public class VueTache extends GridPane implements Observateur {
         //Ces observablesLists serviront pour les comboBox lors de la modification d'une tâche
         //Et accessoirement donc lors de l'ajout de dépendances ou sous-tâches
         lisAllTaches = ((Tableau)s).getListeTaches();//On remet à 0 la liste de toutes les tâches
-        if (t instanceof TacheComplexe){//Et si notre tâche est une tâche complexe (car sinon elle n'a pas de sous-tâche dans tous les cas)
-            ArrayList<Tache> lisSousT = ((TacheComplexe) t).getListeTaches();//On récupère les sous-tâches déjà assignées à cette tâche
-            lisAllTaches.removeAll(lisSousT);//On les enleve de la liste de toutes les tâches
-            lisAllTaches.remove(this.t);//On enlève ensuite la tâche en question
+        if (ta instanceof TacheComplexe){//Et si notre tâche est une tâche complexe (car sinon elle n'a pas de sous-tâche dans tous les cas)
+            TacheComplexe tc = (TacheComplexe) ((Tableau)s).getTache(t.getNomTache());//On cast la tâche en tâche complexe à partir du modèle
+            ArrayList<Tache> lisSousT = tc.getListeTaches();//On récupère les sous-tâches déjà assignées à cette tâche
+            lisAllTaches.removeAll(lisSousT);//On les enlève de la liste de toutes les tâches
+            lisAllTaches.remove(ta);//On enlève ensuite la tache en question
+            this.listeSousT.clear();//On remet la ComboBox à zéro
             for (Tache tach : lisAllTaches){
                 this.listeSousT.add(tach.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
             }
-            TacheComplexe tc = (TacheComplexe) ((Tableau)s).getTache(t.getNomTache());
-            ArrayList<Tache> lisStActuelles = tc.getListeTaches();//On recupere la liste de ses sous-taches
+            ArrayList<Tache> lisStActuelles = tc.getListeTaches();//On récupère la liste de ses sous-taches
             for (Tache tach : lisStActuelles){
-                this.vueSt.add(tach.getNomTache());//On met a jour l'attribut VueSt
+                this.vueSt.add(tach.getNomTache());//On met à jour l'attribut VueSt
+            }
+            this.sousTachesListView.setItems(this.vueSt);//On met dans la vue des sous tâches toutes les sous-tâches que la tâche contient actuellement
+        } else {//Si ce n'est pas encore une tâche complexe :
+            //On va seulement remplir la comboBox pour proposer des sous-tâches à assigner
+            lisAllTaches.remove(ta);//On enlève la tache en question
+            this.listeSousT.clear();//On remet la ComboBox à zéro
+            for (Tache tach : lisAllTaches) {
+                this.listeSousT.add(tach.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
             }
         }
     }

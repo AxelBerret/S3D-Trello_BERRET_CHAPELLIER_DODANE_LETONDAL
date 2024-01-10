@@ -289,7 +289,7 @@ public class Tableau implements Sujet {
         for (Tache t : this.getListeTaches()){
             if (t.getNomTache().equals(nomTache)){
                 if (t instanceof TacheSimple ts){
-                    TacheComplexe tc = new TacheComplexe(ts);
+                    TacheComplexe tc = tacheSimpleToTacheComplexe(ts);
                     tc.ajouterTache(tAAjouter);
                 } else if(t instanceof TacheComplexe tc){
                     tc.ajouterTache(tAAjouter);
@@ -297,6 +297,23 @@ public class Tableau implements Sujet {
             }
         }
         this.notifierObservateurs();
+    }
+
+    public Colonne getColonneByTask(Tache t){
+        for (Colonne c : this.getListeColonnes()){
+            if (c.getListeTaches().contains(t)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public TacheComplexe tacheSimpleToTacheComplexe(TacheSimple ts){
+        TacheComplexe tc = new TacheComplexe(ts);
+        Colonne actuelle = getColonneByTask(ts);
+        actuelle.supprimerTache(ts);
+        actuelle.ajouterTache(tc);
+        return tc;
     }
 
     /**
