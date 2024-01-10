@@ -22,6 +22,21 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
         this.tab = t;
         this.majListeNomColonnes();
     }
+    /**
+     * getter du tableau
+     * @return
+     */
+    public Tableau getTab() {
+        return tab;
+    }
+
+    /**
+     * getter de la liste des noms de colonnes
+     * @return
+     */
+    public ArrayList<String> getListeNomColonnes() {
+        return listeNomColonnes;
+    }
 
     public void handle(ActionEvent event) {
         this.majListeNomColonnes();
