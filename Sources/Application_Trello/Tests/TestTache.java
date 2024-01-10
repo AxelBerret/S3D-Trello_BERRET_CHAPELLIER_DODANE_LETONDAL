@@ -1,5 +1,6 @@
+import com.example.application_trello.Objects.TacheSimple;
 import org.junit.jupiter.api.Test;
-import com.example.application_trello.Tache;
+import com.example.application_trello.Objects.Tache;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 import com.example.application_trello.*;
