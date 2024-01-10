@@ -22,6 +22,10 @@ public class ControlCreationTableau {
      */
     public ControlCreationTableau(ListeTableaux lt) {this.listeTab = lt;}
 
+    /**
+     * getter de la liste de tableaux
+     * @return
+     */
     public ListeTableaux getListeTab() {
         return listeTab;
     }
