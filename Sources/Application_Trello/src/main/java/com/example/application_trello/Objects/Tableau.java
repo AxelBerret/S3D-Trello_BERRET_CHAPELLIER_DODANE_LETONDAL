@@ -204,11 +204,11 @@ public class Tableau implements Sujet {
      * methode desarchiverTache de la classe Tableau
      * @param nomTache nom de la tache que l on souhaite desarchiver la tache
      */
-    public void desarchiverTache(String nomTache) {
+    public void desarchiverTache(String nomTache,String nomCol) {
         for (int i = 0; i < this.archive.getListeTachesArchivees().size(); i++) {
             if (this.archive.getListeTachesArchivees().get(i).getNomTache().equals(nomTache)) {
                 Tache t = this.archive.getListeTachesArchivees().get(i);
-                this.getListeColonnes().get(0).ajouterTache(t);
+                this.getColonne(nomCol).ajouterTache(t);
                 this.archive.desarchiverTache(t);
             }
         }
@@ -222,8 +222,9 @@ public class Tableau implements Sujet {
     public void archiverColonne(String nomColonne) {
         Colonne colonne = this.getColonne(nomColonne);
         this.archive.archiverColonne(colonne);
-        this.supprimerColonne(colonne);
         this.notifierObservateurs();
+        this.supprimerColonne(colonne);
+
     }
 
     /**

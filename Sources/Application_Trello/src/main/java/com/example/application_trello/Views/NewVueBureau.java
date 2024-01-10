@@ -93,6 +93,14 @@ public class NewVueBureau extends HBox implements Observateur {
 
         vueArchive.setOnAction(event -> afficherVueArchive());
 
+        Button boutonArchivageColonne = new Button("Accéder aux archives des colonnes");
+        boutonArchivageColonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
+        VBox.setMargin(boutonArchivageColonne, new Insets(30));
+        boutonArchivageColonne.setOnMouseEntered(e -> boutonArchivageColonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: black; -fx-text-fill: white;"));
+        boutonArchivageColonne.setOnMouseExited(e -> boutonArchivageColonne.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;"));
+
+        boutonArchivageColonne.setOnAction(event -> afficherVueArchiveColonne());
+
         Button ganttButton = new Button("Création du Gantt");
         ganttButton.setStyle("-fx-font-size: 16; -fx-padding: 10 50; -fx-background-radius: 30 30 30 30; -fx-background-color: white; -fx-text-fill: black;");
         VBox.setMargin(ganttButton, new Insets(30));
@@ -123,7 +131,7 @@ public class NewVueBureau extends HBox implements Observateur {
         this.setPadding(new Insets(55));
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
         rightVBox.getChildren().addAll(rightHBox);
-        this.getChildren().addAll(leftVBox, rightVBox, vueListeButton, ganttButton, vueArchive,ajoutercolonne);
+        this.getChildren().addAll(leftVBox, rightVBox, vueListeButton, ganttButton, vueArchive,boutonArchivageColonne,ajoutercolonne);
 
 
 
@@ -157,6 +165,19 @@ public class NewVueBureau extends HBox implements Observateur {
 
             // Affichez la fenêtre
             stage.show();
+    }
+    private void afficherVueArchiveColonne() {
+        System.out.println("test");
+        VueColonneArchive VueColonneArchive = new VueColonneArchive(t, listColVue.get(0).getNomVueColonne());
+
+        // Créez une nouvelle scène pour la VueListe
+        Scene scene = new Scene(VueColonneArchive, 600, 600);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+
+
+        // Affichez la fenêtre
+        stage.show();
     }
 
     private void afficherVueGantt() {
