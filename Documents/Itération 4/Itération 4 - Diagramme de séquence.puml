@@ -3,7 +3,7 @@ actor Utilisateur
 control ControlCreationColonne
 control ControlSuppressionColonne
 
-Utilisateur -> ControlCreationColonne: clique bouton "+"
+Utilisateur -> ControlCreationColonne: clique bouton "Ajouter une colonne"
 ControlCreationColonne -> Tableau: ajouterColonne(Colonne1)
 Tableau --> ControlCreationColonne: colonne ajouté
 
