@@ -1,4 +1,6 @@
 import com.example.application_trello.*;
+import com.example.application_trello.Controls.ControlSuppressionTableau;
+import com.example.application_trello.Objects.ListeTableaux;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
