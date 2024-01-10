@@ -7,6 +7,10 @@ import javafx.scene.control.Alert.*;
 import javafx.event.ActionEvent;
 import java.util.Optional;
 
+/**
+ * Contrôleur pour la suppression d'un tableau dans la liste des tableaux.
+ * Classe écrite par Axel et Logan
+ */
 public class ControlSuppressionTableau {
 
     /**

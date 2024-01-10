@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 
 /**
  * Contrôleur pour la suppression d'une tâche dans un tableau.
- * CLasse co écrite par Titouan et Sacha
+ * CLasse co écrite par Titouan, Sacha et Logan
  */
 public class ControlSuppressionTache implements EventHandler<ActionEvent> {
 
