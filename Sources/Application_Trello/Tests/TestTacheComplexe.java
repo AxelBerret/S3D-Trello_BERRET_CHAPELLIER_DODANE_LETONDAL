@@ -1,4 +1,4 @@
-import com.example.application_trello.*;
+import com.example.application_trello.Objects.*;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
