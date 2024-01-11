@@ -1,0 +1,25 @@
+@startuml
+actor Utilisateur
+control ControlCreationTache
+
+Utilisateur -> ControlCreationTache: clique bouton "Ajouter une tâche"
+ControlCreationTache -> Tableau: ajouterTache(Tache 1, Colonne1)
+activate Tableau
+activate Colonne1
+Tableau -> Colonne1 : ajouterTache(Tache 1)
+Colonne1 --> Tableau : tâche ajoutée
+deactivate Colonne1
+Tableau -> Tableau : notifierObservateurs
+Tableau -> VueColonne : actualiser (Tableau)
+activate VueColonne
+VueColonne -> Tableau : getListeTaches(Colonne1)
+Tableau --> VueColonne : listeTaches
+alt Tache manquante
+    VueColonne -> VueColonne : addTask(TacheManquante)
+    else
+    VueColonne --> Tableau : actualisation réalisée
+end
+deactivate VueColonne
+Tableau --> ControlCreationTache: colonne ajouté
+deactivate Tableau
+@enduml
