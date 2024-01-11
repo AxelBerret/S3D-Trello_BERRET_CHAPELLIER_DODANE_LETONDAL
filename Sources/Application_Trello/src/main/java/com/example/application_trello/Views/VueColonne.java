@@ -85,6 +85,13 @@ public class VueColonne extends VBox implements Observateur {
                     addTask(nom);//On l'ajoute
                 }
             }
+            for (Tache t : lisTacheCol){//Boucle qui retire de l'affichage les sous-tâches
+                if (t instanceof TacheComplexe){
+                    for (Tache st : ((TacheComplexe) t).getListeTaches()){
+                        removeTaskById(st.getNomTache());
+                    }
+                }
+            }
             for (String nomT : this.listeTaches){//Boucle qui parcourt les taches présentes dans la vue et supprime celles qui ne sont plus dans le modèle
                 if (!containsTache(nomT, lisTacheCol)){//Si la liste du modèle ne contient pas la tache nomT alors
                     //On la supprime de notre liste
