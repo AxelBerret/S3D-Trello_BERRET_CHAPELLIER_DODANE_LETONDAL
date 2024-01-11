@@ -28,6 +28,11 @@ public class TacheComplexe extends Tache implements InterfaceListeTaches {
         this.listeTaches = new ArrayList<Tache>();
     }
 
+    /**
+     * deuxieme construceur qui cree des objets de types TacheComplexe
+     * a partir des donnees passees en parametres
+     * @param ts tache simple necessaire a l instantiation de la tache complexe
+     */
     public TacheComplexe(TacheSimple ts){
         super(ts.getNomTache());
         this.commentaire = ts.getCommentaire();
@@ -89,6 +94,10 @@ public class TacheComplexe extends Tache implements InterfaceListeTaches {
      */
     public ArrayList<Tache> getListeTaches() {return this.listeTaches;}
 
+    /**
+     * methode toString de la classe TacheComplexe
+     * @return le mode d affichage console pour les objets de types TacheComplexe
+     */
     public String toString(){
         String res = "";
         for (Tache taches : this.listeTaches){

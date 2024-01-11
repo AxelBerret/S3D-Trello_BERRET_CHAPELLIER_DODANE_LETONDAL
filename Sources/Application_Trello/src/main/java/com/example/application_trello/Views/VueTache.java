@@ -16,9 +16,16 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.*;
 
-//Vue tache : vue qu'on va afficher dans une fenêtre externe a l'application lorsqu'on va cliquer sur une tache,
-//pour afficher des informations complémentaires et personnaliser plus en détails les tâches.
-//Classe écrite par Titouan
+/**
+ * La classe VueTache représente une vue détaillée d'une tâche dans l'application.
+ * Elle affiche des informations complémentaires sur la tâche, permet de personnaliser
+ * les détails de la tâche, et gère les dépendances et les sous-tâches associées à la tâche.
+ *
+ * Cette classe étend GridPane et implémente l'interface Observateur pour pouvoir être notifiée
+ * des mises à jour de la tâche associée dans le modèle.
+ *
+ * @author Titouan
+ */
 public class VueTache extends GridPane implements Observateur {
 
     private DatePicker datePickerDebut;
@@ -29,27 +36,36 @@ public class VueTache extends GridPane implements Observateur {
     private ObservableList<String> listeDep;
     private ObservableList<String> listeSousT;
     private ObservableList<String> vueDep;
-    private ObservableList<String> vueSt;
+    private ObservableList<String> supDep;
+    private ObservableList<String> supSt;
     private String dependanceSelectionnee;
     private String sousTacheSelectionnee;
+    private String suppDepSelectionnee;
+    private String suppSTSSelectionnee;
     private Tableau tab;
     private ListView<String> dependListView;
     private TextArea commentTextArea;
     private VBox vboxListesousTache;
 
+    /**
+     * Constructeur de la classe VueTache.
+     *
+     * @param t   La tâche associée à la vue.
+     * @param tab Le tableau auquel la tâche appartient.
+     */
     public VueTache(Tache t, Tableau tab){// !!! !!! Ne pas oublier d'actualiser a la création
         this.t = t;
         this.tab = tab;
         this.listeDep = FXCollections.observableArrayList();
         this.listeSousT = FXCollections.observableArrayList();
         this.vueDep = FXCollections.observableArrayList();
-        this.vueSt = FXCollections.observableArrayList();
         this.setPadding(new Insets(10, 10, 10, 10));
         this.setVgap(10);
         this.setHgap(10);
         Label commentLabel = new Label("Commentaire:");
         commentLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
-
+        this.supDep = FXCollections.observableArrayList();
+        this.supSt = FXCollections.observableArrayList();
         this.commentTextArea = new TextArea("Commentaire de test");
         commentTextArea.setWrapText(true);
 
@@ -105,8 +121,16 @@ public class VueTache extends GridPane implements Observateur {
         sousTachesComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
       sousTachesComboBox.setItems(this.listeSousT);//On met dans la comboBox les taches qui peuvent devenir des sous-tâches
         ComboBox<String> supComboBox = new ComboBox<>();
+        supComboBox.setItems(this.supSt);
+        supComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            suppSTSSelectionnee = newValue; // Lorsqu'une selection est faite dans la comboBox, on modifie l'attribut séléctionné.
+        });
         supComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
         ComboBox<String> supDepComboBox = new ComboBox<>();
+        supDepComboBox.setItems(this.supDep);
+        supDepComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            suppDepSelectionnee = newValue; // Lorsqu'une selection est faite dans la comboBox, on modifie l'attribut séléctionné.
+        });
         supDepComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
 
         sousTachesComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -120,14 +144,14 @@ public class VueTache extends GridPane implements Observateur {
         supSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
         supSousTacheButton.setOnMouseEntered(e -> supSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
         supSousTacheButton.setOnMouseExited(e -> supSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
-        supSousTacheButton.setId("addSousTacheButton" + this.t.getNomTache());
+        supSousTacheButton.setId("suppST" + this.t.getNomTache());
         supSousTacheButton.setOnAction(controleur);
 
         Button supDepButton = new Button("Supprimer");
         supDepButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
         supDepButton.setOnMouseEntered(e -> supDepButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
         supDepButton.setOnMouseExited(e -> supDepButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
-        supDepButton.setId("addSousTacheButton" + this.t.getNomTache());
+        supDepButton.setId("suppDep" + this.t.getNomTache());
         supDepButton.setOnAction(controleur);
 
         Button addSousTacheButton = new Button("Ajouter");
@@ -168,6 +192,11 @@ public class VueTache extends GridPane implements Observateur {
         this.add(saveButton, 0, 9, 2, 1);
     }
 
+    /**
+     * Méthode appelée pour mettre à jour la vue en fonction des changements dans le modèle.
+     *
+     * @param s Le sujet (dans ce cas, le Tableau) qui notifie la mise à jour.
+     */
     public void actualiser(Sujet s){
         ArrayList<Tache> lisAllTaches = ((Tableau)s).getListeTaches();//Stocke toutes les tâches du modèle
         Tache ta = ((Tableau)s).getTache(this.t.getNomTache());//On récupère la tache actuelle mise a jour
@@ -192,6 +221,10 @@ public class VueTache extends GridPane implements Observateur {
         this.listeDep.clear();//On remet la ComboBox à zéro
         for (Tache t : lisAllTaches){//On ajoute à la liste des dépendances possibles à l'ajout toutes les taches sauf celles qui sont deja les dépendances et la tache en question
             this.listeDep.add(t.getNomTache());
+        }
+        this.supDep.clear();
+        for (Tache t : ta.getListeDependances()){
+            this.supDep.add(t.getNomTache());//Pour chaque dépendance on l'ajoute à la comboBox des suppressions possibles
         }
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
         //On fait la même chose pour les sous-tâches
@@ -226,49 +259,96 @@ public class VueTache extends GridPane implements Observateur {
             for (Tache tach : lisAllTaches) {
                 this.listeSousT.add(tach.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
             }
+            this.supDep.clear();
+            for (Tache t : ta.getListeDependances()){
+                this.supSt.add(t.getNomTache());//Pour chaque sous-tâches on l'ajoute à la comboBox des suppressions possibles
+            }
         }
         this.datePickerDebut.setValue(ta.getDateDebut());
         this.datePickerFin.setValue(ta.getDateFin());
         System.out.println("Date de la tâche : " + this.t.getDateDebut());
-
-        // Ajoute les sous-tâches à la VBox
-        for (String sousTache : listeSousT) {
-
-        }
-
-
     }
 
+    /**
+     * Récupère la dépendance sélectionnée dans la vue.
+     *
+     * @return Le nom de la dépendance sélectionnée.
+     */
     public String getDependanceSelectionnee() {
         return this.dependanceSelectionnee;
     }
-
+    /**
+     * Réinitialise la sélection de dépendance.
+     */
     public void resetDependanceSelectionnee(){
         this.dependanceSelectionnee = null;
     }
-
+    /**
+     * Récupère la sous-tâche sélectionnée dans la vue.
+     *
+     * @return Le nom de la sous-tâche sélectionnée.
+     */
     public String getSousTacheSelectionnee(){
         return this.sousTacheSelectionnee;
     }
-
-    public void resetSousTacheSelectionnee(){
+    /**
+     * Réinitialise la sélection de sous-tâche.
+     */
+    /**
+     * Réinitialise la sélection de la sous-tâche.
+     */
+    public void resetSousTacheSelectionnee() {
         this.sousTacheSelectionnee = null;
     }
 
-    public LocalDate getDateDebutSelectionnee(){
+    /**
+     * Récupère la date de début sélectionnée dans la vue.
+     *
+     * @return La date de début sélectionnée.
+     */
+    public LocalDate getDateDebutSelectionnee() {
         return dateDebutSelectionnee;
     }
 
-    public void resetDateDebutSelectionnee(){
-        this.dateDebutSelectionnee = null;
-    }
-
-    public LocalDate getDateFinSelectionnee(){
+    /**
+     * Récupère la date de fin sélectionnée dans la vue.
+     *
+     * @return La date de fin sélectionnée.
+     */
+    public LocalDate getDateFinSelectionnee() {
         return this.dateFinSelectionnee;
     }
 
-    public void resetDateFinSelectionnee(){
-        this.dateFinSelectionnee = null;
+    /**
+     * Récupère la dépendance à supprimer sélectionnée dans la vue.
+     *
+     * @return Le nom de la dépendance à supprimer sélectionnée.
+     */
+    public String getSuppDepSelectionnee() {
+        return this.suppDepSelectionnee;
+    }
+
+    /**
+     * Réinitialise la sélection de la dépendance à supprimer.
+     */
+    public void resetSuppDepSelectionnee() {
+        this.suppDepSelectionnee = null;
+    }
+
+    /**
+     * Récupère la sous-tâche à supprimer sélectionnée dans la vue.
+     *
+     * @return Le nom de la sous-tâche à supprimer sélectionnée.
+     */
+    public String getSuppSTSSelectionnee() {
+        return this.suppSTSSelectionnee;
+    }
+
+    /**
+     * Réinitialise la sélection de la sous-tâche à supprimer.
+     */
+    public void resetSuppSTSelectionnee() {
+        this.suppSTSSelectionnee = null;
     }
 
 }

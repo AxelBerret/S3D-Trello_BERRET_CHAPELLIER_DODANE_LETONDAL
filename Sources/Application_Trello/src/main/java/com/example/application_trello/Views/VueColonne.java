@@ -18,12 +18,24 @@ import java.util.ArrayList;
 import java.util.Objects;
 //Classe représentant la vue d'une colonne. Ces vues sont contenues dans une vue bureau, et une nouvelle est créée à chaque création de Colonne.
 //Cette vue a été co écrite par Sacha et Titouan
+
+
+/**
+ * Représente la vue d'une colonne dans l'application Trello.
+ * Les instances de cette classe sont contenues dans une vue de bureau, et une nouvelle est créée à chaque création de colonne.
+ * Cette vue a été co-écrite par Sacha et Titouan.
+ */
 public class VueColonne extends VBox implements Observateur {
 
     private String nomColonne;
     private Tableau t;
     private ArrayList<String> listeTaches;
-
+    /**
+     * Constructeur de la classe VueColonne.
+     *
+     * @param columnName Nom de la colonne.
+     * @param t           Tableau auquel appartient la colonne.
+     */
     public VueColonne(String columnName, Tableau t) {
         this.nomColonne = columnName;
         this.t = t;
@@ -31,13 +43,19 @@ public class VueColonne extends VBox implements Observateur {
         Colonne c = new Colonne(columnName);
         initialize();
     }
-
+    /**
+     * Constructeur alternatif prenant une instance de Colonne.
+     *
+     * @param c Colonne à utiliser pour initialiser la vue.
+     */
     public VueColonne(Colonne c){
         this.nomColonne = c.getNomColonne();
         this.listeTaches = new ArrayList<>();
         initialize();
     }
-
+    /**
+     * Initialise la vue de la colonne avec ses composants graphiques.
+     */
     private void initialize() {
 
         setAlignment(Pos.TOP_CENTER);
@@ -74,6 +92,11 @@ public class VueColonne extends VBox implements Observateur {
 
     }
 
+    /**
+     * Méthode appelée lorsqu'une mise à jour du modèle est effectuée.
+     *
+     * @param s Sujet (observable) qui a notifié le changement.
+     */
     @Override
     public void actualiser(Sujet s) {
         Colonne colonneModele = ((Tableau)s).getColonne(this.nomColonne);
@@ -83,13 +106,6 @@ public class VueColonne extends VBox implements Observateur {
                 String nom = t.getNomTache();
                 if (!this.listeTaches.contains(nom)){//Si la liste de la vue ne contient pas la tache nom alors
                     addTask(nom);//On l'ajoute
-                }
-            }
-            for (Tache t : lisTacheCol){//Boucle qui retire de l'affichage les sous-tâches
-                if (t instanceof TacheComplexe){
-                    for (Tache st : ((TacheComplexe) t).getListeTaches()){
-                        removeTaskById(st.getNomTache());
-                    }
                 }
             }
             for (String nomT : this.listeTaches){//Boucle qui parcourt les taches présentes dans la vue et supprime celles qui ne sont plus dans le modèle
@@ -109,11 +125,20 @@ public class VueColonne extends VBox implements Observateur {
         }
         return false;
     }
-
+    /**
+     * Obtient le nom de la colonne.
+     *
+     * @return Le nom de la colonne.
+     */
     public String getNomVueColonne() {
         return this.nomColonne;
     }
-
+    /**
+     * Obtient le nom d'une tâche à partir d'un événement de souris.
+     *
+     * @param event Événement de souris.
+     * @return Le nom de la tâche ou null si non trouvé.
+     */
     public String getTaskName(MouseEvent event) {
         // Récupère l'élément actuellement survolé
         HBox hbox = (HBox) event.getTarget();
@@ -129,7 +154,11 @@ public class VueColonne extends VBox implements Observateur {
         // Si la condition ci-dessus n'est pas satisfaite ou si hbox est vide
         return null; // Ou une autre valeur par défaut selon vos besoins
     }
-
+    /**
+     * Ajoute une tâche à la vue de la colonne.
+     *
+     * @param taskName Nom de la tâche à ajouter.
+     */
     public void addTask(String taskName) {
         this.listeTaches.add(taskName);
         Hyperlink clickableText = new Hyperlink(taskName);
@@ -162,7 +191,11 @@ public class VueColonne extends VBox implements Observateur {
 
         this.getChildren().addAll(columnSeparator, taskInColumn);
     }
-
+    /**
+     * Supprime une tâche de la vue de la colonne en utilisant son identifiant.
+     *
+     * @param nomT Nom de la tâche à supprimer.
+     */
     public void removeTaskById(String nomT) {
         Node taskToRemove = null;
 
@@ -187,9 +220,6 @@ public class VueColonne extends VBox implements Observateur {
             this.listeTaches.remove(nomT);//On supprime la tâche de la liste de la vue
         }
     }
-
-
-
 
     private Button createIconButton(String imageName) {
         Image image = new Image("file:Image/" + imageName);

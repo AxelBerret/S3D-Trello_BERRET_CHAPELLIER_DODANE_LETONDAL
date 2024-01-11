@@ -123,6 +123,10 @@ public abstract class Tache {
      */
     public abstract void setDateFin(LocalDate dateF);
 
+    /**
+     * methode setColonneParent de la classe Tache
+     * @param c colonne que l on souhaite ajouter en tant que parent
+     */
     public void setColonneParent(Colonne c){
         this.colonneParent = c;
     }
@@ -144,11 +148,6 @@ public abstract class Tache {
      public void retirerDependance(Tache tache) {this.listeDependances.remove(tache);}
 
     /**
-     * methode equals de la classe Tache
-     * @param obj
-     * @return vrai si egales sinon faux
-     */
-    /**
      * methode determinerBaseDate de la classe Tache
      * @param tableau le tableau auquel appartient la tâche
      * @return la date de début la plus ancienne parmi toutes les tâches du tableau
@@ -166,7 +165,12 @@ public abstract class Tache {
 
         return minDate;
     }
-    
+
+    /**
+     * methode equals de la classe Tache
+     * @param obj
+     * @return vrai si egales sinon faux
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -183,6 +187,10 @@ public abstract class Tache {
                 Objects.equals(listeDependances, autreTache.listeDependances);
     }
 
+    /**
+     * methode toString de la classe Tache
+     * @return le mode d affichage console pour les objets de types Tache
+     */
     public abstract String toString();
 
     /**
@@ -196,5 +204,4 @@ public abstract class Tache {
             return 0;
         }
     }
-
 }

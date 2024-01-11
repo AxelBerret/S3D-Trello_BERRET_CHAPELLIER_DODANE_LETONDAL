@@ -15,16 +15,30 @@ import javafx.scene.layout.VBox;
 //pour afficher la liste des taches de chaque colonne avec la possibilité d'acceder a la vue tache de chaque tache
 //Classe écrite par Sacha
 
+
+/**
+ * Vue Liste : vue qu'on va afficher dans une fenêtre externe à l'application lorsqu'on va cliquer sur une tâche,
+ * pour afficher la liste des tâches de chaque colonne avec la possibilité d'accéder à la vue tâche de chaque tâche.
+ * Classe écrite par Sacha.
+ */
 public class VueListe extends VBox implements Observateur {
 
     private Tableau tableau;
     private String nomColonne;
-
+    /**
+     * Constructeur de la classe VueListe.
+     *
+     * @param tableau    Tableau auquel appartient la colonne.
+     * @param nomColonne Nom de la colonne associée à cette vue.
+     */
     public VueListe(Tableau tableau, String nomColonne) {
         this.tableau = tableau;
         this.nomColonne = nomColonne;
         initialize();
     }
+    /**
+     * Initialise la vue de la liste avec ses composants graphiques.
+     */
 
     private void initialize() {
         setSpacing(10);
@@ -36,6 +50,11 @@ public class VueListe extends VBox implements Observateur {
 
         tableau.enregistrerObservateur(this);
     }
+    /**
+     * Méthode appelée lorsqu'une mise à jour du modèle est effectuée.
+     *
+     * @param s Sujet (observable) qui a notifié le changement.
+     */
 
     @Override
     public void actualiser(Sujet s) {
