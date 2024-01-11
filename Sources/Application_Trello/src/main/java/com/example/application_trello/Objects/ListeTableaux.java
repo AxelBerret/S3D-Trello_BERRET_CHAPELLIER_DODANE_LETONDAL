@@ -56,6 +56,10 @@ public class ListeTableaux {
      */
     public ArrayList<Tableau> getListeTableaux() {return this.tableaux;}
 
+    /**
+     * methode toString de la classe ListeTableaux
+     * @return le mode d affichage console pour les objets de types ListeTableaux
+     */
     public String toString(){
         String res = "";
         for (Tableau tab : this.tableaux){

@@ -11,8 +11,6 @@ import java.time.LocalDate;
  */
 public class TacheSimple extends Tache {
 
-
-
     /**
      * constructeur qui cree des objets de types TacheSimple
      * a partir des donnees passees en parametres

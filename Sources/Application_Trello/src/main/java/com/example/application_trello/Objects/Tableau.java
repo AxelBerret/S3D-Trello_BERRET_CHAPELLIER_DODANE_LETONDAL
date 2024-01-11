@@ -18,6 +18,11 @@ public class Tableau implements Sujet {
      * represente le nom du tableau (espace de travail)
      */
     private String nomTableau;
+
+    /**
+     * attribut estEnCoursDActualisation de la classe Tableau
+     * permet de savoir si le tableau est en cours d actualisation
+     */
     private boolean estEnCoursDActualisation = false;
 
     /**
@@ -167,6 +172,11 @@ public class Tableau implements Sujet {
         this.notifierObservateurs();
     }
 
+    /**
+     * methode ajouterTache de la classe Tableau
+     * @param t tache que l on souhaite ajouter
+     * @param nomColonne nom de la colonne dans laquelle on souhaite ajouter la tache
+     */
     public void ajouterTache(Tache t, String nomColonne){
         for (Colonne c : this.getListeColonnes()){
             if (c.getNomColonne().equals(nomColonne)){
@@ -235,7 +245,6 @@ public class Tableau implements Sujet {
         this.archive.archiverColonne(colonne);
         this.notifierObservateurs();
         this.supprimerColonne(colonne);
-
     }
 
     /**
@@ -252,6 +261,13 @@ public class Tableau implements Sujet {
         }
         this.notifierObservateurs();
     }
+
+    /**
+     * methode deplacerTache de la classe Tableau
+     * @param nomTache nom de la tache que l on souhaite deplacer
+     * @param nomColonneSource colonne d ou provient la tache
+     * @param nomColonneDestination colonne de destination de la tache
+     */
     public void deplacerTache(String nomTache, String nomColonneSource, String nomColonneDestination) {
         Colonne colonneSource = getColonne(nomColonneSource);
         Colonne colonneDestination = getColonne(nomColonneDestination);
@@ -273,7 +289,11 @@ public class Tableau implements Sujet {
         }
     }
 
-
+    /**
+     * methode ajouterDependances de la classe Tableau
+     * @param nomTache nom de la tache a laquelle on veut ajouter la dependance
+     * @param nomTacheAAjouter nom de la tache a ajouter en tant que dependance de la premiere tache
+     */
     public void ajouterDependance(String nomTache, String nomTacheAAjouter) {
         Tache tAAjouter = null;
         for (Tache t : this.getListeTaches()) {
@@ -289,6 +309,11 @@ public class Tableau implements Sujet {
         this.notifierObservateurs();
     }
 
+    /**
+     * methode ajouterSousTache de la classe Tableau
+     * @param nomTache nom de la tache a laquelle on souhaite ajouter des sous taches
+     * @param nomTacheAAjouter nom de la tache que l on ajoute en sous tache
+     */
     public void ajouterSousTache(String nomTache, String nomTacheAAjouter){
         Tache tAAjouter = null;
         for (Tache t : this.getListeTaches()){
@@ -309,6 +334,11 @@ public class Tableau implements Sujet {
         this.notifierObservateurs();
     }
 
+    /**
+     * methode getColonneByTask de la classe Tableau
+     * @param t tache dont l on souhaite obtenir la colonne
+     * @return la colonne a la tache donnee
+     */
     public Colonne getColonneByTask(Tache t){
         for (Colonne c : this.getListeColonnes()){
             if (c.getListeTaches().contains(t)){
@@ -318,6 +348,11 @@ public class Tableau implements Sujet {
         return null;
     }
 
+    /**
+     * methode tacheSimpletoTacheComplexe de la classe Tableau
+     * @param ts tache simple que l on souhaite passer en complexe
+     * @return la tache simple devenu complexe
+     */
     public TacheComplexe tacheSimpleToTacheComplexe(TacheSimple ts){
         TacheComplexe tc = new TacheComplexe(ts);
         Colonne actuelle = getColonneByTask(ts);
@@ -370,6 +405,10 @@ public class Tableau implements Sujet {
         return res;
     }
 
+    /**
+     * methode getVueTache de la classe Tableau
+     * @return la vue tache
+     */
     public VueTache getVueTache(){
         for (Observateur o : this.observateurs){
             if (o instanceof VueTache){
@@ -379,15 +418,30 @@ public class Tableau implements Sujet {
         return null;
     }
 
+    /**
+     * methode getListeTachesArchivees de la classe Tableau
+     * @return la liste des taches archivees
+     */
     public ArrayList<Tache> getListeTachesArchives() {
         return this.archive.getListeTachesArchivees();
     }
+
+    /**
+     * methode setDateDebut de la classe Tableau
+     * @param nomT nom de la tache a laquelle on souhaite donner une date de debut
+     * @param date date de debut que l on souhaite donner
+     */
     public void setDateDebut(String nomT, LocalDate date){
         Tache tAModifier = getTache(nomT);
         tAModifier.setDateDebut(date);
         notifierObservateurs();
     }
 
+    /**
+     * methode setDateFin de la classe Tableau
+     * @param nomT nom de la tache que l on souhaite donner une date de fin
+     * @param date date de fin que l on souhaite donner
+     */
     public void setDateFin(String nomT, LocalDate date){
         Tache tAModifier = getTache(nomT);
         tAModifier.setDateFin(date);

@@ -29,9 +29,12 @@ public class VueTache extends GridPane implements Observateur {
     private ObservableList<String> listeDep;
     private ObservableList<String> listeSousT;
     private ObservableList<String> vueDep;
-    private ObservableList<String> vueSt;
+    private ObservableList<String> supDep;
+    private ObservableList<String> supSt;
     private String dependanceSelectionnee;
     private String sousTacheSelectionnee;
+    private String suppDepSelectionnee;
+    private String suppSTSSelectionnee;
     private Tableau tab;
     private ListView<String> dependListView;
     private TextArea commentTextArea;
@@ -43,13 +46,13 @@ public class VueTache extends GridPane implements Observateur {
         this.listeDep = FXCollections.observableArrayList();
         this.listeSousT = FXCollections.observableArrayList();
         this.vueDep = FXCollections.observableArrayList();
-        this.vueSt = FXCollections.observableArrayList();
         this.setPadding(new Insets(10, 10, 10, 10));
         this.setVgap(10);
         this.setHgap(10);
         Label commentLabel = new Label("Commentaire:");
         commentLabel.setStyle("-fx-text-fill: white;-fx-font-size: 16;");
-
+        this.supDep = FXCollections.observableArrayList();
+        this.supSt = FXCollections.observableArrayList();
         this.commentTextArea = new TextArea("Commentaire de test");
         commentTextArea.setWrapText(true);
 
@@ -105,8 +108,16 @@ public class VueTache extends GridPane implements Observateur {
         sousTachesComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
       sousTachesComboBox.setItems(this.listeSousT);//On met dans la comboBox les taches qui peuvent devenir des sous-tâches
         ComboBox<String> supComboBox = new ComboBox<>();
+        supComboBox.setItems(this.supSt);
+        supComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            suppSTSSelectionnee = newValue; // Lorsqu'une selection est faite dans la comboBox, on modifie l'attribut séléctionné.
+        });
         supComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
         ComboBox<String> supDepComboBox = new ComboBox<>();
+        supDepComboBox.setItems(this.supDep);
+        supDepComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            suppDepSelectionnee = newValue; // Lorsqu'une selection est faite dans la comboBox, on modifie l'attribut séléctionné.
+        });
         supDepComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
 
         sousTachesComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -120,14 +131,14 @@ public class VueTache extends GridPane implements Observateur {
         supSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
         supSousTacheButton.setOnMouseEntered(e -> supSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
         supSousTacheButton.setOnMouseExited(e -> supSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
-        supSousTacheButton.setId("addSousTacheButton" + this.t.getNomTache());
+        supSousTacheButton.setId("suppST" + this.t.getNomTache());
         supSousTacheButton.setOnAction(controleur);
 
         Button supDepButton = new Button("Supprimer");
         supDepButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
         supDepButton.setOnMouseEntered(e -> supDepButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
         supDepButton.setOnMouseExited(e -> supDepButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
-        supDepButton.setId("addSousTacheButton" + this.t.getNomTache());
+        supDepButton.setId("suppDep" + this.t.getNomTache());
         supDepButton.setOnAction(controleur);
 
         Button addSousTacheButton = new Button("Ajouter");
@@ -193,6 +204,10 @@ public class VueTache extends GridPane implements Observateur {
         for (Tache t : lisAllTaches){//On ajoute à la liste des dépendances possibles à l'ajout toutes les taches sauf celles qui sont deja les dépendances et la tache en question
             this.listeDep.add(t.getNomTache());
         }
+        this.supDep.clear();
+        for (Tache t : ta.getListeDependances()){
+            this.supDep.add(t.getNomTache());//Pour chaque dépendance on l'ajoute à la comboBox des suppressions possibles
+        }
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
         //On fait la même chose pour les sous-tâches
         //Ces observablesLists serviront pour les comboBox lors de la modification d'une tâche
@@ -226,49 +241,45 @@ public class VueTache extends GridPane implements Observateur {
             for (Tache tach : lisAllTaches) {
                 this.listeSousT.add(tach.getNomTache());//On ajoute tous les noms des autres tâches possibles dans l'observableList
             }
+            this.supDep.clear();
+            for (Tache t : ta.getListeDependances()){
+                this.supSt.add(t.getNomTache());//Pour chaque sous-tâches on l'ajoute à la comboBox des suppressions possibles
+            }
         }
         this.datePickerDebut.setValue(ta.getDateDebut());
         this.datePickerFin.setValue(ta.getDateFin());
         System.out.println("Date de la tâche : " + this.t.getDateDebut());
-
-        // Ajoute les sous-tâches à la VBox
-        for (String sousTache : listeSousT) {
-
-        }
-
-
     }
 
     public String getDependanceSelectionnee() {
         return this.dependanceSelectionnee;
     }
-
     public void resetDependanceSelectionnee(){
         this.dependanceSelectionnee = null;
     }
-
     public String getSousTacheSelectionnee(){
         return this.sousTacheSelectionnee;
     }
-
     public void resetSousTacheSelectionnee(){
         this.sousTacheSelectionnee = null;
     }
-
     public LocalDate getDateDebutSelectionnee(){
         return dateDebutSelectionnee;
     }
-
-    public void resetDateDebutSelectionnee(){
-        this.dateDebutSelectionnee = null;
-    }
-
     public LocalDate getDateFinSelectionnee(){
         return this.dateFinSelectionnee;
     }
-
-    public void resetDateFinSelectionnee(){
-        this.dateFinSelectionnee = null;
+    public String getSuppDepSelectionnee(){
+        return this.suppDepSelectionnee;
+    }
+    public void resetSuppDepSelectionnee(){
+        this.suppDepSelectionnee = null;
+    }
+    public String getSuppSTSSelectionnee(){
+        return this.suppSTSSelectionnee;
     }
 
+    public void resetSuppSTSelectionnee(){
+        this.suppSTSSelectionnee = null;
+    }
 }
