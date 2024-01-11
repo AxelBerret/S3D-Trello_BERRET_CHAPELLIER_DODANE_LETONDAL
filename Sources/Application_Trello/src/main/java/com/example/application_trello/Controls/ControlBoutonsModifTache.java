@@ -2,6 +2,7 @@ package com.example.application_trello.Controls;
 
 import com.example.application_trello.Objects.Tableau;
 import com.example.application_trello.Objects.Tache;
+import com.example.application_trello.Objects.TacheComplexe;
 import com.example.application_trello.Views.VueTache;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -51,6 +52,31 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
                     }
                 }
             }
+            else if(targetButton.getId().startsWith("suppDep")){
+                String nomTache = extraireNomTacheID(targetButton.getId());
+                if (this.listeNomTaches.contains(nomTache)){
+                    VueTache vt = this.tab.getVueTache();
+                    String st = vt.getSuppDepSelectionnee();
+                    if (st!=null){
+                        String aSupprimer = vt.getSuppDepSelectionnee();
+                        Tache aSupp = this.tab.getTache(aSupprimer);
+                        this.tab.getTache(nomTache).retirerDependance(aSupp);
+                        vt.resetSuppDepSelectionnee();
+                    }
+                }
+            } else if(targetButton.getId().startsWith("suppST")){
+                String nomTache = extraireNomTacheID(targetButton.getId());
+                if (this.listeNomTaches.contains(nomTache)){
+                    VueTache vt = this.tab.getVueTache();
+                    String st = vt.getSuppSTSSelectionnee();
+                    if (st!=null && this.tab.getTache(nomTache) instanceof TacheComplexe){
+                        String aSupprimer = vt.getSuppSTSSelectionnee();
+                        Tache aSupp = this.tab.getTache(aSupprimer);
+                        ((TacheComplexe) this.tab.getTache(nomTache)).supprimerTache(aSupp);
+                        vt.resetSuppSTSelectionnee();
+                    }
+                }
+            }
         } else if(event.getTarget() instanceof DatePicker) {//Si l'event vient d'un datePicker
             DatePicker targetDatePicker = (DatePicker) event.getTarget();//On le récupère
             if (targetDatePicker.getId().startsWith("setDateDebut")) {//Si c'est un bouton d'ajout de date de début
@@ -80,7 +106,7 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
     }
 
     public String extraireNomTacheID(String idBouton) {//Méthode pour récupérer le nom de la tache depuis l'ID d'un boutton/datePicker
-        String[] prefixes = {"addDependButton", "addSousTacheButton", "setDateDebut", "setDateFin"};
+        String[] prefixes = {"addDependButton", "addSousTacheButton", "setDateDebut", "setDateFin", "suppST", "suppDep"};
         for (String prefix : prefixes) {
             if (idBouton != null && idBouton.startsWith(prefix)) {
                 return idBouton.substring(prefix.length());
