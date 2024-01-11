@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-//Classe générant le diagramme de Gantt
+//Classe générant le diagramme de Gantt avec des rectangles et des rectangles transparent
 //Classe écrite par Sacha
 public class VueGantt extends HBox implements Observateur {
 
