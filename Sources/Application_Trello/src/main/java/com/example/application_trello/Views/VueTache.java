@@ -104,10 +104,31 @@ public class VueTache extends GridPane implements Observateur {
         ComboBox<String> sousTachesComboBox = new ComboBox<>();
         sousTachesComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
       sousTachesComboBox.setItems(this.listeSousT);//On met dans la comboBox les taches qui peuvent devenir des sous-tâches
+        ComboBox<String> supComboBox = new ComboBox<>();
+        supComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
+        ComboBox<String> supDepComboBox = new ComboBox<>();
+        supDepComboBox.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-min-width: 110; -fx-text-fill: black;");
+
         sousTachesComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             sousTacheSelectionnee = newValue; // Lorsqu'une selection est faite dans la comboBox, on modifie l'attribut sous-tache séléctionnée.
+
         });
+
+
         this.setStyle("-fx-background-color: linear-gradient(to top, rgba(50,0,255,0.45), rgba(200,0,200,0.45)); -fx-background-radius: 0;");
+        Button supSousTacheButton = new Button("Supprimer");
+        supSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
+        supSousTacheButton.setOnMouseEntered(e -> supSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
+        supSousTacheButton.setOnMouseExited(e -> supSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
+        supSousTacheButton.setId("addSousTacheButton" + this.t.getNomTache());
+        supSousTacheButton.setOnAction(controleur);
+
+        Button supDepButton = new Button("Supprimer");
+        supDepButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
+        supDepButton.setOnMouseEntered(e -> supDepButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: black; -fx-text-fill: white;"));
+        supDepButton.setOnMouseExited(e -> supDepButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;"));
+        supDepButton.setId("addSousTacheButton" + this.t.getNomTache());
+        supDepButton.setOnAction(controleur);
 
         Button addSousTacheButton = new Button("Ajouter");
         addSousTacheButton.setStyle("-fx-font-size: 16; -fx-padding: 5 30; -fx-background-radius: 20 20 20 20; -fx-background-color: white; -fx-text-fill: black;");
@@ -132,15 +153,19 @@ public class VueTache extends GridPane implements Observateur {
         this.add(dependListView, 1, 1);
         this.add(dependComboBox, 0, 2);
         this.add(addDependButton, 1, 2);
-        this.add(sousTachesLabel, 0, 3);
-        this.add(vboxListesousTache, 1, 3);
-        this.add(sousTachesComboBox, 0, 4);
-        this.add(addSousTacheButton, 1, 4);
-        this.add(dateDebutLabel, 0, 5);
-        this.add(datePickerDebut, 1, 5);
-        this.add(dateFinLabel, 0, 6);
-        this.add(datePickerFin, 1, 6);
-        this.add(saveButton, 0, 7, 2, 1);
+        this.add(sousTachesLabel, 0, 4);
+        this.add(vboxListesousTache, 1, 4);
+        this.add(supDepComboBox,0,3);
+        this.add(supDepButton,1,3);
+        this.add(sousTachesComboBox, 0, 5);
+        this.add(addSousTacheButton, 1, 5);
+        this.add(supComboBox, 0, 6);
+        this.add(supSousTacheButton, 1, 6);
+        this.add(dateDebutLabel, 0, 7);
+        this.add(datePickerDebut, 1, 7);
+        this.add(dateFinLabel, 0, 8);
+        this.add(datePickerFin, 1, 8);
+        this.add(saveButton, 0, 9, 2, 1);
     }
 
     public void actualiser(Sujet s){
