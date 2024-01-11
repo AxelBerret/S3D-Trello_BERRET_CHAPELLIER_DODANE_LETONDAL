@@ -1,27 +1,372 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class ControlArchivageColonne {
+- tab : Tableau
+- nomCol : String
++ ControlArchivageColonne(t : Tableau, nomCol : String)
++ handle(event : ActionEvent) : void
++ extraireNomColonneDeID(idBouton : String) : String
++ getTab() : Tableau
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class ControlArchivageTache {
+- tab : Tableau
+- nomCol : String
+- nomTache : String
++ ControlArchivageTache(t : Tableau, nomTache : String, nomCol : String)
++ handle(event : ActionEvent) : void
++ extraireNomTacheDeID(idbouton : String) : String
++ getTab() : Tableau
 }
+
+class ControlBoutonsModifTache {
+- tab : Tableau
+- listeNomsTaches : ArrayList<String>
++ ControlBoutonsModifTache(t : Tableau)
++ handle(event : ActionEvent) : void
++ majListeNomTaches() : void
++ extraireNomTacheID(idBouton : String) : String
+}
+
+class ControlCreationColonne {
+- tab : Tableau
++ ControlCreationColonne(t : Tableau)
++ getTab() : Tableau
++ handle(event : ActionEvent) : void
+}
+
+class ControlCreationTableau {
+- listeTab : ListeTableaux
++ ControlCreationTableau(lt : ListeTableaux)
++ getListeTab() : ListeTableaux
++ handle(event : ActionEvent) : void
+}
+
+class ControlCreationTache {
+- tab : Tableau
+- listeNomColonnes : ArrayList<String>
++ ControlCreationTache(t : Tableau)
++ getTab() : Tableau
++ getListeNomColonnes() : ArrayList<String>
++ handle(event : ActionEvent) : void
++ majListeNomColonne() : void
++ extraireNomColonneDeID(idBouton : String) : String
+}
+
+class ControlDesarchivageColonne {
+- tab : Tableau
+- nomCol : String
++ ControlDesarchivageColonne(t : Tableau, nomCol : String)
++ getTab() : Tableau
++ handle((event : ActionEvent) : void
+}
+
+class ControlDesarchivageTache {
+- tab : Tableau
+- nomCol : String
+- nomTache : String
++ ControlCreationTache(t : Tableau, nomTache : String, nomCol : String)
++ getTab() : Tableau
++ handle(event : ActionEvent) : void
+}
+
+class ControlModificationTache {
+- tab : Tableau
+- tache : Tache
++ ControlModificationtache(t : Tableau, tt : Tache)
++ getTab() : Tableau
++ handle(event : ActionEvent) : void
+}
+
+class ControlSuppressionColonne {
+- tab : Tableau
++ ControlSuppressionColonne(t : Tableau)
++ handle(event : ActionEvent) : void
++ getTab() : Tableau
++ extraireNomColonneDeID(idBouton : String)
+}
+
+class ControlSuppressionTableau {
+- listeTab : ListeTableaux
++ ControlSuppressionTableau(lt : ListeTableaux)
++ handle(event : ActionEvent) : void
++ getListeTab() : ListeTableau
++ extraireNomTableauDeID(idBouton : String) : String
+}
+
+class ControlSuppressionTache {
+- tab : Tableau
+- nomCol : String
+- nomTache :String
++ ControlSuppressionTache(t : Tableau, nomCol : String, nomTache : String)
++ handle(event : ActionEvent) : void
++ getTab() : Tableau
++ getNomCol() : String
++ getNomTache() : String
+}
+
+class Archive {
+- listeTachesArchivees : ArrayList<Tache>
+- listeColonnesArchivees : ArrayList<Colonne>
++ Archive()
++ archivertache(tache : tache) : void
++ archiverColonne(colonne : Colonne) : void
++ desarchiverTache(tache : Tache) : void
++ desarchiverColonne(colonne : Colonne) : void
++ getListeTachesArchivees() : ArrayList<Tache>
++ getListeColonnesArchivees () : ArrayList<Colonne>
++ getTacheByNom(str : String) : Tache
+}
+
+class Colonne {
+- nomColonne : String
+- listeTaches : ArrayList<Tache>
++ Colonne(pNom : String)
++ getNomColonne() : String
++ ajouterTache(tache : Tache) : void
++ supprimerTache(tache : Tache) : void
++ getTache(nomtache : String) : Tache
++ getListeTaches() : ArrayList<Tache>
++ equals(obj : Object) : boolean
++ toString() : String
+}
+
+interface InterfaceListeTaches {
++ ajouterTache(tache : Tache) : void
++ supprimerTache(tache : Tache) : void
++ getTache(nomTache : String) : Tache
++ getListeTaches() : ArrayList<Tache>
+}
+
+class ListeTableaux {
+- tableaux : ArrayList<Tableau>
++ ListeTableaux()
++ ajouterTableau(yab : Tableau) : void
++ supprimerTableau(tab : Tableau) : void
++ getTableau(nomTab : String) : Tableau
++ getListeTableaux() : ArrayList<Tableau>
+}
+
+interface Observateur {
++ actualiser(s : Sujet) : void
+}
+
+interface Sujet {
++ enregistrerObservateur(o : Observateur) : void
++ supprimerObservateur(o : Observateur) : void
++ notifierObservateur() : void
+}
+
+class Tableau {
+- nomTableau : String
+- estEnCoursDActualisation : boolean
+- listeObjets : ArrayList<InterfaceListeTaches>
+- archive : Archive
+- observateurs : ArrayList<Observateur>
++ Tableau(pNom : String)
++ getNomTableau() : String
++ getArchive() : Archive
++ getListeObjets() : ArrayList<InterfaceListeTaches>
++ getListeTaches() : ArrayList<Tache>
++ getListeColonnes() : ArrayList<Colonne>
++ getTache(nomTache : String) : Tache
++ getColonne(nomColonne : String) : Colonne
++ ajouterColonne(col : Colonne) : void
++ supprimerColonne(col : Colonne) : void
++ ajouterTache(nomTache : String, nomColonne : String) : void
++ ajouterTache(t : Tache, nomColonne : String) : void
++ supprimerTache(nomTache : String, nomColonne : String) : void
++ archiverTache(nomTache : String, nomColonne : String) : void
++ desarchiverTache(nomTache : String, nomCol : String) : void
++ archiverColonne(nomColonne : String) : void
++ desarchiverColonne(nomColonne : String) : void
++ deplacerTache(nomTache : String, nomColonneSource : String, nomColonneDestination : String) : void
++ ajouterDependance(nomTache : String, nomTacheAAjouter : String) : void
++ ajouterSousTache(nomTache : String, nomTacheAAjouter : String) : void
++ getColonneByTask(t : Tache) : Colonne
++ tacheSimpleToTacheComplexe(ts : TacheSimple) : TacheComplexe
++ enregistrerObservateur(o : Observateur) : void
++ supprimerObservateur(o : Observateur) : void
++ notifierObservateur(o : Observateur) : void
++ toString() : String
++ geVueTache() : VueTache
++ getListeTachesArchivees() : ArrayList<Tache>
++ setDateFin(nomT : String, date : LocalDate) : void
+}
+
+abstract class Tache {
+# nomTache : String
+# commentaire : String
+# dateDebut : LocalDate
+# dateFin : LocalDate
+# listeDependances : ArrayList<Tache>
+# colonneParent : Colonne
++ Tache(pNom : String)
++ getNomtache() : String
++ getCommentaire() : String
++ getDateDebut() : LocalDate
++ getDateFin() : LocalDate
++ getListeDependances() : ArrayList<Tache>
++ getColonneParent() : Colonne
++ setCommentaire(com : String) : void
++ setDateDebut(dateD : LocalDate) : void
++ setDateFin(datF : LocalDate) : void
++ setColonneParent(c : Colonne) : void
++ ajouterDependance(tache : Tache) : void
++ retirerDependance(tache : Tache) : void
++ determinerBaseDate(tableau : Tableau) : LocalDate
++ equals(obj : Object) : boolean
++ getDuree() : int
+}
+
+class TacheComplexe {
+- listeTaches : ArrayList<Tache>
++ TacheComplexe(pNom : String)
++ TacheComplexe(ts : TacheSimple)
++ setDateFin(dateF : LocalDate) : void
++ ajouterTache(tache : Tache) : void
++ supprimerTache(tache : Tache) : void
++ getTache(nomTache : String) : Tache
++ getListeTaches() : ArrayList<Tache>
++ toString() : String
+}
+
+class TacheSimple {
++ TacheSimple(nomTache : String)
++ setDateDebut(dateD : LocalDate) : void
++ setDateFin(dateF : LocalDate) : void
++ getDateDebut() : LocalDate
++ getDateFin() : LocalDate
++ toString() : String
+}
+
+class VueArchive {
+- tableau : Tableau
+- nomColonne : String
+- listViewTachesArchivees : ListView<Tache>
++ VueArchive(tableau : Tableau, nomColonne : String)
++ initialize() : void
++ actualiser(s : Sujet) : void
+}
+
+class VueBureau {
+- listeColVue : Arraylist<VueColonne>
+- rightHBox : HBox
+- vbox : VBox
+- t : Tableau
++ NewVueBureau(t : Sujet)
++ configureBouton(button : Button) : void
++ afficherVueListe() : void
++ afficherVueArchive() : void
++ afficherVueArchiveColonne() : void
++ afficherVueGantt() : void
++ actualiser(s : Sujet) : void
++ createColumn(colonne : Colonne) : void
++ removeColumnById(nomColonne : String) : void
++ createAddColumn(colonne : Colonne) : VueColonne
++ setDarDropHandlers(columnVBox) : void
++ findColumnByName(parent : Parent, columnName : String) : VueColonne
++ containsColumn(columnName : String) : boolean
+}
+
+class VueColonne {
+- nomColonne : String
+- t : Tableau
+- listeTaches : ArrayList<String>
++ VueColonne(columnName : String, t : Tableau)
++ VueColonne(c : Colonne)
++ initialize() : void
++ actualiser(s : Sujet) : void
++ containsTache(nomT : String, lisT : Arraylist<Tache>) : boolean
++ getNomVueColonne() : String
++ getTaskName(event : MouseEvent) : String
++ addTask(taskName : String) : void
++ removeTaskById(nomT : String) : void
++ createIconButton(imageName : String) : Button
++ equals(o : Object) : boolean
+}
+
+class VueColonneArchive {
+- tableau : Tableau
+- nomColonne : String
+- listeViewColonneArchivees : ListView<Tache>
++ VueColonneArchive(tableau : Tableau, nomColonne : String)
++ initialize() : void
++ actualiser(s : Sujet) : void
+}
+
+class VueGantt {
+- t : Tableau
++ VueGantt(tableau : Tableau)
++ initialize() : void
++ createTransparentRectangle(baseDate : LocalDate, startDate : LocalDate, daySize : double) : Rectangle
++ createGanttRectangle(tache : Tache, baseDate : LocalDate, daySize : double) : Rectangle
++ actualiser(s : Sujet) : void
++ getIndiceColonne(tache : Tache) : int
++ getCouleurByIndice(indiceColonne : int) : Color
+}
+
+class VueListe {
+- tableau : Tableau
+- nomColonne : String
++ vueListe(tableau : Tableau, nomColonne : String)
++ initialize() : void
++ actualiser(s : Sujet) : void
+}
+
+class VueTache {
+- datePickerDebut : DatePicker
+- datePickerFin : DatePicker
+- dateDebutSelectionnee : LocalDate
+- dateFinSelectionnee : LocalDate
+- t : Tache
+- listeDep : ObservableList<String>
+- listeSousT : ObservableList<String>
+- vueDep : ObservableList<String>
+- vueSt : ObservableList<String>
+- dependanceSelectionnee : String
+- sousTacheSelectionnee : String
+- tab : Tableau
+- dependListView : ListView<String>
+- commentTextArea : TextArea
+- vBoxListeSousTache : VBox
++ VueTache(t : Tache, tab : Tableau)
++ actualiser(s : Sujet) : void
++ getDependanceSelectionnee() : String
++ resetDependanceSelectionnee() : void
++ getSousTacheSelectionnee() : String
++ resetSousTacheSelectionnee() : void
++ getDateDebutSelectionnee()  : LocalDate
++ resetDateDebutSelectionnee() : void
++ getDateFinSelectionnee() : void
++ resetDateFinSelectionnee() : void
+}
+
+
+Colonne -.-|> InterfaceListeTaches
+Tableau -.-|> Sujet
+TacheComplexe -.-|> InterfaceListeTaches
+VueArchive -.-|> Observateur
+VueBureau -.-|> Observateur
+VueColonne -.-|> Observateur
+VueColonneArchive -.-|> Observateur
+VueGantt -.-|> Observateur
+VueListe -.-|> Observateur
+VueTache -.-|> Observateur
+TacheComplexe --|> Tache
+TacheSimple --|> Tache
+
+
+Archive "1" -> "0...*" Tache
+Archive "1" -> "0...*" Colonne
+Colonne "1" -> "0...*" Tache
+Tableau "1" -> "0...*" InterfaceListeTaches
+Tableau "1" -> "0...*" Observateur
+Tache "1" -> "0...*" Tache
+TacheComplexe "1" -> "0...*" Tache
+VueArchive "1" -> "0...*" Tache
+VueBureau "1" -> "0...*" VueColonne
+VueColonneArchive "1" -> "0...*" Tache
 
 @enduml
