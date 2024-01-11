@@ -12,21 +12,26 @@ import javafx.scene.control.Button;
  */
 public class ControlSuppressionColonne implements EventHandler<ActionEvent> {
 
+    /**
+     * attribut tab de la classe ControlSuppressionColonne
+     * represente le modele que l on va utiliser
+     */
     private Tableau tab;
 
+
     /**
-     * Constructeur du contrôleur.
-     *
-     * @param t Le tableau associé au contrôleur.
+     * constructeur qui cree des objets de types ControlSuppressionColonne
+     * a partir des donnees passees en parametres
+     * @param t tableau que l on va utiliser en tant que modele
      */
     public ControlSuppressionColonne(Tableau t) {
         this.tab = t;
     }
 
+
     /**
-     * Méthode appelée lorsqu'un événement (clic sur un bouton) se produit.
-     *
-     * @param event L'événement déclenché.
+     * methode handle de la classe ControlSuppressionColonne
+     * @param event
      */
     public void handle(ActionEvent event) {
         if (event.getTarget() instanceof Button sourceButton) {//Si l'event vient d'un bouton
@@ -46,18 +51,17 @@ public class ControlSuppressionColonne implements EventHandler<ActionEvent> {
     }
 
     /**
-     * getter du tableau
-     * @return
+     * methode getTab de la classe ControlSuppressionColonne
+     * @return le tableau
      */
     public Tableau getTab() {
         return tab;
     }
 
     /**
-     * Extrait le nom de la colonne à partir de l'ID du bouton.
-     *
-     * @param idBouton L'ID du bouton.
-     * @return Le nom de la colonne extrait.
+     * methode extraireNomColonneDeID de la classe ControlSuppressionColonne
+     * @param idBouton identifiant du bouton que l on souhaite verifier
+     * @return le nom de la colonne
      */
     public String extraireNomColonneDeID(String idBouton) {
         if (idBouton != null && idBouton.startsWith("btnSupprimerColonne")) {

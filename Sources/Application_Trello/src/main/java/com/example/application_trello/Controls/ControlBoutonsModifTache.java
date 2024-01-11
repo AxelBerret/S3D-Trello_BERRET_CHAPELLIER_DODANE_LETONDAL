@@ -14,18 +14,35 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
-    /*Classe représentant le controleurs des boutons dans la fenêtre de modification des tâches.
-    *Le controleur agit sur les boutons pour ajouter ou bien des dépendances ou bien des sous-tâches sur la tâche qu'on est en train de modifier.
-    * Classe écrite par Titouan
+
+    /**
+     * attribut tab de la classe ControlBoutonsModifTache
+     * represente le modele que l on modifiera
      */
     private Tableau tab;
+
+    /**
+     * attribut listeNomTaches de la classe ControlBoutonsModifTaches
+     * reresente la liste des noms des taches
+     */
     private ArrayList<String> listeNomTaches;
 
+
+    /**
+     * constructeur qui cree des objets de types ControlBoutonsModifTache
+     * a partir des donnees passees en parametres
+     * @param t tableau que l on va utiliser en tant que modele
+     */
     public ControlBoutonsModifTache(Tableau t){
         this.tab = t;
         this.majListeNomTaches();
     }
 
+
+    /**
+     * methode handle de la classe ControlBoutonsModifTache
+     * @param event
+     */
     public void handle(ActionEvent event) {
         if (event.getTarget() instanceof Button) {
             Button targetButton = (Button) event.getTarget();//Si l'event vient d'un boutton
@@ -97,6 +114,10 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+     * methode majListeNomTaches de la classe ControlBoutonsModifTache
+     * met a jour la liste de noms des taches
+     */
     public void majListeNomTaches(){
         ArrayList<Tache> lt = this.tab.getListeTaches();
         this.listeNomTaches = new ArrayList<>();
@@ -105,6 +126,11 @@ public class ControlBoutonsModifTache implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+     * methode extraireNomTacheID de la classe ControlBoutonsModifTache
+     * @param idBouton identifiant du bouton que l on souhaite verifier
+     * @return le nom de la tache
+     */
     public String extraireNomTacheID(String idBouton) {//Méthode pour récupérer le nom de la tache depuis l'ID d'un boutton/datePicker
         String[] prefixes = {"addDependButton", "addSousTacheButton", "setDateDebut", "setDateFin", "suppST", "suppDep"};
         for (String prefix : prefixes) {

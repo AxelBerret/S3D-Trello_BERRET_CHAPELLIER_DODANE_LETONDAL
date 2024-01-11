@@ -31,8 +31,7 @@ public class ControlSuppressionTableau implements EventHandler<ActionEvent> {
 
     /**
      * methode handle de la classe ControlSuppressionTableau
-     * qui permet la gestion du bouton de suppression de tableau
-     * @param event evenement representant le bouton clickable
+     * @param event
      */
     public void handle(ActionEvent event) {
         if (event.getSource() instanceof Button) {
@@ -53,17 +52,17 @@ public class ControlSuppressionTableau implements EventHandler<ActionEvent> {
     }
 
     /**
-     * getter de la liste des tableaux
-     * @return
+     * methode getListeTab de la classe ControlSuppressionTableau
+     * @return la liste des tableaux
      */
     public ListeTableaux getListeTab() {
         return listeTab;
     }
 
     /**
-     *
-     * @param idBouton
-     * @return
+     * methode extraireNomTableauDeID de la classe ControlSuppressionTableau
+     * @param idBouton identifiant du bouton que l on souhaite verifier
+     * @return le nom du tableau
      */
     public String extraireNomTableauDeID(String idBouton) {
         if (idBouton != null && idBouton.startsWith("boutonSupprimerTableau")) {

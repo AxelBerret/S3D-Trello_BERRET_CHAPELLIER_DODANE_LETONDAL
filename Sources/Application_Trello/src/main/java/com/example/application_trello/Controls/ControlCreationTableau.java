@@ -27,8 +27,8 @@ public class ControlCreationTableau {
     public ControlCreationTableau(ListeTableaux lt) {this.listeTab = lt;}
 
     /**
-     * getter de la liste de tableaux
-     * @return
+     * methode getListeTab de la classe ControlCreationTableau
+     * @return la liste de tableaux
      */
     public ListeTableaux getListeTab() {
         return listeTab;
@@ -36,8 +36,7 @@ public class ControlCreationTableau {
 
     /**
      * methode handle de la classe ControlCreationTableau
-     * qui permet la gestion du bouton de creation de tableau
-     * @param event evenement representant le bouton clickable
+     * @param event
      */
     public void handle(ActionEvent event) {
         if (event.getSource() instanceof Button) {

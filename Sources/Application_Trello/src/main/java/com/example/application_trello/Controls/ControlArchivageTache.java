@@ -17,20 +17,32 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
      * represente le modele que l on modifiera
      */
     private Tableau tab;
+
+    /**
+     * attribut nomCol de la classe ControlArchivageTache
+     * represente la colonne dans laquelle se trouve la tache
+     */
     private String nomCol;
+
+    /**
+     * attribut nomTache de la classe controlArchivageTache
+     * represente le nom de la tache que l on va manipuler
+     */
     private String nomTache;
-    public ControlArchivageTache(Tableau t, String nomTache, String nomCol) {
-        this.tab = t;
-        this.nomCol = nomCol;
-        this.nomTache = nomTache;
-    }
 
 
     /**
      * constructeur qui cree des objets de types ControlArchivageTache
      * a partir des donnees passees en parametres
-     * @param t tableau que l on souhaite utiliser en modele
+     * @param t tableau que l on va utiliser en tant que modele
+     * @param nomTache nom de la tache que l on souhaite manipuler
+     * @param nomCol nom de la colonne dans laquelle se trouve la tache
      */
+    public ControlArchivageTache(Tableau t, String nomTache, String nomCol) {
+        this.tab = t;
+        this.nomCol = nomCol;
+        this.nomTache = nomTache;
+    }
 
 
     /**
@@ -59,9 +71,9 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
-     * @param idBouton
-     * @return
+     * methode extraireNomTacheDeID de la classe ControlArchivageTache
+     * @param idBouton identifiant du bouton que l on souhaite verifier
+     * @return le nom de la tache
      */
     public String extraireNomTacheDeID(String idBouton) {
         if (idBouton != null && idBouton.startsWith("boutonSupprimerTableau")) {
@@ -71,8 +83,8 @@ public class ControlArchivageTache implements EventHandler<ActionEvent> {
     }
 
     /**
-     * getter du tableau
-     * @return
+     * methode getTab de la classe ControlArchivageTache
+     * @return le tableau
      */
     public Tableau getTab() {
         return tab;

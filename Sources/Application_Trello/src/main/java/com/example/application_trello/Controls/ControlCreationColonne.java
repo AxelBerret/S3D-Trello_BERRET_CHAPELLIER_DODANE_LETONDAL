@@ -8,25 +8,35 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 
 public class ControlCreationColonne implements EventHandler<ActionEvent> {
-    /*Controleur pour le bouton + sur la colonne de droite servant à créer une nouvelle colonne.
-    *Ouvre une fenêtre de dialogue temporaire pour que l'utilisateur rentre le nom de la colonne puis appelle
-    * le modèle pour créer une nouvelle colonne.
-    * Classe écrite par Titouan
+
+    /**
+     * attribut tab de la classe ControlCreationColonne
+     * represente le modele que l on va utiliser
      */
     private Tableau tab;
 
+
+    /**
+     * constructeur qui cree des objets de types ControlCreationColonne
+     * a partir des donnees passees en parametres
+     * @param t tableau que l on souhaite utiliser en tant que modele
+     */
     public ControlCreationColonne(Tableau t){
         this.tab = t;
     }
 
     /**
-     * getter du tableau
-     * @return
+     * methode getTab de la classe ControlCreationColonne
+     * @return le tableau
      */
     public Tableau getTab() {
         return tab;
     }
 
+    /**
+     * methode handle de la classe controlCreationColonne
+     * @param event
+     */
     public void handle(ActionEvent event) {
         if (event.getTarget() instanceof Button) {//Si l'event vient d'un boutton
             Button targetButton = (Button) event.getTarget();//On récupère ce bouton
