@@ -1,13 +1,25 @@
 @startuml
 actor Utilisateur
 control ControlCreationColonne
-control ControlSuppressionColonne
 
 Utilisateur -> ControlCreationColonne: clique bouton "Ajouter une colonne"
+activate ControlCreationColonne
+activate Tableau
 ControlCreationColonne -> Tableau: ajouterColonne(Colonne1)
+activate Tableau
+Tableau -> Tableau : notifierObservateurs
+Tableau -> VueBureau : actualiser(Tableau)
+activate VueBureau
+deactivate Tableau
+VueBureau -> Tableau : getListeColonnes
+Tableau --> VueBureau : listeColonnes
+alt Colonne manquante
+    VueBureau -> VueBureau : createColumn(Colonne1)
+else
+    VueBureau --> Tableau : colonne ajoutée
+end
+deactivate VueBureau
 Tableau --> ControlCreationColonne: colonne ajouté
-
-Utilisateur -> ControlSuppressionColonne: clique bouton "x"
-ControlSuppressionColonne -> Tableau: supprimerColonne(Colonne1)
-Tableau --> ControlSuppressionColonne: colonne supprimé
+ControlCreationColonne --> Utilisateur : Colonne ajoutée
+deactivate Tableau
 @enduml
