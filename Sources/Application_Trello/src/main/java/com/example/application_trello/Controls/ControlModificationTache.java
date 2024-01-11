@@ -11,22 +11,44 @@ import javafx.stage.Stage;
 //Et qui va permettre de consulter les sous-tâches et les dépendances, et d'en ajouter ou d'en supprimer.
 //Classe écrite par Titouan
 public class ControlModificationTache implements EventHandler<ActionEvent> {
+
+    /**
+     * attribut tab de la classe ControlModificationTache
+     * represente le modele que l on va utiliser
+     */
     private Tableau tab;
+
+    /**
+     * attribut tache de la classe ControlModificationTache
+     * represente la tache que l on va modifier
+     */
     private Tache tache;
 
+
+    /**
+     * constructeur qui cree des objets ControlModificationTache
+     * a partir des donnees passees en parametres
+     * @param t tableau que l on souhaite utiliser en tant que modele
+     * @param tt tache que l on souhaite modifier
+     */
     public ControlModificationTache(Tableau t, Tache tt){
         this.tab = t;
         this.tache = tt;
     }
 
+
     /**
-     * getter du tableau
-     * @return
+     * methode getTab de la classe ControlModificationTache
+     * @return le tableau
      */
     public Tableau getTab() {
         return tab;
     }
 
+    /**
+     * methode handle de la classe ControlModificationTache
+     * @param event
+     */
     public void handle(ActionEvent event) {
         Stage stageModification = new Stage();
         stageModification.setTitle(tache.getNomTache());
@@ -42,5 +64,4 @@ public class ControlModificationTache implements EventHandler<ActionEvent> {
         // Appelez la méthode actualiser après avoir montré la fenêtre
         vueModificationTache.actualiser(this.tab);
     }
-
 }

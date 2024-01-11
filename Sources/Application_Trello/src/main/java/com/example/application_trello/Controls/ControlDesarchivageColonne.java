@@ -10,9 +10,25 @@ import javafx.scene.control.Button;
 //Classe écrite par Sacha
 public class ControlDesarchivageColonne implements EventHandler<ActionEvent> {
 
+    /**
+     * attribut tab de la classe ControlDesarchivageColonne
+     * represente le modele que l on va utiliser
+     */
     private Tableau tab;
+
+    /**
+     * attribut nomCol de la classe ControlDesarchivageColonne
+     * represente le nom de la colonne que l on va manipuler
+     */
     private String nomCol;
 
+
+    /**
+     * constructeur qui cree des objets de types ControlDesarchivageColonne
+     * a partir des donnees passees en parametres
+     * @param t tableau que l on souhaite utiliser en tant que modele
+     * @param nomCol nom de la colonne que l on va manipuler
+     */
     public ControlDesarchivageColonne(Tableau t, String nomCol) {
         this.tab = t;
         this.nomCol = nomCol;
@@ -20,13 +36,17 @@ public class ControlDesarchivageColonne implements EventHandler<ActionEvent> {
     }
 
     /**
-     * getter du tableau
-     * @return
+     * methode getTab de la classe ControlDesarchivageColonne
+     * @return le tableau
      */
     public Tableau getTab() {
         return tab;
     }
 
+    /**
+     * methode handle de la classe ControlDesarchivageColonne
+     * @param event
+     */
     public void handle(ActionEvent event) {
         if (event.getSource() instanceof Button) {
             Button sourceButton = (Button) event.getSource();

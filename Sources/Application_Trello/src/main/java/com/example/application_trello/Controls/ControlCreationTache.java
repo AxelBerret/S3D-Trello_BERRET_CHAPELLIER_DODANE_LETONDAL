@@ -10,34 +10,51 @@ import javafx.scene.control.TextInputDialog;
 import java.util.ArrayList;
 
 public class ControlCreationTache implements EventHandler<ActionEvent> {
-    /*  Controleur du bouton + servant à créer une tache. Son rôle est d'ouvrir une fenêtre de dialogue temporaire
-    * afin que l'utilisateur rentre le nom de la tâche puis l'ajoute au modèle. Le contrôleur récupère le nom de la colonne de laquelle
-    * provient le bouton + grâce à l'ID du bouton qui est de la forme suivante : "btnCreerTacheColonne1" ce qui explique l'utilisation de la méthode
-    * "extraireNomDeColonne". C'est pour ajouter la tâche dans la bonne colonne.
-    * Le contrôleur a été écrit par Titouan*/
+
+    /**
+     * attribut tab de la classe ControlCreationTache
+     * represente le modele que l on va utiliser
+     */
     private Tableau tab;
+
+    /**
+     * attribut listeNomColonnes de la classe ControlCreationTache
+     * represente la liste des nom des colonnes
+     */
     private ArrayList<String> listeNomColonnes;
 
+
+    /**
+     * constructeur qui cree des objets de types ControlCreationTache
+     * a partir des donnees passees en parametres
+     * @param t tableau que l on souhaite utiliser en tant que modele
+     */
     public ControlCreationTache(Tableau t){
         this.tab = t;
         this.majListeNomColonnes();
     }
+
+
     /**
-     * getter du tableau
-     * @return
+     * methode getTab de la classe ControlCreationTache
+     * @return le tableau
      */
     public Tableau getTab() {
         return tab;
     }
 
     /**
-     * getter de la liste des noms de colonnes
-     * @return
+     * methode getListeNomColonnes de la classe ControlCreationTache
+     * @return la liste des noms des colonnes
      */
     public ArrayList<String> getListeNomColonnes() {
         return listeNomColonnes;
     }
 
+    /**
+     * methode handle de la classe ControlCreationTache
+     * @param event
+     */
     public void handle(ActionEvent event) {
         this.majListeNomColonnes();
         if (event.getTarget() instanceof Button) {//Si l'event vient d'un boutton
@@ -60,6 +77,10 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+     * methode majListeNomColonnes de la classe ControlCreationTache
+     * met a jour la liste des noms des colonnes
+     */
     public void majListeNomColonnes(){//Méthode pour créer une liste des noms de colonnes a partir de la liste des colonnes du tableau pour simplifier la méthode handle
         ArrayList<Colonne> lc = this.tab.getListeColonnes();
         this.listeNomColonnes = new ArrayList<>();
@@ -68,6 +89,11 @@ public class ControlCreationTache implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+     * methode extraireNomColonneDeID de la classe ControlCreationTache
+     * @param idBouton identifiant du bouton que l on souhaite verifier
+     * @return le nom de la colonne
+     */
     public String extraireNomColonneDeID(String idBouton) {//Méthode pour récupérer la colonne dans laquelle ajouter la tâche
         if (idBouton != null && idBouton.startsWith("btnCreerTache")) {
             return idBouton.substring("btnCreerTache".length());
