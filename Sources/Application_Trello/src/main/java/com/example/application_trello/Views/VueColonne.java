@@ -31,13 +31,19 @@ public class VueColonne extends VBox implements Observateur {
         Colonne c = new Colonne(columnName);
         initialize();
     }
-
+    /**
+     * Constructeur alternatif prenant une instance de Colonne.
+     *
+     * @param c Colonne à utiliser pour initialiser la vue.
+     */
     public VueColonne(Colonne c){
         this.nomColonne = c.getNomColonne();
         this.listeTaches = new ArrayList<>();
         initialize();
     }
-
+    /**
+     * Initialise la vue de la colonne avec ses composants graphiques.
+     */
     private void initialize() {
 
         setAlignment(Pos.TOP_CENTER);
