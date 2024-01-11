@@ -1,6 +1,7 @@
 package com.example.application_trello.Controls;
 
 import com.example.application_trello.Objects.ListeTableaux;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.*;
 
