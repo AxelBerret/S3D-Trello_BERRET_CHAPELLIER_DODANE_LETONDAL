@@ -1,0 +1,12 @@
+@startuml
+actor Utilisateur
+control ControlCreationTache
+Utilisateur -> ControlCreationTache : Clique bouton "+"
+ControlCreationTache -> Colonne: ajouterTache(Tache1)
+Colonne --> ControlCreationTache: tache créé
+
+Utilisateur -> VueBureau : "deplace la tache" setDragDropHandler(Colonne 1)
+VueBureau --> Utilisateur : setdragDropHandler(Colonne 1)
+Utilisateur -> VueBureau : setDragDropHandler(Colonne 2)
+VueBureau --> Utilisateur : setdragDropHandler(Colonne 2)
+@enduml

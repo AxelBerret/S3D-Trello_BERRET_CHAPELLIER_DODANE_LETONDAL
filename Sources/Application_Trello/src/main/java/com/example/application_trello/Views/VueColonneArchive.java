@@ -14,16 +14,39 @@ import javafx.scene.layout.VBox;
 //Classe écrite par Sacha
 public class VueColonneArchive  extends GridPane implements Observateur {
 
+    /**
+     * attribut tableau de la classe VueArchive
+     * represente le modele que l on va actualiser
+     */
     private Tableau tableau;
+
+    /**
+     * attribut nomColonne de la classe VueArchive
+     *
+     */
     private String nomColonne;
+
+    /**
+     * attribut listViewtachesArchivees de la classe VueArchive
+     * represente la liste des taches archivees
+     */
     private ListView<Tache> listViewColonneArchivees;
 
+    /**
+     * constructeur qui cree des objets de types VueArchive
+     * @param tableau
+     * @param nomColonne
+     */
     public VueColonneArchive(Tableau tableau, String nomColonne) {
         this.tableau = tableau;
         this.nomColonne = nomColonne;
         initialize();
     }
 
+    /**
+     * methode initialize de la classe VueArchive
+     * initialise la vue
+     */
     private void initialize() {
         setHgap(30);
         setVgap(30);
@@ -40,6 +63,10 @@ public class VueColonneArchive  extends GridPane implements Observateur {
         tableau.enregistrerObservateur(this);
     }
 
+    /**
+     * methode actualiser de la classe VueArchive
+     * @param s sujet que l on va actualiser
+     */
     @Override
     public void actualiser(Sujet s) {
         getChildren().clear();
