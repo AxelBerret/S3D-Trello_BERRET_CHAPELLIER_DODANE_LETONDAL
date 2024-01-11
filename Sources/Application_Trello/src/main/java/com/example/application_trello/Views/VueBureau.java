@@ -25,11 +25,19 @@ import static javafx.application.Application.launch;
 
     public class VueBureau extends HBox implements Observateur {
 
+        /**
+         * attributs de la classe listColVue
+         */
         private ArrayList<VueColonne> listColVue;
         private HBox rightHBox;
         private VBox vbox;  // Nouvelle VBox
         private Tableau t;
 
+
+        /**
+         * constructeur qui cree des objets de types VueBureau
+         * @param t modele que l on souhaite utiliser
+         */
         public VueBureau(Sujet t) {
             VBox leftVBox = new VBox(0);
             leftVBox.setAlignment(Pos.CENTER);
@@ -96,11 +104,20 @@ import static javafx.application.Application.launch;
             this.getChildren().addAll(rightVBox, leftVBox);
         }
 
+
+        /**
+         * methode configureButton de la classe VueBureau
+         * @param button bouton que l on souhaite configurer
+         */
         private void configureButton(Button button) {
             button.setStyle("-fx-font-size: 14; -fx-padding: 10 30; -fx-background-radius: 100 100 100 100; -fx-background-color: white; -fx-text-fill: black;");
             button.setOnMouseEntered(e -> button.setStyle("-fx-font-size: 14; -fx-padding: 10 30; -fx-background-radius: 100 100 100 100; -fx-background-color: black; -fx-text-fill: white;"));
             button.setOnMouseExited(e -> button.setStyle("-fx-font-size: 14; -fx-padding: 10 30; -fx-background-radius: 100 100 100 100; -fx-background-color: white; -fx-text-fill: black;"));
         }
+
+        /**
+         * methode afficherVueListe de la classe VueBureau
+         */
         private void afficherVueListe() {
         // Créez la VueListe en utilisant le premier objet Colonne (ici, la première colonne de la liste)
         if (!listColVue.isEmpty()) {
@@ -117,6 +134,9 @@ import static javafx.application.Application.launch;
         }
     }
 
+    /**
+     * methode afficherVueArchive de la classe VueBureau
+     */
     private void afficherVueArchive() {
 
             VueArchive vueArchive = new VueArchive(t, listColVue.get(0).getNomVueColonne());
@@ -130,6 +150,10 @@ import static javafx.application.Application.launch;
             // Affichez la fenêtre
             stage.show();
     }
+
+    /**
+     * methode afficherVueArchiveColonne de la classe VueBureau
+     */
     private void afficherVueArchiveColonne() {
         System.out.println("test");
         VueColonneArchive VueColonneArchive = new VueColonneArchive(t, listColVue.get(0).getNomVueColonne());
@@ -144,6 +168,9 @@ import static javafx.application.Application.launch;
         stage.show();
     }
 
+    /**
+     * methode afficherVueGantt de la classe VueBureau
+     */
     private void afficherVueGantt() {
         // Créez la VueGantt
         VueGantt vueGantt = new VueGantt(t);
@@ -158,9 +185,10 @@ import static javafx.application.Application.launch;
         stage.show();
     }
 
-
-
-
+    /**
+     * methode actualiser de la classe VueBureau
+     * @param s sujet que l on va actualiser
+     */
     @Override
     public void actualiser(Sujet s){
         //On récupère les colonnes du modèle au moment où la méthode actualiser est appelée
@@ -184,6 +212,11 @@ import static javafx.application.Application.launch;
         }
     }
 
+    /**
+     * methode createColumn de la classe VueBureau
+     * @param colonne colonne que l on souhaite cree
+     * @return la vue colonne a partir de la colonne donnee
+     */
     private VueColonne createColumn(Colonne colonne) {// Cette méthode ajoute un objet colonne graphiquement et renvoie la vueColonne
         VueColonne columnVBox = new VueColonne(colonne.getNomColonne(), this.t);
         this.listColVue.add(columnVBox);
@@ -194,6 +227,10 @@ import static javafx.application.Application.launch;
         return columnVBox;
     }
 
+    /**
+     * methode removeColumnById de la classe VueBureau
+     * @param nomColonne nom de la colonne que l on veut supprimer
+     */
     public void removeColumnById(String nomColonne) {
         Node columnToRemove = null;
         // Parcourir les enfants pour trouver le HBox avec l'id donné
@@ -212,6 +249,11 @@ import static javafx.application.Application.launch;
         }
     }
 
+    /**
+     * methode createAddColumn de la classe VueBureau
+     * @param colonne colonne que l on souhaite ajouter et creer
+     * @return la vue colonne partir de la colonne donnee
+     */
     private VueColonne createAddColumn(Colonne colonne) {
         VueColonne specialColumnVBox = new VueColonne(colonne.getNomColonne(), this.t);
         // Ajoutez un gestionnaire d'événements pour le drag-and-drop
@@ -220,7 +262,10 @@ import static javafx.application.Application.launch;
         return specialColumnVBox;
     }
 
-    // Méthode pour définir les gestionnaires d'événements de glisser-déposer
+    /**
+     * methode setDragDropHandlers de la classe VueBureau
+     * @param columnVBox
+     */
     private void setDragDropHandlers(VueColonne columnVBox) {
         columnVBox.setOnDragDetected(event -> {
             // Commence le glisser-déposer
@@ -269,7 +314,12 @@ import static javafx.application.Application.launch;
         columnVBox.setOnDragDone(DragEvent::consume);
     }
 
-    // Méthode auxiliaire pour trouver la colonne par son nom
+    /**
+     * methode findColumnByName de la classe VueBureau
+     * @param parent
+     * @param columnName
+     * @return la vue colonne a partir du parent et du nom de la colonne
+     */
     private VueColonne findColumnByName(Parent parent, String columnName) {
         if (parent instanceof HBox) {
             HBox hbox = (HBox) parent;
@@ -284,7 +334,11 @@ import static javafx.application.Application.launch;
         return null;
     }
 
-
+    /**
+     * methode containsColumn de la classe VueBureau
+     * @param columnName npm de la colonne que l on souhaite verifier
+     * @return vrai si contenu sinon faux
+     */
     private boolean containsColumn(String columnName) {//Méthode qui compare le nom en paramètre avec les noms de la liste des colonnes présentes dans la vue.
         //Renvoie vrai si la colonne est présente, faux sinon
         for (VueColonne vueColonne : this.listColVue) {
@@ -294,6 +348,7 @@ import static javafx.application.Application.launch;
         }
         return false;
     }
+
 
     public static void main(String[] args) {
         launch();
