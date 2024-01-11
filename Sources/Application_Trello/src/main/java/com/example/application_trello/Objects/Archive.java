@@ -80,6 +80,11 @@ public class Archive {
         return this.listeColonnesArchivees;
     }
 
+    /**
+     * methode getTacheByNom de la classe Archive
+     * @param str nom de la tache que l on souhaite avoir
+     * @return la tache au nom donne
+     */
     public Tache getTacheByNom(String str){
         for (Tache t : this.listeTachesArchivees){
             if (t.getNomTache().equals(str)){

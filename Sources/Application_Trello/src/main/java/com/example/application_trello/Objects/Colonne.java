@@ -91,6 +91,10 @@ public class Colonne implements InterfaceListeTaches {
         return Objects.equals(nomColonne, colonne.nomColonne) && Objects.equals(listeTaches, colonne.listeTaches);
     }
 
+    /**
+     * methode toString de la classe Colonne
+     * @return le mode d affichage console pour les objets de types Colonnes
+     */
     public String toString(){
         String res = this.nomColonne + " :\n";
         for (Tache t : this.listeTaches){
