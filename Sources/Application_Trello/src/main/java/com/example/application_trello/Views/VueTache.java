@@ -16,9 +16,16 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.*;
 
-//Vue tache : vue qu'on va afficher dans une fenêtre externe a l'application lorsqu'on va cliquer sur une tache,
-//pour afficher des informations complémentaires et personnaliser plus en détails les tâches.
-//Classe écrite par Titouan
+/**
+ * La classe VueTache représente une vue détaillée d'une tâche dans l'application.
+ * Elle affiche des informations complémentaires sur la tâche, permet de personnaliser
+ * les détails de la tâche, et gère les dépendances et les sous-tâches associées à la tâche.
+ *
+ * Cette classe étend GridPane et implémente l'interface Observateur pour pouvoir être notifiée
+ * des mises à jour de la tâche associée dans le modèle.
+ *
+ * @author Titouan
+ */
 public class VueTache extends GridPane implements Observateur {
 
     private DatePicker datePickerDebut;
@@ -40,6 +47,12 @@ public class VueTache extends GridPane implements Observateur {
     private TextArea commentTextArea;
     private VBox vboxListesousTache;
 
+    /**
+     * Constructeur de la classe VueTache.
+     *
+     * @param t   La tâche associée à la vue.
+     * @param tab Le tableau auquel la tâche appartient.
+     */
     public VueTache(Tache t, Tableau tab){// !!! !!! Ne pas oublier d'actualiser a la création
         this.t = t;
         this.tab = tab;
@@ -179,6 +192,11 @@ public class VueTache extends GridPane implements Observateur {
         this.add(saveButton, 0, 9, 2, 1);
     }
 
+    /**
+     * Méthode appelée pour mettre à jour la vue en fonction des changements dans le modèle.
+     *
+     * @param s Le sujet (dans ce cas, le Tableau) qui notifie la mise à jour.
+     */
     public void actualiser(Sujet s){
         ArrayList<Tache> lisAllTaches = ((Tableau)s).getListeTaches();//Stocke toutes les tâches du modèle
         Tache ta = ((Tableau)s).getTache(this.t.getNomTache());//On récupère la tache actuelle mise a jour
@@ -251,35 +269,86 @@ public class VueTache extends GridPane implements Observateur {
         System.out.println("Date de la tâche : " + this.t.getDateDebut());
     }
 
+    /**
+     * Récupère la dépendance sélectionnée dans la vue.
+     *
+     * @return Le nom de la dépendance sélectionnée.
+     */
     public String getDependanceSelectionnee() {
         return this.dependanceSelectionnee;
     }
+    /**
+     * Réinitialise la sélection de dépendance.
+     */
     public void resetDependanceSelectionnee(){
         this.dependanceSelectionnee = null;
     }
+    /**
+     * Récupère la sous-tâche sélectionnée dans la vue.
+     *
+     * @return Le nom de la sous-tâche sélectionnée.
+     */
     public String getSousTacheSelectionnee(){
         return this.sousTacheSelectionnee;
     }
-    public void resetSousTacheSelectionnee(){
+    /**
+     * Réinitialise la sélection de sous-tâche.
+     */
+    /**
+     * Réinitialise la sélection de la sous-tâche.
+     */
+    public void resetSousTacheSelectionnee() {
         this.sousTacheSelectionnee = null;
     }
-    public LocalDate getDateDebutSelectionnee(){
+
+    /**
+     * Récupère la date de début sélectionnée dans la vue.
+     *
+     * @return La date de début sélectionnée.
+     */
+    public LocalDate getDateDebutSelectionnee() {
         return dateDebutSelectionnee;
     }
-    public LocalDate getDateFinSelectionnee(){
+
+    /**
+     * Récupère la date de fin sélectionnée dans la vue.
+     *
+     * @return La date de fin sélectionnée.
+     */
+    public LocalDate getDateFinSelectionnee() {
         return this.dateFinSelectionnee;
     }
-    public String getSuppDepSelectionnee(){
+
+    /**
+     * Récupère la dépendance à supprimer sélectionnée dans la vue.
+     *
+     * @return Le nom de la dépendance à supprimer sélectionnée.
+     */
+    public String getSuppDepSelectionnee() {
         return this.suppDepSelectionnee;
     }
-    public void resetSuppDepSelectionnee(){
+
+    /**
+     * Réinitialise la sélection de la dépendance à supprimer.
+     */
+    public void resetSuppDepSelectionnee() {
         this.suppDepSelectionnee = null;
     }
-    public String getSuppSTSSelectionnee(){
+
+    /**
+     * Récupère la sous-tâche à supprimer sélectionnée dans la vue.
+     *
+     * @return Le nom de la sous-tâche à supprimer sélectionnée.
+     */
+    public String getSuppSTSSelectionnee() {
         return this.suppSTSSelectionnee;
     }
 
-    public void resetSuppSTSelectionnee(){
+    /**
+     * Réinitialise la sélection de la sous-tâche à supprimer.
+     */
+    public void resetSuppSTSelectionnee() {
         this.suppSTSSelectionnee = null;
     }
+
 }
