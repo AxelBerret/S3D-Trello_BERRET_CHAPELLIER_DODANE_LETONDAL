@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/class-diagram
-
+package Controller #Pink/LightBlue{
 class ControlArchivageColonne {
 - tab : Tableau
 - nomCol : String
@@ -9,7 +9,6 @@ class ControlArchivageColonne {
 + extraireNomColonneDeID(idBouton : String) : String
 + getTab() : Tableau
 }
-
 class ControlArchivageTache {
 - tab : Tableau
 - nomCol : String
@@ -19,7 +18,6 @@ class ControlArchivageTache {
 + extraireNomTacheDeID(idbouton : String) : String
 + getTab() : Tableau
 }
-
 class ControlBoutonsModifTache {
 - tab : Tableau
 - listeNomsTaches : ArrayList<String>
@@ -28,21 +26,12 @@ class ControlBoutonsModifTache {
 + majListeNomTaches() : void
 + extraireNomTacheID(idBouton : String) : String
 }
-
 class ControlCreationColonne {
 - tab : Tableau
 + ControlCreationColonne(t : Tableau)
 + getTab() : Tableau
 + handle(event : ActionEvent) : void
 }
-
-class ControlCreationTableau {
-- listeTab : ListeTableaux
-+ ControlCreationTableau(lt : ListeTableaux)
-+ getListeTab() : ListeTableaux
-+ handle(event : ActionEvent) : void
-}
-
 class ControlCreationTache {
 - tab : Tableau
 - listeNomColonnes : ArrayList<String>
@@ -53,7 +42,6 @@ class ControlCreationTache {
 + majListeNomColonne() : void
 + extraireNomColonneDeID(idBouton : String) : String
 }
-
 class ControlDesarchivageColonne {
 - tab : Tableau
 - nomCol : String
@@ -61,7 +49,6 @@ class ControlDesarchivageColonne {
 + getTab() : Tableau
 + handle((event : ActionEvent) : void
 }
-
 class ControlDesarchivageTache {
 - tab : Tableau
 - nomCol : String
@@ -70,7 +57,6 @@ class ControlDesarchivageTache {
 + getTab() : Tableau
 + handle(event : ActionEvent) : void
 }
-
 class ControlModificationTache {
 - tab : Tableau
 - tache : Tache
@@ -78,7 +64,6 @@ class ControlModificationTache {
 + getTab() : Tableau
 + handle(event : ActionEvent) : void
 }
-
 class ControlSuppressionColonne {
 - tab : Tableau
 + ControlSuppressionColonne(t : Tableau)
@@ -86,15 +71,6 @@ class ControlSuppressionColonne {
 + getTab() : Tableau
 + extraireNomColonneDeID(idBouton : String)
 }
-
-class ControlSuppressionTableau {
-- listeTab : ListeTableaux
-+ ControlSuppressionTableau(lt : ListeTableaux)
-+ handle(event : ActionEvent) : void
-+ getListeTab() : ListeTableau
-+ extraireNomTableauDeID(idBouton : String) : String
-}
-
 class ControlSuppressionTache {
 - tab : Tableau
 - nomCol : String
@@ -104,6 +80,7 @@ class ControlSuppressionTache {
 + getTab() : Tableau
 + getNomCol() : String
 + getNomTache() : String
+}
 }
 
 class Archive {
@@ -137,15 +114,6 @@ interface InterfaceListeTaches {
 + supprimerTache(tache : Tache) : void
 + getTache(nomTache : String) : Tache
 + getListeTaches() : ArrayList<Tache>
-}
-
-class ListeTableaux {
-- tableaux : ArrayList<Tableau>
-+ ListeTableaux()
-+ ajouterTableau(yab : Tableau) : void
-+ supprimerTableau(tab : Tableau) : void
-+ getTableau(nomTab : String) : Tableau
-+ getListeTableaux() : ArrayList<Tableau>
 }
 
 interface Observateur {
@@ -250,6 +218,7 @@ class VueArchive {
 + actualiser(s : Sujet) : void
 }
 
+package Vue #Red/DarkBlue{
 class VueBureau {
 - listeColVue : Arraylist<VueColonne>
 - rightHBox : HBox
@@ -269,7 +238,6 @@ class VueBureau {
 + findColumnByName(parent : Parent, columnName : String) : VueColonne
 + containsColumn(columnName : String) : boolean
 }
-
 class VueColonne {
 - nomColonne : String
 - t : Tableau
@@ -286,7 +254,6 @@ class VueColonne {
 + createIconButton(imageName : String) : Button
 + equals(o : Object) : boolean
 }
-
 class VueColonneArchive {
 - tableau : Tableau
 - nomColonne : String
@@ -295,7 +262,6 @@ class VueColonneArchive {
 - initialize() : void
 + actualiser(s : Sujet) : void
 }
-
 class VueGantt {
 - t : Tableau
 + VueGantt(tableau : Tableau)
@@ -306,7 +272,6 @@ class VueGantt {
 + getIndiceColonne(tache : Tache) : int
 + getCouleurByIndice(indiceColonne : int) : Color
 }
-
 class VueListe {
 - tableau : Tableau
 - nomColonne : String
@@ -314,7 +279,6 @@ class VueListe {
 - initialize() : void
 + actualiser(s : Sujet) : void
 }
-
 class VueTache {
 - datePickerDebut : DatePicker
 - datePickerFin : DatePicker
@@ -342,8 +306,7 @@ class VueTache {
 + getDateFinSelectionnee() : void
 + resetDateFinSelectionnee() : void
 }
-
-
+}
 
 Colonne -.-|> InterfaceListeTaches
 Tableau -.-|> Sujet
@@ -362,7 +325,6 @@ TacheSimple --|> Tache
 Archive "1" -> "0...*" Tache
 Archive "1" -> "0...*" Colonne
 Colonne "1" -> "0...*" Tache
-ListeTableaux "1" -> "0...*" Tableau
 Tableau "1" -> "0...*" InterfaceListeTaches
 Tableau "1" -> "0...*" Observateur
 Tache "1" -> "0...*" Tache
@@ -375,7 +337,6 @@ Tableau "1" <- "0...*" ControlArchivageColonne
 Tableau "1" <- "0...*" ControlArchivageTache
 Tableau "1" <- "0...*" ControlBoutonsModifTache
 Tableau "1" <- "0...*" ControlCreationColonne
-ListeTableaux "1" <- "0...*" ControlCreationTableau
 Tableau "1" <- "0...*" ControlCreationTache
 Tableau "1" <- "0...*" ControlDesarchivageColonne
 Tableau "1" <- "0...*" ControlDesarchivageTache
@@ -388,7 +349,6 @@ Tableau "1" <- "1" VueColonneArchive
 Tableau "1" <- "1" VueGantt
 Tableau "1" <- "1" VueListe
 Tableau "1" <- "1" VueTache
-ListeTableaux "1" <- "0...*" ControlSuppressionTableau
 Tableau "1" <- "0...*" ControlSuppressionTache
 
 @enduml
