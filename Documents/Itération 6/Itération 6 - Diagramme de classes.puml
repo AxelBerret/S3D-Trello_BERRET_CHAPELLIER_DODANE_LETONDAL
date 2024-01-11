@@ -246,7 +246,7 @@ class VueArchive {
 - nomColonne : String
 - listViewTachesArchivees : ListView<Tache>
 + VueArchive(tableau : Tableau, nomColonne : String)
-+ initialize() : void
+- initialize() : void
 + actualiser(s : Sujet) : void
 }
 
@@ -276,7 +276,7 @@ class VueColonne {
 - listeTaches : ArrayList<String>
 + VueColonne(columnName : String, t : Tableau)
 + VueColonne(c : Colonne)
-+ initialize() : void
+- initialize() : void
 + actualiser(s : Sujet) : void
 + containsTache(nomT : String, lisT : Arraylist<Tache>) : boolean
 + getNomVueColonne() : String
@@ -292,14 +292,14 @@ class VueColonneArchive {
 - nomColonne : String
 - listeViewColonneArchivees : ListView<Tache>
 + VueColonneArchive(tableau : Tableau, nomColonne : String)
-+ initialize() : void
+- initialize() : void
 + actualiser(s : Sujet) : void
 }
 
 class VueGantt {
 - t : Tableau
 + VueGantt(tableau : Tableau)
-+ initialize() : void
+- initialize() : void
 + createTransparentRectangle(baseDate : LocalDate, startDate : LocalDate, daySize : double) : Rectangle
 + createGanttRectangle(tache : Tache, baseDate : LocalDate, daySize : double) : Rectangle
 + actualiser(s : Sujet) : void
@@ -311,7 +311,7 @@ class VueListe {
 - tableau : Tableau
 - nomColonne : String
 + vueListe(tableau : Tableau, nomColonne : String)
-+ initialize() : void
+- initialize() : void
 + actualiser(s : Sujet) : void
 }
 

@@ -11,14 +11,29 @@ import javafx.scene.control.Button;
  */
 public class ControlSuppressionTache implements EventHandler<ActionEvent> {
 
+    /**
+     * attribut tab de la classe ControlSuppressionTache
+     * represente le modele que l on va utiliser
+     */
     private Tableau tab;
-    private String nomCol;
-    private String nomTache;
 
     /**
-     * Constructeur du contrôleur.
-     *
-     * @param t Le tableau associé au contrôleur.
+     * attribut nomCol de la classe ControlSuppressionTache
+     * represente le nom de la colonne dans laquelle se trouve la tache que l on va supprimer
+     */
+    private String nomCol;
+
+    /**
+     * attribut nomTache de la classe ControlSuppressionTache
+     * represente le nom de la tache que l on va supprimer
+     */
+    private String nomTache;
+
+
+    /**
+     * constructeur qui cree des objets de types ControlSuprressionTache
+     * a partir des donnees passees en parametres
+     * @param t le tableau que l on souhaite utiliser en tant que modele
      */
     public ControlSuppressionTache(Tableau t, String nomCol, String nomTache) {
         this.tab = t;
@@ -26,10 +41,10 @@ public class ControlSuppressionTache implements EventHandler<ActionEvent> {
         this.nomTache = nomTache;
     }
 
+
     /**
-     * Méthode appelée lorsqu'un événement (clic sur un bouton) se produit.
-     *
-     * @param event L'événement déclenché.
+     * methode handle de la classe ControlSuppressionTache
+     * @param event
      */
     public void handle(ActionEvent event) {
         // Vérifie si la source de l'événement est un bouton
@@ -41,24 +56,24 @@ public class ControlSuppressionTache implements EventHandler<ActionEvent> {
     }
 
     /**
-     * getter du tableau
-     * @return
+     * methode getTab de la classe ControlSuppressionTache
+     * @return le tableau
      */
     public Tableau getTab() {
         return tab;
     }
 
     /**
-     * getter du nom de la colonne
-     * @return
+     * methode getNomCol de la classe ControlSuppressionTache
+     * @return le nom de la colonne dans laquelle se trouve la tache que l on va supprimer
      */
     public String getNomCol() {
         return nomCol;
     }
 
     /**
-     * getter du nom de la tache
-     * @return
+     * methode getNomTache de la classe ControlSuppressionTache
+     * @return le nom de la tache que l on souhaite supprimer
      */
     public String getNomTache() {
         return nomTache;

@@ -17,20 +17,24 @@ public class ControlArchivageColonne implements EventHandler<ActionEvent> {
      * represente le modele que l on modifiera
      */
     private Tableau tab;
+
+    /**
+     * attribut nomCol de la classe ControlArchivageColonne
+     * represente le nom de la colonne que l on va maniupuler pour l archivage
+     */
     private String nomCol;
-
-    public ControlArchivageColonne(Tableau t, String nomCol) {
-        this.tab = t;
-        this.nomCol = nomCol;
-
-    }
 
 
     /**
-     * constructeur qui cree des objets de types ControlArchivageTache
+     * contructeur qui cree des objets de types ControlArchivageColonne
      * a partir des donnees passees en parametres
-     * @param t tableau que l on souhaite utiliser en modele
+     * @param t tableau que l on va utiliser en tant que modele
+     * @param nomCol nom de la colonne que l on veut manipuler
      */
+    public ControlArchivageColonne(Tableau t, String nomCol) {
+        this.tab = t;
+        this.nomCol = nomCol;
+    }
 
 
     /**
@@ -59,9 +63,9 @@ public class ControlArchivageColonne implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
-     * @param idBouton
-     * @return
+     * methode extraireNomColonneDeID de la classe ControlArchivageColonne
+     * @param idBouton identifiant du bouton que l on souhaite verifier
+     * @return le nom de la colonne
      */
     public String extraireNomColonneDeID(String idBouton) {
         if (idBouton != null && idBouton.startsWith("boutonArchivageColonne")) {
@@ -71,8 +75,8 @@ public class ControlArchivageColonne implements EventHandler<ActionEvent> {
     }
 
     /**
-     * getter du tableau
-     * @return
+     * methode getTab de la classe ControlArchivageColonne
+     * @return le tableau
      */
     public Tableau getTab() {
         return tab;
