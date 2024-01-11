@@ -11,7 +11,7 @@ import java.util.Optional;
  * Contrôleur pour la suppression d'un tableau dans la liste des tableaux.
  * Classe écrite par Axel et Logan
  */
-public class ControlSuppressionTableau {
+public class ControlSuppressionTableau implements EventHandler<ActionEvent> {
 
     /**
      * attribut tab de la classe ControlSuppressionTableau

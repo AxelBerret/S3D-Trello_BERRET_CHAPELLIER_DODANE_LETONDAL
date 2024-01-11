@@ -246,4 +246,4 @@ public class VueTache extends GridPane implements Observateur {
         this.dateFinSelectionnee = null;
     }
 
-    }
+}

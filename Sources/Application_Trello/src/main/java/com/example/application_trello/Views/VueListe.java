@@ -100,6 +100,6 @@ public class VueListe extends VBox implements Observateur {
             event.consume();
         });
     }
-    }
+}
 
 
