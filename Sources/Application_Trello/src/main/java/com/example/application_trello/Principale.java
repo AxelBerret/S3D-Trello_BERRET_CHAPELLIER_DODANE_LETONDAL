@@ -3,7 +3,7 @@ package com.example.application_trello;
 import com.example.application_trello.Objects.Colonne;
 import com.example.application_trello.Objects.Sujet;
 import com.example.application_trello.Objects.Tableau;
-import com.example.application_trello.Views.NewVueBureau;
+import com.example.application_trello.Views.VueBureau;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,7 +16,7 @@ public class Principale extends Application {
 
         Sujet t = new Tableau("Test");
 
-        NewVueBureau vb = new NewVueBureau(t);
+        VueBureau vb = new VueBureau(t);
         t.enregistrerObservateur(vb);
 
         Scene scene = new Scene(vb, 1200, 600);

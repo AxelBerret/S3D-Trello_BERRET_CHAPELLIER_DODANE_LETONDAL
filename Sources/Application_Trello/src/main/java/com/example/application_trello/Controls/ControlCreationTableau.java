@@ -6,6 +6,10 @@ import javafx.scene.control.TextInputDialog;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
+/**
+ * Contrôleur pour la création d'un tableau.
+ * Classe écrite par Axel
+ */
 public class ControlCreationTableau {
 
     /**

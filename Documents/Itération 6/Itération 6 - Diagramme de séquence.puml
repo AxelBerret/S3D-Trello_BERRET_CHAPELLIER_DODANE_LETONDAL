@@ -1,0 +1,19 @@
+@startuml
+actor Utilisateur
+control ControlCreationTache
+
+Utilisateur -> ControlCreationTache: clique bouton "+"
+ControlCreationTache -> Colonne: ajouterTache(Tache1)
+Colonne --> ControlCreationTache: Tache1 créée
+
+Utilisateur -> VueTache: clique sur "Tache1"
+VueTache --> Utilisateur: Afficher VueTache
+Utilisateur -> TacheSimple: setDateDebut(10/01/2024)
+TacheSimple --> Utilisateur: dateDebut = 10/01/2024
+Utilisateur -> TacheSimple: setDateFin(15/01/2024)
+TacheSimple --> Utilisateur: dateFin = 15/01/2024
+Utilisateur -> VueBureau : clique bouton "Enregistrer"
+VueBureau --> Utilisateur: "Tache1 enregistrée, retour au bureau"
+Utilisateur -> VueGantt : clique bouton "Création du Gantt"
+VueGantt --> Utilisateur: Afficher VueGantt
+@enduml
