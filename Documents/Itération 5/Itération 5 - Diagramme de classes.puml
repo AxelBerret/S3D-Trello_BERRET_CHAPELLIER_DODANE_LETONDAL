@@ -344,6 +344,7 @@ class VueTache {
 }
 
 
+
 Colonne -.-|> InterfaceListeTaches
 Tableau -.-|> Sujet
 TacheComplexe -.-|> InterfaceListeTaches
@@ -361,6 +362,7 @@ TacheSimple --|> Tache
 Archive "1" -> "0...*" Tache
 Archive "1" -> "0...*" Colonne
 Colonne "1" -> "0...*" Tache
+ListeTableaux "1" -> "0...*" Tableau
 Tableau "1" -> "0...*" InterfaceListeTaches
 Tableau "1" -> "0...*" Observateur
 Tache "1" -> "0...*" Tache
@@ -368,5 +370,25 @@ TacheComplexe "1" -> "0...*" Tache
 VueArchive "1" -> "0...*" Tache
 VueBureau "1" -> "0...*" VueColonne
 VueColonneArchive "1" -> "0...*" Tache
+
+Tableau "1" <- "0...*" ControlArchivageColonne
+Tableau "1" <- "0...*" ControlArchivageTache
+Tableau "1" <- "0...*" ControlBoutonsModifTache
+Tableau "1" <- "0...*" ControlCreationColonne
+ListeTableaux "1" <- "0...*" ControlCreationTableau
+Tableau "1" <- "0...*" ControlCreationTache
+Tableau "1" <- "0...*" ControlDesarchivageColonne
+Tableau "1" <- "0...*" ControlDesarchivageTache
+Tableau "1" <- "0...*" ControlModificationTache
+Tableau "1" <- "0...*" ControlSuppressionColonne
+Tableau "1" <- "1" VueArchive
+Tableau "1" <- "1" VueBureau
+Tableau "1" <- "0...*" VueColonne
+Tableau "1" <- "1" VueColonneArchive
+Tableau "1" <- "1" VueGantt
+Tableau "1" <- "1" VueListe
+Tableau "1" <- "1" VueTache
+ListeTableaux "1" <- "0...*" ControlSuppressionTableau
+Tableau "1" <- "0...*" ControlSuppressionTache
 
 @enduml
